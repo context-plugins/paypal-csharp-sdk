@@ -1,0 +1,21 @@
+using System.Text.Json.Serialization;
+
+namespace Paypal.Models;
+
+/// <summary>
+/// Customizes the payer experience during the approval process for the payment.
+/// </summary>
+public record GooglePayExperienceContext
+{
+    /// <summary>
+    /// Describes the URL.
+    /// </summary>
+    [JsonPropertyName("return_url")]
+    public required string ReturnUrl { get; init; }
+
+    /// <summary>
+    /// Describes the URL.
+    /// </summary>
+    [JsonPropertyName("cancel_url")]
+    public required string CancelUrl { get; init; }
+}
