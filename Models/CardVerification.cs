@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The API caller can opt in to verify the card through PayPal offered verification services (e.g. Smart Dollar Auth, 3DS).
@@ -12,5 +12,5 @@ public record CardVerification
     /// The method used for card verification.
     /// </summary>
     [JsonPropertyName("method")]
-    public SubscriptionCardVerificationMethod? Method { get; init; } = SubscriptionCardVerificationMethod.ScaWhenRequired;
+    public OrdersCardVerificationMethod? Method { get; init; } = OrdersCardVerificationMethod.ScaWhenRequired;
 }

@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Details shared by Google for the merchant to be shared with PayPal. This is required to process the transaction using the Google Pay payment method.

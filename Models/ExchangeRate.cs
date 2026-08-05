@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The exchange rate that determines the amount to convert from one currency to another currency.

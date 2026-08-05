@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Paypal.Core.Enum;
+using PayPalServerSdk.Core.Enum;
 
-namespace Paypal.Models.Enums;
+namespace PayPalServerSdk.Models.Enums;
 
 /// <summary>
 /// The card verification value code for for Visa, Discover, Mastercard, or American Express.

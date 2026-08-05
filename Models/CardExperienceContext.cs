@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Customizes the payer experience during the 3DS Approval for payment.

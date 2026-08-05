@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Results of Authentication such as 3D Secure.

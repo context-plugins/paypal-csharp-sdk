@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// A resource representing a request to vault Venmo.

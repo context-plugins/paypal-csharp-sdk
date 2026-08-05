@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Paypal.Core.Request;
+namespace PayPalServerSdk.Core.Request;
 
 internal sealed class NonDisposingStream : Stream
 {

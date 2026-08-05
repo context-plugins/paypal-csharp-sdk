@@ -1,10 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Core.Validation;
-using Paypal.Core.Validation.Attributes;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The application context, which customizes the payer experience during the subscription approval process with PayPal.
@@ -33,7 +31,7 @@ public record SubscriptionApplicationContext
     /// The location from which the shipping address is derived.
     /// </summary>
     [JsonPropertyName("shipping_preference")]
-    public ApplicationContextShippingPreference? ShippingPreference { get; init; } = ApplicationContextShippingPreference.GetFromFile;
+    public ExperienceContextShippingPreference? ShippingPreference { get; init; } = ExperienceContextShippingPreference.GetFromFile;
 
     /// <summary>
     /// Configures the label name to <c>Continue</c> or <c>Subscribe Now</c> for subscription consent experience.
@@ -53,7 +51,6 @@ public record SubscriptionApplicationContext
     /// </summary>
     [JsonPropertyName("return_url")]
     [StringLength(4000, MinimumLength = 10)]
-    [Format(FormatKind.Uri)]
     public required string ReturnUrl { get; init; }
 
     /// <summary>
@@ -61,6 +58,5 @@ public record SubscriptionApplicationContext
     /// </summary>
     [JsonPropertyName("cancel_url")]
     [StringLength(4000, MinimumLength = 10)]
-    [Format(FormatKind.Uri)]
     public required string CancelUrl { get; init; }
 }

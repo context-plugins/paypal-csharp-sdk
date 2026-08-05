@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// An API resource denoting a request to securely store a SEPA Debit.

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Paypal.Core.Enum;
+using PayPalServerSdk.Core.Enum;
 
-namespace Paypal.Models.Enums;
+namespace PayPalServerSdk.Models.Enums;
 
 /// <summary>
 /// The person or party who initiated or triggered the payment.

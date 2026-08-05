@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 
-namespace Paypal.Core.Extensions;
+namespace PayPalServerSdk.Core.Extensions;
 
 internal static class JsonSerializerExtensions
 {
@@ -23,12 +23,7 @@ internal static class JsonSerializerExtensions
                 result = deserialized;
                 return true;
             }
-            catch (JsonException)
-            {
-                result = default;
-                return false;
-            }
-            catch (NotSupportedException)
+            catch (Exception ex) when (ex is JsonException or NotSupportedException)
             {
                 result = default;
                 return false;

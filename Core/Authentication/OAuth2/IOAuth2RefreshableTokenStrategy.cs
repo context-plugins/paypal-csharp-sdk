@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Paypal.Core.Authentication.OAuth2;
+namespace PayPalServerSdk.Core.Authentication.OAuth2;
 
 /// <summary>
 /// Token acquisition strategy for OAuth2 grant types that can issue refresh tokens

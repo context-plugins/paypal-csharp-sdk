@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
-using Paypal.Core.Validation.Attributes;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Core.Validation.Attributes;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The billing cycle details.

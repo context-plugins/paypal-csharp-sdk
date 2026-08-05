@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json;
 
-namespace Paypal.Core.Validation.Attributes;
+namespace PayPalServerSdk.Core.Validation.Attributes;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
 public sealed class UniqueItemsAttribute : ValidationAttribute
@@ -17,7 +17,7 @@ public sealed class UniqueItemsAttribute : ValidationAttribute
     {
         try
         {
-            var seen = new HashSet<string>();
+            HashSet<string> seen = [];
             return items.Cast<object?>().All(item => seen.Add(ToCanonicalJson(item)));
         }
         catch (Exception exception) when (exception is JsonException or NotSupportedException)

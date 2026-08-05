@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Core.Validation;
-using Paypal.Core.Validation.Attributes;
+using PayPalServerSdk.Core.Validation;
+using PayPalServerSdk.Core.Validation.Attributes;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Customizes the payer experience during the approval process for the SEPA Debit payment.

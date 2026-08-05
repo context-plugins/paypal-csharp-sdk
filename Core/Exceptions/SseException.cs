@@ -1,6 +1,6 @@
 using System;
 
-namespace Paypal.Core.Exceptions;
+namespace PayPalServerSdk.Core.Exceptions;
 
 public abstract class SseException : Exception
 {

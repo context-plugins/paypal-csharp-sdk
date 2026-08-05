@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Paypal.Core.Validation.Attributes;
+using PayPalServerSdk.Core.Validation.Attributes;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The error details.

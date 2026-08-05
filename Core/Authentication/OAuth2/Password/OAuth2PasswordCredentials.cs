@@ -1,4 +1,4 @@
-namespace Paypal.Core.Authentication.OAuth2.Password;
+namespace PayPalServerSdk.Core.Authentication.OAuth2.Password;
 
 public sealed class OAuth2PasswordCredentials
 {

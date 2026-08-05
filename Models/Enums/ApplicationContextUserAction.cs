@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Paypal.Core.Enum;
+using PayPalServerSdk.Core.Enum;
 
-namespace Paypal.Models.Enums;
+namespace PayPalServerSdk.Models.Enums;
 
 /// <summary>
 /// Configures the label name to <c>Continue</c> or <c>Subscribe Now</c> for subscription consent experience.

@@ -5,9 +5,9 @@ using System.Net.ServerSentEvents;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Paypal.Core.Exceptions;
+using PayPalServerSdk.Core.Exceptions;
 
-namespace Paypal.Core.Response;
+namespace PayPalServerSdk.Core.Response;
 
 internal static class SseFrameReader
 {
@@ -32,7 +32,7 @@ internal static class SseFrameReader
                 await foreach (var item in parser.EnumerateAsync(cancellationToken).ConfigureAwait(false))
                 {
                     var frame = item.Data;
-                    if (sentinelBytes is not null && frame.AsSpan().SequenceEqual(sentinelBytes))
+                    if (IsSentinel(frame, sentinelBytes))
                         yield break;
 
                     yield return frame;
@@ -42,7 +42,7 @@ internal static class SseFrameReader
             }
 
             using var frameCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-            var enumerator = parser.EnumerateAsync(frameCts.Token).GetAsyncEnumerator();
+            var enumerator = parser.EnumerateAsync(frameCts.Token).GetAsyncEnumerator(frameCts.Token);
             try
             {
                 while (true)
@@ -84,7 +84,7 @@ internal static class SseFrameReader
                         yield break;
 
                     var data = enumerator.Current.Data;
-                    if (sentinelBytes is not null && data.AsSpan().SequenceEqual(sentinelBytes))
+                    if (IsSentinel(data, sentinelBytes))
                         yield break;
 
                     yield return data;
@@ -96,4 +96,7 @@ internal static class SseFrameReader
             }
         }
     }
+
+    private static bool IsSentinel(byte[] frame, byte[]? sentinel) =>
+        sentinel is not null && frame.AsSpan().SequenceEqual(sentinel);
 }

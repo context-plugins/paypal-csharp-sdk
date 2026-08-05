@@ -1,11 +1,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Paypal.Core.ErrorResponse;
-using Paypal.Core.Models;
-using Paypal.Models;
+using PayPalServerSdk.Core.ErrorResponse;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Models;
 
-namespace Paypal.Errors;
+namespace PayPalServerSdk.Errors;
 
 public sealed class GetRefundError : ApiError
 {

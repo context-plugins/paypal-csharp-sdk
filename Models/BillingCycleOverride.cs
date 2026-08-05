@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Paypal.Core.Validation.Attributes;
+using PayPalServerSdk.Core.Validation.Attributes;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The billing cycle details to override at subscription level. The subscription billing cycle definition has to adhere to the plan billing cycle definition.

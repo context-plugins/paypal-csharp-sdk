@@ -1,6 +1,6 @@
 # Reference
 
-> Source: [PaypalClient](PaypalClient.cs)
+> Source: [PayPalServerSdkClient](PayPalServerSdkClient.cs)
 
 ## Orders
 
@@ -1527,76 +1527,6 @@ catch (SdkException<CaptureSubscriptionError> ex)
 **OnSuccess**: <code>[SubscriptionTransactionDetails](Models/SubscriptionTransactionDetails.cs)</code>
 
 **OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CaptureSubscriptionError](Errors/CaptureSubscriptionError.cs)&gt;</code>
-
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-</details>
-
-<details>
-<summary><code>Task&lt;SubscriptionTransactionDetails&gt; CaptureSubscription1(string id, string? payPalRequestId, CaptureSubscriptionRequest1? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
-
-<dl>
-<dd>
-
-### Description
-
-<dl>
-<dd>
-
-Captures an authorized payment from the subscriber on the subscription.
-
-</dd>
-</dl>
-
-### Usage
-
-<dl>
-<dd>
-
-```csharp
-try
-{
-    var response = await client.Subscriptions.CaptureSubscription1(id, payPalRequestId, body);
-    // TODO: Handle 'response' of type SubscriptionTransactionDetails
-}
-catch (SdkException<CaptureSubscription1Error> ex)
-{
-    if (ex.Error.TryGetError(out var error))
-    {
-        // TODO: Handle 'error' of type CaptureSubscription1Error
-    }
-}
-```
-
-</dd>
-</dl>
-
-### Parameters
-
-<dl>
-<dd>
-
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the subscription. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 72 hours. |
-| <code>body</code> | <code>[CaptureSubscriptionRequest1?](Models/CaptureSubscriptionRequest1.cs)</code> | - |
-
-</dd>
-</dl>
-
-### Response
-
-<dl>
-<dd>
-
-**OnSuccess**: <code>[SubscriptionTransactionDetails](Models/SubscriptionTransactionDetails.cs)</code>
-
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CaptureSubscription1Error](Errors/CaptureSubscription1Error.cs)&gt;</code>
 
 </dd>
 </dl>

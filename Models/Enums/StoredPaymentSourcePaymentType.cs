@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Paypal.Core.Enum;
+using PayPalServerSdk.Core.Enum;
 
-namespace Paypal.Models.Enums;
+namespace PayPalServerSdk.Models.Enums;
 
 /// <summary>
 /// Indicates the type of the stored payment_source payment.

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Additional attributes associated with the use of this card.

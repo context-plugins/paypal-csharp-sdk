@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Customizes the payer experience during the approval process for payment with PayPal. Note: Partners and Marketplaces might configure brand_name and shipping_preference during partner account setup, which overrides the request values.
@@ -31,7 +31,7 @@ public record PayPalWalletExperienceContext
     /// The location from which the shipping address is derived.
     /// </summary>
     [JsonPropertyName("shipping_preference")]
-    public ApplicationContextShippingPreference? ShippingPreference { get; init; } = ApplicationContextShippingPreference.GetFromFile;
+    public PayPalWalletContextShippingPreference? ShippingPreference { get; init; } = PayPalWalletContextShippingPreference.GetFromFile;
 
     /// <summary>
     /// The preference to display the contact information (buyer’s shipping email &amp; phone number) on PayPal's checkout for easy merchant-buyer communication.

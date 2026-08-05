@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The charge amount from the subscriber.
@@ -20,7 +21,7 @@ public record CaptureSubscriptionRequest
     /// The type of capture.
     /// </summary>
     [JsonPropertyName("capture_type")]
-    public string CaptureType { get; } = "OUTSTANDING_BALANCE";
+    public required CaptureType CaptureType { get; init; }
 
     /// <summary>
     /// The currency and amount for a financial transaction, such as a balance or payment due.

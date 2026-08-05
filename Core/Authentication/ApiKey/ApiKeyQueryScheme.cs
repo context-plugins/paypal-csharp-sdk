@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Paypal.Core.Authentication.ApiKey;
+namespace PayPalServerSdk.Core.Authentication.ApiKey;
 
 internal sealed class ApiKeyQueryScheme : IAuthScheme
 {
@@ -26,9 +26,9 @@ internal sealed class ApiKeyQueryScheme : IAuthScheme
     {
         if (uri is null) throw new InvalidOperationException("RequestUri is null.");
         var builder = new UriBuilder(uri);
-        var encodedParam = Uri.EscapeDataString(name) + "=" + Uri.EscapeDataString(value);
+        var encodedParam = $"{Uri.EscapeDataString(name)}={Uri.EscapeDataString(value)}";
         var existing = builder.Query.TrimStart('?');
-        builder.Query = string.IsNullOrEmpty(existing) ? encodedParam : existing + "&" + encodedParam;
+        builder.Query = existing is null or "" ? encodedParam : $"{existing}&{encodedParam}";
         return builder.Uri;
     }
 }

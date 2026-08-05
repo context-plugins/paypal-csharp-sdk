@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Merchant provided details of the native app or mobile web browser to facilitate buyer's app switch to the PayPal consumer app.

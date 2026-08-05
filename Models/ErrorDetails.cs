@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The error details. Required for client-side <c>4XX</c> errors.
@@ -36,13 +36,6 @@ public record ErrorDetails
     public required string Issue { get; init; }
 
     /// <summary>
-    /// The human-readable description for an issue. The description can change over the lifetime of an API, so clients must not depend on this value.
-    /// </summary>
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    [JsonPropertyName("description")]
-    public string? Description { get; init; }
-
-    /// <summary>
     /// An array of request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS links</see> that are either relevant to the issue by providing additional information or offering potential resolutions.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -50,4 +43,11 @@ public record ErrorDetails
     [MinLength(1)]
     [MaxLength(4)]
     public IReadOnlyList<LinkDescription>? Links { get; init; }
+
+    /// <summary>
+    /// The human-readable description for an issue. The description can change over the lifetime of an API, so clients must not depend on this value.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
 }

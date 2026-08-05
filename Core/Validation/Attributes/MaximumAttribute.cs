@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Paypal.Core.Validation.Attributes;
+namespace PayPalServerSdk.Core.Validation.Attributes;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
 public sealed class MaximumAttribute : ValidationAttribute

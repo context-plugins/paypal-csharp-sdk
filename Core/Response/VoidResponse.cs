@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Paypal.Core.Response;
+namespace PayPalServerSdk.Core.Response;
 
 public sealed class VoidResponse : IResponse<VoidResponse>
 {
@@ -14,6 +14,6 @@ public sealed class VoidResponse : IResponse<VoidResponse>
     {
         // No body to read, but this response still owns the HttpResponseMessage and disposes it.
         httpResponseMessage.Dispose();
-        return new(Instance);
+        return new ValueTask<VoidResponse>(Instance);
     }
 }

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http.Headers;
 
-namespace Paypal.Core.Extensions;
+namespace PayPalServerSdk.Core.Extensions;
 
 internal static class HeaderValueExtensions
 {
@@ -61,10 +61,10 @@ internal static class HeaderValueExtensions
             if (targetEnd < 0)
                 return null;
 
-            var target = headerValue.Substring(index + 1, targetEnd - index - 1);
+            var target = headerValue[(index + 1)..targetEnd];
             var parametersEnd = IndexOfUnquoted(headerValue, ',', targetEnd + 1);
 
-            if (HasRel(headerValue.Substring(targetEnd + 1, parametersEnd - targetEnd - 1), rel))
+            if (HasRel(headerValue[(targetEnd + 1)..parametersEnd], rel))
                 return target;
 
             index = parametersEnd;

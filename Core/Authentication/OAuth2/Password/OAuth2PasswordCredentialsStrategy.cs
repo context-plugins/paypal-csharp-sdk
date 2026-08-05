@@ -4,12 +4,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Paypal.Core.ErrorResponse;
-using Paypal.Core.Models;
-using Paypal.Core.Request;
-using Paypal.Core.Response;
+using PayPalServerSdk.Core.ErrorResponse;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Core.Request;
+using PayPalServerSdk.Core.Response;
 
-namespace Paypal.Core.Authentication.OAuth2.Password;
+namespace PayPalServerSdk.Core.Authentication.OAuth2.Password;
 
 internal sealed class OAuth2PasswordCredentialsStrategy : IOAuth2TokenStrategy<OAuth2PasswordCredentials>
 {
@@ -34,7 +34,10 @@ internal sealed class OAuth2PasswordCredentialsStrategy : IOAuth2TokenStrategy<O
     public Task<OAuthToken> GetToken(OAuth2PasswordCredentials credentials, CancellationToken ct) =>
         _rawClient.Execute(
             _tokenUrl, [], [],
-            _headerParams(credentials.ClientId, credentials.ClientSecret),
+            [
+                .. _headerParams(credentials.ClientId, credentials.ClientSecret),
+                new HeaderParam("Idempotency-Key", Guid.NewGuid())
+            ],
             HttpMethod.Post,
             FormUrlEncodedRequest.Create([
                 new Param("grant_type", "password"),
@@ -50,7 +53,7 @@ internal sealed class OAuth2PasswordCredentialsStrategy : IOAuth2TokenStrategy<O
             ct);
 
     private static IReadOnlyList<Param> ScopeParams(string? scope) =>
-        string.IsNullOrEmpty(scope) ? [] : [new Param("scope", scope!)];
+        scope is null or "" ? [] : [new Param("scope", scope)];
 
     private static IReadOnlyList<HeaderParam> HeaderParams(string clientId, string? clientSecret)
     {
@@ -62,7 +65,7 @@ internal sealed class OAuth2PasswordCredentialsStrategy : IOAuth2TokenStrategy<O
     private static IReadOnlyList<Param> BodyParams(string clientId, string? clientSecret)
     {
         List<Param> parameters = [new("client_id", clientId)];
-        if (clientSecret != null)
+        if (clientSecret is not null)
             parameters.Add(new Param("client_secret", clientSecret));
         return parameters;
     }

@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
-using Paypal.Core.Validation.Attributes;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Core.Validation.Attributes;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The regular and trial execution details for a billing cycle.
@@ -13,7 +13,7 @@ public record CycleExecution
     /// The type of the billing cycle.
     /// </summary>
     [JsonPropertyName("tenure_type")]
-    public required TenureType1 TenureType { get; init; }
+    public required TenureType TenureType { get; init; }
 
     /// <summary>
     /// The order in which to run this cycle among other billing cycles.

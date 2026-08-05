@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Paypal.Core.Authentication;
+namespace PayPalServerSdk.Core.Authentication;
 
 public interface IAuthScheme
 {
@@ -13,6 +13,11 @@ public interface IAuthScheme
 
 internal static class AuthSchemeExtensions
 {
+    extension(IAuthScheme scheme)
+    {
+        public bool IsConfigured() => scheme is not NoneAuthScheme;
+    }
+
     extension(IEnumerable<IAuthScheme> authSchemes)
     {
         public async ValueTask Apply(HttpRequestMessage httpRequest, CancellationToken cancellationToken)

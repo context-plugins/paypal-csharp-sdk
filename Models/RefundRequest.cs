@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Refunds a captured payment, by ID. For a full refund, include an empty request body. For a partial refund, include an amount object in the request body.

@@ -6,17 +6,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Polly;
 using Polly.Timeout;
-using Paypal.Core.Authentication;
-using Paypal.Core.ErrorResponse;
-using Paypal.Core.Extensions;
-using Paypal.Core.Logging;
-using Paypal.Core.Models;
-using Paypal.Core.Pagination;
-using Paypal.Core.Pagination.States;
-using Paypal.Core.Request;
-using Paypal.Core.Response;
+using PayPalServerSdk.Core.Authentication;
+using PayPalServerSdk.Core.ErrorResponse;
+using PayPalServerSdk.Core.Extensions;
+using PayPalServerSdk.Core.Logging;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Core.Pagination;
+using PayPalServerSdk.Core.Pagination.States;
+using PayPalServerSdk.Core.Request;
+using PayPalServerSdk.Core.Response;
 
-namespace Paypal.Core;
+namespace PayPalServerSdk.Core;
 
 internal sealed class RawClient
 {
@@ -105,8 +105,7 @@ internal sealed class RawClient
     {
         var pages = ExecutePagedResult(initialState, requestFactory, itemsSelector, response,
             requestOptions, cancellationToken);
-        return new Pageable<TResponse, TItem>(ThrowOnError(pages.AsPages(cancellationToken), cancellationToken),
-            itemsSelector);
+        return new Pageable<TResponse, TItem>(ThrowOnError(pages.AsPages(cancellationToken), cancellationToken), itemsSelector);
 
         static async IAsyncEnumerable<TResponse> ThrowOnError(
             IAsyncEnumerable<ApiResult<TResponse, TError>> pages,
@@ -152,7 +151,7 @@ internal sealed class RawClient
                     yield break;
 
                 var next = state.Next(page, result.Headers);
-                if (next == null)
+                if (next is null)
                     yield break;
 
                 state = next;

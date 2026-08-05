@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Paypal.Core.Models;
+using PayPalServerSdk.Core.Models;
 
-namespace Paypal.Core.Request;
+namespace PayPalServerSdk.Core.Request;
 
 internal sealed class FormRequest : IRequest
 {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Core.Validation.Attributes;
+using PayPalServerSdk.Core.Validation.Attributes;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The billing details for the subscription. If the subscription was or is active, these fields are populated.

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Paypal.Core.Webhooks.Signing;
+namespace PayPalServerSdk.Core.Webhooks.Signing;
 
 internal abstract record SignatureHeaderFormat
 {
@@ -16,7 +16,7 @@ internal abstract record SignatureHeaderFormat
     {
         internal override IReadOnlyList<string> ExtractSignatures(string headerValue)
         {
-            var signatures = new List<string>();
+            List<string> signatures = [];
             foreach (var pair in headerValue.Split(','))
             {
                 var separatorIndex = pair.IndexOf('=');

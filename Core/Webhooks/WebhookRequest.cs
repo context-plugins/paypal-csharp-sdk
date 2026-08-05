@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Paypal.Core.Webhooks;
+namespace PayPalServerSdk.Core.Webhooks;
 
 public sealed class WebhookRequest
 {

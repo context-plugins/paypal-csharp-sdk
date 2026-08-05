@@ -1,7 +1,7 @@
 using System;
 using System.Net.Http.Headers;
 
-namespace Paypal.Core.Pagination.States;
+namespace PayPalServerSdk.Core.Pagination.States;
 
 internal sealed record KeysetState<TResponse> : IPageState<TResponse, KeysetState<TResponse>>
 {
@@ -32,7 +32,7 @@ internal sealed record KeysetState<TResponse> : IPageState<TResponse, KeysetStat
 
         var hasMore = _hasMore?.Invoke(page, headers);
 
-        if (hasMore == false)
+        if (hasMore is false)
             return null;
 
         if (hasMore is null && count < Limit)

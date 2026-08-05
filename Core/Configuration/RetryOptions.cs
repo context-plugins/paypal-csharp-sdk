@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 
-namespace Paypal.Core.Configuration;
+namespace PayPalServerSdk.Core.Configuration;
 
 public record RetryOptions
 {

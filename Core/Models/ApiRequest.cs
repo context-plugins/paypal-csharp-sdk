@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
-using Paypal.Core.Authentication;
-using Paypal.Core.Request;
+using PayPalServerSdk.Core.Authentication;
+using PayPalServerSdk.Core.Request;
 
-namespace Paypal.Core.Models;
+namespace PayPalServerSdk.Core.Models;
 
 internal sealed class ApiRequest
 {

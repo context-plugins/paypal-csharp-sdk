@@ -1,7 +1,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 
-namespace Paypal.Core.Request;
+namespace PayPalServerSdk.Core.Request;
 
 internal sealed class JsonRequest<TData> : IRequest
 {

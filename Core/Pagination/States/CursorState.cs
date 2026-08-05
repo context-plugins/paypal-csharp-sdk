@@ -1,7 +1,7 @@
 using System;
 using System.Net.Http.Headers;
 
-namespace Paypal.Core.Pagination.States;
+namespace PayPalServerSdk.Core.Pagination.States;
 
 internal sealed record CursorState<TResponse> : IPageState<TResponse, CursorState<TResponse>>
 {
@@ -28,7 +28,7 @@ internal sealed record CursorState<TResponse> : IPageState<TResponse, CursorStat
         if (next == Cursor)
             return null;
 
-        if (_hasMore?.Invoke(page, headers) == false)
+        if (_hasMore?.Invoke(page, headers) is false)
             return null;
 
         return this with { Cursor = next };

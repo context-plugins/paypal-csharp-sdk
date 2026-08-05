@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using Paypal.Core.Models;
+using PayPalServerSdk.Core.Models;
 
-namespace Paypal.Core.Request;
+namespace PayPalServerSdk.Core.Request;
 
 internal sealed class FormUrlEncodedRequest : IRequest
 {

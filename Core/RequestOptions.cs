@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Paypal.Core;
+namespace PayPalServerSdk.Core;
 
 public sealed record RequestOptions
 {

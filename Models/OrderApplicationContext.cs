@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Customizes the payer experience during the approval process for the payment with PayPal. Note: Partners and Marketplaces might configure brand_name and shipping_preference during partner account setup, which overrides the request values.
@@ -36,7 +36,7 @@ public record OrderApplicationContext
     /// DEPRECATED. DEPRECATED. The shipping preference: Displays the shipping address to the customer. Enables the customer to choose an address on the PayPal site. Restricts the customer from changing the address during the payment-approval process. .  The fields in <c>application_context</c> are now available in the <c>experience_context</c> object under the <c>payment_source</c> which supports them (eg. <c>payment_source.paypal.experience_context.shipping_preference</c>). Please specify this field in the <c>experience_context</c> object instead of the <c>application_context</c> object.
     /// </summary>
     [JsonPropertyName("shipping_preference")]
-    public ApplicationContextShippingPreference? ShippingPreference { get; init; } = ApplicationContextShippingPreference.GetFromFile;
+    public OrderApplicationContextShippingPreference? ShippingPreference { get; init; } = OrderApplicationContextShippingPreference.GetFromFile;
 
     /// <summary>
     /// DEPRECATED. Configures a Continue or Pay Now checkout flow.  The fields in <c>application_context</c> are now available in the <c>experience_context</c> object under the <c>payment_source</c> which supports them (eg. <c>payment_source.paypal.experience_context.user_action</c>). Please specify this field in the <c>experience_context</c> object instead of the <c>application_context</c> object.

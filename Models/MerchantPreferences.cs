@@ -1,9 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Core.Validation;
-using Paypal.Core.Validation.Attributes;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The merchant preferences for a subscription.
@@ -16,7 +14,6 @@ public record MerchantPreferences
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("return_url")]
     [StringLength(4000, MinimumLength = 10)]
-    [Format(FormatKind.Uri)]
     public string? ReturnUrl { get; init; }
 
     /// <summary>
@@ -25,6 +22,5 @@ public record MerchantPreferences
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("cancel_url")]
     [StringLength(4000, MinimumLength = 10)]
-    [Format(FormatKind.Uri)]
     public string? CancelUrl { get; init; }
 }

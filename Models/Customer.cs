@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// This object defines a customer in your system. Use it to manage customer profiles, save payment methods and contact details., Customer in merchant's or partner's system of records.

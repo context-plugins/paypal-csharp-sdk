@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Paypal.Core;
-using Paypal.Core.Exceptions;
-using Paypal.Core.Models;
-using Paypal.Core.Request;
-using Paypal.Core.Response;
-using Paypal.Errors;
-using Paypal.Models;
+using PayPalServerSdk.Core;
+using PayPalServerSdk.Core.Exceptions;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Core.Request;
+using PayPalServerSdk.Core.Response;
+using PayPalServerSdk.Errors;
+using PayPalServerSdk.Models;
 
-namespace Paypal.Api;
+namespace PayPalServerSdk.Api;
 
 /// <summary>
 /// Use the <c>/subscriptions</c> resource to create, update, retrieve, and cancel subscriptions and their associated plans.
@@ -138,37 +138,6 @@ public sealed class Subscriptions
             JsonRequest.Create(body),
             JsonResponse.Create<SubscriptionTransactionDetails>(),
             CaptureSubscriptionErrorResponse.Instance,
-            [_auth.Oauth2],
-            requestOptions,
-            ct);
-
-    /// <summary>
-    /// Capture authorized payment on subscription
-    /// </summary>
-    /// <param name="id">The ID of the subscription.</param>
-    /// <param name="payPalRequestId">The server stores keys for 72 hours.</param>
-    /// <param name="body"></param>
-    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="SubscriptionTransactionDetails"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="CaptureSubscription1Error"/> when the server returns an error response.</exception>
-    /// <remarks>
-    /// Captures an authorized payment from the subscriber on the subscription.
-    /// </remarks>
-    public Task<SubscriptionTransactionDetails> CaptureSubscription1(string id,
-        string? payPalRequestId,
-        CaptureSubscriptionRequest1? body,
-        RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}/capture"),
-            [new TemplateParam("id", id)],
-            [],
-            [new HeaderParam("PayPal-Request-Id", payPalRequestId),
-                new HeaderParam("Idempotency-Key", Guid.NewGuid())],
-            HttpMethod.Post,
-            JsonRequest.Create(body),
-            JsonResponse.Create<SubscriptionTransactionDetails>(),
-            CaptureSubscription1ErrorResponse.Instance,
             [_auth.Oauth2],
             requestOptions,
             ct);

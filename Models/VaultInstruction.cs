@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Base vaulting specification. The object can be extended for specific use cases within each payment_source that supports vaulting.

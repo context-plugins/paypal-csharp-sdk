@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace Paypal.Core.Logging;
+namespace PayPalServerSdk.Core.Logging;
 
 internal sealed class ConsoleErrorLoggerFactory : ILoggerFactory
 {
@@ -43,7 +43,7 @@ internal sealed class ConsoleErrorLogger : ILogger
             return;
 
         var message = formatter(state, exception);
-        if (string.IsNullOrEmpty(message) && exception is null)
+        if (message is null or "" && exception is null)
             return;
 
         var line = $"[{Abbreviate(logLevel)}] {_category}: {message}";

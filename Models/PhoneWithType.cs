@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The phone information.
@@ -16,7 +16,7 @@ public record PhoneWithType
     public PhoneType? PhoneType { get; init; }
 
     /// <summary>
-    /// The phone number, in its canonical international <see href="https://www.itu.int/rec/T-REC-E.164/en">E.164 numbering plan format</see>.
+    /// The phone number in its canonical international <see href="https://www.itu.int/rec/T-REC-E.164/en">E.164 numbering plan format</see>.
     /// </summary>
     [JsonPropertyName("phone_number")]
     public required PhoneNumber PhoneNumber { get; init; }

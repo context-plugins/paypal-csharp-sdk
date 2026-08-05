@@ -1,6 +1,6 @@
 using System;
 
-namespace Paypal.Core.Webhooks.Signing;
+namespace PayPalServerSdk.Core.Webhooks.Signing;
 
 internal abstract record SignatureDigestEncoding
 {

@@ -1,6 +1,6 @@
 using System.Net.Http;
 
-namespace Paypal.Core.Request;
+namespace PayPalServerSdk.Core.Request;
 
 internal interface IRequest
 {

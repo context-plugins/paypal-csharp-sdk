@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Customizes the Vault creation flow experience for your customers.
@@ -47,7 +47,7 @@ public record VaultExperienceContext
     /// The shipping preference. This only applies to PayPal payment source.
     /// </summary>
     [JsonPropertyName("shipping_preference")]
-    public ApplicationContextShippingPreference? ShippingPreference { get; init; } = ApplicationContextShippingPreference.GetFromFile;
+    public ExperienceContextShippingPreference? ShippingPreference { get; init; } = ExperienceContextShippingPreference.GetFromFile;
 
     /// <summary>
     /// DEPRECATED. Vault Instruction on action to be performed after a successful payer approval.

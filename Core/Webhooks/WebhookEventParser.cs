@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Paypal.Core.Webhooks;
+namespace PayPalServerSdk.Core.Webhooks;
 
 public abstract class WebhookEventParser<TEvent>
     where TEvent : class

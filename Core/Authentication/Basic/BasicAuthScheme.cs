@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Paypal.Core.Authentication.Basic;
+namespace PayPalServerSdk.Core.Authentication.Basic;
 
 internal sealed class BasicAuthScheme : IAuthScheme
 {

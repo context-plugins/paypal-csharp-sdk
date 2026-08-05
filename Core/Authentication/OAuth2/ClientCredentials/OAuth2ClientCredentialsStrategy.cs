@@ -4,12 +4,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Paypal.Core.ErrorResponse;
-using Paypal.Core.Models;
-using Paypal.Core.Request;
-using Paypal.Core.Response;
+using PayPalServerSdk.Core.ErrorResponse;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Core.Request;
+using PayPalServerSdk.Core.Response;
 
-namespace Paypal.Core.Authentication.OAuth2.ClientCredentials;
+namespace PayPalServerSdk.Core.Authentication.OAuth2.ClientCredentials;
 
 internal sealed class OAuth2ClientCredentialsStrategy : IOAuth2TokenStrategy<OAuth2ClientCredentials>
 {
@@ -34,7 +34,10 @@ internal sealed class OAuth2ClientCredentialsStrategy : IOAuth2TokenStrategy<OAu
     public Task<OAuthToken> GetToken(OAuth2ClientCredentials credentials, CancellationToken ct) =>
         _rawClient.Execute(
             _tokenUrl, [], [],
-            _headerParams(credentials.ClientId, credentials.ClientSecret),
+            [
+                .. _headerParams(credentials.ClientId, credentials.ClientSecret),
+                new HeaderParam("Idempotency-Key", Guid.NewGuid())
+            ],
             HttpMethod.Post,
             FormUrlEncodedRequest.Create([
                 new Param("grant_type", "client_credentials"),
@@ -48,7 +51,7 @@ internal sealed class OAuth2ClientCredentialsStrategy : IOAuth2TokenStrategy<OAu
             ct);
 
     private static IReadOnlyList<Param> ScopeParams(string? scope) =>
-        string.IsNullOrEmpty(scope) ? [] : [new Param("scope", scope!)];
+        scope is null or "" ? [] : [new Param("scope", scope)];
 
     private static IReadOnlyList<HeaderParam> HeaderParams(string clientId, string? clientSecret)
     {

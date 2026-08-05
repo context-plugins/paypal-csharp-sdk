@@ -1,6 +1,6 @@
 using System.Net.Http.Headers;
 
-namespace Paypal.Core.Pagination.States;
+namespace PayPalServerSdk.Core.Pagination.States;
 
 internal interface IPageState<in TResponse, out TState>
 {

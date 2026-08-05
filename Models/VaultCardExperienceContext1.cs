@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Paypal.Core.Validation;
-using Paypal.Core.Validation.Attributes;
-using Paypal.Models.Enums;
+using PayPalServerSdk.Core.Validation;
+using PayPalServerSdk.Core.Validation.Attributes;
+using PayPalServerSdk.Models.Enums;
 
-namespace Paypal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// A resource representing an experience context of vault a card.

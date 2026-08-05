@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Paypal.Core.Response;
+namespace PayPalServerSdk.Core.Response;
 
 internal sealed class JsonResponse<TResponse> : IResponse<TResponse>
 {
