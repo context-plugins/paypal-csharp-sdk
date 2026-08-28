@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The purchase unit details. Used to capture required information for the payment contract.
@@ -114,4 +115,7 @@ public record PurchaseUnit
     [MinLength(1)]
     [MaxLength(10)]
     public IReadOnlyList<object>? MostRecentErrors { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

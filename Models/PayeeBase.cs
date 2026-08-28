@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The details for the merchant who receives the funds and fulfills the order. The merchant is also known as the payee.
@@ -25,4 +26,7 @@ public record PayeeBase
     [StringLength(13, MinimumLength = 13)]
     [RegularExpression("^[2-9A-HJ-NP-Z]{13}$")]
     public string? MerchantId { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

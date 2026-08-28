@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Supplementary data about a payment. This object passes information that can be used to improve risk assessments and processing costs, for example, by providing Level 2 and Level 3 payment data.
@@ -20,4 +21,7 @@ public record SupplementaryData
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("risk")]
     public RiskSupplementaryData? Risk { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

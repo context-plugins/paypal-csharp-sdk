@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The payer information.
@@ -73,4 +74,7 @@ public record PayerInformation
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("address")]
     public SimplePostalAddressCoarseGrained? Address { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,8 +1,9 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The billing cycle details.
@@ -43,4 +44,7 @@ public record SubscriptionBillingCycle
     [Minimum(0)]
     [Maximum(999)]
     public int? TotalCycles { get; init; } = 1;
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

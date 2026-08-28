@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// A Resource representing a request to vault a Card.
@@ -58,4 +59,7 @@ public record PaymentTokenRequestCard
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("billing_address")]
     public Address? BillingAddress { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

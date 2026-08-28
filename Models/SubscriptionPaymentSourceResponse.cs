@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The payment source used to fund the payment.
@@ -13,4 +14,7 @@ public record SubscriptionPaymentSourceResponse
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("card")]
     public CardResponseWithBillingAddress? Card { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 public record PayPalWalletCustomerRequest
 {
@@ -45,4 +46,7 @@ public record PayPalWalletCustomerRequest
     [StringLength(64, MinimumLength = 1)]
     [RegularExpression("^[0-9a-zA-Z-_.^*$@#]+$")]
     public string? MerchantCustomerId { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The currency and amount for a financial transaction, such as a balance or payment due.
@@ -22,4 +23,7 @@ public record Money
     [MaxLength(32)]
     [RegularExpression("^((-?[0-9]+)|(-?([0-9]+)?[.][0-9]+))$")]
     public required string Value { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

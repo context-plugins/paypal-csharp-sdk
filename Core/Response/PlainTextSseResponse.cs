@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PayPalServerSdk.Core.Response;
+namespace PayPal.Core.Response;
 
 internal sealed class PlainTextSseResponse<TResponse> : IResponse<IAsyncEnumerable<TResponse>>
 {

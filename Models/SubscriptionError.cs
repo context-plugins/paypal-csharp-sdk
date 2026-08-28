@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The error details.
@@ -46,4 +47,7 @@ public record SubscriptionError
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("links")]
     public IReadOnlyList<LinkDescription>? Links { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

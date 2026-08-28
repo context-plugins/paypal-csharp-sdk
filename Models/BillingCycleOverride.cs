@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
+using PayPal.Core.Models;
+using PayPal.Core.Validation.Attributes;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The billing cycle details to override at subscription level. The subscription billing cycle definition has to adhere to the plan billing cycle definition.
@@ -31,4 +32,7 @@ public record BillingCycleOverride
     [Minimum(0)]
     [Maximum(999)]
     public int? TotalCycles { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

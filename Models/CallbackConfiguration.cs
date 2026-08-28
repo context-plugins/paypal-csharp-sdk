@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// CallBack Configuration that the merchant can provide to PayPal/Venmo.
@@ -26,5 +28,9 @@ public record CallbackConfiguration
     [JsonPropertyName("callback_url")]
     [StringLength(2040, MinimumLength = 10)]
     [RegularExpression("^.*$")]
+    [Format(FormatKind.Uri)]
     public required string CallbackUrl { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

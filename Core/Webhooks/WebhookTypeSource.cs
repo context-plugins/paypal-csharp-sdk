@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json;
 
-namespace PayPalServerSdk.Core.Webhooks;
+namespace PayPal.Core.Webhooks;
 
 internal abstract record WebhookTypeSource
 {

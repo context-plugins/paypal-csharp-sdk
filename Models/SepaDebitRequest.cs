@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// An API resource denoting a request to securely store a SEPA Debit.
@@ -13,4 +14,7 @@ public record SepaDebitRequest
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("experience_context")]
     public SepaDebitExperienceContext? ExperienceContext { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

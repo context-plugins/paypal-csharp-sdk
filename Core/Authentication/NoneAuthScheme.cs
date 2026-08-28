@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PayPalServerSdk.Core.Authentication;
+namespace PayPal.Core.Authentication;
 
 internal sealed class NoneAuthScheme : IAuthScheme
 {

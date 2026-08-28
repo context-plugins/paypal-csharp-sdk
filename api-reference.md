@@ -1,6 +1,6 @@
 # Reference
 
-> Source: [PayPalServerSdkClient](PayPalServerSdkClient.cs)
+> Source: [PayPalClient](PayPalClient.cs)
 
 ## Orders
 
@@ -42,7 +42,7 @@ catch (SdkException<AuthorizeOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type AuthorizeOrderError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -121,7 +121,7 @@ catch (SdkException<CaptureOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type CaptureOrderError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -195,7 +195,7 @@ catch (SdkException<ConfirmOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type ConfirmOrderError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -272,7 +272,7 @@ catch (SdkException<CreateOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type CreateOrderError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -346,7 +346,7 @@ catch (SdkException<CreateOrderTrackingError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type CreateOrderTrackingError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -416,7 +416,7 @@ catch (SdkException<GetOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type GetOrderError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -486,7 +486,7 @@ catch (SdkException<PatchOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type PatchOrderError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -556,7 +556,7 @@ catch (SdkException<UpdateOrderTrackingError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type UpdateOrderTrackingError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -635,7 +635,7 @@ catch (SdkException<CaptureAuthorizedPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type CaptureAuthorizedPaymentError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -678,83 +678,6 @@ catch (SdkException<CaptureAuthorizedPaymentError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;CapturedPayment&gt; CaptureAuthorizedPayment1(string authorizationId, string? payPalMockResponse, string? payPalRequestId, string? payPalAuthAssertion, CaptureRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
-
-<dl>
-<dd>
-
-### Description
-
-<dl>
-<dd>
-
-Captures an authorized payment, by ID.
-
-</dd>
-</dl>
-
-### Usage
-
-<dl>
-<dd>
-
-```csharp
-try
-{
-    var response = await client.Payments.CaptureAuthorizedPayment1(authorizationId,
-        payPalMockResponse,
-        payPalRequestId,
-        payPalAuthAssertion,
-        body);
-    // TODO: Handle 'response' of type CapturedPayment
-}
-catch (SdkException<CaptureAuthorizedPayment1Error> ex)
-{
-    if (ex.Error.TryGetError(out var error))
-    {
-        // TODO: Handle 'error' of type CaptureAuthorizedPayment1Error
-    }
-}
-```
-
-</dd>
-</dl>
-
-### Parameters
-
-<dl>
-<dd>
-
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>authorizationId</code> | <code>string</code> | The PayPal-generated ID for the authorized payment to capture. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 45 days. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion). Note:For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject. |
-| <code>body</code> | <code>[CaptureRequest?](Models/CaptureRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
-
-</dd>
-</dl>
-
-### Response
-
-<dl>
-<dd>
-
-**OnSuccess**: <code>[CapturedPayment](Models/CapturedPayment.cs)</code>
-
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CaptureAuthorizedPayment1Error](Errors/CaptureAuthorizedPayment1Error.cs)&gt;</code>
-
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-</details>
-
-<details>
 <summary><code>Task&lt;PaymentAuthorization&gt; GetAuthorizedPayment(string authorizationId, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
 
 <dl>
@@ -785,7 +708,7 @@ catch (SdkException<GetAuthorizedPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type GetAuthorizedPaymentError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -855,7 +778,7 @@ catch (SdkException<GetCapturedPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type GetCapturedPaymentError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -884,75 +807,6 @@ catch (SdkException<GetCapturedPaymentError> ex)
 **OnSuccess**: <code>[CapturedPayment](Models/CapturedPayment.cs)</code>
 
 **OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetCapturedPaymentError](Errors/GetCapturedPaymentError.cs)&gt;</code>
-
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-</details>
-
-<details>
-<summary><code>Task&lt;CapturedPayment&gt; GetCapturedPayment1(string captureId, string? payPalMockResponse, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
-
-<dl>
-<dd>
-
-### Description
-
-<dl>
-<dd>
-
-Shows details for a captured payment, by ID.
-
-</dd>
-</dl>
-
-### Usage
-
-<dl>
-<dd>
-
-```csharp
-try
-{
-    var response = await client.Payments.GetCapturedPayment1(captureId, payPalMockResponse);
-    // TODO: Handle 'response' of type CapturedPayment
-}
-catch (SdkException<GetCapturedPayment1Error> ex)
-{
-    if (ex.Error.TryGetError(out var error))
-    {
-        // TODO: Handle 'error' of type GetCapturedPayment1Error
-    }
-}
-```
-
-</dd>
-</dl>
-
-### Parameters
-
-<dl>
-<dd>
-
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>captureId</code> | <code>string</code> | The PayPal-generated ID for the captured payment for which to show details. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-
-</dd>
-</dl>
-
-### Response
-
-<dl>
-<dd>
-
-**OnSuccess**: <code>[CapturedPayment](Models/CapturedPayment.cs)</code>
-
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetCapturedPayment1Error](Errors/GetCapturedPayment1Error.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -993,7 +847,7 @@ catch (SdkException<GetRefundError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type GetRefundError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -1066,7 +920,7 @@ catch (SdkException<ReauthorizePaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type ReauthorizePaymentError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -1142,7 +996,7 @@ catch (SdkException<RefundCapturedPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type RefundCapturedPaymentError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -1218,7 +1072,7 @@ catch (SdkException<VoidPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type VoidPaymentError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -1291,9 +1145,9 @@ try
 }
 catch (SdkException<ActivateBillingPlanError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type ActivateBillingPlanError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1358,9 +1212,9 @@ try
 }
 catch (SdkException<ActivateSubscriptionError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type ActivateSubscriptionError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1426,9 +1280,9 @@ try
 }
 catch (SdkException<CancelSubscriptionError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type CancelSubscriptionError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1495,9 +1349,9 @@ try
 }
 catch (SdkException<CaptureSubscriptionError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type CaptureSubscriptionError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1565,9 +1419,9 @@ try
 }
 catch (SdkException<CreateBillingPlanError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type CreateBillingPlanError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1635,9 +1489,9 @@ try
 }
 catch (SdkException<CreateSubscriptionError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type CreateSubscriptionError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1705,9 +1559,9 @@ try
 }
 catch (SdkException<DeactivateBillingPlanError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type DeactivateBillingPlanError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1773,9 +1627,9 @@ try
 }
 catch (SdkException<GetBillingPlanError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type GetBillingPlanError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1841,9 +1695,9 @@ try
 }
 catch (SdkException<GetSubscriptionError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type GetSubscriptionError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1910,9 +1764,9 @@ try
 }
 catch (SdkException<ListBillingPlansError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type ListBillingPlansError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -1982,9 +1836,9 @@ try
 }
 catch (SdkException<ListSubscriptionTransactionsError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type ListSubscriptionTransactionsError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -2059,9 +1913,9 @@ try
 }
 catch (SdkException<ListSubscriptionsError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type ListSubscriptionsError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -2135,9 +1989,9 @@ try
 }
 catch (SdkException<PatchBillingPlanError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type PatchBillingPlanError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -2203,9 +2057,9 @@ try
 }
 catch (SdkException<PatchSubscriptionError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type PatchSubscriptionError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -2272,9 +2126,9 @@ try
 }
 catch (SdkException<ReviseSubscriptionError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type ReviseSubscriptionError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -2340,9 +2194,9 @@ try
 }
 catch (SdkException<SuspendSubscriptionError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type SuspendSubscriptionError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -2381,74 +2235,6 @@ catch (SdkException<SuspendSubscriptionError> ex)
 </details>
 
 <details>
-<summary><code>Task SuspendSubscription1(string id, CancelSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
-
-<dl>
-<dd>
-
-### Description
-
-<dl>
-<dd>
-
-Suspends the subscription.
-
-</dd>
-</dl>
-
-### Usage
-
-<dl>
-<dd>
-
-```csharp
-try
-{
-    await client.Subscriptions.SuspendSubscription1(id, body);
-}
-catch (SdkException<SuspendSubscription1Error> ex)
-{
-    if (ex.Error.TryGetError(out var error))
-    {
-        // TODO: Handle 'error' of type SuspendSubscription1Error
-    }
-}
-```
-
-</dd>
-</dl>
-
-### Parameters
-
-<dl>
-<dd>
-
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the subscription. |
-| <code>body</code> | <code>[CancelSubscriptionRequest?](Models/CancelSubscriptionRequest.cs)</code> | - |
-
-</dd>
-</dl>
-
-### Response
-
-<dl>
-<dd>
-
-**OnSuccess**: No content
-
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[SuspendSubscription1Error](Errors/SuspendSubscription1Error.cs)&gt;</code>
-
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-</details>
-
-<details>
 <summary><code>Task UpdateBillingPlanPricingSchemes(string id, UpdatePricingSchemesRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
 
 <dl>
@@ -2476,9 +2262,9 @@ try
 }
 catch (SdkException<UpdateBillingPlanPricingSchemesError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetSubscriptionError(out var error))
     {
-        // TODO: Handle 'error' of type UpdateBillingPlanPricingSchemesError
+        // TODO: Handle 'error' of type SubscriptionError
     }
 }
 ```
@@ -2549,9 +2335,9 @@ try
 }
 catch (SdkException<SearchBalancesError> ex)
 {
-    if (ex.Error.TryGetError(out var error))
+    if (ex.Error.TryGetDefaultError(out var error))
     {
-        // TODO: Handle 'error' of type SearchBalancesError
+        // TODO: Handle 'error' of type DefaultError
     }
 }
 ```
@@ -2711,7 +2497,7 @@ catch (SdkException<CreatePaymentTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type CreatePaymentTokenError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -2780,7 +2566,7 @@ catch (SdkException<CreateSetupTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type CreateSetupTokenError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -2848,7 +2634,7 @@ catch (SdkException<DeletePaymentTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type DeletePaymentTokenError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -2916,7 +2702,7 @@ catch (SdkException<GetPaymentTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type GetPaymentTokenError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -2984,7 +2770,7 @@ catch (SdkException<GetSetupTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type GetSetupTokenError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```
@@ -3052,7 +2838,7 @@ catch (SdkException<ListCustomerPaymentTokensError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
-        // TODO: Handle 'error' of type ListCustomerPaymentTokensError
+        // TODO: Handle 'error' of type Error
     }
 }
 ```

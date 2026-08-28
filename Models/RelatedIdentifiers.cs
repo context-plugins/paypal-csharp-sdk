@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Identifiers related to a specific resource.
@@ -34,4 +35,7 @@ public record RelatedIdentifiers
     [StringLength(20, MinimumLength = 1)]
     [RegularExpression("^[A-Z0-9]+$")]
     public string? CaptureId { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

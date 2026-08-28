@@ -1,10 +1,10 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using PayPal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace PayPal.Models.Enums;
 
 /// <summary>
-/// The location from which the shipping address is derived., The shipping preference. This only applies to PayPal payment source., The shipping preference. This only applies to PayPal payment source., The location from which the shipping address is derived., The shipping preference. This only applies to PayPal payment source., The shipping preference. This only applies to PayPal payment source., The location from which the shipping address is derived.
+/// The location from which the shipping address is derived., The shipping preference. This only applies to PayPal payment source., The shipping preference. This only applies to PayPal payment source., The location from which the shipping address is derived.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<ExperienceContextShippingPreference>))]
 public sealed record ExperienceContextShippingPreference : StringEnum<ExperienceContextShippingPreference>

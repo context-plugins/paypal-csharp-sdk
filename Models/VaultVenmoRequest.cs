@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// A resource representing a request to vault Venmo.
@@ -58,4 +59,7 @@ public record VaultVenmoRequest
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("experience_context")]
     public VenmoExperienceContext? ExperienceContext { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

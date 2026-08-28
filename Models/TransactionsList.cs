@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
+using PayPal.Core.Models;
+using PayPal.Core.Validation.Attributes;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The list transactions for a subscription request details.
@@ -45,4 +46,7 @@ public record TransactionsList
     [MinLength(1)]
     [MaxLength(10)]
     public IReadOnlyList<LinkDescription>? Links { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

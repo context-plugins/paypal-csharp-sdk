@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The customer who approves and pays for the order. The customer is also known as the payer.
@@ -25,4 +26,7 @@ public record PayerBase
     [StringLength(13, MinimumLength = 13)]
     [RegularExpression("^[2-9A-HJ-NP-Z]{13}$")]
     public string? PayerId { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

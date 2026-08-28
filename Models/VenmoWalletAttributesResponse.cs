@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Additional attributes associated with the use of a Venmo Wallet.
@@ -13,4 +14,7 @@ public record VenmoWalletAttributesResponse
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("vault")]
     public VenmoVaultResponse? Vault { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

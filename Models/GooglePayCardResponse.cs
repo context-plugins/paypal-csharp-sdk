@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The payment card to use to fund a Google Pay payment response. Can be a credit or debit card.
@@ -54,4 +55,7 @@ public record GooglePayCardResponse
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("authentication_result")]
     public AuthenticationResponse? AuthenticationResult { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

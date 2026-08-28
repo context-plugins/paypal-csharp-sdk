@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The net amount. Returned when the currency of the refund is different from the currency of the PayPal account where the merchant holds their funds.
@@ -27,4 +28,7 @@ public record NetAmountBreakdownItem
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("exchange_rate")]
     public ExchangeRate? ExchangeRate { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

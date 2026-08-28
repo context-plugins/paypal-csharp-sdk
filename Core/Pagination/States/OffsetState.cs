@@ -1,7 +1,7 @@
 using System;
 using System.Net.Http.Headers;
 
-namespace PayPalServerSdk.Core.Pagination.States;
+namespace PayPal.Core.Pagination.States;
 
 internal sealed record OffsetState<TResponse> : IPageState<TResponse, OffsetState<TResponse>>
 {

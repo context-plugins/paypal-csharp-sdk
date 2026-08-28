@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Information used to pay using BLIK one-click flow.
@@ -16,4 +17,7 @@ public record BlikOneClickPaymentObject
     [StringLength(64, MinimumLength = 3)]
     [RegularExpression("^[ -~]{3,64}$")]
     public string? ConsumerReference { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

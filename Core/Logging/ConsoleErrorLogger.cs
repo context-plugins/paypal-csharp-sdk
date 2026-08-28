@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace PayPalServerSdk.Core.Logging;
+namespace PayPal.Core.Logging;
 
 internal sealed class ConsoleErrorLoggerFactory : ILoggerFactory
 {

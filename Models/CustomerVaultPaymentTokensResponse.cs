@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
+using PayPal.Core.Models;
+using PayPal.Core.Validation.Attributes;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Collection of payment tokens saved for a given customer.
@@ -49,4 +50,7 @@ public record CustomerVaultPaymentTokensResponse
     [MinLength(1)]
     [MaxLength(32)]
     public IReadOnlyList<LinkDescription>? Links { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

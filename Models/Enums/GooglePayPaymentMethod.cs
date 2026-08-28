@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using PayPal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace PayPal.Models.Enums;
 
 /// <summary>
 /// The type of the payment credential. Currently, only CARD is supported.

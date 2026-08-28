@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Full representation of a Venmo Payment Token.
@@ -99,4 +100,7 @@ public record VenmoPaymentToken
     [StringLength(50, MinimumLength = 1)]
     [RegularExpression("^[-a-zA-Z0-9_]*$")]
     public string? UserName { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
+using PayPal.Core.Models;
+using PayPal.Core.Validation.Attributes;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The search response information.
@@ -90,4 +91,7 @@ public record SearchResponse
     [MinLength(1)]
     [MaxLength(32767)]
     public IReadOnlyList<LinkDescription>? Links { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

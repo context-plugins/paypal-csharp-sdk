@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Merchant provided details of the native app or mobile web browser to facilitate buyer's app switch to the PayPal consumer app.
@@ -20,4 +21,7 @@ public record AppSwitchContext
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("mobile_web")]
     public MobileWebContext? MobileWeb { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

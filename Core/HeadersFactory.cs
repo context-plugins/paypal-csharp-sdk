@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PayPalServerSdk.Core.Models;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Core;
+namespace PayPal.Core;
 
 internal sealed class HeadersFactory
 {

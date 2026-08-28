@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using PayPal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace PayPal.Models.Enums;
 
 /// <summary>
 /// Merchant preference on how the buyer can navigate back to merchant website post approving the transaction on the Venmo App.

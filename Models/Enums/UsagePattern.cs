@@ -1,10 +1,10 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using PayPal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace PayPal.Models.Enums;
 
 /// <summary>
-/// Expected business/pricing model for the billing agreement., Expected business/charge model for the billing agreement., Expected business/charge model for the billing agreement.
+/// Expected business/pricing model for the billing agreement., Expected business/charge model for the billing agreement.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<UsagePattern>))]
 public sealed record UsagePattern : StringEnum<UsagePattern>

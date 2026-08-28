@@ -1,9 +1,9 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.Models;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Core.Response;
+namespace PayPal.Core.Response;
 
 internal sealed class ErrorByteResponse : IResponse<ErrorByteContent>
 {

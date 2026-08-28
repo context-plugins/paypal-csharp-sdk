@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Payer confirms the intent to pay for the Order using the provided payment source.
@@ -27,4 +28,7 @@ public record ConfirmOrderRequest
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("application_context")]
     public OrderConfirmApplicationContext? ApplicationContext { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

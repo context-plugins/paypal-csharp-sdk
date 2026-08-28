@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Address request details.
@@ -64,4 +65,7 @@ public record CardResponseAddress
     [StringLength(36, MinimumLength = 1)]
     [RegularExpression("^[0-9A-Za-z-_]+$")]
     public string? Id { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

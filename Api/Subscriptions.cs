@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core;
-using PayPalServerSdk.Core.Exceptions;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Request;
-using PayPalServerSdk.Core.Response;
-using PayPalServerSdk.Errors;
-using PayPalServerSdk.Models;
+using PayPal.Core;
+using PayPal.Core.Exceptions;
+using PayPal.Core.Models;
+using PayPal.Core.Request;
+using PayPal.Core.Response;
+using PayPal.Errors;
+using PayPal.Models;
 
-namespace PayPalServerSdk.Api;
+namespace PayPal.Api;
 
 /// <summary>
 /// Use the <c>/subscriptions</c> resource to create, update, retrieve, and cancel subscriptions and their associated plans.
@@ -517,34 +517,6 @@ public sealed class Subscriptions
             JsonRequest.Create(body),
             VoidResponse.Instance,
             SuspendSubscriptionErrorResponse.Instance,
-            [_auth.Oauth2],
-            requestOptions,
-            ct);
-
-    /// <summary>
-    /// Suspend subscription
-    /// </summary>
-    /// <param name="id">The ID of the subscription.</param>
-    /// <param name="body"></param>
-    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="SuspendSubscription1Error"/> when the server returns an error response.</exception>
-    /// <remarks>
-    /// Suspends the subscription.
-    /// </remarks>
-    public Task SuspendSubscription1(string id,
-        CancelSubscriptionRequest? body,
-        RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}/suspend"),
-            [new TemplateParam("id", id)],
-            [],
-            [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
-            HttpMethod.Post,
-            JsonRequest.Create(body),
-            VoidResponse.Instance,
-            SuspendSubscription1ErrorResponse.Instance,
             [_auth.Oauth2],
             requestOptions,
             ct);

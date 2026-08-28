@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The details for the items to be purchased.
@@ -59,6 +62,7 @@ public record ItemRequest
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("url")]
     [StringLength(2048, MinimumLength = 1)]
+    [Format(FormatKind.Uri)]
     public string? Url { get; init; }
 
     /// <summary>
@@ -75,6 +79,7 @@ public record ItemRequest
     [JsonPropertyName("image_url")]
     [StringLength(2048, MinimumLength = 1)]
     [RegularExpression("^(https:)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png|jpeg|JPG|GIF|PNG|JPEG)")]
+    [Format(FormatKind.Uri)]
     public string? ImageUrl { get; init; }
 
     /// <summary>
@@ -90,4 +95,7 @@ public record ItemRequest
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("billing_plan")]
     public OrderBillingPlan? BillingPlan { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

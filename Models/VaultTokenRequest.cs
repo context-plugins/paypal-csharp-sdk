@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The Tokenized Payment Source representing a Request to Vault a Token.
@@ -22,4 +23,7 @@ public record VaultTokenRequest
     /// </summary>
     [JsonPropertyName("type")]
     public required VaultTokenRequestType Type { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The item details.
@@ -158,4 +159,7 @@ public record ItemDetails
     [MinLength(1)]
     [MaxLength(32767)]
     public IReadOnlyList<CheckoutOption>? CheckoutOptions { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

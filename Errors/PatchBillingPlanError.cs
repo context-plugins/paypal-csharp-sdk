@@ -1,11 +1,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models;
+using PayPal.Core.ErrorResponse;
+using PayPal.Core.Models;
+using PayPal.Models;
 
-namespace PayPalServerSdk.Errors;
+namespace PayPal.Errors;
 
 public sealed class PatchBillingPlanError : ApiError
 {

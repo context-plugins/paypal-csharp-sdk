@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Setup Token Request where the <c>source</c> defines the type of instrument to be stored.
@@ -19,4 +20,7 @@ public record SetupTokenRequest
     /// </summary>
     [JsonPropertyName("payment_source")]
     public required SetupTokenRequestPaymentSource PaymentSource { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

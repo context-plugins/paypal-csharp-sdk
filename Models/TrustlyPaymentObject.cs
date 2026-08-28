@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Information needed to pay using Trustly.
@@ -51,4 +52,7 @@ public record TrustlyPaymentObject
     [StringLength(34, MinimumLength = 4)]
     [RegularExpression("[a-zA-Z0-9]{4}")]
     public string? IbanLastChars { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

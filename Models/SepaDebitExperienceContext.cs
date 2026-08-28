@@ -1,7 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Customizes the payer experience during the approval process for the SEPA Debit payment.
@@ -21,11 +24,16 @@ public record SepaDebitExperienceContext
     /// Describes the URL.
     /// </summary>
     [JsonPropertyName("return_url")]
+    [Format(FormatKind.Uri)]
     public required string ReturnUrl { get; init; }
 
     /// <summary>
     /// Describes the URL.
     /// </summary>
     [JsonPropertyName("cancel_url")]
+    [Format(FormatKind.Uri)]
     public required string CancelUrl { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

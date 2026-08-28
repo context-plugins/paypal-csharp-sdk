@@ -2,10 +2,10 @@ using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Response;
+using PayPal.Core.Models;
+using PayPal.Core.Response;
 
-namespace PayPalServerSdk.Core.ErrorResponse;
+namespace PayPal.Core.ErrorResponse;
 
 public abstract class ApiError
 {

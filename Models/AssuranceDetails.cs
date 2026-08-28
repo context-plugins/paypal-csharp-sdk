@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Information about cardholder possession validation and cardholder identification and verifications (ID&amp;V).
@@ -18,4 +19,7 @@ public record AssuranceDetails
     /// </summary>
     [JsonPropertyName("card_holder_authenticated")]
     public bool? CardHolderAuthenticated { get; init; } = false;
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

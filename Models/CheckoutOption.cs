@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// A checkout option as a name-and-value pair.
@@ -25,4 +26,7 @@ public record CheckoutOption
     [StringLength(200, MinimumLength = 1)]
     [RegularExpression("^[a-zA-Z0-9_'\\-., \":;\\!?]*$")]
     public string? CheckoutOptionValue { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

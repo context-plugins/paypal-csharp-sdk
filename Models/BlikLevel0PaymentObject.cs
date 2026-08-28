@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Information used to pay using BLIK level_0 flow.
@@ -15,4 +16,7 @@ public record BlikLevel0PaymentObject
     [StringLength(6, MinimumLength = 6)]
     [RegularExpression("^[0-9]{6}$")]
     public required string AuthCode { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

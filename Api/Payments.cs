@@ -2,15 +2,15 @@ using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core;
-using PayPalServerSdk.Core.Exceptions;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Request;
-using PayPalServerSdk.Core.Response;
-using PayPalServerSdk.Errors;
-using PayPalServerSdk.Models;
+using PayPal.Core;
+using PayPal.Core.Exceptions;
+using PayPal.Core.Models;
+using PayPal.Core.Request;
+using PayPal.Core.Response;
+using PayPal.Errors;
+using PayPal.Models;
 
-namespace PayPalServerSdk.Api;
+namespace PayPal.Api;
 
 /// <summary>
 /// Use the <c>/payments</c> resource to authorize, capture, void authorizations, and retrieve captures.
@@ -64,46 +64,6 @@ public sealed class Payments
             JsonRequest.Create(body),
             JsonResponse.Create<CapturedPayment>(),
             CaptureAuthorizedPaymentErrorResponse.Instance,
-            [_auth.Oauth2],
-            requestOptions,
-            ct);
-
-    /// <summary>
-    /// Capture authorized payment
-    /// </summary>
-    /// <param name="authorizationId">The PayPal-generated ID for the authorized payment to capture.</param>
-    /// <param name="payPalMockResponse">PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant.</param>
-    /// <param name="payPalRequestId">The server stores keys for 45 days.</param>
-    /// <param name="payPalAuthAssertion">An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see <see href="/docs/api/reference/api-requests/#paypal-auth-assertion">PayPal-Auth-Assertion</see>. Note:For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject.</param>
-    /// <param name="body"></param>
-    /// <param name="prefer">The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.</param>
-    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="CapturedPayment"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="CaptureAuthorizedPayment1Error"/> when the server returns an error response.</exception>
-    /// <remarks>
-    /// Captures an authorized payment, by ID.
-    /// </remarks>
-    public Task<CapturedPayment> CaptureAuthorizedPayment1(string authorizationId,
-        string? payPalMockResponse,
-        string? payPalRequestId,
-        string? payPalAuthAssertion,
-        CaptureRequest? body,
-        string? prefer = "return=minimal",
-        RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v2/payments/authorizations/{authorization_id}/capture"),
-            [new TemplateParam("authorization_id", authorizationId)],
-            [],
-            [new HeaderParam("PayPal-Mock-Response", payPalMockResponse),
-                new HeaderParam("PayPal-Request-Id", payPalRequestId),
-                new HeaderParam("Prefer", prefer),
-                new HeaderParam("PayPal-Auth-Assertion", payPalAuthAssertion),
-                new HeaderParam("Idempotency-Key", Guid.NewGuid())],
-            HttpMethod.Post,
-            JsonRequest.Create(body),
-            JsonResponse.Create<CapturedPayment>(),
-            CaptureAuthorizedPayment1ErrorResponse.Instance,
             [_auth.Oauth2],
             requestOptions,
             ct);
@@ -163,34 +123,6 @@ public sealed class Payments
             EmptyBody.Instance,
             JsonResponse.Create<CapturedPayment>(),
             GetCapturedPaymentErrorResponse.Instance,
-            [_auth.Oauth2],
-            requestOptions,
-            ct);
-
-    /// <summary>
-    /// Show captured payment details
-    /// </summary>
-    /// <param name="captureId">The PayPal-generated ID for the captured payment for which to show details.</param>
-    /// <param name="payPalMockResponse">PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant.</param>
-    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="CapturedPayment"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="GetCapturedPayment1Error"/> when the server returns an error response.</exception>
-    /// <remarks>
-    /// Shows details for a captured payment, by ID.
-    /// </remarks>
-    public Task<CapturedPayment> GetCapturedPayment1(string captureId,
-        string? payPalMockResponse,
-        RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v2/payments/captures/{capture_id}"),
-            [new TemplateParam("capture_id", captureId)],
-            [],
-            [new HeaderParam("PayPal-Mock-Response", payPalMockResponse)],
-            HttpMethod.Get,
-            EmptyBody.Instance,
-            JsonResponse.Create<CapturedPayment>(),
-            GetCapturedPayment1ErrorResponse.Instance,
             [_auth.Oauth2],
             requestOptions,
             ct);

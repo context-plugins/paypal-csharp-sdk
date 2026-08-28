@@ -1,16 +1,16 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Exceptions;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Request;
-using PayPalServerSdk.Core.Response;
-using PayPalServerSdk.Errors;
-using PayPalServerSdk.Models;
+using PayPal.Core;
+using PayPal.Core.ErrorResponse;
+using PayPal.Core.Exceptions;
+using PayPal.Core.Models;
+using PayPal.Core.Request;
+using PayPal.Core.Response;
+using PayPal.Errors;
+using PayPal.Models;
 
-namespace PayPalServerSdk.Api;
+namespace PayPal.Api;
 
 /// <summary>
 /// Use the <c>/transactions</c> resource to list transactions and the <c>/balances</c> resource to list balances.

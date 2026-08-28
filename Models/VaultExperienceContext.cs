@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Customizes the Vault creation flow experience for your customers.
@@ -33,6 +36,7 @@ public record VaultExperienceContext
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("return_url")]
     [StringLength(4000, MinimumLength = 1)]
+    [Format(FormatKind.Uri)]
     public string? ReturnUrl { get; init; }
 
     /// <summary>
@@ -41,6 +45,7 @@ public record VaultExperienceContext
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("cancel_url")]
     [StringLength(4000, MinimumLength = 1)]
+    [Format(FormatKind.Uri)]
     public string? CancelUrl { get; init; }
 
     /// <summary>
@@ -68,4 +73,7 @@ public record VaultExperienceContext
     /// </summary>
     [JsonPropertyName("user_action")]
     public VaultUserAction? UserAction { get; init; } = VaultUserAction.Continue;
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

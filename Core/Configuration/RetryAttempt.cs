@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace PayPalServerSdk.Core.Configuration;
+namespace PayPal.Core.Configuration;
 
 public sealed record RetryAttempt
 {

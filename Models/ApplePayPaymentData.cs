@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Information about the decrypted apple pay payment data for the token like cryptogram, eci indicator.
@@ -43,4 +44,7 @@ public record ApplePayPaymentData
     [StringLength(2000, MinimumLength = 1)]
     [RegularExpression("^.*$")]
     public string? Pin { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Customizes the payer experience during the approval process for the BLIK payment.
@@ -38,6 +41,7 @@ public record BlikExperienceContext
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("return_url")]
+    [Format(FormatKind.Uri)]
     public string? ReturnUrl { get; init; }
 
     /// <summary>
@@ -45,6 +49,7 @@ public record BlikExperienceContext
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("cancel_url")]
+    [Format(FormatKind.Uri)]
     public string? CancelUrl { get; init; }
 
     /// <summary>
@@ -64,4 +69,7 @@ public record BlikExperienceContext
     [StringLength(256, MinimumLength = 1)]
     [RegularExpression("^.*$")]
     public string? ConsumerUserAgent { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The cart information.
@@ -32,4 +33,7 @@ public record CartInformation
     [StringLength(127, MinimumLength = 1)]
     [RegularExpression("^[a-zA-Z0-9_'\\-., \":;\\!?]*$")]
     public string? PaypalInvoiceId { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

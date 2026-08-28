@@ -1,8 +1,9 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The frequency of the billing cycle.
@@ -22,4 +23,7 @@ public record Frequency
     [Minimum(1)]
     [Maximum(365)]
     public int? IntervalCount { get; init; } = 1;
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

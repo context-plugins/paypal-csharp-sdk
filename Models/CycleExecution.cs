@@ -1,8 +1,9 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The regular and trial execution details for a billing cycle.
@@ -57,4 +58,7 @@ public record CycleExecution
     [Minimum(0)]
     [Maximum(999)]
     public int? TotalCycles { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

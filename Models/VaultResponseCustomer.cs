@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// This object defines a customer in your system. Use it to manage customer profiles, save payment methods and contact details.
@@ -34,4 +35,7 @@ public record VaultResponseCustomer
     [JsonPropertyName("links")]
     [MaxLength(16)]
     public IReadOnlyList<object>? Links { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

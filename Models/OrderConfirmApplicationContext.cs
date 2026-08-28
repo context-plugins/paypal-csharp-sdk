@@ -1,7 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Customizes the payer confirmation experience.
@@ -31,6 +34,7 @@ public record OrderConfirmApplicationContext
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("return_url")]
     [StringLength(4000, MinimumLength = 10)]
+    [Format(FormatKind.Uri)]
     public string? ReturnUrl { get; init; }
 
     /// <summary>
@@ -39,6 +43,7 @@ public record OrderConfirmApplicationContext
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("cancel_url")]
     [StringLength(4000, MinimumLength = 10)]
+    [Format(FormatKind.Uri)]
     public string? CancelUrl { get; init; }
 
     /// <summary>
@@ -47,4 +52,7 @@ public record OrderConfirmApplicationContext
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("stored_payment_source")]
     public StoredPaymentSource? StoredPaymentSource { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

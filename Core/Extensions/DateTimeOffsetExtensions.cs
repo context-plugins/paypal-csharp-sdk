@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace PayPalServerSdk.Core.Extensions;
+namespace PayPal.Core.Extensions;
 
 internal static class DateTimeOffsetExtensions
 {

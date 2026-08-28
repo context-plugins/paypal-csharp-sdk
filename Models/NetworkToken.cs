@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The Third Party Network token used to fund a payment.
@@ -49,4 +50,7 @@ public record NetworkToken
     [StringLength(11, MinimumLength = 1)]
     [RegularExpression("^[0-9A-Z_]+$")]
     public string? TokenRequestorId { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

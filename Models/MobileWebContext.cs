@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Buyer's mobile web browser context to app switch to the PayPal consumer app.
@@ -23,4 +24,7 @@ public record MobileWebContext
     [StringLength(512, MinimumLength = 1)]
     [RegularExpression("^.*$")]
     public string? BuyerUserAgent { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Results of 3D Secure Authentication.
@@ -13,7 +14,7 @@ public record ThreeDSecureAuthenticationResponse
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("authentication_status")]
-    public ParesStatus? AuthenticationStatus { get; init; }
+    public PaResStatus? AuthenticationStatus { get; init; }
 
     /// <summary>
     /// Status of Authentication eligibility.
@@ -21,4 +22,7 @@ public record ThreeDSecureAuthenticationResponse
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("enrollment_status")]
     public EnrollmentStatus? EnrollmentStatus { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

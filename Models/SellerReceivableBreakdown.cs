@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The detailed breakdown of the capture activity. This is not available for transactions that are in pending state.
@@ -58,4 +59,7 @@ public record SellerReceivableBreakdown
     [MinLength(0)]
     [MaxLength(1)]
     public IReadOnlyList<PlatformFee>? PlatformFees { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

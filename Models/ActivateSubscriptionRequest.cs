@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The activate subscription request details.
@@ -16,4 +17,7 @@ public record ActivateSubscriptionRequest
     [StringLength(128, MinimumLength = 1)]
     [RegularExpression("^.*$")]
     public string? Reason { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

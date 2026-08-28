@@ -1,10 +1,11 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
-/// The request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS link</see> information., The request-related <see href="/api/rest/responses/#hateoas-links">HATEOAS link</see> information., The request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS link</see> information., The request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS link</see> information., The request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS link</see> information., The request-related <see href="/api/rest/responses/#hateoas-links">HATEOAS link</see> information., The request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS link</see> information.
+/// The request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS link</see> information., The request-related <see href="/api/rest/responses/#hateoas-links">HATEOAS link</see> information., The request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS link</see> information.
 /// </summary>
 public record LinkDescription
 {
@@ -26,4 +27,7 @@ public record LinkDescription
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("method")]
     public LinkHttpMethod? Method { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

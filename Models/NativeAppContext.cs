@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Merchant provided, buyer's native app preferences to app switch to the PayPal consumer app.
@@ -24,4 +25,7 @@ public record NativeAppContext
     [StringLength(64, MinimumLength = 1)]
     [RegularExpression("^.*$")]
     public string? OsVersion { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

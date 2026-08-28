@@ -1,8 +1,8 @@
 using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using PayPal.Core.Enum;
 
-namespace PayPalServerSdk.Servers;
+namespace PayPal.Servers;
 
 [JsonConverter(typeof(StringEnumConverter<ServerEnvironment>))]
 public record ServerEnvironment : StringEnum<ServerEnvironment>
@@ -10,20 +10,20 @@ public record ServerEnvironment : StringEnum<ServerEnvironment>
     /// <summary>
     /// PayPal Sandbox Environment
     /// </summary>
-    public static readonly ServerEnvironment Sandbox = new("Sandbox");
+    public static readonly ServerEnvironment Production = new("production");
 
     private ServerEnvironment(string value) : base(value)
     {
     }
 
-    internal T Match<T>(Func<T> onSandbox) =>
+    internal T Match<T>(Func<T> onProduction) =>
         this switch
         {
-            _ when this == Sandbox => onSandbox(),
+            _ when this == Production => onProduction(),
             _ => throw new ArgumentOutOfRangeException(nameof(ServerEnvironment),
                 this,
                 $"Unknown {nameof(ServerEnvironment)} value.")
         };
 
-    public static ServerEnvironment Default() => Sandbox;
+    public static ServerEnvironment Default() => Production;
 }

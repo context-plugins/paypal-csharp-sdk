@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Metadata for merchant-managed recurring billing plans. Valid only during the saved payment method token or billing agreement creation.
@@ -32,4 +33,7 @@ public record OrderBillingPlan
     [StringLength(127, MinimumLength = 1)]
     [RegularExpression("^[A-Za-z0-9() +',.:-]+$")]
     public string? Name { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Resource consolidating common request and response attirbutes for vaulting Venmo Wallet.
@@ -48,4 +49,7 @@ public record VenmoWalletVaultAttributes
     /// </summary>
     [JsonPropertyName("permit_multiple_payment_tokens")]
     public bool? PermitMultiplePaymentTokens { get; init; } = false;
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

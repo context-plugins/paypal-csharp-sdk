@@ -1,19 +1,16 @@
-# PayPal Server SDK
+# PayPal
 
 [![Built with APIMatic][apimatic-badge]][apimatic-url] [![License: MIT][license-badge]][license-url]
 
-The PayPal Server SDK SDK for .NET provides access to the PayPal Server SDK REST APIs from .NET applications.
+The PayPal SDK for .NET provides access to the PayPal REST APIs from .NET applications.
 
-### Important Notes
- - **Available Features:** This SDK currently contains only 5 of PayPal's API endpoints. Additional endpoints and functionality will be added in the future.
- 
- ## Information
- The PayPal Server SDK provides integration access to the PayPal REST APIs. The API endpoints are divided into distinct controllers:
- - Orders Controller: [Orders API v2](https://developer.paypal.com/docs/api/orders/v2/)
- - Payments Controller: [Payments API v2](https://developer.paypal.com/docs/api/payments/v2)
- - Vault Controller: [Payment Method Tokens API v3](https://developer.paypal.com/docs/api/payment-tokens/v3/) *Available in the US only.*
- - Transaction Search Controller: [Transaction Search API v1](https://developer.paypal.com/docs/api/transaction-search/v1/)
- - Subscriptions Controller: [Subscriptions API v1](https://developer.paypal.com/docs/api/subscriptions/v1/)
+> [!TIP]
+> **Looking for a specific signature, model, enum, or error type?** This SDK ships a generated,
+> machine-readable **[SDK map](sdk-map.md)** — a lookup index of the SDK's entire C# surface. Consult it
+> **before** grepping or scanning the source tree; it answers most contract questions directly and,
+> when a source file is genuinely needed, names the exact one to open. Details under [SDK map](#sdk-map).
+
+An order represents a payment between two or more parties. Use the Orders API to create, update, retrieve, authorize, and capture orders., Call the Payments API to authorize payments, capture authorized payments, refund payments that have already been captured, and show payment information. Use the Payments API in conjunction with the Orders API. For more information, see the PayPal Checkout Overview., The Payment Method Tokens API saves payment methods so payers don't have to enter details for future transactions. Payers can check out faster or pay without being present after they agree to save a payment method. The API associates a payment method with a temporary setup token. Pass the setup token to the API to exchange the setup token for a permanent token. The permanent token represents a payment method that's saved to the vault. This token can be used repeatedly for checkout or recurring transactions such as subscriptions. The Payment Method Tokens API is available in the US only., Use the Transaction Search API to get the history of transactions for a PayPal account. To use the API on behalf of third parties, you must be part of the PayPal partner network. Reach out to your partner manager for the next steps. To enroll in the partner program, see Partner with PayPal. For more information about the API, see the Transaction Search API Integration Guide. Note: To use the API on behalf of third parties, you must be part of the PayPal partner network. Reach out to your partner manager for the next steps. To enroll in the partner program, see Partner with PayPal., You can use billing plans and subscriptions to create subscriptions that process recurring PayPal payments for physical or digital goods, or services. A plan includes pricing and billing cycle information that defines the amount and frequency of charge for a subscription. You can also define a fixed plan, such as a $5 basic plan or a volume- or graduated-based plan with pricing tiers based on the quantity purchased. For more information, see Subscriptions Overview.
 
 ---
 
@@ -22,7 +19,7 @@ The PayPal Server SDK SDK for .NET provides access to the PayPal Server SDK REST
 Add the .NET SDK as a project reference into your solution:
 
 ```bash
-dotnet add reference <path-to-sdk>/PayPalServerSdk.csproj
+dotnet add reference <path-to-sdk>/PayPal.csproj
 ```
 
 ---
@@ -31,10 +28,10 @@ dotnet add reference <path-to-sdk>/PayPalServerSdk.csproj
 
 ### Dependency Injection
 
-Register the client with `IServiceCollection` and resolve it from the container. The `HttpClient` is managed by `IHttpClientFactory`. Configure the client's behavior through [PayPalServerSdkClientOptions](PayPalServerSdkClientOptions.cs).
+Register the client with `IServiceCollection` and resolve it from the container. The `HttpClient` is managed by `IHttpClientFactory`. Configure the client's behavior through [PayPalClientOptions](PayPalClientOptions.cs).
 
 ```csharp
-services.AddPayPalServerSdkClient(options =>
+services.AddPayPalClient(options =>
     {
         options.Oauth2 =
             new OAuth2ClientCredentials
@@ -42,29 +39,29 @@ services.AddPayPalServerSdkClient(options =>
                 ClientId = "YOUR_CLIENT_ID",
                 ClientSecret = "YOUR_CLIENT_SECRET",
             };
-        options.Environment = ServerEnvironment.Sandbox;
+        options.Environment = ServerEnvironment.Production;
         // TODO: configure more client options here
     });
 ```
 
 ### Direct Instantiation
 
-Create the client by passing an `HttpClient` you manage yourself. Configure the client's behavior through [PayPalServerSdkClientOptions](PayPalServerSdkClientOptions.cs).
+Create the client by passing an `HttpClient` you manage yourself. Configure the client's behavior through [PayPalClientOptions](PayPalClientOptions.cs).
 
 ```csharp
 var httpClient = new HttpClient();
 // TODO: configure more client options here
 var options =
-    new PayPalServerSdkClientOptions
+    new PayPalClientOptions
     {
         Oauth2 = new OAuth2ClientCredentials
         {
             ClientId = "YOUR_CLIENT_ID",
             ClientSecret = "YOUR_CLIENT_SECRET",
         },
-        Environment = ServerEnvironment.Sandbox,
+        Environment = ServerEnvironment.Production,
     };
-var client = new PayPalServerSdkClient(httpClient, options);
+var client = new PayPalClient(httpClient, options);
 ```
 
 ---
@@ -73,10 +70,36 @@ var client = new PayPalServerSdkClient(httpClient, options);
 
 For code examples and error responses, see [API Reference](api-reference.md).
 
+## SDK map
+
+This SDK ships a generated **SDK map** — [`sdk-map.md`](sdk-map.md) plus the [`map/`](map/) pages — a deterministic, lookup-oriented table of contents of the SDK's C# surface, generated by APIMatic alongside this SDK.
+
+**Read it before scanning the source.** Whether you are an AI coding assistant or searching by hand, the map answers "what is the exact …" by lookup for every call-level contract, and for anything it does not carry it names the one file that does — so you never have to search the source tree:
+
+- **[`sdk-map.md`](sdk-map.md)** — the index: client construction, servers/auth, the options/retry reference, the SDK-wide defaults the operation rows rely on, and link tables into [`map/`](map/).
+- **[`map/operations/`](map/operations/)** — one page per controller: the exact C# signature, the return type, the error type with its typed `TryGet…` accessors, and pagination — plus, per operation, a **Type sources** table naming the file that declares every type that operation mentions.
+
+Model shapes — record fields with their JSON wire names, enum member names and wire values, `OneOf`/`AnyOf` union variants — are **not** duplicated in the map. Take the path from the operation's Type sources table and read the declaring file; it is the single source of truth and cannot go stale against the code.
+
+**Each operation row states what is specific to that operation.** The SDK-wide defaults are stated once in [`sdk-map.md`](sdk-map.md) — throw-only (no `Result`-style no-throw variants), no pagination, the four fixed `RawError` accessors, the `Default` server group — and a row appears only where its operation departs from one. A row silent on pagination is telling you that operation has none.
+
+The **HTTP verb and route**, and the endpoint's **behavioural prose**, live on the operation itself, in the source file named at the top of its operations page. Read them there when something needs them — wiring a mock, reading a provider log, or settling a rule about what you must pass.
+
+**Workflow:** look the fact up in the map → where the map leaves something ambiguous, open the **one** source file the row names → the compiler is the backstop (a name that isn't in the map won't build). Don't scan or grep the tree to find things — the map is the locator.
+
+### Which one to reach for
+
+The map and the [API Reference](api-reference.md) answer different questions, and the map is generated from this SDK's source so it stays in lockstep with the code it describes.
+
+| Use | For |
+| --- | --- |
+| **[`sdk-map.md`](sdk-map.md) + [`map/`](map/)** | Traversing the SDK and working out its surface — locating the operation you need (this SDK exposes **40 operations**), its exact signature and parameter order, the shape and JSON wire names of the models it takes and returns, which error type it throws and how to read it, and the source file behind any of it. This is the index to consume the SDK from, and the one to reach for first. |
+| **[`api-reference.md`](api-reference.md)** | Usage guidance for a single operation once you know which one you want — a runnable code sample, per-parameter descriptions, and the error responses it can return. |
+
 ## Best Practices
 
 > [!TIP]
-> Use a **single `PayPalServerSdkClient` instance** for the lifetime of your application and
+> Use a **single `PayPalClient` instance** for the lifetime of your application and
 > reuse it across all requests. Creating a new instance per request might exhaust the
 > connection pool.
 

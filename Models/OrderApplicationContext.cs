@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Customizes the payer experience during the approval process for the payment with PayPal. Note: Partners and Marketplaces might configure brand_name and shipping_preference during partner account setup, which overrides the request values.
@@ -56,6 +59,7 @@ public record OrderApplicationContext
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("return_url")]
+    [Format(FormatKind.Uri)]
     public string? ReturnUrl { get; init; }
 
     /// <summary>
@@ -63,6 +67,7 @@ public record OrderApplicationContext
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("cancel_url")]
+    [Format(FormatKind.Uri)]
     public string? CancelUrl { get; init; }
 
     /// <summary>
@@ -71,4 +76,7 @@ public record OrderApplicationContext
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("stored_payment_source")]
     public StoredPaymentSource? StoredPaymentSource { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Additional attributes associated with the use of a PayPal Wallet.
@@ -24,4 +25,7 @@ public record PayPalWalletAttributesResponse
     [MinLength(0)]
     [MaxLength(25)]
     public IReadOnlyList<CobrandedCard>? CobrandedCards { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

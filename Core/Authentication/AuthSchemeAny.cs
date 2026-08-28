@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.Exceptions;
+using PayPal.Core.Exceptions;
 
-namespace PayPalServerSdk.Core.Authentication;
+namespace PayPal.Core.Authentication;
 
 /// <summary>
 /// Represents multiple alternative schemes (OR logic).

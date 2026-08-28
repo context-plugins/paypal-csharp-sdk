@@ -1,11 +1,12 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
-/// The payment preferences for a subscription., The payment preferences to override at subscription level.
+/// The payment preferences for a subscription.
 /// </summary>
 public record PaymentPreferences
 {
@@ -35,4 +36,7 @@ public record PaymentPreferences
     [Minimum(0)]
     [Maximum(999)]
     public int? PaymentFailureThreshold { get; init; } = 0;
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

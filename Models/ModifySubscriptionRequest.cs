@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The request to update the quantity of the product or service in a subscription. You can also use this method to switch the plan and update the <c>shipping_amount</c> and <c>shipping_address</c> values for the subscription. This type of update requires the buyer's consent.
@@ -53,4 +54,7 @@ public record ModifySubscriptionRequest
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("plan")]
     public PlanOverride? Plan { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

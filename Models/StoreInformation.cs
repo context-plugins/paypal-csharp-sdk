@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The store information.
@@ -25,4 +26,7 @@ public record StoreInformation
     [StringLength(60, MinimumLength = 1)]
     [RegularExpression("^[a-zA-Z0-9]*$")]
     public string? TerminalId { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

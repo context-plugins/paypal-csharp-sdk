@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Bank Identification Number (BIN) details used to fund a payment.
@@ -43,4 +44,7 @@ public record BinDetails
     [MinLength(1)]
     [MaxLength(256)]
     public IReadOnlyList<string>? Products { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

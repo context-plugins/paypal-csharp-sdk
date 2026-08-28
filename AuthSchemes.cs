@@ -1,15 +1,15 @@
-using PayPalServerSdk.Core;
-using PayPalServerSdk.Core.Authentication;
-using PayPalServerSdk.Core.Authentication.OAuth2;
-using PayPalServerSdk.Core.Authentication.OAuth2.ClientCredentials;
+using PayPal.Core;
+using PayPal.Core.Authentication;
+using PayPal.Core.Authentication.OAuth2;
+using PayPal.Core.Authentication.OAuth2.ClientCredentials;
 
-namespace PayPalServerSdk;
+namespace PayPal;
 
 internal sealed class AuthSchemes
 {
     public IAuthScheme Oauth2 { get; }
 
-    public AuthSchemes(PayPalServerSdkClientOptions options, Server server, RawClient rawClient)
+    public AuthSchemes(PayPalClientOptions options, Server server, RawClient rawClient)
     {
         Oauth2 =
             OAuth2Scheme<OAuth2ClientCredentials>.Create(options.Oauth2,

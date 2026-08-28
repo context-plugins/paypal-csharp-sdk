@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Information used to pay using P24(Przelewy24).
@@ -57,4 +58,7 @@ public record P24PaymentObject
     [JsonPropertyName("method_description")]
     [StringLength(2000, MinimumLength = 1)]
     public string? MethodDescription { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

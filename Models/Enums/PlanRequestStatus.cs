@@ -1,10 +1,10 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using PayPal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace PayPal.Models.Enums;
 
 /// <summary>
-/// The initial state of the plan. Allowed input values are CREATED and ACTIVE., The plan status.
+/// The initial state of the plan. Allowed input values are CREATED and ACTIVE.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PlanRequestStatus>))]
 public sealed record PlanRequestStatus : StringEnum<PlanRequestStatus>

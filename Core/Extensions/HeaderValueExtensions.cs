@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http.Headers;
 
-namespace PayPalServerSdk.Core.Extensions;
+namespace PayPal.Core.Extensions;
 
 internal static class HeaderValueExtensions
 {

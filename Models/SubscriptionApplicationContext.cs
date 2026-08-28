@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The application context, which customizes the payer experience during the subscription approval process with PayPal.
@@ -51,6 +54,7 @@ public record SubscriptionApplicationContext
     /// </summary>
     [JsonPropertyName("return_url")]
     [StringLength(4000, MinimumLength = 10)]
+    [Format(FormatKind.Uri)]
     public required string ReturnUrl { get; init; }
 
     /// <summary>
@@ -58,5 +62,9 @@ public record SubscriptionApplicationContext
     /// </summary>
     [JsonPropertyName("cancel_url")]
     [StringLength(4000, MinimumLength = 10)]
+    [Format(FormatKind.Uri)]
     public required string CancelUrl { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

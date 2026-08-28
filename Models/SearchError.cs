@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Validation.Attributes;
+using PayPal.Core.Models;
+using PayPal.Core.Validation.Attributes;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The error details.
@@ -65,4 +66,7 @@ public record SearchError
     [Minimum(0)]
     [Maximum(2147483647)]
     public int? MaximumItems { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

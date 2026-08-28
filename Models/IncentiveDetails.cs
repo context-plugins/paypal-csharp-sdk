@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The incentive details.
@@ -41,4 +42,7 @@ public record IncentiveDetails
     [StringLength(100, MinimumLength = 1)]
     [RegularExpression("^[a-zA-Z0-9_'\\-., \":;\\!?]*$")]
     public string? IncentiveProgramCode { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

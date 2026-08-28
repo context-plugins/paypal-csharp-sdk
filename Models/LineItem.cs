@@ -1,7 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The line items for this purchase. If your merchant account has been configured for Level 3 processing this field will be passed to the processor on your behalf.
@@ -45,6 +48,7 @@ public record LineItem
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("url")]
     [StringLength(2048, MinimumLength = 1)]
+    [Format(FormatKind.Uri)]
     public string? Url { get; init; }
 
     /// <summary>
@@ -54,6 +58,7 @@ public record LineItem
     [JsonPropertyName("image_url")]
     [StringLength(2048, MinimumLength = 1)]
     [RegularExpression("^(https:)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png|jpeg|JPG|GIF|PNG|JPEG)(\\?.*)?$")]
+    [Format(FormatKind.Uri)]
     public string? ImageUrl { get; init; }
 
     /// <summary>
@@ -115,4 +120,7 @@ public record LineItem
     [StringLength(12, MinimumLength = 1)]
     [RegularExpression("^[a-zA-Z0-9_'.-]*$")]
     public string? UnitOfMeasure { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

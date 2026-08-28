@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Captures either a portion or the full authorized amount of an authorized payment.
@@ -51,4 +52,7 @@ public record CaptureRequest
     [JsonPropertyName("soft_descriptor")]
     [MaxLength(22)]
     public string? SoftDescriptor { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -4,12 +4,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Request;
-using PayPalServerSdk.Core.Response;
+using PayPal.Core.ErrorResponse;
+using PayPal.Core.Models;
+using PayPal.Core.Request;
+using PayPal.Core.Response;
 
-namespace PayPalServerSdk.Core.Authentication.OAuth2.Password;
+namespace PayPal.Core.Authentication.OAuth2.Password;
 
 internal sealed class OAuth2PasswordCredentialsStrategy : IOAuth2TokenStrategy<OAuth2PasswordCredentials>
 {
@@ -62,11 +62,6 @@ internal sealed class OAuth2PasswordCredentialsStrategy : IOAuth2TokenStrategy<O
         return [new HeaderParam("Authorization", $"Basic {encoded}")];
     }
 
-    private static IReadOnlyList<Param> BodyParams(string clientId, string? clientSecret)
-    {
-        List<Param> parameters = [new("client_id", clientId)];
-        if (clientSecret is not null)
-            parameters.Add(new Param("client_secret", clientSecret));
-        return parameters;
-    }
+    private static IReadOnlyList<Param> BodyParams(string clientId, string? clientSecret) =>
+        [new("client_id", clientId), new("client_secret", clientSecret)];
 }

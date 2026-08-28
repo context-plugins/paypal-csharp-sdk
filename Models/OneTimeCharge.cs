@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The one-time charge info at the time of checkout.
@@ -47,4 +48,7 @@ public record OneTimeCharge
     /// </summary>
     [JsonPropertyName("total_amount")]
     public required Money TotalAmount { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

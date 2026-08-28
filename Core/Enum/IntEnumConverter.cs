@@ -4,9 +4,9 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace PayPalServerSdk.Core.Enum;
+namespace PayPal.Core.Enum;
 
-public sealed class IntEnumConverter<TEnum> : JsonConverter<TEnum>
+internal sealed class IntEnumConverter<TEnum> : JsonConverter<TEnum>
     where TEnum : IntEnum<TEnum>
 {
     private static readonly ConcurrentDictionary<Type, Func<int, TEnum>> FromValueCoreCache = new();

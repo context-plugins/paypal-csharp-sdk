@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
-/// This object defines a customer in your system. Use it to manage customer profiles, save payment methods and contact details., Customer in merchant's or partner's system of records.
+/// This object defines a customer in your system. Use it to manage customer profiles, save payment methods and contact details.
 /// </summary>
 public record Customer
 {
@@ -25,4 +26,7 @@ public record Customer
     [StringLength(64, MinimumLength = 1)]
     [RegularExpression("^[0-9a-zA-Z-_.^*$@#]+$")]
     public string? MerchantCustomerId { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

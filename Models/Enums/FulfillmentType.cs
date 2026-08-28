@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using PayPal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace PayPal.Models.Enums;
 
 /// <summary>
 /// A classification for the method of purchase fulfillment (e.g shipping, in-store pickup, etc). Either <c>type</c> or <c>options</c> may be present, but not both.

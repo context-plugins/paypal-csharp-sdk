@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Base vaulting specification. The object can be extended for specific use cases within each payment_source that supports vaulting.
@@ -13,4 +14,7 @@ public record VaultInstruction
     /// </summary>
     [JsonPropertyName("store_in_vault")]
     public required StoreInVaultInstruction StoreInVault { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

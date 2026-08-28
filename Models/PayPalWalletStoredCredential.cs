@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Provides additional details to process a payment using the PayPal wallet billing agreement or a vaulted payment method that has been stored or is intended to be stored.
@@ -33,4 +34,7 @@ public record PayPalWalletStoredCredential
     /// </summary>
     [JsonPropertyName("usage")]
     public StoredPaymentSourceUsageType? Usage { get; init; } = StoredPaymentSourceUsageType.Derived;
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

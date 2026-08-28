@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Models.Enums;
+using PayPal.Core.Models;
+using PayPal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The Card from Apple Pay Wallet used to fund the payment.
@@ -108,4 +109,7 @@ public record ApplePayCardResponse
     [StringLength(2, MinimumLength = 2)]
     [RegularExpression("^([A-Z]{2}|C2)$")]
     public string? CountryCode { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

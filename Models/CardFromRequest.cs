@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// Representation of card details as received in the request.
@@ -25,4 +26,7 @@ public record CardFromRequest
     [StringLength(4, MinimumLength = 2)]
     [RegularExpression("[0-9]{2,}")]
     public string? LastDigits { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

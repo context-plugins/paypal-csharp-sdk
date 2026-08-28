@@ -2,9 +2,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http.Headers;
-using PayPalServerSdk.Core.Exceptions;
+using PayPal.Core.Exceptions;
 
-namespace PayPalServerSdk.Core.Models;
+namespace PayPal.Core.Models;
 
 /// <summary>
 ///     Represents either a successful response of type <typeparamref name="TResponse" />

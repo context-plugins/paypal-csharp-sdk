@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-namespace PayPalServerSdk.Core.Configuration;
+namespace PayPal.Core.Configuration;
 
 public record LoggingOptions
 {

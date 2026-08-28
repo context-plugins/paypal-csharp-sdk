@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The payment card used to fund the payment. Card can be a credit or debit card.
@@ -39,4 +40,7 @@ public record CardResponseWithBillingAddress
     [JsonPropertyName("currency_code")]
     [StringLength(3, MinimumLength = 3)]
     public string? CurrencyCode { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

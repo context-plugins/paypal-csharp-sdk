@@ -1,7 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PayPal.Core.Models;
+using PayPal.Core.Validation;
+using PayPal.Core.Validation.Attributes;
 
-namespace PayPalServerSdk.Models;
+namespace PayPal.Models;
 
 /// <summary>
 /// The details of the items in the shipment.
@@ -39,6 +42,7 @@ public record OrderTrackerItem
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("url")]
     [StringLength(2048, MinimumLength = 1)]
+    [Format(FormatKind.Uri)]
     public string? Url { get; init; }
 
     /// <summary>
@@ -48,6 +52,7 @@ public record OrderTrackerItem
     [JsonPropertyName("image_url")]
     [StringLength(2048, MinimumLength = 1)]
     [RegularExpression("^(https:)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png|jpeg|JPG|GIF|PNG|JPEG)")]
+    [Format(FormatKind.Uri)]
     public string? ImageUrl { get; init; }
 
     /// <summary>
@@ -56,4 +61,7 @@ public record OrderTrackerItem
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("upc")]
     public UniversalProductCode? Upc { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

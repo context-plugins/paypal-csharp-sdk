@@ -1,10 +1,10 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using PayPal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace PayPal.Models.Enums;
 
 /// <summary>
-/// The usage type associated with the PayPal payment token., The usage type associated with a digital wallet payment token., The usage type associated with a digital wallet payment token.
+/// The usage type associated with the PayPal payment token., The usage type associated with a digital wallet payment token.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PayPalPaymentTokenUsageType>))]
 public sealed record PayPalPaymentTokenUsageType : StringEnum<PayPalPaymentTokenUsageType>

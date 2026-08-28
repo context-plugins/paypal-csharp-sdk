@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PayPalServerSdk.Core.ErrorResponse;
+namespace PayPal.Core.ErrorResponse;
 
 public interface IErrorResponse<TError>
 {
