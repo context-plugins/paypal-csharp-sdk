@@ -1,7 +1,7 @@
 using System;
 using System.Net.Http.Headers;
 
-namespace PayPal.Core.Pagination.States;
+namespace PayPalServerSdk.Core.Pagination.States;
 
 internal sealed record CursorState<TResponse> : IPageState<TResponse, CursorState<TResponse>>
 {

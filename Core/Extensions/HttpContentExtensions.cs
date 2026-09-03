@@ -1,6 +1,6 @@
 using System.Net.Http;
 
-namespace PayPal.Core.Extensions;
+namespace PayPalServerSdk.Core.Extensions;
 
 internal static class HttpContentExtension
 {

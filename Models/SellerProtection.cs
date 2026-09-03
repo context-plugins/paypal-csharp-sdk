@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using PayPal.Core.Models;
-using PayPal.Models.Enums;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Models.Enums;
 
-namespace PayPal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The level of protection offered as defined by <see href="https://www.paypal.com/us/webapps/mpp/security/seller-protection">PayPal Seller Protection for Merchants</see>.

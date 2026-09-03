@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPal.Core.Models;
+using PayPalServerSdk.Core.Models;
 
-namespace PayPal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The currency and amount for a financial transaction, such as a balance or payment due.

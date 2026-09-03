@@ -3,9 +3,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPal.Core.Extensions;
+using PayPalServerSdk.Core.Extensions;
 
-namespace PayPal.Core.Response;
+namespace PayPalServerSdk.Core.Response;
 
 internal sealed class JsonResponse<TResponse> : IResponse<TResponse>
 {

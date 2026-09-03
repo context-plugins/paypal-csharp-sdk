@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
-using PayPal.Core.Models;
-using PayPal.Models.Enums;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Models.Enums;
 
-namespace PayPal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The API caller can opt in to verify the card through PayPal offered verification services (e.g. Smart Dollar Auth, 3DS).

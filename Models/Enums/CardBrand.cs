@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPal.Core.Enum;
+using PayPalServerSdk.Core.Enum;
 
-namespace PayPal.Models.Enums;
+namespace PayPalServerSdk.Models.Enums;
 
 /// <summary>
 /// The card network or brand. Applies to credit, debit, gift, and payment cards.

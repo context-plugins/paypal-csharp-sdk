@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Polly;
 using Polly.Retry;
 using Polly.Timeout;
-using PayPal.Core.Configuration;
-using PayPal.Core.Logging;
-using PayPal.Core.Request;
+using PayPalServerSdk.Core.Configuration;
+using PayPalServerSdk.Core.Logging;
+using PayPalServerSdk.Core.Request;
 
-namespace PayPal.Core;
+namespace PayPalServerSdk.Core;
 
 internal sealed class ResiliencePipelineFactory
 {

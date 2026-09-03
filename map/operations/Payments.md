@@ -8,6 +8,7 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 ### CaptureAuthorizedPayment
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CaptureAuthorizedPayment(string authorizationId, string? payPalMockResponse, string? payPalRequestId, string? payPalAuthAssertion, CaptureRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`payPalMockResponse` … `body`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
   - defaults: `prefer` = `"return=minimal"`
@@ -24,6 +25,7 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 ### GetAuthorizedPayment
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `GetAuthorizedPayment(string authorizationId, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalMockResponse` — nullable, no default → **must pass explicitly**
   - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
@@ -39,6 +41,7 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 ### GetCapturedPayment
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `GetCapturedPayment(string captureId, string? payPalMockResponse, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalMockResponse` — nullable, no default → **must pass explicitly**
 - **Returns**: `CapturedPayment`
@@ -53,6 +56,7 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 ### GetRefund
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `GetRefund(string refundId, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalMockResponse` — nullable, no default → **must pass explicitly**
   - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
@@ -68,6 +72,7 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 ### ReauthorizePayment
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `ReauthorizePayment(string authorizationId, string? payPalRequestId, string? payPalAuthAssertion, ReauthorizeRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalRequestId` — nullable, no default → **must pass explicitly**
   - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
@@ -86,6 +91,7 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 ### RefundCapturedPayment
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `RefundCapturedPayment(string captureId, string? payPalMockResponse, string? payPalRequestId, string? payPalAuthAssertion, RefundRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`payPalMockResponse` … `body`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
   - defaults: `prefer` = `"return=minimal"`
@@ -102,6 +108,7 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 ### VoidPayment
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `VoidPayment(string authorizationId, string? payPalMockResponse, string? payPalAuthAssertion, string? payPalRequestId, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalMockResponse` — nullable, no default → **must pass explicitly**
   - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**

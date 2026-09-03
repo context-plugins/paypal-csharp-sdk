@@ -1,6 +1,6 @@
-using PayPal.Core.Enum;
+using PayPalServerSdk.Core.Enum;
 
-namespace PayPal.Core.Webhooks;
+namespace PayPalServerSdk.Core.Webhooks;
 
 public abstract record WebhookEvent<TPayload>
 {

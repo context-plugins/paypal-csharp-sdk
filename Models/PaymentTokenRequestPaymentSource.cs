@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPal.Core.Models;
+using PayPalServerSdk.Core.Models;
 
-namespace PayPal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The payment method to vault with the instrument details.

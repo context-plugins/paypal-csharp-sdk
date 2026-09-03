@@ -1,6 +1,6 @@
 # Reference
 
-> Source: [PayPalClient](PayPalClient.cs)
+> Source: [PayPalServerSdkClient](PayPalServerSdkClient.cs)
 
 ## Orders
 

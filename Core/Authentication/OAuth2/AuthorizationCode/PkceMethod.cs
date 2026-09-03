@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPal.Core.Enum;
+using PayPalServerSdk.Core.Enum;
 
-namespace PayPal.Core.Authentication.OAuth2.AuthorizationCode;
+namespace PayPalServerSdk.Core.Authentication.OAuth2.AuthorizationCode;
 
 [JsonConverter(typeof(StringEnumConverter<PkceMethod>))]
 public sealed record PkceMethod : StringEnum<PkceMethod>

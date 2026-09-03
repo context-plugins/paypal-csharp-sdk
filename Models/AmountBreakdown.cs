@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPal.Core.Models;
+using PayPalServerSdk.Core.Models;
 
-namespace PayPal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The breakdown of the amount. Breakdown provides details such as total item amount, total tax amount, shipping, handling, insurance, and discounts, if any.

@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPal.Core.Models;
-using PayPal.Core.Validation;
-using PayPal.Core.Validation.Attributes;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Core.Validation;
+using PayPalServerSdk.Core.Validation.Attributes;
 
-namespace PayPal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The line items for this purchase. If your merchant account has been configured for Level 3 processing this field will be passed to the processor on your behalf.

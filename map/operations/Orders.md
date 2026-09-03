@@ -8,6 +8,7 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 ### AuthorizeOrder
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `AuthorizeOrder(string id, string? payPalMockResponse, string? payPalRequestId, string? payPalClientMetadataId, string? payPalAuthAssertion, OrderAuthorizeRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 5 params (`payPalMockResponse` … `body`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
   - defaults: `prefer` = `"return=minimal"`
@@ -24,6 +25,7 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 ### CaptureOrder
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CaptureOrder(string id, string? payPalMockResponse, string? payPalRequestId, string? payPalClientMetadataId, string? payPalAuthAssertion, OrderCaptureRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 5 params (`payPalMockResponse` … `body`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
   - defaults: `prefer` = `"return=minimal"`
@@ -40,6 +42,7 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 ### ConfirmOrder
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `ConfirmOrder(string id, string? payPalClientMetadataId, string? payPalAuthAssertion, ConfirmOrderRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalClientMetadataId` — nullable, no default → **must pass explicitly**
   - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
@@ -58,6 +61,7 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 ### CreateOrder
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CreateOrder(string? payPalMockResponse, string? payPalRequestId, string? payPalPartnerAttributionId, string? payPalClientMetadataId, string? payPalAuthAssertion, OrderRequest body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 5 params (`payPalMockResponse` … `payPalAuthAssertion`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
   - defaults: `prefer` = `"return=minimal"`
@@ -74,6 +78,7 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 ### CreateOrderTracking
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CreateOrderTracking(string id, string? payPalAuthAssertion, OrderTrackerRequest body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
 - **Returns**: `Order`
@@ -89,6 +94,7 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 ### GetOrder
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `GetOrder(string id, string? fields, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `fields` — nullable, no default → **must pass explicitly**
   - `payPalMockResponse` — nullable, no default → **must pass explicitly**
@@ -106,6 +112,7 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 ### PatchOrder
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `PatchOrder(string id, string? payPalMockResponse, string? payPalAuthAssertion, IReadOnlyList<Patch>? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalMockResponse` — nullable, no default → **must pass explicitly**
   - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
@@ -122,6 +129,7 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 ### UpdateOrderTracking
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `UpdateOrderTracking(string id, string trackerId, string? payPalAuthAssertion, IReadOnlyList<Patch>? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
   - `body` — nullable, no default → **must pass explicitly**

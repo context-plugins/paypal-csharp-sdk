@@ -8,6 +8,7 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 ### CreatePaymentToken
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CreatePaymentToken(string? payPalRequestId, PaymentTokenRequest body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalRequestId` — nullable, no default → **must pass explicitly**
 - **Returns**: `PaymentTokenResponse`
@@ -23,6 +24,7 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 ### CreateSetupToken
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CreateSetupToken(string? payPalRequestId, SetupTokenRequest body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalRequestId` — nullable, no default → **must pass explicitly**
 - **Returns**: `SetupTokenResponse`
@@ -38,6 +40,7 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 ### DeletePaymentToken
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `DeletePaymentToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `void` (Task)
 - **Error**: `SdkException<DeletePaymentTokenError>` — **Case A (typed)**
@@ -50,6 +53,7 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 ### GetPaymentToken
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `GetPaymentToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `PaymentTokenResponse`
 - **Error**: `SdkException<GetPaymentTokenError>` — **Case A (typed)**
@@ -63,6 +67,7 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 ### GetSetupToken
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `GetSetupToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `SetupTokenResponse`
 - **Error**: `SdkException<GetSetupTokenError>` — **Case A (typed)**
@@ -76,6 +81,7 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 ### ListCustomerPaymentTokens
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `ListCustomerPaymentTokens(string customerId, int? pageSize = 5, int? page = 1, bool? totalRequired = false, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - defaults: `pageSize` = `5`, `page` = `1`, `totalRequired` = `false`
 - **Query params (wire ← C#)**: `customer_id` ← `customerId`, `page_size` ← `pageSize`, `page` ← `page`, `total_required` ← `totalRequired`

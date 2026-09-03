@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPal.Core.Enum;
+using PayPalServerSdk.Core.Enum;
 
-namespace PayPal.Models.Enums;
+namespace PayPalServerSdk.Models.Enums;
 
 /// <summary>
 /// Operating System type of the device that the buyer is using.

@@ -8,6 +8,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### ActivateBillingPlan
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `ActivateBillingPlan(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `void` (Task)
 - **Error**: `SdkException<ActivateBillingPlanError>` — **Case A (typed)**
@@ -20,6 +21,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### ActivateSubscription
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `ActivateSubscription(string id, ActivateSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `body` — nullable, no default → **must pass explicitly**
 - **Returns**: `void` (Task)
@@ -34,6 +36,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### CancelSubscription
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CancelSubscription(string id, CancelSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `body` — nullable, no default → **must pass explicitly**
 - **Returns**: `void` (Task)
@@ -48,6 +51,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### CaptureSubscription
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CaptureSubscription(string id, string? payPalRequestId, CaptureSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalRequestId` — nullable, no default → **must pass explicitly**
   - `body` — nullable, no default → **must pass explicitly**
@@ -64,6 +68,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### CreateBillingPlan
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CreateBillingPlan(string? payPalRequestId, PlanRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalRequestId` — nullable, no default → **must pass explicitly**
   - `body` — nullable, no default → **must pass explicitly**
@@ -81,6 +86,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### CreateSubscription
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `CreateSubscription(string? payPalRequestId, string? payPalClientMetadataId, CreateSubscriptionRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `payPalRequestId` — nullable, no default → **must pass explicitly**
   - `payPalClientMetadataId` — nullable, no default → **must pass explicitly**
@@ -99,6 +105,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### DeactivateBillingPlan
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `DeactivateBillingPlan(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `void` (Task)
 - **Error**: `SdkException<DeactivateBillingPlanError>` — **Case A (typed)**
@@ -111,6 +118,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### GetBillingPlan
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `GetBillingPlan(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `BillingPlan`
 - **Error**: `SdkException<GetBillingPlanError>` — **Case A (typed)**
@@ -124,6 +132,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### GetSubscription
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `GetSubscription(string id, string? fields, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `fields` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `fields` ← `fields`
@@ -139,6 +148,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### ListBillingPlans
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `ListBillingPlans(string? productId, int? pageSize = 10, int? page = 1, bool? totalRequired = false, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `productId` — nullable, no default → **must pass explicitly**
   - defaults: `pageSize` = `10`, `page` = `1`, `totalRequired` = `false`, `prefer` = `"return=minimal"`
@@ -155,6 +165,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### ListSubscriptionTransactions
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `ListSubscriptionTransactions(string id, string startTime, string endTime, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `start_time` ← `startTime`, `end_time` ← `endTime`
 - **Returns**: `TransactionsList`
@@ -169,6 +180,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### ListSubscriptions
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `ListSubscriptions(string? planIds, string? statuses, string? createdAfter, string? createdBefore, string? statusUpdatedBefore, string? statusUpdatedAfter, string? filter, IReadOnlyList<string>? customerIds, int? pageSize = 10, int? page = 1, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 8 params (`planIds` … `customerIds`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
   - defaults: `pageSize` = `10`, `page` = `1`
@@ -185,6 +197,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### PatchBillingPlan
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `PatchBillingPlan(string id, IReadOnlyList<Patch>? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `body` — nullable, no default → **must pass explicitly**
 - **Returns**: `void` (Task)
@@ -199,6 +212,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### PatchSubscription
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `PatchSubscription(string id, IReadOnlyList<Patch>? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `body` — nullable, no default → **must pass explicitly**
 - **Returns**: `void` (Task)
@@ -213,6 +227,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### ReviseSubscription
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `ReviseSubscription(string id, ModifySubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `body` — nullable, no default → **must pass explicitly**
 - **Returns**: `ModifySubscriptionResponse`
@@ -228,6 +243,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### SuspendSubscription
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `SuspendSubscription(string id, SuspendSubscription? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `body` — nullable, no default → **must pass explicitly**
 - **Returns**: `void` (Task)
@@ -242,6 +258,7 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 ### UpdateBillingPlanPricingSchemes
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `UpdateBillingPlanPricingSchemes(string id, UpdatePricingSchemesRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `body` — nullable, no default → **must pass explicitly**
 - **Returns**: `void` (Task)

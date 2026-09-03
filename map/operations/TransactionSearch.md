@@ -8,6 +8,7 @@ Accessor: `client.TransactionSearch` · Source: `Api/TransactionSearch.cs` · 2 
 
 ### SearchBalances
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `SearchBalances(string? asOfTime, string? currencyCode, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `asOfTime` — nullable, no default → **must pass explicitly**
   - `currencyCode` — nullable, no default → **must pass explicitly**
@@ -24,6 +25,7 @@ Accessor: `client.TransactionSearch` · Source: `Api/TransactionSearch.cs` · 2 
 
 ### SearchTransactions
 
+- **Auth**: `options.Oauth2`
 - **Signature**: `SearchTransactions(string startDate, string endDate, string? transactionId, string? transactionType, string? transactionStatus, string? transactionAmount, string? transactionCurrency, string? paymentInstrumentType, string? storeId, string? terminalId, string? fields = "transaction_info", string? balanceAffectingRecordsOnly = "Y", int? pageSize = 100, int? page = 1, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 8 params (`transactionId` … `terminalId`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
   - defaults: `fields` = `"transaction_info"`, `balanceAffectingRecordsOnly` = `"Y"`, `pageSize` = `100`, `page` = `1`

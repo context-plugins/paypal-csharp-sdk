@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PayPal.Core.ErrorResponse;
+namespace PayPalServerSdk.Core.ErrorResponse;
 
 public sealed class RawError
 {

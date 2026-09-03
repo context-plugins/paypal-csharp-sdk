@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using PayPal.Core.Models;
+using PayPalServerSdk.Core.Models;
 
-namespace PayPal.Core;
+namespace PayPalServerSdk.Core;
 
 internal sealed class UriFactory
 {

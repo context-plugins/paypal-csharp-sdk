@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
-using PayPal.Core.Models;
-using PayPal.Models.Enums;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Models.Enums;
 
-namespace PayPal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// Provides additional details to process a payment using the PayPal wallet billing agreement or a vaulted payment method that has been stored or is intended to be stored.

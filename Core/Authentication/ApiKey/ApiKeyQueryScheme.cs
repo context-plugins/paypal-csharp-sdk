@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PayPal.Core.Authentication.ApiKey;
+namespace PayPalServerSdk.Core.Authentication.ApiKey;
 
 internal sealed class ApiKeyQueryScheme : IAuthScheme
 {

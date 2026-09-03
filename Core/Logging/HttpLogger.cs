@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using PayPal.Core.Configuration;
+using PayPalServerSdk.Core.Configuration;
 
-namespace PayPal.Core.Logging;
+namespace PayPalServerSdk.Core.Logging;
 
 internal sealed class HttpLogger
 {

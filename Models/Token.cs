@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPal.Core.Models;
-using PayPal.Models.Enums;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Models.Enums;
 
-namespace PayPal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The tokenized payment source to fund a payment.

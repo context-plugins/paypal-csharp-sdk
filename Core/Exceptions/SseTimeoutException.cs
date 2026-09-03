@@ -1,6 +1,6 @@
 using System;
 
-namespace PayPal.Core.Exceptions;
+namespace PayPalServerSdk.Core.Exceptions;
 
 public sealed class SseTimeoutException : SseException
 {

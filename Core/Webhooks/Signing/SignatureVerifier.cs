@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace PayPal.Core.Webhooks.Signing;
+namespace PayPalServerSdk.Core.Webhooks.Signing;
 
 internal sealed class SignatureVerifier
 {

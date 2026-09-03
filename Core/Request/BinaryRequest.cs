@@ -1,9 +1,9 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
-using PayPal.Core.Extensions;
-using PayPal.Core.Models;
+using PayPalServerSdk.Core.Extensions;
+using PayPalServerSdk.Core.Models;
 
-namespace PayPal.Core.Request;
+namespace PayPalServerSdk.Core.Request;
 
 internal sealed class BinaryRequest : IRequest
 {

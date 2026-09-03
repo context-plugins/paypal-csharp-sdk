@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PayPal.Core.Webhooks.Signing;
+namespace PayPalServerSdk.Core.Webhooks.Signing;
 
 internal abstract record SignatureHeaderFormat
 {

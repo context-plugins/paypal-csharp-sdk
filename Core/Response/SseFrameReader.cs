@@ -5,9 +5,9 @@ using System.Net.ServerSentEvents;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPal.Core.Exceptions;
+using PayPalServerSdk.Core.Exceptions;
 
-namespace PayPal.Core.Response;
+namespace PayPalServerSdk.Core.Response;
 
 internal static class SseFrameReader
 {

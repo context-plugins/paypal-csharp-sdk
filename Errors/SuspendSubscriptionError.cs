@@ -1,11 +1,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPal.Core.ErrorResponse;
-using PayPal.Core.Models;
-using PayPal.Models;
+using PayPalServerSdk.Core.ErrorResponse;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Models;
 
-namespace PayPal.Errors;
+namespace PayPalServerSdk.Errors;
 
 public sealed class SuspendSubscriptionError : ApiError
 {

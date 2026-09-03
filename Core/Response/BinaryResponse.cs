@@ -2,9 +2,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPal.Core.Models;
+using PayPalServerSdk.Core.Models;
 
-namespace PayPal.Core.Response;
+namespace PayPalServerSdk.Core.Response;
 
 internal sealed class BinaryResponse : IResponse<BinaryContent>
 {

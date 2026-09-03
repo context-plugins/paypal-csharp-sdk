@@ -7,10 +7,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPal.Core.Exceptions;
-using PayPal.Core.Extensions;
+using PayPalServerSdk.Core.Exceptions;
+using PayPalServerSdk.Core.Extensions;
 
-namespace PayPal.Core.Response;
+namespace PayPalServerSdk.Core.Response;
 
 internal sealed class JsonSseResponse<TResponse> : IResponse<IAsyncEnumerable<TResponse>>
 {

@@ -1,9 +1,9 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPal.Core.ErrorResponse;
+using PayPalServerSdk.Core.ErrorResponse;
 
-namespace PayPal.Core.Response;
+namespace PayPalServerSdk.Core.Response;
 
 internal sealed class RawErrorBodyResponse : IResponse<RawError>
 {

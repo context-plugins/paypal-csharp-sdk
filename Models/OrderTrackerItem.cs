@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPal.Core.Models;
-using PayPal.Core.Validation;
-using PayPal.Core.Validation.Attributes;
+using PayPalServerSdk.Core.Models;
+using PayPalServerSdk.Core.Validation;
+using PayPalServerSdk.Core.Validation.Attributes;
 
-namespace PayPal.Models;
+namespace PayPalServerSdk.Models;
 
 /// <summary>
 /// The details of the items in the shipment.

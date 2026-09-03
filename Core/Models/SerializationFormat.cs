@@ -1,4 +1,4 @@
-namespace PayPal.Core.Models;
+namespace PayPalServerSdk.Core.Models;
 
 internal enum SerializationFormat
 {

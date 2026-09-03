@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace PayPal.Core.Authentication.Basic;
+namespace PayPalServerSdk.Core.Authentication.Basic;
 
 public sealed class BasicAuthCredentials
 {

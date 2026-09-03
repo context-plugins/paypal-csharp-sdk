@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-namespace PayPal.Core;
+namespace PayPalServerSdk.Core;
 
 internal sealed class HttpStatusPolicy
 {
