@@ -66,6 +66,9 @@ All `PayPalServerSdkClientOptions` properties (source: `PayPalServerSdkClientOpt
 | `Oauth2` | `OAuth2ClientCredentials?` |
 | `Oauth2TokenStrategy` | `IOAuth2TokenStrategy<OAuth2ClientCredentials>?` |
 
+`ServerEnvironment` (source: `Servers/ServerEnvironment.cs`, namespace `PayPalServerSdk.Servers`)
+`OAuth2ClientCredentials` (source: `Core/Authentication/OAuth2/ClientCredentials/OAuth2ClientCredentials.cs`, namespace `PayPalServerSdk.Core.Authentication.OAuth2.ClientCredentials`)
+
 `RetryOptions` members (namespace `PayPalServerSdk.Core.Configuration` — add `using PayPalServerSdk.Core.Configuration;`; source: `Core/Configuration/RetryOptions.cs`; all members are `required`, so build a full instance or start from `RetryOptions.Default()`):
 
 | Member | Type |
@@ -84,10 +87,12 @@ All `PayPalServerSdkClientOptions` properties (source: `PayPalServerSdkClientOpt
 
 ## Error-handling model (read once — applies to every operation)
 
-Operations are **throw-based**. On an error status the SDK throws `SdkException<TError>` (`Core/Exceptions/SdkException.cs`) exposing `.Error` of type `TError`. There are two cases:
+Operations are **throw-based**. On an error status the SDK throws `SdkException<TError>` (`Core/Exceptions/SdkException.cs`, namespace `PayPalServerSdk.Core.Exceptions`) exposing `.Error` of type `TError`. There are two cases:
 
-- **Case A — typed error.** `TError` is a generated `…Error : ApiError` class with status-specific `TryGet…(out …)` accessors (each returns `true` when that shape is present) plus the inherited `TryGetRawError(out RawError)` fallback. The operation blocks name the exact `TryGet…` methods and the HTTP status each maps to.
-- **Case B — raw error.** `TError` is `RawError` (`Core/ErrorResponse/RawError.cs`): `StatusCode: HttpStatusCode` · `ReadAsBytes(): ReadOnlyMemory<byte>` · `ReadAsString(): string` · `ReadAsJson<T>(): T?`.
+- **Case A — typed error.** `TError` is a generated `…Error : ApiError` class (namespace `PayPalServerSdk.Errors`) with status-specific `TryGet…(out …)` accessors (each returns `true` when that shape is present) plus the inherited `TryGetRawError(out RawError)` fallback. The operation blocks name the exact `TryGet…` methods and the HTTP status each maps to.
+- **Case B — raw error.** `TError` is `RawError` (`Core/ErrorResponse/RawError.cs`, namespace `PayPalServerSdk.Core.ErrorResponse`): `StatusCode: HttpStatusCode` · `ReadAsBytes(): ReadOnlyMemory<byte>` · `ReadAsString(): string` · `ReadAsJson<T>(): T?`.
+
+⚠ Each of the three lives in its own namespace. `Core/` holds several namespaces, so a catch block naming `SdkException<T>`, a typed `{Operation}Error` and `RawError` together needs a `using` for each.
 
 Core error types (`Core/ErrorResponse/`) — public members with their **declared types**, verbatim from source:
 
