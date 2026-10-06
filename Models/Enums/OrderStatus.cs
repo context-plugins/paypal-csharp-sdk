@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The order status.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<OrderStatus>))]
-public sealed record OrderStatus : StringEnum<OrderStatus>
+public sealed record OrderStatus : OpenStringEnum<OrderStatus>
 {
     private OrderStatus(string value) : base(value)
     {
@@ -43,5 +44,38 @@ public sealed record OrderStatus : StringEnum<OrderStatus>
     /// </summary>
     public static readonly OrderStatus PayerActionRequired = new("PAYER_ACTION_REQUIRED");
 
-    public static OrderStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCreated,
+        Func<TResult> onSaved,
+        Func<TResult> onApproved,
+        Func<TResult> onVoided,
+        Func<TResult> onCompleted,
+        Func<TResult> onPayerActionRequired,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Created => onCreated(),
+            _ when this == Saved => onSaved(),
+            _ when this == Approved => onApproved(),
+            _ when this == Voided => onVoided(),
+            _ when this == Completed => onCompleted(),
+            _ when this == PayerActionRequired => onPayerActionRequired(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCreated,
+        Action onSaved,
+        Action onApproved,
+        Action onVoided,
+        Action onCompleted,
+        Action onPayerActionRequired,
+        Action<string> otherwise)
+    {
+        if (this == Created) onCreated();
+        else if (this == Saved) onSaved();
+        else if (this == Approved) onApproved();
+        else if (this == Voided) onVoided();
+        else if (this == Completed) onCompleted();
+        else if (this == PayerActionRequired) onPayerActionRequired();
+        else otherwise(Value);
+    }
 }

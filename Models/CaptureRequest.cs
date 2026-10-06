@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// Captures either a portion or the full authorized amount of an authorized payment.
@@ -27,6 +27,7 @@ public record CaptureRequest
     /// <summary>
     /// Indicates whether you can make additional captures against the authorized payment. Set to <c>true</c> if you do not intend to capture additional payments against the authorization. Set to <c>false</c> if you intend to capture additional payments against the authorization.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("final_capture")]
     public bool? FinalCapture { get; init; } = false;
 

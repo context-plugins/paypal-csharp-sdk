@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The carrier for the shipment. Some carriers have a global version as well as local subsidiaries. The subsidiaries are repeated over many countries and might also have an entry in the global list. Choose the carrier for your country. If the carrier is not available for your country, choose the global version of the carrier. If your carrier name is not in the list, set <c>carrier</c> to <c>OTHER</c> and set carrier name in <c>carrier_name_other</c>. For allowed values, see Carriers.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<ShipmentCarrier>))]
-public sealed record ShipmentCarrier : StringEnum<ShipmentCarrier>
+public sealed record ShipmentCarrier : OpenStringEnum<ShipmentCarrier>
 {
     private ShipmentCarrier(string value) : base(value)
     {
@@ -7073,10 +7074,5662 @@ public sealed record ShipmentCarrier : StringEnum<ShipmentCarrier>
     /// </summary>
     public static readonly ShipmentCarrier Toptrans = new("TOPTRANS");
 
-    /// <summary>
-    /// Other.
-    /// </summary>
-    public static readonly ShipmentCarrier Other = new("OTHER");
+    public TResult Match<TResult>(Func<TResult> onDpdRu,
+        Func<TResult> onBgBulgarianPost,
+        Func<TResult> onKrKoreaPost,
+        Func<TResult> onZaCourierit,
+        Func<TResult> onFrExapaq,
+        Func<TResult> onAreEmiratesPost,
+        Func<TResult> onGac,
+        Func<TResult> onGeis,
+        Func<TResult> onSfEx,
+        Func<TResult> onPago,
+        Func<TResult> onMyhermes,
+        Func<TResult> onDiamondEurogistics,
+        Func<TResult> onCorporatecouriersWebhook,
+        Func<TResult> onBond,
+        Func<TResult> onOmniparcel,
+        Func<TResult> onSkPosta,
+        Func<TResult> onPurolator,
+        Func<TResult> onFetchrWebhook,
+        Func<TResult> onThedeliverygroup,
+        Func<TResult> onCelloSquare,
+        Func<TResult> onTarrive,
+        Func<TResult> onCollivery,
+        Func<TResult> onMainfreight,
+        Func<TResult> onIndFirstflight,
+        Func<TResult> onAcsworldwide,
+        Func<TResult> onAmstan,
+        Func<TResult> onOkayparcel,
+        Func<TResult> onEnvialiaReference,
+        Func<TResult> onSeurEs,
+        Func<TResult> onContinental,
+        Func<TResult> onFdsexpress,
+        Func<TResult> onAmazonFbaSwiship,
+        Func<TResult> onWyngs,
+        Func<TResult> onDhlActiveTracing,
+        Func<TResult> onZyllem,
+        Func<TResult> onRuston,
+        Func<TResult> onXpost,
+        Func<TResult> onCorreosEs,
+        Func<TResult> onDhlFr,
+        Func<TResult> onPanAsia,
+        Func<TResult> onBrtIt,
+        Func<TResult> onSreKorea,
+        Func<TResult> onSpeedee,
+        Func<TResult> onTntUk,
+        Func<TResult> onVenipak,
+        Func<TResult> onShreenandancourier,
+        Func<TResult> onCroshot,
+        Func<TResult> onNipostNg,
+        Func<TResult> onEpstGlbl,
+        Func<TResult> onNewgistics,
+        Func<TResult> onPostSlovenia,
+        Func<TResult> onJerseyPost,
+        Func<TResult> onBombinoexp,
+        Func<TResult> onWmg,
+        Func<TResult> onXqExpress,
+        Func<TResult> onFurdeco,
+        Func<TResult> onLhtExpress,
+        Func<TResult> onSouthAfricanPostOffice,
+        Func<TResult> onSpoton,
+        Func<TResult> onDimerco,
+        Func<TResult> onCyprusPostCyp,
+        Func<TResult> onAbcustom,
+        Func<TResult> onIndDelivree,
+        Func<TResult> onCnBestexpress,
+        Func<TResult> onDxSftp,
+        Func<TResult> onPickuppMys,
+        Func<TResult> onFmx,
+        Func<TResult> onHellmann,
+        Func<TResult> onShipItAsia,
+        Func<TResult> onKerryEcommerce,
+        Func<TResult> onFreterapido,
+        Func<TResult> onPitneyBowes,
+        Func<TResult> onXpressenDk,
+        Func<TResult> onSeurSpApi,
+        Func<TResult> onDeliveryontime,
+        Func<TResult> onJinsung,
+        Func<TResult> onTransKargo,
+        Func<TResult> onSwishipDe,
+        Func<TResult> onIvoyWebhook,
+        Func<TResult> onAirmeeWebhook,
+        Func<TResult> onDhlBenelux,
+        Func<TResult> onFirstmile,
+        Func<TResult> onFastwayIr,
+        Func<TResult> onHhExp,
+        Func<TResult> onMysMypostOnline,
+        Func<TResult> onTntNl,
+        Func<TResult> onTipsa,
+        Func<TResult> onTaqbinMy,
+        Func<TResult> onKgmhub,
+        Func<TResult> onIntexpress,
+        Func<TResult> onOverseExp,
+        Func<TResult> onOneclick,
+        Func<TResult> onRoadrunnerFreight,
+        Func<TResult> onGlsCrotia,
+        Func<TResult> onMrwFtp,
+        Func<TResult> onBluex,
+        Func<TResult> onDylt,
+        Func<TResult> onDpdIr,
+        Func<TResult> onSinGlbl,
+        Func<TResult> onTuffnellsReference,
+        Func<TResult> onCjpacket,
+        Func<TResult> onMilkman,
+        Func<TResult> onAsigna,
+        Func<TResult> onOneworldexpress,
+        Func<TResult> onRoyalMail,
+        Func<TResult> onViaExpress,
+        Func<TResult> onTigfreight,
+        Func<TResult> onZtoExpress,
+        Func<TResult> onTwoGo,
+        Func<TResult> onIml,
+        Func<TResult> onIntelValley,
+        Func<TResult> onEfs,
+        Func<TResult> onUkUkMail,
+        Func<TResult> onRam,
+        Func<TResult> onAlliedexpress,
+        Func<TResult> onApcOvernight,
+        Func<TResult> onShippit,
+        Func<TResult> onTfm,
+        Func<TResult> onMXpress,
+        Func<TResult> onHdbBox,
+        Func<TResult> onClevyLinks,
+        Func<TResult> onIbeone,
+        Func<TResult> onFiegeNl,
+        Func<TResult> onKweGlobal,
+        Func<TResult> onCtcExpress,
+        Func<TResult> onAmazon,
+        Func<TResult> onMoreLink,
+        Func<TResult> onJx,
+        Func<TResult> onEasyMail,
+        Func<TResult> onAduiepyle,
+        Func<TResult> onGbPanther,
+        Func<TResult> onExpresssale,
+        Func<TResult> onSgDetrack,
+        Func<TResult> onTrunkrsWebhook,
+        Func<TResult> onMatdespatch,
+        Func<TResult> onDicom,
+        Func<TResult> onMbw,
+        Func<TResult> onKhmCambodiaPost,
+        Func<TResult> onSinotrans,
+        Func<TResult> onBrtItParcelid,
+        Func<TResult> onDhlSupplyChain,
+        Func<TResult> onDhlPl,
+        Func<TResult> onTopyou,
+        Func<TResult> onPalexpress,
+        Func<TResult> onDhlSg,
+        Func<TResult> onCnWedo,
+        Func<TResult> onFulfillme,
+        Func<TResult> onDpdDelistrack,
+        Func<TResult> onUpsReference,
+        Func<TResult> onCaribou,
+        Func<TResult> onLocusWebhook,
+        Func<TResult> onDsv,
+        Func<TResult> onP2PTrc,
+        Func<TResult> onDirectparcels,
+        Func<TResult> onNovaPoshtaInt,
+        Func<TResult> onFedexPoland,
+        Func<TResult> onCnJcex,
+        Func<TResult> onFarInternational,
+        Func<TResult> onIdexpress,
+        Func<TResult> onGangbao,
+        Func<TResult> onNeway,
+        Func<TResult> onPostnlInt3S,
+        Func<TResult> onRpxId,
+        Func<TResult> onDesignertransportWebhook,
+        Func<TResult> onGlsSloven,
+        Func<TResult> onParcelledIn,
+        Func<TResult> onGsiExpress,
+        Func<TResult> onConWay,
+        Func<TResult> onBrouwerTransport,
+        Func<TResult> onCpex,
+        Func<TResult> onIsraelPost,
+        Func<TResult> onDtdcIn,
+        Func<TResult> onPttPost,
+        Func<TResult> onXdeWebhook,
+        Func<TResult> onTolos,
+        Func<TResult> onGiaoHang,
+        Func<TResult> onGeodisEspace,
+        Func<TResult> onMagyarHu,
+        Func<TResult> onDoordashWebhook,
+        Func<TResult> onTikiId,
+        Func<TResult> onCjHkInternational,
+        Func<TResult> onStarTrackExpress,
+        Func<TResult> onHelthjem,
+        Func<TResult> onSfb2C,
+        Func<TResult> onFreightquote,
+        Func<TResult> onLandmarkGlobalReference,
+        Func<TResult> onParcel2Go,
+        Func<TResult> onDelnext,
+        Func<TResult> onRcl,
+        Func<TResult> onCgsExpress,
+        Func<TResult> onHkPost,
+        Func<TResult> onSapExpress,
+        Func<TResult> onParcelpostSg,
+        Func<TResult> onHermes,
+        Func<TResult> onIndSafeexpress,
+        Func<TResult> onTophatterexpress,
+        Func<TResult> onMglobal,
+        Func<TResult> onAveritt,
+        Func<TResult> onLeader,
+        Func<TResult> on_2Ebox,
+        Func<TResult> onSgSpeedpost,
+        Func<TResult> onDbschenkerSe,
+        Func<TResult> onIsrPostDomestic,
+        Func<TResult> onBestwayparcel,
+        Func<TResult> onAsendiaDe,
+        Func<TResult> onNightlineUk,
+        Func<TResult> onTaqbinSg,
+        Func<TResult> onTckExpress,
+        Func<TResult> onEndeavourDelivery,
+        Func<TResult> onNanjingwoyuan,
+        Func<TResult> onHeppnerFr,
+        Func<TResult> onEmpsCn,
+        Func<TResult> onFonsen,
+        Func<TResult> onPickrr,
+        Func<TResult> onApcOvernightConnum,
+        Func<TResult> onStarTrackNextFlight,
+        Func<TResult> onDajin,
+        Func<TResult> onUpsFreight,
+        Func<TResult> onPostaPlus,
+        Func<TResult> onCeva,
+        Func<TResult> onAnserx,
+        Func<TResult> onJsExpress,
+        Func<TResult> onPadtf,
+        Func<TResult> onUpsMailInnovations,
+        Func<TResult> onSypost,
+        Func<TResult> onAmazonShipMcf,
+        Func<TResult> onYusen,
+        Func<TResult> onBring,
+        Func<TResult> onSdaIt,
+        Func<TResult> onGba,
+        Func<TResult> onNeweggexpress,
+        Func<TResult> onSpeedcouriersGr,
+        Func<TResult> onForrun,
+        Func<TResult> onPickup,
+        Func<TResult> onEcms,
+        Func<TResult> onIntelipost,
+        Func<TResult> onFlashexpress,
+        Func<TResult> onCnSto,
+        Func<TResult> onSekoSftp,
+        Func<TResult> onHomeDeliverySolutions,
+        Func<TResult> onDpdHgry,
+        Func<TResult> onKerryttcVn,
+        Func<TResult> onJoyingBox,
+        Func<TResult> onTotalExpress,
+        Func<TResult> onZjsExpress,
+        Func<TResult> onStarken,
+        Func<TResult> onDemandship,
+        Func<TResult> onCnDpex,
+        Func<TResult> onAupostCn,
+        Func<TResult> onLogisters,
+        Func<TResult> onGoglobalpost,
+        Func<TResult> onGlsCz,
+        Func<TResult> onPaackWebhook,
+        Func<TResult> onGrabWebhook,
+        Func<TResult> onParcelpoint,
+        Func<TResult> onIcumulus,
+        Func<TResult> onDaiglobaltrack,
+        Func<TResult> onGlobalIparcel,
+        Func<TResult> onYurticiKargo,
+        Func<TResult> onCnPaypalPackage,
+        Func<TResult> onParcel2Post,
+        Func<TResult> onGlsIt,
+        Func<TResult> onPilLogistics,
+        Func<TResult> onHeppner,
+        Func<TResult> onGeneralOvernight,
+        Func<TResult> onHappy2Point,
+        Func<TResult> onChitchats,
+        Func<TResult> onSmooth,
+        Func<TResult> onCleLogistics,
+        Func<TResult> onFiege,
+        Func<TResult> onMxCargo,
+        Func<TResult> onZiingfinalmile,
+        Func<TResult> onDaytonFreight,
+        Func<TResult> onTcs,
+        Func<TResult> onAex,
+        Func<TResult> onHermesDe,
+        Func<TResult> onRoutificWebhook,
+        Func<TResult> onGlobavend,
+        Func<TResult> onCjLogistics,
+        Func<TResult> onPalletNetwork,
+        Func<TResult> onRafPh,
+        Func<TResult> onUkXdp,
+        Func<TResult> onPaperExpress,
+        Func<TResult> onLaPosteSuivi,
+        Func<TResult> onPaquetexpress,
+        Func<TResult> onLiefery,
+        Func<TResult> onStreckTransport,
+        Func<TResult> onPonyExpress,
+        Func<TResult> onAlwaysExpress,
+        Func<TResult> onGbsBroker,
+        Func<TResult> onCitylinkMy,
+        Func<TResult> onAlljoy,
+        Func<TResult> onYodel,
+        Func<TResult> onYodelDir,
+        Func<TResult> onStone3Pl,
+        Func<TResult> onParcelpalWebhook,
+        Func<TResult> onDhlEcomerceAsa,
+        Func<TResult> onSimplypost,
+        Func<TResult> onKyExpress,
+        Func<TResult> onShenzhen,
+        Func<TResult> onUsLasership,
+        Func<TResult> onUcExpre,
+        Func<TResult> onDidadi,
+        Func<TResult> onCjKr,
+        Func<TResult> onDbschenkerB2B,
+        Func<TResult> onMxe,
+        Func<TResult> onCaeDelivers,
+        Func<TResult> onPfcexpress,
+        Func<TResult> onWhistl,
+        Func<TResult> onWepost,
+        Func<TResult> onDhlParcelEs,
+        Func<TResult> onDdexpress,
+        Func<TResult> onAramexAu,
+        Func<TResult> onBneed,
+        Func<TResult> onHkTgx,
+        Func<TResult> onLatvijasPasts,
+        Func<TResult> onViaeurope,
+        Func<TResult> onCorreoUy,
+        Func<TResult> onChronopostFr,
+        Func<TResult> onJNet,
+        Func<TResult> on_6Ls,
+        Func<TResult> onBlrBelpost,
+        Func<TResult> onBirdsystem,
+        Func<TResult> onDobropost,
+        Func<TResult> onWahanaId,
+        Func<TResult> onWeaship,
+        Func<TResult> onSonictl,
+        Func<TResult> onKwt,
+        Func<TResult> onAfllogFtp,
+        Func<TResult> onSkynetWorldwide,
+        Func<TResult> onNovaPoshta,
+        Func<TResult> onSeino,
+        Func<TResult> onSzendex,
+        Func<TResult> onBpostInt,
+        Func<TResult> onDbschenkerSv,
+        Func<TResult> onAoDeutschland,
+        Func<TResult> onEuFleetSolutions,
+        Func<TResult> onPcfcorp,
+        Func<TResult> onLinkbridge,
+        Func<TResult> onPrimamulticipta,
+        Func<TResult> onCourex,
+        Func<TResult> onZajilExpress,
+        Func<TResult> onCollectco,
+        Func<TResult> onJtexpress,
+        Func<TResult> onFedexUk,
+        Func<TResult> onUship,
+        Func<TResult> onPixsell,
+        Func<TResult> onShiptor,
+        Func<TResult> onCdek,
+        Func<TResult> onVnmViettelpost,
+        Func<TResult> onCjCentury,
+        Func<TResult> onGso,
+        Func<TResult> onViwo,
+        Func<TResult> onSkybox,
+        Func<TResult> onKerrytj,
+        Func<TResult> onNtlogisticsVn,
+        Func<TResult> onSdhScm,
+        Func<TResult> onZinc,
+        Func<TResult> onDpeSouthAfrc,
+        Func<TResult> onCeskaCz,
+        Func<TResult> onAcsGr,
+        Func<TResult> onDealersend,
+        Func<TResult> onJocom,
+        Func<TResult> onCse,
+        Func<TResult> onTforceFinalmile,
+        Func<TResult> onShipGate,
+        Func<TResult> onShipter,
+        Func<TResult> onNationalSameday,
+        Func<TResult> onYunexpress,
+        Func<TResult> onCainiao,
+        Func<TResult> onDmsMatrix,
+        Func<TResult> onDirectlog,
+        Func<TResult> onAsendiaUs,
+        Func<TResult> on_3Jmslogistics,
+        Func<TResult> onLiccardiExpress,
+        Func<TResult> onSkyPostal,
+        Func<TResult> onCnwangtong,
+        Func<TResult> onPostnordLogisticsDk,
+        Func<TResult> onLogistika,
+        Func<TResult> onCeleritas,
+        Func<TResult> onPressiode,
+        Func<TResult> onShreeMaruti,
+        Func<TResult> onLogisticsworldwideHk,
+        Func<TResult> onEfex,
+        Func<TResult> onLotte,
+        Func<TResult> onLonestar,
+        Func<TResult> onAprisaexpress,
+        Func<TResult> onBelRs,
+        Func<TResult> onOsmWorldwide,
+        Func<TResult> onWestgateGl,
+        Func<TResult> onFastrack,
+        Func<TResult> onDtdExpr,
+        Func<TResult> onAlfatrex,
+        Func<TResult> onPromeddelivery,
+        Func<TResult> onThabitLogistics,
+        Func<TResult> onHctLogistics,
+        Func<TResult> onCarryFlap,
+        Func<TResult> onUsOldDominion,
+        Func<TResult> onAnicamBox,
+        Func<TResult> onWanbexpress,
+        Func<TResult> onAnPost,
+        Func<TResult> onDpdLocal,
+        Func<TResult> onStallionexpress,
+        Func<TResult> onRaiderex,
+        Func<TResult> onShopfans,
+        Func<TResult> onKyungdongParcel,
+        Func<TResult> onChampionLogistics,
+        Func<TResult> onPickuppSgp,
+        Func<TResult> onMorningExpress,
+        Func<TResult> onNacex,
+        Func<TResult> onThenileWebhook,
+        Func<TResult> onHolisol,
+        Func<TResult> onLbcexpressFtp,
+        Func<TResult> onKurasi,
+        Func<TResult> onUsfReddaway,
+        Func<TResult> onApg,
+        Func<TResult> onCnBoxc,
+        Func<TResult> onEcoscooting,
+        Func<TResult> onMainway,
+        Func<TResult> onPaperfly,
+        Func<TResult> onHoundexpress,
+        Func<TResult> onBoxBerry,
+        Func<TResult> onEpBox,
+        Func<TResult> onPlusLogUk,
+        Func<TResult> onFulfilla,
+        Func<TResult> onAse,
+        Func<TResult> onMailPlus,
+        Func<TResult> onXpoLogistics,
+        Func<TResult> onWndirect,
+        Func<TResult> onCloudwishAsia,
+        Func<TResult> onZeleris,
+        Func<TResult> onGioExpress,
+        Func<TResult> onOcsWorldwide,
+        Func<TResult> onArkLogistics,
+        Func<TResult> onAquiline,
+        Func<TResult> onPilotFreight,
+        Func<TResult> onQwintry,
+        Func<TResult> onDanskeFragt,
+        Func<TResult> onCarriers,
+        Func<TResult> onAirCanadaGlobal,
+        Func<TResult> onPresidentTrans,
+        Func<TResult> onStepforwardfs,
+        Func<TResult> onSkynetUk,
+        Func<TResult> onPittohio,
+        Func<TResult> onCorreosExpress,
+        Func<TResult> onRlUs,
+        Func<TResult> onDestiny,
+        Func<TResult> onUkYodel,
+        Func<TResult> onCometTech,
+        Func<TResult> onDhlParcelRu,
+        Func<TResult> onTntRefr,
+        Func<TResult> onShreeAnjaniCourier,
+        Func<TResult> onMikropakketBe,
+        Func<TResult> onEtsExpress,
+        Func<TResult> onColisPrive,
+        Func<TResult> onCnYunda,
+        Func<TResult> onAaaCooper,
+        Func<TResult> onRocketParcel,
+        Func<TResult> on_360Lion,
+        Func<TResult> onPandu,
+        Func<TResult> onProfessionalCouriers,
+        Func<TResult> onFlytexpress,
+        Func<TResult> onLogisticsworldwideMy,
+        Func<TResult> onCorreosDeEspana,
+        Func<TResult> onImx,
+        Func<TResult> onFourPxExpress,
+        Func<TResult> onXpressbees,
+        Func<TResult> onPickuppVnm,
+        Func<TResult> onStartrackExpress,
+        Func<TResult> onFrColissimo,
+        Func<TResult> onNacexSpainReference,
+        Func<TResult> onDhlSupplyChainAu,
+        Func<TResult> onEshipping,
+        Func<TResult> onShreetirupati,
+        Func<TResult> onHxExpress,
+        Func<TResult> onIndopaket,
+        Func<TResult> onCn17Post,
+        Func<TResult> onK1Express,
+        Func<TResult> onCjGls,
+        Func<TResult> onMysGdex,
+        Func<TResult> onNationex,
+        Func<TResult> onAnjun,
+        Func<TResult> onFargood,
+        Func<TResult> onSmgExpress,
+        Func<TResult> onRzyexpress,
+        Func<TResult> onSefl,
+        Func<TResult> onTntClickIt,
+        Func<TResult> onHdb,
+        Func<TResult> onHipshipper,
+        Func<TResult> onRpxlogistics,
+        Func<TResult> onKuehne,
+        Func<TResult> onItNexive,
+        Func<TResult> onPts,
+        Func<TResult> onSwissPostFtp,
+        Func<TResult> onFastrkServ,
+        Func<TResult> on_472,
+        Func<TResult> onUsYrc,
+        Func<TResult> onPostnlIntl3S,
+        Func<TResult> onElianPost,
+        Func<TResult> onCubyn,
+        Func<TResult> onSauSaudiPost,
+        Func<TResult> onAbxexpressMy,
+        Func<TResult> onHuahanExpress,
+        Func<TResult> onZesExpress,
+        Func<TResult> onZeptoExpress,
+        Func<TResult> onSkynetZa,
+        Func<TResult> onZeek2Door,
+        Func<TResult> onBlinklastmile,
+        Func<TResult> onPostaUkr,
+        Func<TResult> onChrobinson,
+        Func<TResult> onCnPost56,
+        Func<TResult> onCourantPlus,
+        Func<TResult> onScudexExpress,
+        Func<TResult> onShipentegra,
+        Func<TResult> onBTwoCEurope,
+        Func<TResult> onCope,
+        Func<TResult> onIndGati,
+        Func<TResult> onCnWishpost,
+        Func<TResult> onNacexEs,
+        Func<TResult> onTaqbinHk,
+        Func<TResult> onGlobaltranz,
+        Func<TResult> onHkd,
+        Func<TResult> onBjshomedelivery,
+        Func<TResult> onOmniva,
+        Func<TResult> onSutton,
+        Func<TResult> onPantherReference,
+        Func<TResult> onSfcservice,
+        Func<TResult> onLtl,
+        Func<TResult> onParknparcel,
+        Func<TResult> onSpringGds,
+        Func<TResult> onEcexpress,
+        Func<TResult> onInterparcelAu,
+        Func<TResult> onAgility,
+        Func<TResult> onXlExpress,
+        Func<TResult> onAderonline,
+        Func<TResult> onDirectcouriers,
+        Func<TResult> onPlanzer,
+        Func<TResult> onSending,
+        Func<TResult> onNinjavanWb,
+        Func<TResult> onNationwideMy,
+        Func<TResult> onSendit,
+        Func<TResult> onGbArrow,
+        Func<TResult> onIndGojavas,
+        Func<TResult> onKpost,
+        Func<TResult> onDhlFreight,
+        Func<TResult> onBluecare,
+        Func<TResult> onJindouyun,
+        Func<TResult> onTrackon,
+        Func<TResult> onGbTuffnells,
+        Func<TResult> onTrumpcard,
+        Func<TResult> onEtotal,
+        Func<TResult> onSfplusWebhook,
+        Func<TResult> onSekologistics,
+        Func<TResult> onHermes2MannHandling,
+        Func<TResult> onDpdLocalRef,
+        Func<TResult> onUds,
+        Func<TResult> onZaSpecialisedFreight,
+        Func<TResult> onThaKerry,
+        Func<TResult> onPrtIntSeur,
+        Func<TResult> onBraCorreios,
+        Func<TResult> onNzNzPost,
+        Func<TResult> onCnEquick,
+        Func<TResult> onMysEms,
+        Func<TResult> onGbNorsk,
+        Func<TResult> onEspMrw,
+        Func<TResult> onEspPacklink,
+        Func<TResult> onKangarooMy,
+        Func<TResult> onRpx,
+        Func<TResult> onXdpUkReference,
+        Func<TResult> onNinjavanMy,
+        Func<TResult> onAdicional,
+        Func<TResult> onRoadbull,
+        Func<TResult> onYakit,
+        Func<TResult> onMailamericas,
+        Func<TResult> onMikropakket,
+        Func<TResult> onDynalogic,
+        Func<TResult> onDhlEs,
+        Func<TResult> onDhlParcelNl,
+        Func<TResult> onDhlGlobalMailAsia,
+        Func<TResult> onDawnWing,
+        Func<TResult> onGenikiGr,
+        Func<TResult> onHermesworldUk,
+        Func<TResult> onAlphafast,
+        Func<TResult> onBuylogic,
+        Func<TResult> onEkart,
+        Func<TResult> onMexSenda,
+        Func<TResult> onSfcLogistics,
+        Func<TResult> onPostSerbia,
+        Func<TResult> onIndDelhivery,
+        Func<TResult> onDeDpdDelistrack,
+        Func<TResult> onRpd2Man,
+        Func<TResult> onCnSfExpress,
+        Func<TResult> onYanwen,
+        Func<TResult> onMysSkynet,
+        Func<TResult> onCorreosDeMexico,
+        Func<TResult> onCblLogistica,
+        Func<TResult> onMexEstafeta,
+        Func<TResult> onAuAustrianPost,
+        Func<TResult> onRincos,
+        Func<TResult> onNldDhl,
+        Func<TResult> onRussianPost,
+        Func<TResult> onCouriersPlease,
+        Func<TResult> onPostnordLogistics,
+        Func<TResult> onFedex,
+        Func<TResult> onDpeExpress,
+        Func<TResult> onDpd,
+        Func<TResult> onAdsone,
+        Func<TResult> onIdnJne,
+        Func<TResult> onThecourierguy,
+        Func<TResult> onCnexps,
+        Func<TResult> onPrtChronopost,
+        Func<TResult> onLandmarkGlobal,
+        Func<TResult> onItDhlEcommerce,
+        Func<TResult> onEspNacex,
+        Func<TResult> onPrtCtt,
+        Func<TResult> onBeKiala,
+        Func<TResult> onAsendiaUk,
+        Func<TResult> onGlobalTnt,
+        Func<TResult> onPosturIs,
+        Func<TResult> onEparcelKr,
+        Func<TResult> onInpostPaczkomaty,
+        Func<TResult> onItPosteItalia,
+        Func<TResult> onBeBpost,
+        Func<TResult> onPlPocztaPolska,
+        Func<TResult> onMysMysPost,
+        Func<TResult> onSgSgPost,
+        Func<TResult> onThaThailandPost,
+        Func<TResult> onLexship,
+        Func<TResult> onFastwayNz,
+        Func<TResult> onDhlAu,
+        Func<TResult> onCostmeticsnow,
+        Func<TResult> onPflogistics,
+        Func<TResult> onLoomisExpress,
+        Func<TResult> onGlsItaly,
+        Func<TResult> onLine,
+        Func<TResult> onGelExpress,
+        Func<TResult> onHuodull,
+        Func<TResult> onNinjavanSg,
+        Func<TResult> onJanio,
+        Func<TResult> onAoCourier,
+        Func<TResult> onBrtItSenderRef,
+        Func<TResult> onSailpost,
+        Func<TResult> onLalamove,
+        Func<TResult> onNewzealandCouriers,
+        Func<TResult> onEtomars,
+        Func<TResult> onVirtransport,
+        Func<TResult> onWizmo,
+        Func<TResult> onPalletways,
+        Func<TResult> onIDika,
+        Func<TResult> onCflLogistics,
+        Func<TResult> onGemworldwide,
+        Func<TResult> onGlobalExpress,
+        Func<TResult> onLogistyxTransgroup,
+        Func<TResult> onWestbankCourier,
+        Func<TResult> onArcoSpedizioni,
+        Func<TResult> onYdhExpress,
+        Func<TResult> onParcelinklogistics,
+        Func<TResult> onCndexpress,
+        Func<TResult> onNoxNightTimeExpress,
+        Func<TResult> onAeronet,
+        Func<TResult> onLtianexp,
+        Func<TResult> onIntegra2Ftp,
+        Func<TResult> onParcelone,
+        Func<TResult> onNoxNachtexpress,
+        Func<TResult> onCnChinaPostEms,
+        Func<TResult> onChukou1,
+        Func<TResult> onGlsSlov,
+        Func<TResult> onOrangeDs,
+        Func<TResult> onJoomLogis,
+        Func<TResult> onAusStartrack,
+        Func<TResult> onDhl,
+        Func<TResult> onGbApc,
+        Func<TResult> onBondscouriers,
+        Func<TResult> onJpnJapanPost,
+        Func<TResult> onUsps,
+        Func<TResult> onWinit,
+        Func<TResult> onArgOca,
+        Func<TResult> onTwTaiwanPost,
+        Func<TResult> onDmmNetwork,
+        Func<TResult> onTnt,
+        Func<TResult> onBhPosta,
+        Func<TResult> onSwePostnord,
+        Func<TResult> onCaCanadaPost,
+        Func<TResult> onWiseloads,
+        Func<TResult> onAsendiaHk,
+        Func<TResult> onNldGls,
+        Func<TResult> onMexRedpack,
+        Func<TResult> onJetShip,
+        Func<TResult> onDeDhlExpress,
+        Func<TResult> onNinjavanThai,
+        Func<TResult> onRabenGroup,
+        Func<TResult> onEspAsm,
+        Func<TResult> onHrvHrvatska,
+        Func<TResult> onGlobalEstes,
+        Func<TResult> onLtuLietuvos,
+        Func<TResult> onBelDhl,
+        Func<TResult> onAuAuPost,
+        Func<TResult> onSpeedexcourier,
+        Func<TResult> onFrColis,
+        Func<TResult> onAramex,
+        Func<TResult> onDpex,
+        Func<TResult> onMysAirpak,
+        Func<TResult> onCuckooexpress,
+        Func<TResult> onDpdPoland,
+        Func<TResult> onNldPostnl,
+        Func<TResult> onNimExpress,
+        Func<TResult> onQuantium,
+        Func<TResult> onSendle,
+        Func<TResult> onEspRedur,
+        Func<TResult> onMatkahuolto,
+        Func<TResult> onCpacket,
+        Func<TResult> onPosti,
+        Func<TResult> onHunterExpress,
+        Func<TResult> onChoirExp,
+        Func<TResult> onLegionExpress,
+        Func<TResult> onAustrianPostExpress,
+        Func<TResult> onGrupo,
+        Func<TResult> onPostaRo,
+        Func<TResult> onInterparcelUk,
+        Func<TResult> onGlobalAbf,
+        Func<TResult> onPostenNorge,
+        Func<TResult> onXpertDelivery,
+        Func<TResult> onDhlRefr,
+        Func<TResult> onDhlHk,
+        Func<TResult> onSkynetUae,
+        Func<TResult> onGojek,
+        Func<TResult> onYodelIntnl,
+        Func<TResult> onJanco,
+        Func<TResult> onYto,
+        Func<TResult> onWiseExpress,
+        Func<TResult> onJtexpressVn,
+        Func<TResult> onFedexIntlMlserv,
+        Func<TResult> onVamox,
+        Func<TResult> onAmsGrp,
+        Func<TResult> onDhlJp,
+        Func<TResult> onHrparcel,
+        Func<TResult> onGeswl,
+        Func<TResult> onBluestar,
+        Func<TResult> onCdekTr,
+        Func<TResult> onDescartes,
+        Func<TResult> onDeltecUk,
+        Func<TResult> onDtdcExpress,
+        Func<TResult> onTourline,
+        Func<TResult> onBhWorldwide,
+        Func<TResult> onOcs,
+        Func<TResult> onYingnuoLogistics,
+        Func<TResult> onUps,
+        Func<TResult> onToll,
+        Func<TResult> onPrtSeur,
+        Func<TResult> onDtdcAu,
+        Func<TResult> onThaDynamicLogistics,
+        Func<TResult> onUbiLogistics,
+        Func<TResult> onFedexCrossborder,
+        Func<TResult> onA1Post,
+        Func<TResult> onTazmanianFreight,
+        Func<TResult> onCjIntMy,
+        Func<TResult> onSaiaFreight,
+        Func<TResult> onSgQxpress,
+        Func<TResult> onNhansSolutions,
+        Func<TResult> onDpdFr,
+        Func<TResult> onCoordinadora,
+        Func<TResult> onAndreani,
+        Func<TResult> onDoora,
+        Func<TResult> onInterparcelNz,
+        Func<TResult> onPhlJamexpress,
+        Func<TResult> onBelBelgiumPost,
+        Func<TResult> onUsApc,
+        Func<TResult> onIdnPos,
+        Func<TResult> onFrMondial,
+        Func<TResult> onDeDhl,
+        Func<TResult> onHkRpx,
+        Func<TResult> onDhlPieceid,
+        Func<TResult> onVnpostEms,
+        Func<TResult> onRrdonnelley,
+        Func<TResult> onDpdDe,
+        Func<TResult> onDelcartIn,
+        Func<TResult> onImexglobalsolutions,
+        Func<TResult> onAcommerce,
+        Func<TResult> onEurodis,
+        Func<TResult> onCanpar,
+        Func<TResult> onGls,
+        Func<TResult> onIndEcom,
+        Func<TResult> onEspEnvialia,
+        Func<TResult> onDhlUk,
+        Func<TResult> onSmsaExpress,
+        Func<TResult> onTntFr,
+        Func<TResult> onDexI,
+        Func<TResult> onBudbeeWebhook,
+        Func<TResult> onCopaCourier,
+        Func<TResult> onVnmVietnamPost,
+        Func<TResult> onDpdHk,
+        Func<TResult> onTollNz,
+        Func<TResult> onEcho,
+        Func<TResult> onFedexFr,
+        Func<TResult> onBorderexpress,
+        Func<TResult> onMailplusJpn,
+        Func<TResult> onTntUkRefr,
+        Func<TResult> onKec,
+        Func<TResult> onDpdRo,
+        Func<TResult> onTntJp,
+        Func<TResult> onThCj,
+        Func<TResult> onEcCn,
+        Func<TResult> onFastwayUk,
+        Func<TResult> onFastwayUs,
+        Func<TResult> onGlsDe,
+        Func<TResult> onGlsEs,
+        Func<TResult> onGlsFr,
+        Func<TResult> onMondialBe,
+        Func<TResult> onSgtIt,
+        Func<TResult> onTntCn,
+        Func<TResult> onTntDe,
+        Func<TResult> onTntEs,
+        Func<TResult> onTntPl,
+        Func<TResult> onParcelforce,
+        Func<TResult> onSwissPost,
+        Func<TResult> onTollIpec,
+        Func<TResult> onAir21,
+        Func<TResult> onAirspeed,
+        Func<TResult> onBert,
+        Func<TResult> onBluedart,
+        Func<TResult> onCollectplus,
+        Func<TResult> onCourierplus,
+        Func<TResult> onCourierPost,
+        Func<TResult> onDhlGlobalMail,
+        Func<TResult> onDpdUk,
+        Func<TResult> onDeltecDe,
+        Func<TResult> onDeutscheDe,
+        Func<TResult> onDotzot,
+        Func<TResult> onEltaGr,
+        Func<TResult> onEmsCn,
+        Func<TResult> onEcargo,
+        Func<TResult> onEnsenda,
+        Func<TResult> onFercamIt,
+        Func<TResult> onFastwayZa,
+        Func<TResult> onFastwayAu,
+        Func<TResult> onFirstLogisitcs,
+        Func<TResult> onGeodis,
+        Func<TResult> onGlobegistics,
+        Func<TResult> onGreyhound,
+        Func<TResult> onJetshipMy,
+        Func<TResult> onLionParcel,
+        Func<TResult> onAeroflash,
+        Func<TResult> onOntrac,
+        Func<TResult> onSagawa,
+        Func<TResult> onSiodemka,
+        Func<TResult> onStartrack,
+        Func<TResult> onTntAu,
+        Func<TResult> onTntIt,
+        Func<TResult> onTransmission,
+        Func<TResult> onYamato,
+        Func<TResult> onDhlIt,
+        Func<TResult> onDhlAt,
+        Func<TResult> onLogisticsworldwideKr,
+        Func<TResult> onGlsSpain,
+        Func<TResult> onAmazonUkApi,
+        Func<TResult> onDpdFrReference,
+        Func<TResult> onDhlparcelUk,
+        Func<TResult> onMegasave,
+        Func<TResult> onQualitypost,
+        Func<TResult> onIdsLogistics,
+        Func<TResult> onJoyingbox,
+        Func<TResult> onPantherOrderNumber,
+        Func<TResult> onWatkinsShepard,
+        Func<TResult> onFasttrack,
+        Func<TResult> onUpExpress,
+        Func<TResult> onElogistica,
+        Func<TResult> onEcourier,
+        Func<TResult> onCjPhilippines,
+        Func<TResult> onSpeedex,
+        Func<TResult> onOrangeconnex,
+        Func<TResult> onTecor,
+        Func<TResult> onSaee,
+        Func<TResult> onGlsItalyFtp,
+        Func<TResult> onDelivere,
+        Func<TResult> onYycom,
+        Func<TResult> onAdicionalPt,
+        Func<TResult> onDksh,
+        Func<TResult> onNipponExpressFtp,
+        Func<TResult> onGols,
+        Func<TResult> onFujexp,
+        Func<TResult> onQtrack,
+        Func<TResult> onOmlogisticsApi,
+        Func<TResult> onGdpharm,
+        Func<TResult> onMisumiCn,
+        Func<TResult> onAirCanada,
+        Func<TResult> onCity56Webhook,
+        Func<TResult> onSagawaApi,
+        Func<TResult> onKedaex,
+        Func<TResult> onPgeonApi,
+        Func<TResult> onWeworldexpress,
+        Func<TResult> onJtLogistics,
+        Func<TResult> onTrusk,
+        Func<TResult> onViaxpress,
+        Func<TResult> onDhlSupplychainId,
+        Func<TResult> onZuelligpharmaSftp,
+        Func<TResult> onMeest,
+        Func<TResult> onTollPriority,
+        Func<TResult> onMothershipApi,
+        Func<TResult> onCapital,
+        Func<TResult> onEuropaketApi,
+        Func<TResult> onHfd,
+        Func<TResult> onTourlineReference,
+        Func<TResult> onGioEcourier,
+        Func<TResult> onCnLogistics,
+        Func<TResult> onPandion,
+        Func<TResult> onBpostApi,
+        Func<TResult> onPassportshipping,
+        Func<TResult> onPakajo,
+        Func<TResult> onDachser,
+        Func<TResult> onYusenSftp,
+        Func<TResult> onShyplite,
+        Func<TResult> onXyy,
+        Func<TResult> onMwd,
+        Func<TResult> onFaxecargo,
+        Func<TResult> onMazet,
+        Func<TResult> onFirstLogisticsApi,
+        Func<TResult> onSprintPack,
+        Func<TResult> onHermesDeFtp,
+        Func<TResult> onConcise,
+        Func<TResult> onKerryExpressTwApi,
+        Func<TResult> onEwe,
+        Func<TResult> onFastdespatch,
+        Func<TResult> onAbcustomSftp,
+        Func<TResult> onChazki,
+        Func<TResult> onShippie,
+        Func<TResult> onGeodisApi,
+        Func<TResult> onNaqelExpress,
+        Func<TResult> onPapaWebhook,
+        Func<TResult> onForwardair,
+        Func<TResult> onDialogoLogisticaApi,
+        Func<TResult> onLalamoveApi,
+        Func<TResult> onTomydoor,
+        Func<TResult> onKronosWebhook,
+        Func<TResult> onJtcargo,
+        Func<TResult> onTCat,
+        Func<TResult> onConciseWebhook,
+        Func<TResult> onTeleportWebhook,
+        Func<TResult> onCustomcoApi,
+        Func<TResult> onSpxTh,
+        Func<TResult> onBolloreLogistics,
+        Func<TResult> onClicklinkSftp,
+        Func<TResult> onM3Logistics,
+        Func<TResult> onVnpostApi,
+        Func<TResult> onAxlehireFtp,
+        Func<TResult> onShadowfax,
+        Func<TResult> onMyhermesUkApi,
+        Func<TResult> onDaiichi,
+        Func<TResult> onMensajerosurbanosApi,
+        Func<TResult> onPolarspeed,
+        Func<TResult> onIdexpressId,
+        Func<TResult> onPayo,
+        Func<TResult> onWhistlSftp,
+        Func<TResult> onIntexDe,
+        Func<TResult> onTrans2U,
+        Func<TResult> onProductcaregroupSftp,
+        Func<TResult> onBigsmart,
+        Func<TResult> onExpeditorsApiRef,
+        Func<TResult> onAitworldwideApi,
+        Func<TResult> onWorldcourier,
+        Func<TResult> onQuiqup,
+        Func<TResult> onAgedissSftp,
+        Func<TResult> onAndreaniApi,
+        Func<TResult> onCrlexpress,
+        Func<TResult> onSmartcat,
+        Func<TResult> onCrossflight,
+        Func<TResult> onProcarrier,
+        Func<TResult> onDhlReferenceApi,
+        Func<TResult> onSeinoApi,
+        Func<TResult> onWspexpress,
+        Func<TResult> onKronos,
+        Func<TResult> onTotalExpressApi,
+        Func<TResult> onParcll,
+        Func<TResult> onXpedigo,
+        Func<TResult> onStarTrackWebhook,
+        Func<TResult> onGpost,
+        Func<TResult> onUcs,
+        Func<TResult> onDmfgroup,
+        Func<TResult> onCoordinadoraApi,
+        Func<TResult> onMarken,
+        Func<TResult> onNtl,
+        Func<TResult> onRedjepakketje,
+        Func<TResult> onAlliedExpressFtp,
+        Func<TResult> onMondialrelayEs,
+        Func<TResult> onNaekoFtp,
+        Func<TResult> onMhi,
+        Func<TResult> onShippify,
+        Func<TResult> onMalcaAmitApi,
+        Func<TResult> onJtexpressSgApi,
+        Func<TResult> onDachserWeb,
+        Func<TResult> onFlightlg,
+        Func<TResult> onCago,
+        Func<TResult> onCom1Express,
+        Func<TResult> onTonamiFtp,
+        Func<TResult> onPackfleet,
+        Func<TResult> onPurolatorInternational,
+        Func<TResult> onWineshippingWebhook,
+        Func<TResult> onDhlEsSftp,
+        Func<TResult> onPchomeApi,
+        Func<TResult> onCeskapostaApi,
+        Func<TResult> onGorush,
+        Func<TResult> onHomerunner,
+        Func<TResult> onAmazonOrder,
+        Func<TResult> onEfwnowApi,
+        Func<TResult> onCblLogisticaApi,
+        Func<TResult> onNimbuspost,
+        Func<TResult> onLogwinLogistics,
+        Func<TResult> onNowlogApi,
+        Func<TResult> onDpdNl,
+        Func<TResult> onGodependable,
+        Func<TResult> onEsdex,
+        Func<TResult> onLogisystemsSftp,
+        Func<TResult> onExpeditors,
+        Func<TResult> onSntglobalApi,
+        Func<TResult> onShipx,
+        Func<TResult> onQintlApi,
+        Func<TResult> onPacks,
+        Func<TResult> onPostnlInternational,
+        Func<TResult> onAmazonEmailPush,
+        Func<TResult> onDhlApi,
+        Func<TResult> onSpx,
+        Func<TResult> onAxlehire,
+        Func<TResult> onIcscourier,
+        Func<TResult> onDialogoLogistica,
+        Func<TResult> onShunbangExpress,
+        Func<TResult> onTcsApi,
+        Func<TResult> onSfExpressCn,
+        Func<TResult> onPacketa,
+        Func<TResult> onSicTeliway,
+        Func<TResult> onMondialrelayFr,
+        Func<TResult> onIntimeFtp,
+        Func<TResult> onJdExpress,
+        Func<TResult> onFastbox,
+        Func<TResult> onPatheon,
+        Func<TResult> onIndiaPost,
+        Func<TResult> onTipsaRef,
+        Func<TResult> onEcofreight,
+        Func<TResult> onVox,
+        Func<TResult> onDirectfreightAuRef,
+        Func<TResult> onBesttransportSftp,
+        Func<TResult> onAustraliaPostApi,
+        Func<TResult> onFragilepakSftp,
+        Func<TResult> onFlipxp,
+        Func<TResult> onValueWebhook,
+        Func<TResult> onDaeshin,
+        Func<TResult> onSherpa,
+        Func<TResult> onMwdApi,
+        Func<TResult> onSmartkargo,
+        Func<TResult> onDnjExpress,
+        Func<TResult> onGopeople,
+        Func<TResult> onMysendleApi,
+        Func<TResult> onAramexApi,
+        Func<TResult> onPidge,
+        Func<TResult> onThaiparcels,
+        Func<TResult> onPantherReferenceApi,
+        Func<TResult> onPostaplus,
+        Func<TResult> onBuffalo,
+        Func<TResult> onUEnvios,
+        Func<TResult> onEliteCo,
+        Func<TResult> onRocheInternalSftp,
+        Func<TResult> onDbschenkerIceland,
+        Func<TResult> onTntFrReference,
+        Func<TResult> onNewgisticsapi,
+        Func<TResult> onGlovo,
+        Func<TResult> onGwlogisApi,
+        Func<TResult> onSpreetailApi,
+        Func<TResult> onMoova,
+        Func<TResult> onPlycongroup,
+        Func<TResult> onUspsWebhook,
+        Func<TResult> onReimaginedelivery,
+        Func<TResult> onEdfFtp,
+        Func<TResult> onDao365,
+        Func<TResult> onBiocairFtp,
+        Func<TResult> onRansaWebhook,
+        Func<TResult> onShipxpres,
+        Func<TResult> onCourantPlusApi,
+        Func<TResult> onShipa,
+        Func<TResult> onHomelogistics,
+        Func<TResult> onDx,
+        Func<TResult> onPosteItalianePaccocelere,
+        Func<TResult> onTollWebhook,
+        Func<TResult> onLctbrApi,
+        Func<TResult> onDxFreight,
+        Func<TResult> onDhlSftp,
+        Func<TResult> onShiprocket,
+        Func<TResult> onUberWebhook,
+        Func<TResult> onStatovernight,
+        Func<TResult> onBurd,
+        Func<TResult> onFastship,
+        Func<TResult> onIbventureWebhook,
+        Func<TResult> onGatiKweApi,
+        Func<TResult> onCryopdpFtp,
+        Func<TResult> onHubbed,
+        Func<TResult> onTipsaApi,
+        Func<TResult> onAraskargo,
+        Func<TResult> onThijsNl,
+        Func<TResult> onAtshealthcareReference,
+        Func<TResult> on_99Minutos,
+        Func<TResult> onHellenicPost,
+        Func<TResult> onHsmGlobal,
+        Func<TResult> onMnx,
+        Func<TResult> onNmtransfer,
+        Func<TResult> onLogysto,
+        Func<TResult> onIndiaPostInt,
+        Func<TResult> onAmazonFbaSwishipIn,
+        Func<TResult> onSrtTransport,
+        Func<TResult> onBomi,
+        Func<TResult> onDeliverrSftp,
+        Func<TResult> onHsdexpress,
+        Func<TResult> onSimpletireWebhook,
+        Func<TResult> onHunterExpressSftp,
+        Func<TResult> onUpsApi,
+        Func<TResult> onWooyoungLogisticsSftp,
+        Func<TResult> onPhseApi,
+        Func<TResult> onWishEmailPush,
+        Func<TResult> onNorthline,
+        Func<TResult> onMedafrica,
+        Func<TResult> onDpdAtSftp,
+        Func<TResult> onAnteraja,
+        Func<TResult> onDhlGlobalForwardingApi,
+        Func<TResult> onLbcexpressApi,
+        Func<TResult> onSimsglobal,
+        Func<TResult> onCdldelivers,
+        Func<TResult> onTyp,
+        Func<TResult> onTestingCourierWebhook,
+        Func<TResult> onPandagoApi,
+        Func<TResult> onRoyalMailFtp,
+        Func<TResult> onThunderexpress,
+        Func<TResult> onSecretlabWebhook,
+        Func<TResult> onSetel,
+        Func<TResult> onJdWorldwide,
+        Func<TResult> onDpdRuApi,
+        Func<TResult> onArgentsWebhook,
+        Func<TResult> onPostone,
+        Func<TResult> onTusklogistics,
+        Func<TResult> onRhenusUkApi,
+        Func<TResult> onTaqbinSgApi,
+        Func<TResult> onInntralogSftp,
+        Func<TResult> onDayross,
+        Func<TResult> onCorreosexpressApi,
+        Func<TResult> onInternationalSeurApi,
+        Func<TResult> onYodelApi,
+        Func<TResult> onHeroexpress,
+        Func<TResult> onDhlSupplychainIn,
+        Func<TResult> onUrgentCargus,
+        Func<TResult> onFrontdoorcorp,
+        Func<TResult> onJtexpressPh,
+        Func<TResult> onParcelstarsWebhook,
+        Func<TResult> onDpdSkSftp,
+        Func<TResult> onMovianto,
+        Func<TResult> onOzepartsShipping,
+        Func<TResult> onKargomkolay,
+        Func<TResult> onTrunkrs,
+        Func<TResult> onOmnirpsWebhook,
+        Func<TResult> onChilexpress,
+        Func<TResult> onTestingCourier,
+        Func<TResult> onJneApi,
+        Func<TResult> onBjshomedeliveryFtp,
+        Func<TResult> onDexpressWebhook,
+        Func<TResult> onUspsApi,
+        Func<TResult> onTransvirtual,
+        Func<TResult> onSolisticaApi,
+        Func<TResult> onChienventureWebhook,
+        Func<TResult> onDpdUkSftp,
+        Func<TResult> onInpostUk,
+        Func<TResult> onJavit,
+        Func<TResult> onZtoDomestic,
+        Func<TResult> onDhlGtApi,
+        Func<TResult> onCevaTracking,
+        Func<TResult> onKomonExpress,
+        Func<TResult> onEastwestcourierFtp,
+        Func<TResult> onDanniao,
+        Func<TResult> onSpectran,
+        Func<TResult> onDeliverIt,
+        Func<TResult> onRelaiscolis,
+        Func<TResult> onGlsSpainApi,
+        Func<TResult> onPostplus,
+        Func<TResult> onAirterra,
+        Func<TResult> onGioEcourierApi,
+        Func<TResult> onDpdChSftp,
+        Func<TResult> onFedexApi,
+        Func<TResult> onIntersmarttrans,
+        Func<TResult> onHermesUkSftp,
+        Func<TResult> onExelotFtp,
+        Func<TResult> onDhlPaApi,
+        Func<TResult> onVirtransportSftp,
+        Func<TResult> onWorldnet,
+        Func<TResult> onInstaboxWebhook,
+        Func<TResult> onKng,
+        Func<TResult> onFlashexpressWebhook,
+        Func<TResult> onMagyarPostaApi,
+        Func<TResult> onWeshipApi,
+        Func<TResult> onOhiWebhook,
+        Func<TResult> onMudita,
+        Func<TResult> onBluedartApi,
+        Func<TResult> onTCatApi,
+        Func<TResult> onAds,
+        Func<TResult> onHermesIt,
+        Func<TResult> onFitzmarkApi,
+        Func<TResult> onPostiApi,
+        Func<TResult> onSmsaExpressWebhook,
+        Func<TResult> onTamergroupWebhook,
+        Func<TResult> onLivrapide,
+        Func<TResult> onNipponExpress,
+        Func<TResult> onBettertrucks,
+        Func<TResult> onFan,
+        Func<TResult> onPbUspsflatsFtp,
+        Func<TResult> onParcelright,
+        Func<TResult> onIthinklogistics,
+        Func<TResult> onKerryExpressThWebhook,
+        Func<TResult> onEcoutier,
+        Func<TResult> onShowl,
+        Func<TResult> onBrtItApi,
+        Func<TResult> onRixonhkApi,
+        Func<TResult> onDbschenkerApi,
+        Func<TResult> onIlyanglogis,
+        Func<TResult> onMailBoxEtc,
+        Func<TResult> onWeship,
+        Func<TResult> onDhlGlobalMailApi,
+        Func<TResult> onActivos24Api,
+        Func<TResult> onAtshealthcare,
+        Func<TResult> onLuwjistik,
+        Func<TResult> onGwWorld,
+        Func<TResult> onFairsendenApi,
+        Func<TResult> onServipWebhook,
+        Func<TResult> onSwiship,
+        Func<TResult> onTanet,
+        Func<TResult> onHotsinCargo,
+        Func<TResult> onDirex,
+        Func<TResult> onHuantong,
+        Func<TResult> onImileApi,
+        Func<TResult> onAuexpress,
+        Func<TResult> onNytlogistics,
+        Func<TResult> onDsvReference,
+        Func<TResult> onNovofarmaWebhook,
+        Func<TResult> onAitworldwideSftp,
+        Func<TResult> onShopolive,
+        Func<TResult> onFnfZa,
+        Func<TResult> onDhlEcommerceGc,
+        Func<TResult> onFetchr,
+        Func<TResult> onStarlinksApi,
+        Func<TResult> onYyexpress,
+        Func<TResult> onServientrega,
+        Func<TResult> onHanjin,
+        Func<TResult> onSpanishSeurFtp,
+        Func<TResult> onDxB2BConnum,
+        Func<TResult> onHelthjemApi,
+        Func<TResult> onInexpost,
+        Func<TResult> onA2BBa,
+        Func<TResult> onRhenusGroup,
+        Func<TResult> onSberlogisticsRu,
+        Func<TResult> onMalcaAmit,
+        Func<TResult> onPpl,
+        Func<TResult> onOsmWorldwideSftp,
+        Func<TResult> onAcilogistix,
+        Func<TResult> onOptimacourier,
+        Func<TResult> onNovaPoshtaApi,
+        Func<TResult> onLoggi,
+        Func<TResult> onYifan,
+        Func<TResult> onMydynalogic,
+        Func<TResult> onMorninglobal,
+        Func<TResult> onConciseApi,
+        Func<TResult> onFxtran,
+        Func<TResult> onDeliveryourparcelZa,
+        Func<TResult> onUparcel,
+        Func<TResult> onMobiBr,
+        Func<TResult> onLoginextWebhook,
+        Func<TResult> onEms,
+        Func<TResult> onSpeedy,
+        Func<TResult> onZoomRed,
+        Func<TResult> onNavlungo,
+        Func<TResult> onCastleparcels,
+        Func<TResult> onWeee,
+        Func<TResult> onPackaly,
+        Func<TResult> onYunhuipost,
+        Func<TResult> onYouparcel,
+        Func<TResult> onLeman,
+        Func<TResult> onMoovin,
+        Func<TResult> onUrbIt,
+        Func<TResult> onMultientregapanama,
+        Func<TResult> onJusdasr,
+        Func<TResult> onDiscountpost,
+        Func<TResult> onRhenusUk,
+        Func<TResult> onSwishipJp,
+        Func<TResult> onGlsUs,
+        Func<TResult> onSmtl,
+        Func<TResult> onEmega,
+        Func<TResult> onExpressoneSv,
+        Func<TResult> onHepsijet,
+        Func<TResult> onWelivery,
+        Func<TResult> onBringer,
+        Func<TResult> onEasyroutes,
+        Func<TResult> onMrw,
+        Func<TResult> onRpm,
+        Func<TResult> onDpdPrt,
+        Func<TResult> onGlsRomania,
+        Func<TResult> onLmparcel,
+        Func<TResult> onGtagsm,
+        Func<TResult> onDomino,
+        Func<TResult> onEshipper,
+        Func<TResult> onTranspak,
+        Func<TResult> onXindus,
+        Func<TResult> onAoyue,
+        Func<TResult> onEasyparcel,
+        Func<TResult> onExpressone,
+        Func<TResult> onSendeoKargo,
+        Func<TResult> onSpeedaf,
+        Func<TResult> onEtower,
+        Func<TResult> onGcx,
+        Func<TResult> onNinjavanVn,
+        Func<TResult> onAllegro,
+        Func<TResult> onJumppoint,
+        Func<TResult> onShipglobalUs,
+        Func<TResult> onKinisi,
+        Func<TResult> onOakh,
+        Func<TResult> onAwest,
+        Func<TResult> onBarsan,
+        Func<TResult> onEnergologistic,
+        Func<TResult> onMadrooex,
+        Func<TResult> onGobolt,
+        Func<TResult> onSwissUniversalExpress,
+        Func<TResult> onIordirect,
+        Func<TResult> onXmszm,
+        Func<TResult> onGlsHun,
+        Func<TResult> onSendy,
+        Func<TResult> onBraunsexpress,
+        Func<TResult> onGrandslamexpress,
+        Func<TResult> onXgs,
+        Func<TResult> onOtschile,
+        Func<TResult> onPackUp,
+        Func<TResult> onParcelstars,
+        Func<TResult> onTeamexpressllc,
+        Func<TResult> onAsyadexpress,
+        Func<TResult> onTdn,
+        Func<TResult> onEarlybird,
+        Func<TResult> onCacesa,
+        Func<TResult> onParceljet,
+        Func<TResult> onMngKargo,
+        Func<TResult> onSuperpackline,
+        Func<TResult> onSpeedx,
+        Func<TResult> onVesyl,
+        Func<TResult> onSkyking,
+        Func<TResult> onDirmensajeria,
+        Func<TResult> onNetlogixgroup,
+        Func<TResult> onZyou,
+        Func<TResult> onJawar,
+        Func<TResult> onAgsystems,
+        Func<TResult> onGps,
+        Func<TResult> onPttKargo,
+        Func<TResult> onMaergo,
+        Func<TResult> onArihantcourier,
+        Func<TResult> onVtfe,
+        Func<TResult> onYunant,
+        Func<TResult> onUrbify,
+        Func<TResult> onPackMan,
+        Func<TResult> onLiefergrun,
+        Func<TResult> onObibox,
+        Func<TResult> onPaikeda,
+        Func<TResult> onScotty,
+        Func<TResult> onIntelcomCa,
+        Func<TResult> onSwe,
+        Func<TResult> onAsendia,
+        Func<TResult> onDpdAt,
+        Func<TResult> onRelay,
+        Func<TResult> onAta,
+        Func<TResult> onSkyexpressInternational,
+        Func<TResult> onSuratKargo,
+        Func<TResult> onSglink,
+        Func<TResult> onFleetopticsinc,
+        Func<TResult> onShopline,
+        Func<TResult> onPiggyship,
+        Func<TResult> onLogoix,
+        Func<TResult> onKolayGelsin,
+        Func<TResult> onAssociatedCouriers,
+        Func<TResult> onUpsChecker,
+        Func<TResult> onWineshipping,
+        Func<TResult> onSpedisci,
+        Func<TResult> onFourkites,
+        Func<TResult> onEtonas,
+        Func<TResult> onFinmile,
+        Func<TResult> onUniuni,
+        Func<TResult> onRodonaves,
+        Func<TResult> onInpostIt,
+        Func<TResult> onTforceFreight,
+        Func<TResult> onRichmom,
+        Func<TResult> onFranco,
+        Func<TResult> onEcparcel,
+        Func<TResult> onFedexChina,
+        Func<TResult> onGofoExpress,
+        Func<TResult> onShipbob,
+        Func<TResult> onJerseypostAtlas,
+        Func<TResult> onCoretrails,
+        Func<TResult> onRhenusItaly,
+        Func<TResult> onJadlog,
+        Func<TResult> onJitsu,
+        Func<TResult> onYanwenExpress,
+        Func<TResult> onDashlink,
+        Func<TResult> onSeinoSuperExpress,
+        Func<TResult> onFloship,
+        Func<TResult> onMetroscg,
+        Func<TResult> onSendparcel,
+        Func<TResult> onP2P,
+        Func<TResult> onCnExpress,
+        Func<TResult> onCirrotrack,
+        Func<TResult> onLandLogistics,
+        Func<TResult> onVeho,
+        Func<TResult> onMedline,
+        Func<TResult> onVdtrack,
+        Func<TResult> onSinoScm,
+        Func<TResult> on_3PeExpress,
+        Func<TResult> onSwiftx,
+        Func<TResult> onSfydexpress,
+        Func<TResult> onToptrans,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == DpdRu => onDpdRu(),
+            _ when this == BgBulgarianPost => onBgBulgarianPost(),
+            _ when this == KrKoreaPost => onKrKoreaPost(),
+            _ when this == ZaCourierit => onZaCourierit(),
+            _ when this == FrExapaq => onFrExapaq(),
+            _ when this == AreEmiratesPost => onAreEmiratesPost(),
+            _ when this == Gac => onGac(),
+            _ when this == Geis => onGeis(),
+            _ when this == SfEx => onSfEx(),
+            _ when this == Pago => onPago(),
+            _ when this == Myhermes => onMyhermes(),
+            _ when this == DiamondEurogistics => onDiamondEurogistics(),
+            _ when this == CorporatecouriersWebhook => onCorporatecouriersWebhook(),
+            _ when this == Bond => onBond(),
+            _ when this == Omniparcel => onOmniparcel(),
+            _ when this == SkPosta => onSkPosta(),
+            _ when this == Purolator => onPurolator(),
+            _ when this == FetchrWebhook => onFetchrWebhook(),
+            _ when this == Thedeliverygroup => onThedeliverygroup(),
+            _ when this == CelloSquare => onCelloSquare(),
+            _ when this == Tarrive => onTarrive(),
+            _ when this == Collivery => onCollivery(),
+            _ when this == Mainfreight => onMainfreight(),
+            _ when this == IndFirstflight => onIndFirstflight(),
+            _ when this == Acsworldwide => onAcsworldwide(),
+            _ when this == Amstan => onAmstan(),
+            _ when this == Okayparcel => onOkayparcel(),
+            _ when this == EnvialiaReference => onEnvialiaReference(),
+            _ when this == SeurEs => onSeurEs(),
+            _ when this == Continental => onContinental(),
+            _ when this == Fdsexpress => onFdsexpress(),
+            _ when this == AmazonFbaSwiship => onAmazonFbaSwiship(),
+            _ when this == Wyngs => onWyngs(),
+            _ when this == DhlActiveTracing => onDhlActiveTracing(),
+            _ when this == Zyllem => onZyllem(),
+            _ when this == Ruston => onRuston(),
+            _ when this == Xpost => onXpost(),
+            _ when this == CorreosEs => onCorreosEs(),
+            _ when this == DhlFr => onDhlFr(),
+            _ when this == PanAsia => onPanAsia(),
+            _ when this == BrtIt => onBrtIt(),
+            _ when this == SreKorea => onSreKorea(),
+            _ when this == Speedee => onSpeedee(),
+            _ when this == TntUk => onTntUk(),
+            _ when this == Venipak => onVenipak(),
+            _ when this == Shreenandancourier => onShreenandancourier(),
+            _ when this == Croshot => onCroshot(),
+            _ when this == NipostNg => onNipostNg(),
+            _ when this == EpstGlbl => onEpstGlbl(),
+            _ when this == Newgistics => onNewgistics(),
+            _ when this == PostSlovenia => onPostSlovenia(),
+            _ when this == JerseyPost => onJerseyPost(),
+            _ when this == Bombinoexp => onBombinoexp(),
+            _ when this == Wmg => onWmg(),
+            _ when this == XqExpress => onXqExpress(),
+            _ when this == Furdeco => onFurdeco(),
+            _ when this == LhtExpress => onLhtExpress(),
+            _ when this == SouthAfricanPostOffice => onSouthAfricanPostOffice(),
+            _ when this == Spoton => onSpoton(),
+            _ when this == Dimerco => onDimerco(),
+            _ when this == CyprusPostCyp => onCyprusPostCyp(),
+            _ when this == Abcustom => onAbcustom(),
+            _ when this == IndDelivree => onIndDelivree(),
+            _ when this == CnBestexpress => onCnBestexpress(),
+            _ when this == DxSftp => onDxSftp(),
+            _ when this == PickuppMys => onPickuppMys(),
+            _ when this == Fmx => onFmx(),
+            _ when this == Hellmann => onHellmann(),
+            _ when this == ShipItAsia => onShipItAsia(),
+            _ when this == KerryEcommerce => onKerryEcommerce(),
+            _ when this == Freterapido => onFreterapido(),
+            _ when this == PitneyBowes => onPitneyBowes(),
+            _ when this == XpressenDk => onXpressenDk(),
+            _ when this == SeurSpApi => onSeurSpApi(),
+            _ when this == Deliveryontime => onDeliveryontime(),
+            _ when this == Jinsung => onJinsung(),
+            _ when this == TransKargo => onTransKargo(),
+            _ when this == SwishipDe => onSwishipDe(),
+            _ when this == IvoyWebhook => onIvoyWebhook(),
+            _ when this == AirmeeWebhook => onAirmeeWebhook(),
+            _ when this == DhlBenelux => onDhlBenelux(),
+            _ when this == Firstmile => onFirstmile(),
+            _ when this == FastwayIr => onFastwayIr(),
+            _ when this == HhExp => onHhExp(),
+            _ when this == MysMypostOnline => onMysMypostOnline(),
+            _ when this == TntNl => onTntNl(),
+            _ when this == Tipsa => onTipsa(),
+            _ when this == TaqbinMy => onTaqbinMy(),
+            _ when this == Kgmhub => onKgmhub(),
+            _ when this == Intexpress => onIntexpress(),
+            _ when this == OverseExp => onOverseExp(),
+            _ when this == Oneclick => onOneclick(),
+            _ when this == RoadrunnerFreight => onRoadrunnerFreight(),
+            _ when this == GlsCrotia => onGlsCrotia(),
+            _ when this == MrwFtp => onMrwFtp(),
+            _ when this == Bluex => onBluex(),
+            _ when this == Dylt => onDylt(),
+            _ when this == DpdIr => onDpdIr(),
+            _ when this == SinGlbl => onSinGlbl(),
+            _ when this == TuffnellsReference => onTuffnellsReference(),
+            _ when this == Cjpacket => onCjpacket(),
+            _ when this == Milkman => onMilkman(),
+            _ when this == Asigna => onAsigna(),
+            _ when this == Oneworldexpress => onOneworldexpress(),
+            _ when this == RoyalMail => onRoyalMail(),
+            _ when this == ViaExpress => onViaExpress(),
+            _ when this == Tigfreight => onTigfreight(),
+            _ when this == ZtoExpress => onZtoExpress(),
+            _ when this == TwoGo => onTwoGo(),
+            _ when this == Iml => onIml(),
+            _ when this == IntelValley => onIntelValley(),
+            _ when this == Efs => onEfs(),
+            _ when this == UkUkMail => onUkUkMail(),
+            _ when this == Ram => onRam(),
+            _ when this == Alliedexpress => onAlliedexpress(),
+            _ when this == ApcOvernight => onApcOvernight(),
+            _ when this == Shippit => onShippit(),
+            _ when this == Tfm => onTfm(),
+            _ when this == MXpress => onMXpress(),
+            _ when this == HdbBox => onHdbBox(),
+            _ when this == ClevyLinks => onClevyLinks(),
+            _ when this == Ibeone => onIbeone(),
+            _ when this == FiegeNl => onFiegeNl(),
+            _ when this == KweGlobal => onKweGlobal(),
+            _ when this == CtcExpress => onCtcExpress(),
+            _ when this == Amazon => onAmazon(),
+            _ when this == MoreLink => onMoreLink(),
+            _ when this == Jx => onJx(),
+            _ when this == EasyMail => onEasyMail(),
+            _ when this == Aduiepyle => onAduiepyle(),
+            _ when this == GbPanther => onGbPanther(),
+            _ when this == Expresssale => onExpresssale(),
+            _ when this == SgDetrack => onSgDetrack(),
+            _ when this == TrunkrsWebhook => onTrunkrsWebhook(),
+            _ when this == Matdespatch => onMatdespatch(),
+            _ when this == Dicom => onDicom(),
+            _ when this == Mbw => onMbw(),
+            _ when this == KhmCambodiaPost => onKhmCambodiaPost(),
+            _ when this == Sinotrans => onSinotrans(),
+            _ when this == BrtItParcelid => onBrtItParcelid(),
+            _ when this == DhlSupplyChain => onDhlSupplyChain(),
+            _ when this == DhlPl => onDhlPl(),
+            _ when this == Topyou => onTopyou(),
+            _ when this == Palexpress => onPalexpress(),
+            _ when this == DhlSg => onDhlSg(),
+            _ when this == CnWedo => onCnWedo(),
+            _ when this == Fulfillme => onFulfillme(),
+            _ when this == DpdDelistrack => onDpdDelistrack(),
+            _ when this == UpsReference => onUpsReference(),
+            _ when this == Caribou => onCaribou(),
+            _ when this == LocusWebhook => onLocusWebhook(),
+            _ when this == Dsv => onDsv(),
+            _ when this == P2PTrc => onP2PTrc(),
+            _ when this == Directparcels => onDirectparcels(),
+            _ when this == NovaPoshtaInt => onNovaPoshtaInt(),
+            _ when this == FedexPoland => onFedexPoland(),
+            _ when this == CnJcex => onCnJcex(),
+            _ when this == FarInternational => onFarInternational(),
+            _ when this == Idexpress => onIdexpress(),
+            _ when this == Gangbao => onGangbao(),
+            _ when this == Neway => onNeway(),
+            _ when this == PostnlInt3S => onPostnlInt3S(),
+            _ when this == RpxId => onRpxId(),
+            _ when this == DesignertransportWebhook => onDesignertransportWebhook(),
+            _ when this == GlsSloven => onGlsSloven(),
+            _ when this == ParcelledIn => onParcelledIn(),
+            _ when this == GsiExpress => onGsiExpress(),
+            _ when this == ConWay => onConWay(),
+            _ when this == BrouwerTransport => onBrouwerTransport(),
+            _ when this == Cpex => onCpex(),
+            _ when this == IsraelPost => onIsraelPost(),
+            _ when this == DtdcIn => onDtdcIn(),
+            _ when this == PttPost => onPttPost(),
+            _ when this == XdeWebhook => onXdeWebhook(),
+            _ when this == Tolos => onTolos(),
+            _ when this == GiaoHang => onGiaoHang(),
+            _ when this == GeodisEspace => onGeodisEspace(),
+            _ when this == MagyarHu => onMagyarHu(),
+            _ when this == DoordashWebhook => onDoordashWebhook(),
+            _ when this == TikiId => onTikiId(),
+            _ when this == CjHkInternational => onCjHkInternational(),
+            _ when this == StarTrackExpress => onStarTrackExpress(),
+            _ when this == Helthjem => onHelthjem(),
+            _ when this == Sfb2C => onSfb2C(),
+            _ when this == Freightquote => onFreightquote(),
+            _ when this == LandmarkGlobalReference => onLandmarkGlobalReference(),
+            _ when this == Parcel2Go => onParcel2Go(),
+            _ when this == Delnext => onDelnext(),
+            _ when this == Rcl => onRcl(),
+            _ when this == CgsExpress => onCgsExpress(),
+            _ when this == HkPost => onHkPost(),
+            _ when this == SapExpress => onSapExpress(),
+            _ when this == ParcelpostSg => onParcelpostSg(),
+            _ when this == Hermes => onHermes(),
+            _ when this == IndSafeexpress => onIndSafeexpress(),
+            _ when this == Tophatterexpress => onTophatterexpress(),
+            _ when this == Mglobal => onMglobal(),
+            _ when this == Averitt => onAveritt(),
+            _ when this == Leader => onLeader(),
+            _ when this == _2Ebox => on_2Ebox(),
+            _ when this == SgSpeedpost => onSgSpeedpost(),
+            _ when this == DbschenkerSe => onDbschenkerSe(),
+            _ when this == IsrPostDomestic => onIsrPostDomestic(),
+            _ when this == Bestwayparcel => onBestwayparcel(),
+            _ when this == AsendiaDe => onAsendiaDe(),
+            _ when this == NightlineUk => onNightlineUk(),
+            _ when this == TaqbinSg => onTaqbinSg(),
+            _ when this == TckExpress => onTckExpress(),
+            _ when this == EndeavourDelivery => onEndeavourDelivery(),
+            _ when this == Nanjingwoyuan => onNanjingwoyuan(),
+            _ when this == HeppnerFr => onHeppnerFr(),
+            _ when this == EmpsCn => onEmpsCn(),
+            _ when this == Fonsen => onFonsen(),
+            _ when this == Pickrr => onPickrr(),
+            _ when this == ApcOvernightConnum => onApcOvernightConnum(),
+            _ when this == StarTrackNextFlight => onStarTrackNextFlight(),
+            _ when this == Dajin => onDajin(),
+            _ when this == UpsFreight => onUpsFreight(),
+            _ when this == PostaPlus => onPostaPlus(),
+            _ when this == Ceva => onCeva(),
+            _ when this == Anserx => onAnserx(),
+            _ when this == JsExpress => onJsExpress(),
+            _ when this == Padtf => onPadtf(),
+            _ when this == UpsMailInnovations => onUpsMailInnovations(),
+            _ when this == Sypost => onSypost(),
+            _ when this == AmazonShipMcf => onAmazonShipMcf(),
+            _ when this == Yusen => onYusen(),
+            _ when this == Bring => onBring(),
+            _ when this == SdaIt => onSdaIt(),
+            _ when this == Gba => onGba(),
+            _ when this == Neweggexpress => onNeweggexpress(),
+            _ when this == SpeedcouriersGr => onSpeedcouriersGr(),
+            _ when this == Forrun => onForrun(),
+            _ when this == Pickup => onPickup(),
+            _ when this == Ecms => onEcms(),
+            _ when this == Intelipost => onIntelipost(),
+            _ when this == Flashexpress => onFlashexpress(),
+            _ when this == CnSto => onCnSto(),
+            _ when this == SekoSftp => onSekoSftp(),
+            _ when this == HomeDeliverySolutions => onHomeDeliverySolutions(),
+            _ when this == DpdHgry => onDpdHgry(),
+            _ when this == KerryttcVn => onKerryttcVn(),
+            _ when this == JoyingBox => onJoyingBox(),
+            _ when this == TotalExpress => onTotalExpress(),
+            _ when this == ZjsExpress => onZjsExpress(),
+            _ when this == Starken => onStarken(),
+            _ when this == Demandship => onDemandship(),
+            _ when this == CnDpex => onCnDpex(),
+            _ when this == AupostCn => onAupostCn(),
+            _ when this == Logisters => onLogisters(),
+            _ when this == Goglobalpost => onGoglobalpost(),
+            _ when this == GlsCz => onGlsCz(),
+            _ when this == PaackWebhook => onPaackWebhook(),
+            _ when this == GrabWebhook => onGrabWebhook(),
+            _ when this == Parcelpoint => onParcelpoint(),
+            _ when this == Icumulus => onIcumulus(),
+            _ when this == Daiglobaltrack => onDaiglobaltrack(),
+            _ when this == GlobalIparcel => onGlobalIparcel(),
+            _ when this == YurticiKargo => onYurticiKargo(),
+            _ when this == CnPaypalPackage => onCnPaypalPackage(),
+            _ when this == Parcel2Post => onParcel2Post(),
+            _ when this == GlsIt => onGlsIt(),
+            _ when this == PilLogistics => onPilLogistics(),
+            _ when this == Heppner => onHeppner(),
+            _ when this == GeneralOvernight => onGeneralOvernight(),
+            _ when this == Happy2Point => onHappy2Point(),
+            _ when this == Chitchats => onChitchats(),
+            _ when this == Smooth => onSmooth(),
+            _ when this == CleLogistics => onCleLogistics(),
+            _ when this == Fiege => onFiege(),
+            _ when this == MxCargo => onMxCargo(),
+            _ when this == Ziingfinalmile => onZiingfinalmile(),
+            _ when this == DaytonFreight => onDaytonFreight(),
+            _ when this == Tcs => onTcs(),
+            _ when this == Aex => onAex(),
+            _ when this == HermesDe => onHermesDe(),
+            _ when this == RoutificWebhook => onRoutificWebhook(),
+            _ when this == Globavend => onGlobavend(),
+            _ when this == CjLogistics => onCjLogistics(),
+            _ when this == PalletNetwork => onPalletNetwork(),
+            _ when this == RafPh => onRafPh(),
+            _ when this == UkXdp => onUkXdp(),
+            _ when this == PaperExpress => onPaperExpress(),
+            _ when this == LaPosteSuivi => onLaPosteSuivi(),
+            _ when this == Paquetexpress => onPaquetexpress(),
+            _ when this == Liefery => onLiefery(),
+            _ when this == StreckTransport => onStreckTransport(),
+            _ when this == PonyExpress => onPonyExpress(),
+            _ when this == AlwaysExpress => onAlwaysExpress(),
+            _ when this == GbsBroker => onGbsBroker(),
+            _ when this == CitylinkMy => onCitylinkMy(),
+            _ when this == Alljoy => onAlljoy(),
+            _ when this == Yodel => onYodel(),
+            _ when this == YodelDir => onYodelDir(),
+            _ when this == Stone3Pl => onStone3Pl(),
+            _ when this == ParcelpalWebhook => onParcelpalWebhook(),
+            _ when this == DhlEcomerceAsa => onDhlEcomerceAsa(),
+            _ when this == Simplypost => onSimplypost(),
+            _ when this == KyExpress => onKyExpress(),
+            _ when this == Shenzhen => onShenzhen(),
+            _ when this == UsLasership => onUsLasership(),
+            _ when this == UcExpre => onUcExpre(),
+            _ when this == Didadi => onDidadi(),
+            _ when this == CjKr => onCjKr(),
+            _ when this == DbschenkerB2B => onDbschenkerB2B(),
+            _ when this == Mxe => onMxe(),
+            _ when this == CaeDelivers => onCaeDelivers(),
+            _ when this == Pfcexpress => onPfcexpress(),
+            _ when this == Whistl => onWhistl(),
+            _ when this == Wepost => onWepost(),
+            _ when this == DhlParcelEs => onDhlParcelEs(),
+            _ when this == Ddexpress => onDdexpress(),
+            _ when this == AramexAu => onAramexAu(),
+            _ when this == Bneed => onBneed(),
+            _ when this == HkTgx => onHkTgx(),
+            _ when this == LatvijasPasts => onLatvijasPasts(),
+            _ when this == Viaeurope => onViaeurope(),
+            _ when this == CorreoUy => onCorreoUy(),
+            _ when this == ChronopostFr => onChronopostFr(),
+            _ when this == JNet => onJNet(),
+            _ when this == _6Ls => on_6Ls(),
+            _ when this == BlrBelpost => onBlrBelpost(),
+            _ when this == Birdsystem => onBirdsystem(),
+            _ when this == Dobropost => onDobropost(),
+            _ when this == WahanaId => onWahanaId(),
+            _ when this == Weaship => onWeaship(),
+            _ when this == Sonictl => onSonictl(),
+            _ when this == Kwt => onKwt(),
+            _ when this == AfllogFtp => onAfllogFtp(),
+            _ when this == SkynetWorldwide => onSkynetWorldwide(),
+            _ when this == NovaPoshta => onNovaPoshta(),
+            _ when this == Seino => onSeino(),
+            _ when this == Szendex => onSzendex(),
+            _ when this == BpostInt => onBpostInt(),
+            _ when this == DbschenkerSv => onDbschenkerSv(),
+            _ when this == AoDeutschland => onAoDeutschland(),
+            _ when this == EuFleetSolutions => onEuFleetSolutions(),
+            _ when this == Pcfcorp => onPcfcorp(),
+            _ when this == Linkbridge => onLinkbridge(),
+            _ when this == Primamulticipta => onPrimamulticipta(),
+            _ when this == Courex => onCourex(),
+            _ when this == ZajilExpress => onZajilExpress(),
+            _ when this == Collectco => onCollectco(),
+            _ when this == Jtexpress => onJtexpress(),
+            _ when this == FedexUk => onFedexUk(),
+            _ when this == Uship => onUship(),
+            _ when this == Pixsell => onPixsell(),
+            _ when this == Shiptor => onShiptor(),
+            _ when this == Cdek => onCdek(),
+            _ when this == VnmViettelpost => onVnmViettelpost(),
+            _ when this == CjCentury => onCjCentury(),
+            _ when this == Gso => onGso(),
+            _ when this == Viwo => onViwo(),
+            _ when this == Skybox => onSkybox(),
+            _ when this == Kerrytj => onKerrytj(),
+            _ when this == NtlogisticsVn => onNtlogisticsVn(),
+            _ when this == SdhScm => onSdhScm(),
+            _ when this == Zinc => onZinc(),
+            _ when this == DpeSouthAfrc => onDpeSouthAfrc(),
+            _ when this == CeskaCz => onCeskaCz(),
+            _ when this == AcsGr => onAcsGr(),
+            _ when this == Dealersend => onDealersend(),
+            _ when this == Jocom => onJocom(),
+            _ when this == Cse => onCse(),
+            _ when this == TforceFinalmile => onTforceFinalmile(),
+            _ when this == ShipGate => onShipGate(),
+            _ when this == Shipter => onShipter(),
+            _ when this == NationalSameday => onNationalSameday(),
+            _ when this == Yunexpress => onYunexpress(),
+            _ when this == Cainiao => onCainiao(),
+            _ when this == DmsMatrix => onDmsMatrix(),
+            _ when this == Directlog => onDirectlog(),
+            _ when this == AsendiaUs => onAsendiaUs(),
+            _ when this == _3Jmslogistics => on_3Jmslogistics(),
+            _ when this == LiccardiExpress => onLiccardiExpress(),
+            _ when this == SkyPostal => onSkyPostal(),
+            _ when this == Cnwangtong => onCnwangtong(),
+            _ when this == PostnordLogisticsDk => onPostnordLogisticsDk(),
+            _ when this == Logistika => onLogistika(),
+            _ when this == Celeritas => onCeleritas(),
+            _ when this == Pressiode => onPressiode(),
+            _ when this == ShreeMaruti => onShreeMaruti(),
+            _ when this == LogisticsworldwideHk => onLogisticsworldwideHk(),
+            _ when this == Efex => onEfex(),
+            _ when this == Lotte => onLotte(),
+            _ when this == Lonestar => onLonestar(),
+            _ when this == Aprisaexpress => onAprisaexpress(),
+            _ when this == BelRs => onBelRs(),
+            _ when this == OsmWorldwide => onOsmWorldwide(),
+            _ when this == WestgateGl => onWestgateGl(),
+            _ when this == Fastrack => onFastrack(),
+            _ when this == DtdExpr => onDtdExpr(),
+            _ when this == Alfatrex => onAlfatrex(),
+            _ when this == Promeddelivery => onPromeddelivery(),
+            _ when this == ThabitLogistics => onThabitLogistics(),
+            _ when this == HctLogistics => onHctLogistics(),
+            _ when this == CarryFlap => onCarryFlap(),
+            _ when this == UsOldDominion => onUsOldDominion(),
+            _ when this == AnicamBox => onAnicamBox(),
+            _ when this == Wanbexpress => onWanbexpress(),
+            _ when this == AnPost => onAnPost(),
+            _ when this == DpdLocal => onDpdLocal(),
+            _ when this == Stallionexpress => onStallionexpress(),
+            _ when this == Raiderex => onRaiderex(),
+            _ when this == Shopfans => onShopfans(),
+            _ when this == KyungdongParcel => onKyungdongParcel(),
+            _ when this == ChampionLogistics => onChampionLogistics(),
+            _ when this == PickuppSgp => onPickuppSgp(),
+            _ when this == MorningExpress => onMorningExpress(),
+            _ when this == Nacex => onNacex(),
+            _ when this == ThenileWebhook => onThenileWebhook(),
+            _ when this == Holisol => onHolisol(),
+            _ when this == LbcexpressFtp => onLbcexpressFtp(),
+            _ when this == Kurasi => onKurasi(),
+            _ when this == UsfReddaway => onUsfReddaway(),
+            _ when this == Apg => onApg(),
+            _ when this == CnBoxc => onCnBoxc(),
+            _ when this == Ecoscooting => onEcoscooting(),
+            _ when this == Mainway => onMainway(),
+            _ when this == Paperfly => onPaperfly(),
+            _ when this == Houndexpress => onHoundexpress(),
+            _ when this == BoxBerry => onBoxBerry(),
+            _ when this == EpBox => onEpBox(),
+            _ when this == PlusLogUk => onPlusLogUk(),
+            _ when this == Fulfilla => onFulfilla(),
+            _ when this == Ase => onAse(),
+            _ when this == MailPlus => onMailPlus(),
+            _ when this == XpoLogistics => onXpoLogistics(),
+            _ when this == Wndirect => onWndirect(),
+            _ when this == CloudwishAsia => onCloudwishAsia(),
+            _ when this == Zeleris => onZeleris(),
+            _ when this == GioExpress => onGioExpress(),
+            _ when this == OcsWorldwide => onOcsWorldwide(),
+            _ when this == ArkLogistics => onArkLogistics(),
+            _ when this == Aquiline => onAquiline(),
+            _ when this == PilotFreight => onPilotFreight(),
+            _ when this == Qwintry => onQwintry(),
+            _ when this == DanskeFragt => onDanskeFragt(),
+            _ when this == Carriers => onCarriers(),
+            _ when this == AirCanadaGlobal => onAirCanadaGlobal(),
+            _ when this == PresidentTrans => onPresidentTrans(),
+            _ when this == Stepforwardfs => onStepforwardfs(),
+            _ when this == SkynetUk => onSkynetUk(),
+            _ when this == Pittohio => onPittohio(),
+            _ when this == CorreosExpress => onCorreosExpress(),
+            _ when this == RlUs => onRlUs(),
+            _ when this == Destiny => onDestiny(),
+            _ when this == UkYodel => onUkYodel(),
+            _ when this == CometTech => onCometTech(),
+            _ when this == DhlParcelRu => onDhlParcelRu(),
+            _ when this == TntRefr => onTntRefr(),
+            _ when this == ShreeAnjaniCourier => onShreeAnjaniCourier(),
+            _ when this == MikropakketBe => onMikropakketBe(),
+            _ when this == EtsExpress => onEtsExpress(),
+            _ when this == ColisPrive => onColisPrive(),
+            _ when this == CnYunda => onCnYunda(),
+            _ when this == AaaCooper => onAaaCooper(),
+            _ when this == RocketParcel => onRocketParcel(),
+            _ when this == _360Lion => on_360Lion(),
+            _ when this == Pandu => onPandu(),
+            _ when this == ProfessionalCouriers => onProfessionalCouriers(),
+            _ when this == Flytexpress => onFlytexpress(),
+            _ when this == LogisticsworldwideMy => onLogisticsworldwideMy(),
+            _ when this == CorreosDeEspana => onCorreosDeEspana(),
+            _ when this == Imx => onImx(),
+            _ when this == FourPxExpress => onFourPxExpress(),
+            _ when this == Xpressbees => onXpressbees(),
+            _ when this == PickuppVnm => onPickuppVnm(),
+            _ when this == StartrackExpress => onStartrackExpress(),
+            _ when this == FrColissimo => onFrColissimo(),
+            _ when this == NacexSpainReference => onNacexSpainReference(),
+            _ when this == DhlSupplyChainAu => onDhlSupplyChainAu(),
+            _ when this == Eshipping => onEshipping(),
+            _ when this == Shreetirupati => onShreetirupati(),
+            _ when this == HxExpress => onHxExpress(),
+            _ when this == Indopaket => onIndopaket(),
+            _ when this == Cn17Post => onCn17Post(),
+            _ when this == K1Express => onK1Express(),
+            _ when this == CjGls => onCjGls(),
+            _ when this == MysGdex => onMysGdex(),
+            _ when this == Nationex => onNationex(),
+            _ when this == Anjun => onAnjun(),
+            _ when this == Fargood => onFargood(),
+            _ when this == SmgExpress => onSmgExpress(),
+            _ when this == Rzyexpress => onRzyexpress(),
+            _ when this == Sefl => onSefl(),
+            _ when this == TntClickIt => onTntClickIt(),
+            _ when this == Hdb => onHdb(),
+            _ when this == Hipshipper => onHipshipper(),
+            _ when this == Rpxlogistics => onRpxlogistics(),
+            _ when this == Kuehne => onKuehne(),
+            _ when this == ItNexive => onItNexive(),
+            _ when this == Pts => onPts(),
+            _ when this == SwissPostFtp => onSwissPostFtp(),
+            _ when this == FastrkServ => onFastrkServ(),
+            _ when this == _472 => on_472(),
+            _ when this == UsYrc => onUsYrc(),
+            _ when this == PostnlIntl3S => onPostnlIntl3S(),
+            _ when this == ElianPost => onElianPost(),
+            _ when this == Cubyn => onCubyn(),
+            _ when this == SauSaudiPost => onSauSaudiPost(),
+            _ when this == AbxexpressMy => onAbxexpressMy(),
+            _ when this == HuahanExpress => onHuahanExpress(),
+            _ when this == ZesExpress => onZesExpress(),
+            _ when this == ZeptoExpress => onZeptoExpress(),
+            _ when this == SkynetZa => onSkynetZa(),
+            _ when this == Zeek2Door => onZeek2Door(),
+            _ when this == Blinklastmile => onBlinklastmile(),
+            _ when this == PostaUkr => onPostaUkr(),
+            _ when this == Chrobinson => onChrobinson(),
+            _ when this == CnPost56 => onCnPost56(),
+            _ when this == CourantPlus => onCourantPlus(),
+            _ when this == ScudexExpress => onScudexExpress(),
+            _ when this == Shipentegra => onShipentegra(),
+            _ when this == BTwoCEurope => onBTwoCEurope(),
+            _ when this == Cope => onCope(),
+            _ when this == IndGati => onIndGati(),
+            _ when this == CnWishpost => onCnWishpost(),
+            _ when this == NacexEs => onNacexEs(),
+            _ when this == TaqbinHk => onTaqbinHk(),
+            _ when this == Globaltranz => onGlobaltranz(),
+            _ when this == Hkd => onHkd(),
+            _ when this == Bjshomedelivery => onBjshomedelivery(),
+            _ when this == Omniva => onOmniva(),
+            _ when this == Sutton => onSutton(),
+            _ when this == PantherReference => onPantherReference(),
+            _ when this == Sfcservice => onSfcservice(),
+            _ when this == Ltl => onLtl(),
+            _ when this == Parknparcel => onParknparcel(),
+            _ when this == SpringGds => onSpringGds(),
+            _ when this == Ecexpress => onEcexpress(),
+            _ when this == InterparcelAu => onInterparcelAu(),
+            _ when this == Agility => onAgility(),
+            _ when this == XlExpress => onXlExpress(),
+            _ when this == Aderonline => onAderonline(),
+            _ when this == Directcouriers => onDirectcouriers(),
+            _ when this == Planzer => onPlanzer(),
+            _ when this == Sending => onSending(),
+            _ when this == NinjavanWb => onNinjavanWb(),
+            _ when this == NationwideMy => onNationwideMy(),
+            _ when this == Sendit => onSendit(),
+            _ when this == GbArrow => onGbArrow(),
+            _ when this == IndGojavas => onIndGojavas(),
+            _ when this == Kpost => onKpost(),
+            _ when this == DhlFreight => onDhlFreight(),
+            _ when this == Bluecare => onBluecare(),
+            _ when this == Jindouyun => onJindouyun(),
+            _ when this == Trackon => onTrackon(),
+            _ when this == GbTuffnells => onGbTuffnells(),
+            _ when this == Trumpcard => onTrumpcard(),
+            _ when this == Etotal => onEtotal(),
+            _ when this == SfplusWebhook => onSfplusWebhook(),
+            _ when this == Sekologistics => onSekologistics(),
+            _ when this == Hermes2MannHandling => onHermes2MannHandling(),
+            _ when this == DpdLocalRef => onDpdLocalRef(),
+            _ when this == Uds => onUds(),
+            _ when this == ZaSpecialisedFreight => onZaSpecialisedFreight(),
+            _ when this == ThaKerry => onThaKerry(),
+            _ when this == PrtIntSeur => onPrtIntSeur(),
+            _ when this == BraCorreios => onBraCorreios(),
+            _ when this == NzNzPost => onNzNzPost(),
+            _ when this == CnEquick => onCnEquick(),
+            _ when this == MysEms => onMysEms(),
+            _ when this == GbNorsk => onGbNorsk(),
+            _ when this == EspMrw => onEspMrw(),
+            _ when this == EspPacklink => onEspPacklink(),
+            _ when this == KangarooMy => onKangarooMy(),
+            _ when this == Rpx => onRpx(),
+            _ when this == XdpUkReference => onXdpUkReference(),
+            _ when this == NinjavanMy => onNinjavanMy(),
+            _ when this == Adicional => onAdicional(),
+            _ when this == Roadbull => onRoadbull(),
+            _ when this == Yakit => onYakit(),
+            _ when this == Mailamericas => onMailamericas(),
+            _ when this == Mikropakket => onMikropakket(),
+            _ when this == Dynalogic => onDynalogic(),
+            _ when this == DhlEs => onDhlEs(),
+            _ when this == DhlParcelNl => onDhlParcelNl(),
+            _ when this == DhlGlobalMailAsia => onDhlGlobalMailAsia(),
+            _ when this == DawnWing => onDawnWing(),
+            _ when this == GenikiGr => onGenikiGr(),
+            _ when this == HermesworldUk => onHermesworldUk(),
+            _ when this == Alphafast => onAlphafast(),
+            _ when this == Buylogic => onBuylogic(),
+            _ when this == Ekart => onEkart(),
+            _ when this == MexSenda => onMexSenda(),
+            _ when this == SfcLogistics => onSfcLogistics(),
+            _ when this == PostSerbia => onPostSerbia(),
+            _ when this == IndDelhivery => onIndDelhivery(),
+            _ when this == DeDpdDelistrack => onDeDpdDelistrack(),
+            _ when this == Rpd2Man => onRpd2Man(),
+            _ when this == CnSfExpress => onCnSfExpress(),
+            _ when this == Yanwen => onYanwen(),
+            _ when this == MysSkynet => onMysSkynet(),
+            _ when this == CorreosDeMexico => onCorreosDeMexico(),
+            _ when this == CblLogistica => onCblLogistica(),
+            _ when this == MexEstafeta => onMexEstafeta(),
+            _ when this == AuAustrianPost => onAuAustrianPost(),
+            _ when this == Rincos => onRincos(),
+            _ when this == NldDhl => onNldDhl(),
+            _ when this == RussianPost => onRussianPost(),
+            _ when this == CouriersPlease => onCouriersPlease(),
+            _ when this == PostnordLogistics => onPostnordLogistics(),
+            _ when this == Fedex => onFedex(),
+            _ when this == DpeExpress => onDpeExpress(),
+            _ when this == Dpd => onDpd(),
+            _ when this == Adsone => onAdsone(),
+            _ when this == IdnJne => onIdnJne(),
+            _ when this == Thecourierguy => onThecourierguy(),
+            _ when this == Cnexps => onCnexps(),
+            _ when this == PrtChronopost => onPrtChronopost(),
+            _ when this == LandmarkGlobal => onLandmarkGlobal(),
+            _ when this == ItDhlEcommerce => onItDhlEcommerce(),
+            _ when this == EspNacex => onEspNacex(),
+            _ when this == PrtCtt => onPrtCtt(),
+            _ when this == BeKiala => onBeKiala(),
+            _ when this == AsendiaUk => onAsendiaUk(),
+            _ when this == GlobalTnt => onGlobalTnt(),
+            _ when this == PosturIs => onPosturIs(),
+            _ when this == EparcelKr => onEparcelKr(),
+            _ when this == InpostPaczkomaty => onInpostPaczkomaty(),
+            _ when this == ItPosteItalia => onItPosteItalia(),
+            _ when this == BeBpost => onBeBpost(),
+            _ when this == PlPocztaPolska => onPlPocztaPolska(),
+            _ when this == MysMysPost => onMysMysPost(),
+            _ when this == SgSgPost => onSgSgPost(),
+            _ when this == ThaThailandPost => onThaThailandPost(),
+            _ when this == Lexship => onLexship(),
+            _ when this == FastwayNz => onFastwayNz(),
+            _ when this == DhlAu => onDhlAu(),
+            _ when this == Costmeticsnow => onCostmeticsnow(),
+            _ when this == Pflogistics => onPflogistics(),
+            _ when this == LoomisExpress => onLoomisExpress(),
+            _ when this == GlsItaly => onGlsItaly(),
+            _ when this == Line => onLine(),
+            _ when this == GelExpress => onGelExpress(),
+            _ when this == Huodull => onHuodull(),
+            _ when this == NinjavanSg => onNinjavanSg(),
+            _ when this == Janio => onJanio(),
+            _ when this == AoCourier => onAoCourier(),
+            _ when this == BrtItSenderRef => onBrtItSenderRef(),
+            _ when this == Sailpost => onSailpost(),
+            _ when this == Lalamove => onLalamove(),
+            _ when this == NewzealandCouriers => onNewzealandCouriers(),
+            _ when this == Etomars => onEtomars(),
+            _ when this == Virtransport => onVirtransport(),
+            _ when this == Wizmo => onWizmo(),
+            _ when this == Palletways => onPalletways(),
+            _ when this == IDika => onIDika(),
+            _ when this == CflLogistics => onCflLogistics(),
+            _ when this == Gemworldwide => onGemworldwide(),
+            _ when this == GlobalExpress => onGlobalExpress(),
+            _ when this == LogistyxTransgroup => onLogistyxTransgroup(),
+            _ when this == WestbankCourier => onWestbankCourier(),
+            _ when this == ArcoSpedizioni => onArcoSpedizioni(),
+            _ when this == YdhExpress => onYdhExpress(),
+            _ when this == Parcelinklogistics => onParcelinklogistics(),
+            _ when this == Cndexpress => onCndexpress(),
+            _ when this == NoxNightTimeExpress => onNoxNightTimeExpress(),
+            _ when this == Aeronet => onAeronet(),
+            _ when this == Ltianexp => onLtianexp(),
+            _ when this == Integra2Ftp => onIntegra2Ftp(),
+            _ when this == Parcelone => onParcelone(),
+            _ when this == NoxNachtexpress => onNoxNachtexpress(),
+            _ when this == CnChinaPostEms => onCnChinaPostEms(),
+            _ when this == Chukou1 => onChukou1(),
+            _ when this == GlsSlov => onGlsSlov(),
+            _ when this == OrangeDs => onOrangeDs(),
+            _ when this == JoomLogis => onJoomLogis(),
+            _ when this == AusStartrack => onAusStartrack(),
+            _ when this == Dhl => onDhl(),
+            _ when this == GbApc => onGbApc(),
+            _ when this == Bondscouriers => onBondscouriers(),
+            _ when this == JpnJapanPost => onJpnJapanPost(),
+            _ when this == Usps => onUsps(),
+            _ when this == Winit => onWinit(),
+            _ when this == ArgOca => onArgOca(),
+            _ when this == TwTaiwanPost => onTwTaiwanPost(),
+            _ when this == DmmNetwork => onDmmNetwork(),
+            _ when this == Tnt => onTnt(),
+            _ when this == BhPosta => onBhPosta(),
+            _ when this == SwePostnord => onSwePostnord(),
+            _ when this == CaCanadaPost => onCaCanadaPost(),
+            _ when this == Wiseloads => onWiseloads(),
+            _ when this == AsendiaHk => onAsendiaHk(),
+            _ when this == NldGls => onNldGls(),
+            _ when this == MexRedpack => onMexRedpack(),
+            _ when this == JetShip => onJetShip(),
+            _ when this == DeDhlExpress => onDeDhlExpress(),
+            _ when this == NinjavanThai => onNinjavanThai(),
+            _ when this == RabenGroup => onRabenGroup(),
+            _ when this == EspAsm => onEspAsm(),
+            _ when this == HrvHrvatska => onHrvHrvatska(),
+            _ when this == GlobalEstes => onGlobalEstes(),
+            _ when this == LtuLietuvos => onLtuLietuvos(),
+            _ when this == BelDhl => onBelDhl(),
+            _ when this == AuAuPost => onAuAuPost(),
+            _ when this == Speedexcourier => onSpeedexcourier(),
+            _ when this == FrColis => onFrColis(),
+            _ when this == Aramex => onAramex(),
+            _ when this == Dpex => onDpex(),
+            _ when this == MysAirpak => onMysAirpak(),
+            _ when this == Cuckooexpress => onCuckooexpress(),
+            _ when this == DpdPoland => onDpdPoland(),
+            _ when this == NldPostnl => onNldPostnl(),
+            _ when this == NimExpress => onNimExpress(),
+            _ when this == Quantium => onQuantium(),
+            _ when this == Sendle => onSendle(),
+            _ when this == EspRedur => onEspRedur(),
+            _ when this == Matkahuolto => onMatkahuolto(),
+            _ when this == Cpacket => onCpacket(),
+            _ when this == Posti => onPosti(),
+            _ when this == HunterExpress => onHunterExpress(),
+            _ when this == ChoirExp => onChoirExp(),
+            _ when this == LegionExpress => onLegionExpress(),
+            _ when this == AustrianPostExpress => onAustrianPostExpress(),
+            _ when this == Grupo => onGrupo(),
+            _ when this == PostaRo => onPostaRo(),
+            _ when this == InterparcelUk => onInterparcelUk(),
+            _ when this == GlobalAbf => onGlobalAbf(),
+            _ when this == PostenNorge => onPostenNorge(),
+            _ when this == XpertDelivery => onXpertDelivery(),
+            _ when this == DhlRefr => onDhlRefr(),
+            _ when this == DhlHk => onDhlHk(),
+            _ when this == SkynetUae => onSkynetUae(),
+            _ when this == Gojek => onGojek(),
+            _ when this == YodelIntnl => onYodelIntnl(),
+            _ when this == Janco => onJanco(),
+            _ when this == Yto => onYto(),
+            _ when this == WiseExpress => onWiseExpress(),
+            _ when this == JtexpressVn => onJtexpressVn(),
+            _ when this == FedexIntlMlserv => onFedexIntlMlserv(),
+            _ when this == Vamox => onVamox(),
+            _ when this == AmsGrp => onAmsGrp(),
+            _ when this == DhlJp => onDhlJp(),
+            _ when this == Hrparcel => onHrparcel(),
+            _ when this == Geswl => onGeswl(),
+            _ when this == Bluestar => onBluestar(),
+            _ when this == CdekTr => onCdekTr(),
+            _ when this == Descartes => onDescartes(),
+            _ when this == DeltecUk => onDeltecUk(),
+            _ when this == DtdcExpress => onDtdcExpress(),
+            _ when this == Tourline => onTourline(),
+            _ when this == BhWorldwide => onBhWorldwide(),
+            _ when this == Ocs => onOcs(),
+            _ when this == YingnuoLogistics => onYingnuoLogistics(),
+            _ when this == Ups => onUps(),
+            _ when this == Toll => onToll(),
+            _ when this == PrtSeur => onPrtSeur(),
+            _ when this == DtdcAu => onDtdcAu(),
+            _ when this == ThaDynamicLogistics => onThaDynamicLogistics(),
+            _ when this == UbiLogistics => onUbiLogistics(),
+            _ when this == FedexCrossborder => onFedexCrossborder(),
+            _ when this == A1Post => onA1Post(),
+            _ when this == TazmanianFreight => onTazmanianFreight(),
+            _ when this == CjIntMy => onCjIntMy(),
+            _ when this == SaiaFreight => onSaiaFreight(),
+            _ when this == SgQxpress => onSgQxpress(),
+            _ when this == NhansSolutions => onNhansSolutions(),
+            _ when this == DpdFr => onDpdFr(),
+            _ when this == Coordinadora => onCoordinadora(),
+            _ when this == Andreani => onAndreani(),
+            _ when this == Doora => onDoora(),
+            _ when this == InterparcelNz => onInterparcelNz(),
+            _ when this == PhlJamexpress => onPhlJamexpress(),
+            _ when this == BelBelgiumPost => onBelBelgiumPost(),
+            _ when this == UsApc => onUsApc(),
+            _ when this == IdnPos => onIdnPos(),
+            _ when this == FrMondial => onFrMondial(),
+            _ when this == DeDhl => onDeDhl(),
+            _ when this == HkRpx => onHkRpx(),
+            _ when this == DhlPieceid => onDhlPieceid(),
+            _ when this == VnpostEms => onVnpostEms(),
+            _ when this == Rrdonnelley => onRrdonnelley(),
+            _ when this == DpdDe => onDpdDe(),
+            _ when this == DelcartIn => onDelcartIn(),
+            _ when this == Imexglobalsolutions => onImexglobalsolutions(),
+            _ when this == Acommerce => onAcommerce(),
+            _ when this == Eurodis => onEurodis(),
+            _ when this == Canpar => onCanpar(),
+            _ when this == Gls => onGls(),
+            _ when this == IndEcom => onIndEcom(),
+            _ when this == EspEnvialia => onEspEnvialia(),
+            _ when this == DhlUk => onDhlUk(),
+            _ when this == SmsaExpress => onSmsaExpress(),
+            _ when this == TntFr => onTntFr(),
+            _ when this == DexI => onDexI(),
+            _ when this == BudbeeWebhook => onBudbeeWebhook(),
+            _ when this == CopaCourier => onCopaCourier(),
+            _ when this == VnmVietnamPost => onVnmVietnamPost(),
+            _ when this == DpdHk => onDpdHk(),
+            _ when this == TollNz => onTollNz(),
+            _ when this == Echo => onEcho(),
+            _ when this == FedexFr => onFedexFr(),
+            _ when this == Borderexpress => onBorderexpress(),
+            _ when this == MailplusJpn => onMailplusJpn(),
+            _ when this == TntUkRefr => onTntUkRefr(),
+            _ when this == Kec => onKec(),
+            _ when this == DpdRo => onDpdRo(),
+            _ when this == TntJp => onTntJp(),
+            _ when this == ThCj => onThCj(),
+            _ when this == EcCn => onEcCn(),
+            _ when this == FastwayUk => onFastwayUk(),
+            _ when this == FastwayUs => onFastwayUs(),
+            _ when this == GlsDe => onGlsDe(),
+            _ when this == GlsEs => onGlsEs(),
+            _ when this == GlsFr => onGlsFr(),
+            _ when this == MondialBe => onMondialBe(),
+            _ when this == SgtIt => onSgtIt(),
+            _ when this == TntCn => onTntCn(),
+            _ when this == TntDe => onTntDe(),
+            _ when this == TntEs => onTntEs(),
+            _ when this == TntPl => onTntPl(),
+            _ when this == Parcelforce => onParcelforce(),
+            _ when this == SwissPost => onSwissPost(),
+            _ when this == TollIpec => onTollIpec(),
+            _ when this == Air21 => onAir21(),
+            _ when this == Airspeed => onAirspeed(),
+            _ when this == Bert => onBert(),
+            _ when this == Bluedart => onBluedart(),
+            _ when this == Collectplus => onCollectplus(),
+            _ when this == Courierplus => onCourierplus(),
+            _ when this == CourierPost => onCourierPost(),
+            _ when this == DhlGlobalMail => onDhlGlobalMail(),
+            _ when this == DpdUk => onDpdUk(),
+            _ when this == DeltecDe => onDeltecDe(),
+            _ when this == DeutscheDe => onDeutscheDe(),
+            _ when this == Dotzot => onDotzot(),
+            _ when this == EltaGr => onEltaGr(),
+            _ when this == EmsCn => onEmsCn(),
+            _ when this == Ecargo => onEcargo(),
+            _ when this == Ensenda => onEnsenda(),
+            _ when this == FercamIt => onFercamIt(),
+            _ when this == FastwayZa => onFastwayZa(),
+            _ when this == FastwayAu => onFastwayAu(),
+            _ when this == FirstLogisitcs => onFirstLogisitcs(),
+            _ when this == Geodis => onGeodis(),
+            _ when this == Globegistics => onGlobegistics(),
+            _ when this == Greyhound => onGreyhound(),
+            _ when this == JetshipMy => onJetshipMy(),
+            _ when this == LionParcel => onLionParcel(),
+            _ when this == Aeroflash => onAeroflash(),
+            _ when this == Ontrac => onOntrac(),
+            _ when this == Sagawa => onSagawa(),
+            _ when this == Siodemka => onSiodemka(),
+            _ when this == Startrack => onStartrack(),
+            _ when this == TntAu => onTntAu(),
+            _ when this == TntIt => onTntIt(),
+            _ when this == Transmission => onTransmission(),
+            _ when this == Yamato => onYamato(),
+            _ when this == DhlIt => onDhlIt(),
+            _ when this == DhlAt => onDhlAt(),
+            _ when this == LogisticsworldwideKr => onLogisticsworldwideKr(),
+            _ when this == GlsSpain => onGlsSpain(),
+            _ when this == AmazonUkApi => onAmazonUkApi(),
+            _ when this == DpdFrReference => onDpdFrReference(),
+            _ when this == DhlparcelUk => onDhlparcelUk(),
+            _ when this == Megasave => onMegasave(),
+            _ when this == Qualitypost => onQualitypost(),
+            _ when this == IdsLogistics => onIdsLogistics(),
+            _ when this == Joyingbox => onJoyingbox(),
+            _ when this == PantherOrderNumber => onPantherOrderNumber(),
+            _ when this == WatkinsShepard => onWatkinsShepard(),
+            _ when this == Fasttrack => onFasttrack(),
+            _ when this == UpExpress => onUpExpress(),
+            _ when this == Elogistica => onElogistica(),
+            _ when this == Ecourier => onEcourier(),
+            _ when this == CjPhilippines => onCjPhilippines(),
+            _ when this == Speedex => onSpeedex(),
+            _ when this == Orangeconnex => onOrangeconnex(),
+            _ when this == Tecor => onTecor(),
+            _ when this == Saee => onSaee(),
+            _ when this == GlsItalyFtp => onGlsItalyFtp(),
+            _ when this == Delivere => onDelivere(),
+            _ when this == Yycom => onYycom(),
+            _ when this == AdicionalPt => onAdicionalPt(),
+            _ when this == Dksh => onDksh(),
+            _ when this == NipponExpressFtp => onNipponExpressFtp(),
+            _ when this == Gols => onGols(),
+            _ when this == Fujexp => onFujexp(),
+            _ when this == Qtrack => onQtrack(),
+            _ when this == OmlogisticsApi => onOmlogisticsApi(),
+            _ when this == Gdpharm => onGdpharm(),
+            _ when this == MisumiCn => onMisumiCn(),
+            _ when this == AirCanada => onAirCanada(),
+            _ when this == City56Webhook => onCity56Webhook(),
+            _ when this == SagawaApi => onSagawaApi(),
+            _ when this == Kedaex => onKedaex(),
+            _ when this == PgeonApi => onPgeonApi(),
+            _ when this == Weworldexpress => onWeworldexpress(),
+            _ when this == JtLogistics => onJtLogistics(),
+            _ when this == Trusk => onTrusk(),
+            _ when this == Viaxpress => onViaxpress(),
+            _ when this == DhlSupplychainId => onDhlSupplychainId(),
+            _ when this == ZuelligpharmaSftp => onZuelligpharmaSftp(),
+            _ when this == Meest => onMeest(),
+            _ when this == TollPriority => onTollPriority(),
+            _ when this == MothershipApi => onMothershipApi(),
+            _ when this == Capital => onCapital(),
+            _ when this == EuropaketApi => onEuropaketApi(),
+            _ when this == Hfd => onHfd(),
+            _ when this == TourlineReference => onTourlineReference(),
+            _ when this == GioEcourier => onGioEcourier(),
+            _ when this == CnLogistics => onCnLogistics(),
+            _ when this == Pandion => onPandion(),
+            _ when this == BpostApi => onBpostApi(),
+            _ when this == Passportshipping => onPassportshipping(),
+            _ when this == Pakajo => onPakajo(),
+            _ when this == Dachser => onDachser(),
+            _ when this == YusenSftp => onYusenSftp(),
+            _ when this == Shyplite => onShyplite(),
+            _ when this == Xyy => onXyy(),
+            _ when this == Mwd => onMwd(),
+            _ when this == Faxecargo => onFaxecargo(),
+            _ when this == Mazet => onMazet(),
+            _ when this == FirstLogisticsApi => onFirstLogisticsApi(),
+            _ when this == SprintPack => onSprintPack(),
+            _ when this == HermesDeFtp => onHermesDeFtp(),
+            _ when this == Concise => onConcise(),
+            _ when this == KerryExpressTwApi => onKerryExpressTwApi(),
+            _ when this == Ewe => onEwe(),
+            _ when this == Fastdespatch => onFastdespatch(),
+            _ when this == AbcustomSftp => onAbcustomSftp(),
+            _ when this == Chazki => onChazki(),
+            _ when this == Shippie => onShippie(),
+            _ when this == GeodisApi => onGeodisApi(),
+            _ when this == NaqelExpress => onNaqelExpress(),
+            _ when this == PapaWebhook => onPapaWebhook(),
+            _ when this == Forwardair => onForwardair(),
+            _ when this == DialogoLogisticaApi => onDialogoLogisticaApi(),
+            _ when this == LalamoveApi => onLalamoveApi(),
+            _ when this == Tomydoor => onTomydoor(),
+            _ when this == KronosWebhook => onKronosWebhook(),
+            _ when this == Jtcargo => onJtcargo(),
+            _ when this == TCat => onTCat(),
+            _ when this == ConciseWebhook => onConciseWebhook(),
+            _ when this == TeleportWebhook => onTeleportWebhook(),
+            _ when this == CustomcoApi => onCustomcoApi(),
+            _ when this == SpxTh => onSpxTh(),
+            _ when this == BolloreLogistics => onBolloreLogistics(),
+            _ when this == ClicklinkSftp => onClicklinkSftp(),
+            _ when this == M3Logistics => onM3Logistics(),
+            _ when this == VnpostApi => onVnpostApi(),
+            _ when this == AxlehireFtp => onAxlehireFtp(),
+            _ when this == Shadowfax => onShadowfax(),
+            _ when this == MyhermesUkApi => onMyhermesUkApi(),
+            _ when this == Daiichi => onDaiichi(),
+            _ when this == MensajerosurbanosApi => onMensajerosurbanosApi(),
+            _ when this == Polarspeed => onPolarspeed(),
+            _ when this == IdexpressId => onIdexpressId(),
+            _ when this == Payo => onPayo(),
+            _ when this == WhistlSftp => onWhistlSftp(),
+            _ when this == IntexDe => onIntexDe(),
+            _ when this == Trans2U => onTrans2U(),
+            _ when this == ProductcaregroupSftp => onProductcaregroupSftp(),
+            _ when this == Bigsmart => onBigsmart(),
+            _ when this == ExpeditorsApiRef => onExpeditorsApiRef(),
+            _ when this == AitworldwideApi => onAitworldwideApi(),
+            _ when this == Worldcourier => onWorldcourier(),
+            _ when this == Quiqup => onQuiqup(),
+            _ when this == AgedissSftp => onAgedissSftp(),
+            _ when this == AndreaniApi => onAndreaniApi(),
+            _ when this == Crlexpress => onCrlexpress(),
+            _ when this == Smartcat => onSmartcat(),
+            _ when this == Crossflight => onCrossflight(),
+            _ when this == Procarrier => onProcarrier(),
+            _ when this == DhlReferenceApi => onDhlReferenceApi(),
+            _ when this == SeinoApi => onSeinoApi(),
+            _ when this == Wspexpress => onWspexpress(),
+            _ when this == Kronos => onKronos(),
+            _ when this == TotalExpressApi => onTotalExpressApi(),
+            _ when this == Parcll => onParcll(),
+            _ when this == Xpedigo => onXpedigo(),
+            _ when this == StarTrackWebhook => onStarTrackWebhook(),
+            _ when this == Gpost => onGpost(),
+            _ when this == Ucs => onUcs(),
+            _ when this == Dmfgroup => onDmfgroup(),
+            _ when this == CoordinadoraApi => onCoordinadoraApi(),
+            _ when this == Marken => onMarken(),
+            _ when this == Ntl => onNtl(),
+            _ when this == Redjepakketje => onRedjepakketje(),
+            _ when this == AlliedExpressFtp => onAlliedExpressFtp(),
+            _ when this == MondialrelayEs => onMondialrelayEs(),
+            _ when this == NaekoFtp => onNaekoFtp(),
+            _ when this == Mhi => onMhi(),
+            _ when this == Shippify => onShippify(),
+            _ when this == MalcaAmitApi => onMalcaAmitApi(),
+            _ when this == JtexpressSgApi => onJtexpressSgApi(),
+            _ when this == DachserWeb => onDachserWeb(),
+            _ when this == Flightlg => onFlightlg(),
+            _ when this == Cago => onCago(),
+            _ when this == Com1Express => onCom1Express(),
+            _ when this == TonamiFtp => onTonamiFtp(),
+            _ when this == Packfleet => onPackfleet(),
+            _ when this == PurolatorInternational => onPurolatorInternational(),
+            _ when this == WineshippingWebhook => onWineshippingWebhook(),
+            _ when this == DhlEsSftp => onDhlEsSftp(),
+            _ when this == PchomeApi => onPchomeApi(),
+            _ when this == CeskapostaApi => onCeskapostaApi(),
+            _ when this == Gorush => onGorush(),
+            _ when this == Homerunner => onHomerunner(),
+            _ when this == AmazonOrder => onAmazonOrder(),
+            _ when this == EfwnowApi => onEfwnowApi(),
+            _ when this == CblLogisticaApi => onCblLogisticaApi(),
+            _ when this == Nimbuspost => onNimbuspost(),
+            _ when this == LogwinLogistics => onLogwinLogistics(),
+            _ when this == NowlogApi => onNowlogApi(),
+            _ when this == DpdNl => onDpdNl(),
+            _ when this == Godependable => onGodependable(),
+            _ when this == Esdex => onEsdex(),
+            _ when this == LogisystemsSftp => onLogisystemsSftp(),
+            _ when this == Expeditors => onExpeditors(),
+            _ when this == SntglobalApi => onSntglobalApi(),
+            _ when this == Shipx => onShipx(),
+            _ when this == QintlApi => onQintlApi(),
+            _ when this == Packs => onPacks(),
+            _ when this == PostnlInternational => onPostnlInternational(),
+            _ when this == AmazonEmailPush => onAmazonEmailPush(),
+            _ when this == DhlApi => onDhlApi(),
+            _ when this == Spx => onSpx(),
+            _ when this == Axlehire => onAxlehire(),
+            _ when this == Icscourier => onIcscourier(),
+            _ when this == DialogoLogistica => onDialogoLogistica(),
+            _ when this == ShunbangExpress => onShunbangExpress(),
+            _ when this == TcsApi => onTcsApi(),
+            _ when this == SfExpressCn => onSfExpressCn(),
+            _ when this == Packeta => onPacketa(),
+            _ when this == SicTeliway => onSicTeliway(),
+            _ when this == MondialrelayFr => onMondialrelayFr(),
+            _ when this == IntimeFtp => onIntimeFtp(),
+            _ when this == JdExpress => onJdExpress(),
+            _ when this == Fastbox => onFastbox(),
+            _ when this == Patheon => onPatheon(),
+            _ when this == IndiaPost => onIndiaPost(),
+            _ when this == TipsaRef => onTipsaRef(),
+            _ when this == Ecofreight => onEcofreight(),
+            _ when this == Vox => onVox(),
+            _ when this == DirectfreightAuRef => onDirectfreightAuRef(),
+            _ when this == BesttransportSftp => onBesttransportSftp(),
+            _ when this == AustraliaPostApi => onAustraliaPostApi(),
+            _ when this == FragilepakSftp => onFragilepakSftp(),
+            _ when this == Flipxp => onFlipxp(),
+            _ when this == ValueWebhook => onValueWebhook(),
+            _ when this == Daeshin => onDaeshin(),
+            _ when this == Sherpa => onSherpa(),
+            _ when this == MwdApi => onMwdApi(),
+            _ when this == Smartkargo => onSmartkargo(),
+            _ when this == DnjExpress => onDnjExpress(),
+            _ when this == Gopeople => onGopeople(),
+            _ when this == MysendleApi => onMysendleApi(),
+            _ when this == AramexApi => onAramexApi(),
+            _ when this == Pidge => onPidge(),
+            _ when this == Thaiparcels => onThaiparcels(),
+            _ when this == PantherReferenceApi => onPantherReferenceApi(),
+            _ when this == Postaplus => onPostaplus(),
+            _ when this == Buffalo => onBuffalo(),
+            _ when this == UEnvios => onUEnvios(),
+            _ when this == EliteCo => onEliteCo(),
+            _ when this == RocheInternalSftp => onRocheInternalSftp(),
+            _ when this == DbschenkerIceland => onDbschenkerIceland(),
+            _ when this == TntFrReference => onTntFrReference(),
+            _ when this == Newgisticsapi => onNewgisticsapi(),
+            _ when this == Glovo => onGlovo(),
+            _ when this == GwlogisApi => onGwlogisApi(),
+            _ when this == SpreetailApi => onSpreetailApi(),
+            _ when this == Moova => onMoova(),
+            _ when this == Plycongroup => onPlycongroup(),
+            _ when this == UspsWebhook => onUspsWebhook(),
+            _ when this == Reimaginedelivery => onReimaginedelivery(),
+            _ when this == EdfFtp => onEdfFtp(),
+            _ when this == Dao365 => onDao365(),
+            _ when this == BiocairFtp => onBiocairFtp(),
+            _ when this == RansaWebhook => onRansaWebhook(),
+            _ when this == Shipxpres => onShipxpres(),
+            _ when this == CourantPlusApi => onCourantPlusApi(),
+            _ when this == Shipa => onShipa(),
+            _ when this == Homelogistics => onHomelogistics(),
+            _ when this == Dx => onDx(),
+            _ when this == PosteItalianePaccocelere => onPosteItalianePaccocelere(),
+            _ when this == TollWebhook => onTollWebhook(),
+            _ when this == LctbrApi => onLctbrApi(),
+            _ when this == DxFreight => onDxFreight(),
+            _ when this == DhlSftp => onDhlSftp(),
+            _ when this == Shiprocket => onShiprocket(),
+            _ when this == UberWebhook => onUberWebhook(),
+            _ when this == Statovernight => onStatovernight(),
+            _ when this == Burd => onBurd(),
+            _ when this == Fastship => onFastship(),
+            _ when this == IbventureWebhook => onIbventureWebhook(),
+            _ when this == GatiKweApi => onGatiKweApi(),
+            _ when this == CryopdpFtp => onCryopdpFtp(),
+            _ when this == Hubbed => onHubbed(),
+            _ when this == TipsaApi => onTipsaApi(),
+            _ when this == Araskargo => onAraskargo(),
+            _ when this == ThijsNl => onThijsNl(),
+            _ when this == AtshealthcareReference => onAtshealthcareReference(),
+            _ when this == _99Minutos => on_99Minutos(),
+            _ when this == HellenicPost => onHellenicPost(),
+            _ when this == HsmGlobal => onHsmGlobal(),
+            _ when this == Mnx => onMnx(),
+            _ when this == Nmtransfer => onNmtransfer(),
+            _ when this == Logysto => onLogysto(),
+            _ when this == IndiaPostInt => onIndiaPostInt(),
+            _ when this == AmazonFbaSwishipIn => onAmazonFbaSwishipIn(),
+            _ when this == SrtTransport => onSrtTransport(),
+            _ when this == Bomi => onBomi(),
+            _ when this == DeliverrSftp => onDeliverrSftp(),
+            _ when this == Hsdexpress => onHsdexpress(),
+            _ when this == SimpletireWebhook => onSimpletireWebhook(),
+            _ when this == HunterExpressSftp => onHunterExpressSftp(),
+            _ when this == UpsApi => onUpsApi(),
+            _ when this == WooyoungLogisticsSftp => onWooyoungLogisticsSftp(),
+            _ when this == PhseApi => onPhseApi(),
+            _ when this == WishEmailPush => onWishEmailPush(),
+            _ when this == Northline => onNorthline(),
+            _ when this == Medafrica => onMedafrica(),
+            _ when this == DpdAtSftp => onDpdAtSftp(),
+            _ when this == Anteraja => onAnteraja(),
+            _ when this == DhlGlobalForwardingApi => onDhlGlobalForwardingApi(),
+            _ when this == LbcexpressApi => onLbcexpressApi(),
+            _ when this == Simsglobal => onSimsglobal(),
+            _ when this == Cdldelivers => onCdldelivers(),
+            _ when this == Typ => onTyp(),
+            _ when this == TestingCourierWebhook => onTestingCourierWebhook(),
+            _ when this == PandagoApi => onPandagoApi(),
+            _ when this == RoyalMailFtp => onRoyalMailFtp(),
+            _ when this == Thunderexpress => onThunderexpress(),
+            _ when this == SecretlabWebhook => onSecretlabWebhook(),
+            _ when this == Setel => onSetel(),
+            _ when this == JdWorldwide => onJdWorldwide(),
+            _ when this == DpdRuApi => onDpdRuApi(),
+            _ when this == ArgentsWebhook => onArgentsWebhook(),
+            _ when this == Postone => onPostone(),
+            _ when this == Tusklogistics => onTusklogistics(),
+            _ when this == RhenusUkApi => onRhenusUkApi(),
+            _ when this == TaqbinSgApi => onTaqbinSgApi(),
+            _ when this == InntralogSftp => onInntralogSftp(),
+            _ when this == Dayross => onDayross(),
+            _ when this == CorreosexpressApi => onCorreosexpressApi(),
+            _ when this == InternationalSeurApi => onInternationalSeurApi(),
+            _ when this == YodelApi => onYodelApi(),
+            _ when this == Heroexpress => onHeroexpress(),
+            _ when this == DhlSupplychainIn => onDhlSupplychainIn(),
+            _ when this == UrgentCargus => onUrgentCargus(),
+            _ when this == Frontdoorcorp => onFrontdoorcorp(),
+            _ when this == JtexpressPh => onJtexpressPh(),
+            _ when this == ParcelstarsWebhook => onParcelstarsWebhook(),
+            _ when this == DpdSkSftp => onDpdSkSftp(),
+            _ when this == Movianto => onMovianto(),
+            _ when this == OzepartsShipping => onOzepartsShipping(),
+            _ when this == Kargomkolay => onKargomkolay(),
+            _ when this == Trunkrs => onTrunkrs(),
+            _ when this == OmnirpsWebhook => onOmnirpsWebhook(),
+            _ when this == Chilexpress => onChilexpress(),
+            _ when this == TestingCourier => onTestingCourier(),
+            _ when this == JneApi => onJneApi(),
+            _ when this == BjshomedeliveryFtp => onBjshomedeliveryFtp(),
+            _ when this == DexpressWebhook => onDexpressWebhook(),
+            _ when this == UspsApi => onUspsApi(),
+            _ when this == Transvirtual => onTransvirtual(),
+            _ when this == SolisticaApi => onSolisticaApi(),
+            _ when this == ChienventureWebhook => onChienventureWebhook(),
+            _ when this == DpdUkSftp => onDpdUkSftp(),
+            _ when this == InpostUk => onInpostUk(),
+            _ when this == Javit => onJavit(),
+            _ when this == ZtoDomestic => onZtoDomestic(),
+            _ when this == DhlGtApi => onDhlGtApi(),
+            _ when this == CevaTracking => onCevaTracking(),
+            _ when this == KomonExpress => onKomonExpress(),
+            _ when this == EastwestcourierFtp => onEastwestcourierFtp(),
+            _ when this == Danniao => onDanniao(),
+            _ when this == Spectran => onSpectran(),
+            _ when this == DeliverIt => onDeliverIt(),
+            _ when this == Relaiscolis => onRelaiscolis(),
+            _ when this == GlsSpainApi => onGlsSpainApi(),
+            _ when this == Postplus => onPostplus(),
+            _ when this == Airterra => onAirterra(),
+            _ when this == GioEcourierApi => onGioEcourierApi(),
+            _ when this == DpdChSftp => onDpdChSftp(),
+            _ when this == FedexApi => onFedexApi(),
+            _ when this == Intersmarttrans => onIntersmarttrans(),
+            _ when this == HermesUkSftp => onHermesUkSftp(),
+            _ when this == ExelotFtp => onExelotFtp(),
+            _ when this == DhlPaApi => onDhlPaApi(),
+            _ when this == VirtransportSftp => onVirtransportSftp(),
+            _ when this == Worldnet => onWorldnet(),
+            _ when this == InstaboxWebhook => onInstaboxWebhook(),
+            _ when this == Kng => onKng(),
+            _ when this == FlashexpressWebhook => onFlashexpressWebhook(),
+            _ when this == MagyarPostaApi => onMagyarPostaApi(),
+            _ when this == WeshipApi => onWeshipApi(),
+            _ when this == OhiWebhook => onOhiWebhook(),
+            _ when this == Mudita => onMudita(),
+            _ when this == BluedartApi => onBluedartApi(),
+            _ when this == TCatApi => onTCatApi(),
+            _ when this == Ads => onAds(),
+            _ when this == HermesIt => onHermesIt(),
+            _ when this == FitzmarkApi => onFitzmarkApi(),
+            _ when this == PostiApi => onPostiApi(),
+            _ when this == SmsaExpressWebhook => onSmsaExpressWebhook(),
+            _ when this == TamergroupWebhook => onTamergroupWebhook(),
+            _ when this == Livrapide => onLivrapide(),
+            _ when this == NipponExpress => onNipponExpress(),
+            _ when this == Bettertrucks => onBettertrucks(),
+            _ when this == Fan => onFan(),
+            _ when this == PbUspsflatsFtp => onPbUspsflatsFtp(),
+            _ when this == Parcelright => onParcelright(),
+            _ when this == Ithinklogistics => onIthinklogistics(),
+            _ when this == KerryExpressThWebhook => onKerryExpressThWebhook(),
+            _ when this == Ecoutier => onEcoutier(),
+            _ when this == Showl => onShowl(),
+            _ when this == BrtItApi => onBrtItApi(),
+            _ when this == RixonhkApi => onRixonhkApi(),
+            _ when this == DbschenkerApi => onDbschenkerApi(),
+            _ when this == Ilyanglogis => onIlyanglogis(),
+            _ when this == MailBoxEtc => onMailBoxEtc(),
+            _ when this == Weship => onWeship(),
+            _ when this == DhlGlobalMailApi => onDhlGlobalMailApi(),
+            _ when this == Activos24Api => onActivos24Api(),
+            _ when this == Atshealthcare => onAtshealthcare(),
+            _ when this == Luwjistik => onLuwjistik(),
+            _ when this == GwWorld => onGwWorld(),
+            _ when this == FairsendenApi => onFairsendenApi(),
+            _ when this == ServipWebhook => onServipWebhook(),
+            _ when this == Swiship => onSwiship(),
+            _ when this == Tanet => onTanet(),
+            _ when this == HotsinCargo => onHotsinCargo(),
+            _ when this == Direx => onDirex(),
+            _ when this == Huantong => onHuantong(),
+            _ when this == ImileApi => onImileApi(),
+            _ when this == Auexpress => onAuexpress(),
+            _ when this == Nytlogistics => onNytlogistics(),
+            _ when this == DsvReference => onDsvReference(),
+            _ when this == NovofarmaWebhook => onNovofarmaWebhook(),
+            _ when this == AitworldwideSftp => onAitworldwideSftp(),
+            _ when this == Shopolive => onShopolive(),
+            _ when this == FnfZa => onFnfZa(),
+            _ when this == DhlEcommerceGc => onDhlEcommerceGc(),
+            _ when this == Fetchr => onFetchr(),
+            _ when this == StarlinksApi => onStarlinksApi(),
+            _ when this == Yyexpress => onYyexpress(),
+            _ when this == Servientrega => onServientrega(),
+            _ when this == Hanjin => onHanjin(),
+            _ when this == SpanishSeurFtp => onSpanishSeurFtp(),
+            _ when this == DxB2BConnum => onDxB2BConnum(),
+            _ when this == HelthjemApi => onHelthjemApi(),
+            _ when this == Inexpost => onInexpost(),
+            _ when this == A2BBa => onA2BBa(),
+            _ when this == RhenusGroup => onRhenusGroup(),
+            _ when this == SberlogisticsRu => onSberlogisticsRu(),
+            _ when this == MalcaAmit => onMalcaAmit(),
+            _ when this == Ppl => onPpl(),
+            _ when this == OsmWorldwideSftp => onOsmWorldwideSftp(),
+            _ when this == Acilogistix => onAcilogistix(),
+            _ when this == Optimacourier => onOptimacourier(),
+            _ when this == NovaPoshtaApi => onNovaPoshtaApi(),
+            _ when this == Loggi => onLoggi(),
+            _ when this == Yifan => onYifan(),
+            _ when this == Mydynalogic => onMydynalogic(),
+            _ when this == Morninglobal => onMorninglobal(),
+            _ when this == ConciseApi => onConciseApi(),
+            _ when this == Fxtran => onFxtran(),
+            _ when this == DeliveryourparcelZa => onDeliveryourparcelZa(),
+            _ when this == Uparcel => onUparcel(),
+            _ when this == MobiBr => onMobiBr(),
+            _ when this == LoginextWebhook => onLoginextWebhook(),
+            _ when this == Ems => onEms(),
+            _ when this == Speedy => onSpeedy(),
+            _ when this == ZoomRed => onZoomRed(),
+            _ when this == Navlungo => onNavlungo(),
+            _ when this == Castleparcels => onCastleparcels(),
+            _ when this == Weee => onWeee(),
+            _ when this == Packaly => onPackaly(),
+            _ when this == Yunhuipost => onYunhuipost(),
+            _ when this == Youparcel => onYouparcel(),
+            _ when this == Leman => onLeman(),
+            _ when this == Moovin => onMoovin(),
+            _ when this == UrbIt => onUrbIt(),
+            _ when this == Multientregapanama => onMultientregapanama(),
+            _ when this == Jusdasr => onJusdasr(),
+            _ when this == Discountpost => onDiscountpost(),
+            _ when this == RhenusUk => onRhenusUk(),
+            _ when this == SwishipJp => onSwishipJp(),
+            _ when this == GlsUs => onGlsUs(),
+            _ when this == Smtl => onSmtl(),
+            _ when this == Emega => onEmega(),
+            _ when this == ExpressoneSv => onExpressoneSv(),
+            _ when this == Hepsijet => onHepsijet(),
+            _ when this == Welivery => onWelivery(),
+            _ when this == Bringer => onBringer(),
+            _ when this == Easyroutes => onEasyroutes(),
+            _ when this == Mrw => onMrw(),
+            _ when this == Rpm => onRpm(),
+            _ when this == DpdPrt => onDpdPrt(),
+            _ when this == GlsRomania => onGlsRomania(),
+            _ when this == Lmparcel => onLmparcel(),
+            _ when this == Gtagsm => onGtagsm(),
+            _ when this == Domino => onDomino(),
+            _ when this == Eshipper => onEshipper(),
+            _ when this == Transpak => onTranspak(),
+            _ when this == Xindus => onXindus(),
+            _ when this == Aoyue => onAoyue(),
+            _ when this == Easyparcel => onEasyparcel(),
+            _ when this == Expressone => onExpressone(),
+            _ when this == SendeoKargo => onSendeoKargo(),
+            _ when this == Speedaf => onSpeedaf(),
+            _ when this == Etower => onEtower(),
+            _ when this == Gcx => onGcx(),
+            _ when this == NinjavanVn => onNinjavanVn(),
+            _ when this == Allegro => onAllegro(),
+            _ when this == Jumppoint => onJumppoint(),
+            _ when this == ShipglobalUs => onShipglobalUs(),
+            _ when this == Kinisi => onKinisi(),
+            _ when this == Oakh => onOakh(),
+            _ when this == Awest => onAwest(),
+            _ when this == Barsan => onBarsan(),
+            _ when this == Energologistic => onEnergologistic(),
+            _ when this == Madrooex => onMadrooex(),
+            _ when this == Gobolt => onGobolt(),
+            _ when this == SwissUniversalExpress => onSwissUniversalExpress(),
+            _ when this == Iordirect => onIordirect(),
+            _ when this == Xmszm => onXmszm(),
+            _ when this == GlsHun => onGlsHun(),
+            _ when this == Sendy => onSendy(),
+            _ when this == Braunsexpress => onBraunsexpress(),
+            _ when this == Grandslamexpress => onGrandslamexpress(),
+            _ when this == Xgs => onXgs(),
+            _ when this == Otschile => onOtschile(),
+            _ when this == PackUp => onPackUp(),
+            _ when this == Parcelstars => onParcelstars(),
+            _ when this == Teamexpressllc => onTeamexpressllc(),
+            _ when this == Asyadexpress => onAsyadexpress(),
+            _ when this == Tdn => onTdn(),
+            _ when this == Earlybird => onEarlybird(),
+            _ when this == Cacesa => onCacesa(),
+            _ when this == Parceljet => onParceljet(),
+            _ when this == MngKargo => onMngKargo(),
+            _ when this == Superpackline => onSuperpackline(),
+            _ when this == Speedx => onSpeedx(),
+            _ when this == Vesyl => onVesyl(),
+            _ when this == Skyking => onSkyking(),
+            _ when this == Dirmensajeria => onDirmensajeria(),
+            _ when this == Netlogixgroup => onNetlogixgroup(),
+            _ when this == Zyou => onZyou(),
+            _ when this == Jawar => onJawar(),
+            _ when this == Agsystems => onAgsystems(),
+            _ when this == Gps => onGps(),
+            _ when this == PttKargo => onPttKargo(),
+            _ when this == Maergo => onMaergo(),
+            _ when this == Arihantcourier => onArihantcourier(),
+            _ when this == Vtfe => onVtfe(),
+            _ when this == Yunant => onYunant(),
+            _ when this == Urbify => onUrbify(),
+            _ when this == PackMan => onPackMan(),
+            _ when this == Liefergrun => onLiefergrun(),
+            _ when this == Obibox => onObibox(),
+            _ when this == Paikeda => onPaikeda(),
+            _ when this == Scotty => onScotty(),
+            _ when this == IntelcomCa => onIntelcomCa(),
+            _ when this == Swe => onSwe(),
+            _ when this == Asendia => onAsendia(),
+            _ when this == DpdAt => onDpdAt(),
+            _ when this == Relay => onRelay(),
+            _ when this == Ata => onAta(),
+            _ when this == SkyexpressInternational => onSkyexpressInternational(),
+            _ when this == SuratKargo => onSuratKargo(),
+            _ when this == Sglink => onSglink(),
+            _ when this == Fleetopticsinc => onFleetopticsinc(),
+            _ when this == Shopline => onShopline(),
+            _ when this == Piggyship => onPiggyship(),
+            _ when this == Logoix => onLogoix(),
+            _ when this == KolayGelsin => onKolayGelsin(),
+            _ when this == AssociatedCouriers => onAssociatedCouriers(),
+            _ when this == UpsChecker => onUpsChecker(),
+            _ when this == Wineshipping => onWineshipping(),
+            _ when this == Spedisci => onSpedisci(),
+            _ when this == Fourkites => onFourkites(),
+            _ when this == Etonas => onEtonas(),
+            _ when this == Finmile => onFinmile(),
+            _ when this == Uniuni => onUniuni(),
+            _ when this == Rodonaves => onRodonaves(),
+            _ when this == InpostIt => onInpostIt(),
+            _ when this == TforceFreight => onTforceFreight(),
+            _ when this == Richmom => onRichmom(),
+            _ when this == Franco => onFranco(),
+            _ when this == Ecparcel => onEcparcel(),
+            _ when this == FedexChina => onFedexChina(),
+            _ when this == GofoExpress => onGofoExpress(),
+            _ when this == Shipbob => onShipbob(),
+            _ when this == JerseypostAtlas => onJerseypostAtlas(),
+            _ when this == Coretrails => onCoretrails(),
+            _ when this == RhenusItaly => onRhenusItaly(),
+            _ when this == Jadlog => onJadlog(),
+            _ when this == Jitsu => onJitsu(),
+            _ when this == YanwenExpress => onYanwenExpress(),
+            _ when this == Dashlink => onDashlink(),
+            _ when this == SeinoSuperExpress => onSeinoSuperExpress(),
+            _ when this == Floship => onFloship(),
+            _ when this == Metroscg => onMetroscg(),
+            _ when this == Sendparcel => onSendparcel(),
+            _ when this == P2P => onP2P(),
+            _ when this == CnExpress => onCnExpress(),
+            _ when this == Cirrotrack => onCirrotrack(),
+            _ when this == LandLogistics => onLandLogistics(),
+            _ when this == Veho => onVeho(),
+            _ when this == Medline => onMedline(),
+            _ when this == Vdtrack => onVdtrack(),
+            _ when this == SinoScm => onSinoScm(),
+            _ when this == _3PeExpress => on_3PeExpress(),
+            _ when this == Swiftx => onSwiftx(),
+            _ when this == Sfydexpress => onSfydexpress(),
+            _ when this == Toptrans => onToptrans(),
+            _ => otherwise(Value)
+        };
 
-    public static ShipmentCarrier FromValue(string value) => FromValueCore(value);
+    public void Match(Action onDpdRu,
+        Action onBgBulgarianPost,
+        Action onKrKoreaPost,
+        Action onZaCourierit,
+        Action onFrExapaq,
+        Action onAreEmiratesPost,
+        Action onGac,
+        Action onGeis,
+        Action onSfEx,
+        Action onPago,
+        Action onMyhermes,
+        Action onDiamondEurogistics,
+        Action onCorporatecouriersWebhook,
+        Action onBond,
+        Action onOmniparcel,
+        Action onSkPosta,
+        Action onPurolator,
+        Action onFetchrWebhook,
+        Action onThedeliverygroup,
+        Action onCelloSquare,
+        Action onTarrive,
+        Action onCollivery,
+        Action onMainfreight,
+        Action onIndFirstflight,
+        Action onAcsworldwide,
+        Action onAmstan,
+        Action onOkayparcel,
+        Action onEnvialiaReference,
+        Action onSeurEs,
+        Action onContinental,
+        Action onFdsexpress,
+        Action onAmazonFbaSwiship,
+        Action onWyngs,
+        Action onDhlActiveTracing,
+        Action onZyllem,
+        Action onRuston,
+        Action onXpost,
+        Action onCorreosEs,
+        Action onDhlFr,
+        Action onPanAsia,
+        Action onBrtIt,
+        Action onSreKorea,
+        Action onSpeedee,
+        Action onTntUk,
+        Action onVenipak,
+        Action onShreenandancourier,
+        Action onCroshot,
+        Action onNipostNg,
+        Action onEpstGlbl,
+        Action onNewgistics,
+        Action onPostSlovenia,
+        Action onJerseyPost,
+        Action onBombinoexp,
+        Action onWmg,
+        Action onXqExpress,
+        Action onFurdeco,
+        Action onLhtExpress,
+        Action onSouthAfricanPostOffice,
+        Action onSpoton,
+        Action onDimerco,
+        Action onCyprusPostCyp,
+        Action onAbcustom,
+        Action onIndDelivree,
+        Action onCnBestexpress,
+        Action onDxSftp,
+        Action onPickuppMys,
+        Action onFmx,
+        Action onHellmann,
+        Action onShipItAsia,
+        Action onKerryEcommerce,
+        Action onFreterapido,
+        Action onPitneyBowes,
+        Action onXpressenDk,
+        Action onSeurSpApi,
+        Action onDeliveryontime,
+        Action onJinsung,
+        Action onTransKargo,
+        Action onSwishipDe,
+        Action onIvoyWebhook,
+        Action onAirmeeWebhook,
+        Action onDhlBenelux,
+        Action onFirstmile,
+        Action onFastwayIr,
+        Action onHhExp,
+        Action onMysMypostOnline,
+        Action onTntNl,
+        Action onTipsa,
+        Action onTaqbinMy,
+        Action onKgmhub,
+        Action onIntexpress,
+        Action onOverseExp,
+        Action onOneclick,
+        Action onRoadrunnerFreight,
+        Action onGlsCrotia,
+        Action onMrwFtp,
+        Action onBluex,
+        Action onDylt,
+        Action onDpdIr,
+        Action onSinGlbl,
+        Action onTuffnellsReference,
+        Action onCjpacket,
+        Action onMilkman,
+        Action onAsigna,
+        Action onOneworldexpress,
+        Action onRoyalMail,
+        Action onViaExpress,
+        Action onTigfreight,
+        Action onZtoExpress,
+        Action onTwoGo,
+        Action onIml,
+        Action onIntelValley,
+        Action onEfs,
+        Action onUkUkMail,
+        Action onRam,
+        Action onAlliedexpress,
+        Action onApcOvernight,
+        Action onShippit,
+        Action onTfm,
+        Action onMXpress,
+        Action onHdbBox,
+        Action onClevyLinks,
+        Action onIbeone,
+        Action onFiegeNl,
+        Action onKweGlobal,
+        Action onCtcExpress,
+        Action onAmazon,
+        Action onMoreLink,
+        Action onJx,
+        Action onEasyMail,
+        Action onAduiepyle,
+        Action onGbPanther,
+        Action onExpresssale,
+        Action onSgDetrack,
+        Action onTrunkrsWebhook,
+        Action onMatdespatch,
+        Action onDicom,
+        Action onMbw,
+        Action onKhmCambodiaPost,
+        Action onSinotrans,
+        Action onBrtItParcelid,
+        Action onDhlSupplyChain,
+        Action onDhlPl,
+        Action onTopyou,
+        Action onPalexpress,
+        Action onDhlSg,
+        Action onCnWedo,
+        Action onFulfillme,
+        Action onDpdDelistrack,
+        Action onUpsReference,
+        Action onCaribou,
+        Action onLocusWebhook,
+        Action onDsv,
+        Action onP2PTrc,
+        Action onDirectparcels,
+        Action onNovaPoshtaInt,
+        Action onFedexPoland,
+        Action onCnJcex,
+        Action onFarInternational,
+        Action onIdexpress,
+        Action onGangbao,
+        Action onNeway,
+        Action onPostnlInt3S,
+        Action onRpxId,
+        Action onDesignertransportWebhook,
+        Action onGlsSloven,
+        Action onParcelledIn,
+        Action onGsiExpress,
+        Action onConWay,
+        Action onBrouwerTransport,
+        Action onCpex,
+        Action onIsraelPost,
+        Action onDtdcIn,
+        Action onPttPost,
+        Action onXdeWebhook,
+        Action onTolos,
+        Action onGiaoHang,
+        Action onGeodisEspace,
+        Action onMagyarHu,
+        Action onDoordashWebhook,
+        Action onTikiId,
+        Action onCjHkInternational,
+        Action onStarTrackExpress,
+        Action onHelthjem,
+        Action onSfb2C,
+        Action onFreightquote,
+        Action onLandmarkGlobalReference,
+        Action onParcel2Go,
+        Action onDelnext,
+        Action onRcl,
+        Action onCgsExpress,
+        Action onHkPost,
+        Action onSapExpress,
+        Action onParcelpostSg,
+        Action onHermes,
+        Action onIndSafeexpress,
+        Action onTophatterexpress,
+        Action onMglobal,
+        Action onAveritt,
+        Action onLeader,
+        Action on_2Ebox,
+        Action onSgSpeedpost,
+        Action onDbschenkerSe,
+        Action onIsrPostDomestic,
+        Action onBestwayparcel,
+        Action onAsendiaDe,
+        Action onNightlineUk,
+        Action onTaqbinSg,
+        Action onTckExpress,
+        Action onEndeavourDelivery,
+        Action onNanjingwoyuan,
+        Action onHeppnerFr,
+        Action onEmpsCn,
+        Action onFonsen,
+        Action onPickrr,
+        Action onApcOvernightConnum,
+        Action onStarTrackNextFlight,
+        Action onDajin,
+        Action onUpsFreight,
+        Action onPostaPlus,
+        Action onCeva,
+        Action onAnserx,
+        Action onJsExpress,
+        Action onPadtf,
+        Action onUpsMailInnovations,
+        Action onSypost,
+        Action onAmazonShipMcf,
+        Action onYusen,
+        Action onBring,
+        Action onSdaIt,
+        Action onGba,
+        Action onNeweggexpress,
+        Action onSpeedcouriersGr,
+        Action onForrun,
+        Action onPickup,
+        Action onEcms,
+        Action onIntelipost,
+        Action onFlashexpress,
+        Action onCnSto,
+        Action onSekoSftp,
+        Action onHomeDeliverySolutions,
+        Action onDpdHgry,
+        Action onKerryttcVn,
+        Action onJoyingBox,
+        Action onTotalExpress,
+        Action onZjsExpress,
+        Action onStarken,
+        Action onDemandship,
+        Action onCnDpex,
+        Action onAupostCn,
+        Action onLogisters,
+        Action onGoglobalpost,
+        Action onGlsCz,
+        Action onPaackWebhook,
+        Action onGrabWebhook,
+        Action onParcelpoint,
+        Action onIcumulus,
+        Action onDaiglobaltrack,
+        Action onGlobalIparcel,
+        Action onYurticiKargo,
+        Action onCnPaypalPackage,
+        Action onParcel2Post,
+        Action onGlsIt,
+        Action onPilLogistics,
+        Action onHeppner,
+        Action onGeneralOvernight,
+        Action onHappy2Point,
+        Action onChitchats,
+        Action onSmooth,
+        Action onCleLogistics,
+        Action onFiege,
+        Action onMxCargo,
+        Action onZiingfinalmile,
+        Action onDaytonFreight,
+        Action onTcs,
+        Action onAex,
+        Action onHermesDe,
+        Action onRoutificWebhook,
+        Action onGlobavend,
+        Action onCjLogistics,
+        Action onPalletNetwork,
+        Action onRafPh,
+        Action onUkXdp,
+        Action onPaperExpress,
+        Action onLaPosteSuivi,
+        Action onPaquetexpress,
+        Action onLiefery,
+        Action onStreckTransport,
+        Action onPonyExpress,
+        Action onAlwaysExpress,
+        Action onGbsBroker,
+        Action onCitylinkMy,
+        Action onAlljoy,
+        Action onYodel,
+        Action onYodelDir,
+        Action onStone3Pl,
+        Action onParcelpalWebhook,
+        Action onDhlEcomerceAsa,
+        Action onSimplypost,
+        Action onKyExpress,
+        Action onShenzhen,
+        Action onUsLasership,
+        Action onUcExpre,
+        Action onDidadi,
+        Action onCjKr,
+        Action onDbschenkerB2B,
+        Action onMxe,
+        Action onCaeDelivers,
+        Action onPfcexpress,
+        Action onWhistl,
+        Action onWepost,
+        Action onDhlParcelEs,
+        Action onDdexpress,
+        Action onAramexAu,
+        Action onBneed,
+        Action onHkTgx,
+        Action onLatvijasPasts,
+        Action onViaeurope,
+        Action onCorreoUy,
+        Action onChronopostFr,
+        Action onJNet,
+        Action on_6Ls,
+        Action onBlrBelpost,
+        Action onBirdsystem,
+        Action onDobropost,
+        Action onWahanaId,
+        Action onWeaship,
+        Action onSonictl,
+        Action onKwt,
+        Action onAfllogFtp,
+        Action onSkynetWorldwide,
+        Action onNovaPoshta,
+        Action onSeino,
+        Action onSzendex,
+        Action onBpostInt,
+        Action onDbschenkerSv,
+        Action onAoDeutschland,
+        Action onEuFleetSolutions,
+        Action onPcfcorp,
+        Action onLinkbridge,
+        Action onPrimamulticipta,
+        Action onCourex,
+        Action onZajilExpress,
+        Action onCollectco,
+        Action onJtexpress,
+        Action onFedexUk,
+        Action onUship,
+        Action onPixsell,
+        Action onShiptor,
+        Action onCdek,
+        Action onVnmViettelpost,
+        Action onCjCentury,
+        Action onGso,
+        Action onViwo,
+        Action onSkybox,
+        Action onKerrytj,
+        Action onNtlogisticsVn,
+        Action onSdhScm,
+        Action onZinc,
+        Action onDpeSouthAfrc,
+        Action onCeskaCz,
+        Action onAcsGr,
+        Action onDealersend,
+        Action onJocom,
+        Action onCse,
+        Action onTforceFinalmile,
+        Action onShipGate,
+        Action onShipter,
+        Action onNationalSameday,
+        Action onYunexpress,
+        Action onCainiao,
+        Action onDmsMatrix,
+        Action onDirectlog,
+        Action onAsendiaUs,
+        Action on_3Jmslogistics,
+        Action onLiccardiExpress,
+        Action onSkyPostal,
+        Action onCnwangtong,
+        Action onPostnordLogisticsDk,
+        Action onLogistika,
+        Action onCeleritas,
+        Action onPressiode,
+        Action onShreeMaruti,
+        Action onLogisticsworldwideHk,
+        Action onEfex,
+        Action onLotte,
+        Action onLonestar,
+        Action onAprisaexpress,
+        Action onBelRs,
+        Action onOsmWorldwide,
+        Action onWestgateGl,
+        Action onFastrack,
+        Action onDtdExpr,
+        Action onAlfatrex,
+        Action onPromeddelivery,
+        Action onThabitLogistics,
+        Action onHctLogistics,
+        Action onCarryFlap,
+        Action onUsOldDominion,
+        Action onAnicamBox,
+        Action onWanbexpress,
+        Action onAnPost,
+        Action onDpdLocal,
+        Action onStallionexpress,
+        Action onRaiderex,
+        Action onShopfans,
+        Action onKyungdongParcel,
+        Action onChampionLogistics,
+        Action onPickuppSgp,
+        Action onMorningExpress,
+        Action onNacex,
+        Action onThenileWebhook,
+        Action onHolisol,
+        Action onLbcexpressFtp,
+        Action onKurasi,
+        Action onUsfReddaway,
+        Action onApg,
+        Action onCnBoxc,
+        Action onEcoscooting,
+        Action onMainway,
+        Action onPaperfly,
+        Action onHoundexpress,
+        Action onBoxBerry,
+        Action onEpBox,
+        Action onPlusLogUk,
+        Action onFulfilla,
+        Action onAse,
+        Action onMailPlus,
+        Action onXpoLogistics,
+        Action onWndirect,
+        Action onCloudwishAsia,
+        Action onZeleris,
+        Action onGioExpress,
+        Action onOcsWorldwide,
+        Action onArkLogistics,
+        Action onAquiline,
+        Action onPilotFreight,
+        Action onQwintry,
+        Action onDanskeFragt,
+        Action onCarriers,
+        Action onAirCanadaGlobal,
+        Action onPresidentTrans,
+        Action onStepforwardfs,
+        Action onSkynetUk,
+        Action onPittohio,
+        Action onCorreosExpress,
+        Action onRlUs,
+        Action onDestiny,
+        Action onUkYodel,
+        Action onCometTech,
+        Action onDhlParcelRu,
+        Action onTntRefr,
+        Action onShreeAnjaniCourier,
+        Action onMikropakketBe,
+        Action onEtsExpress,
+        Action onColisPrive,
+        Action onCnYunda,
+        Action onAaaCooper,
+        Action onRocketParcel,
+        Action on_360Lion,
+        Action onPandu,
+        Action onProfessionalCouriers,
+        Action onFlytexpress,
+        Action onLogisticsworldwideMy,
+        Action onCorreosDeEspana,
+        Action onImx,
+        Action onFourPxExpress,
+        Action onXpressbees,
+        Action onPickuppVnm,
+        Action onStartrackExpress,
+        Action onFrColissimo,
+        Action onNacexSpainReference,
+        Action onDhlSupplyChainAu,
+        Action onEshipping,
+        Action onShreetirupati,
+        Action onHxExpress,
+        Action onIndopaket,
+        Action onCn17Post,
+        Action onK1Express,
+        Action onCjGls,
+        Action onMysGdex,
+        Action onNationex,
+        Action onAnjun,
+        Action onFargood,
+        Action onSmgExpress,
+        Action onRzyexpress,
+        Action onSefl,
+        Action onTntClickIt,
+        Action onHdb,
+        Action onHipshipper,
+        Action onRpxlogistics,
+        Action onKuehne,
+        Action onItNexive,
+        Action onPts,
+        Action onSwissPostFtp,
+        Action onFastrkServ,
+        Action on_472,
+        Action onUsYrc,
+        Action onPostnlIntl3S,
+        Action onElianPost,
+        Action onCubyn,
+        Action onSauSaudiPost,
+        Action onAbxexpressMy,
+        Action onHuahanExpress,
+        Action onZesExpress,
+        Action onZeptoExpress,
+        Action onSkynetZa,
+        Action onZeek2Door,
+        Action onBlinklastmile,
+        Action onPostaUkr,
+        Action onChrobinson,
+        Action onCnPost56,
+        Action onCourantPlus,
+        Action onScudexExpress,
+        Action onShipentegra,
+        Action onBTwoCEurope,
+        Action onCope,
+        Action onIndGati,
+        Action onCnWishpost,
+        Action onNacexEs,
+        Action onTaqbinHk,
+        Action onGlobaltranz,
+        Action onHkd,
+        Action onBjshomedelivery,
+        Action onOmniva,
+        Action onSutton,
+        Action onPantherReference,
+        Action onSfcservice,
+        Action onLtl,
+        Action onParknparcel,
+        Action onSpringGds,
+        Action onEcexpress,
+        Action onInterparcelAu,
+        Action onAgility,
+        Action onXlExpress,
+        Action onAderonline,
+        Action onDirectcouriers,
+        Action onPlanzer,
+        Action onSending,
+        Action onNinjavanWb,
+        Action onNationwideMy,
+        Action onSendit,
+        Action onGbArrow,
+        Action onIndGojavas,
+        Action onKpost,
+        Action onDhlFreight,
+        Action onBluecare,
+        Action onJindouyun,
+        Action onTrackon,
+        Action onGbTuffnells,
+        Action onTrumpcard,
+        Action onEtotal,
+        Action onSfplusWebhook,
+        Action onSekologistics,
+        Action onHermes2MannHandling,
+        Action onDpdLocalRef,
+        Action onUds,
+        Action onZaSpecialisedFreight,
+        Action onThaKerry,
+        Action onPrtIntSeur,
+        Action onBraCorreios,
+        Action onNzNzPost,
+        Action onCnEquick,
+        Action onMysEms,
+        Action onGbNorsk,
+        Action onEspMrw,
+        Action onEspPacklink,
+        Action onKangarooMy,
+        Action onRpx,
+        Action onXdpUkReference,
+        Action onNinjavanMy,
+        Action onAdicional,
+        Action onRoadbull,
+        Action onYakit,
+        Action onMailamericas,
+        Action onMikropakket,
+        Action onDynalogic,
+        Action onDhlEs,
+        Action onDhlParcelNl,
+        Action onDhlGlobalMailAsia,
+        Action onDawnWing,
+        Action onGenikiGr,
+        Action onHermesworldUk,
+        Action onAlphafast,
+        Action onBuylogic,
+        Action onEkart,
+        Action onMexSenda,
+        Action onSfcLogistics,
+        Action onPostSerbia,
+        Action onIndDelhivery,
+        Action onDeDpdDelistrack,
+        Action onRpd2Man,
+        Action onCnSfExpress,
+        Action onYanwen,
+        Action onMysSkynet,
+        Action onCorreosDeMexico,
+        Action onCblLogistica,
+        Action onMexEstafeta,
+        Action onAuAustrianPost,
+        Action onRincos,
+        Action onNldDhl,
+        Action onRussianPost,
+        Action onCouriersPlease,
+        Action onPostnordLogistics,
+        Action onFedex,
+        Action onDpeExpress,
+        Action onDpd,
+        Action onAdsone,
+        Action onIdnJne,
+        Action onThecourierguy,
+        Action onCnexps,
+        Action onPrtChronopost,
+        Action onLandmarkGlobal,
+        Action onItDhlEcommerce,
+        Action onEspNacex,
+        Action onPrtCtt,
+        Action onBeKiala,
+        Action onAsendiaUk,
+        Action onGlobalTnt,
+        Action onPosturIs,
+        Action onEparcelKr,
+        Action onInpostPaczkomaty,
+        Action onItPosteItalia,
+        Action onBeBpost,
+        Action onPlPocztaPolska,
+        Action onMysMysPost,
+        Action onSgSgPost,
+        Action onThaThailandPost,
+        Action onLexship,
+        Action onFastwayNz,
+        Action onDhlAu,
+        Action onCostmeticsnow,
+        Action onPflogistics,
+        Action onLoomisExpress,
+        Action onGlsItaly,
+        Action onLine,
+        Action onGelExpress,
+        Action onHuodull,
+        Action onNinjavanSg,
+        Action onJanio,
+        Action onAoCourier,
+        Action onBrtItSenderRef,
+        Action onSailpost,
+        Action onLalamove,
+        Action onNewzealandCouriers,
+        Action onEtomars,
+        Action onVirtransport,
+        Action onWizmo,
+        Action onPalletways,
+        Action onIDika,
+        Action onCflLogistics,
+        Action onGemworldwide,
+        Action onGlobalExpress,
+        Action onLogistyxTransgroup,
+        Action onWestbankCourier,
+        Action onArcoSpedizioni,
+        Action onYdhExpress,
+        Action onParcelinklogistics,
+        Action onCndexpress,
+        Action onNoxNightTimeExpress,
+        Action onAeronet,
+        Action onLtianexp,
+        Action onIntegra2Ftp,
+        Action onParcelone,
+        Action onNoxNachtexpress,
+        Action onCnChinaPostEms,
+        Action onChukou1,
+        Action onGlsSlov,
+        Action onOrangeDs,
+        Action onJoomLogis,
+        Action onAusStartrack,
+        Action onDhl,
+        Action onGbApc,
+        Action onBondscouriers,
+        Action onJpnJapanPost,
+        Action onUsps,
+        Action onWinit,
+        Action onArgOca,
+        Action onTwTaiwanPost,
+        Action onDmmNetwork,
+        Action onTnt,
+        Action onBhPosta,
+        Action onSwePostnord,
+        Action onCaCanadaPost,
+        Action onWiseloads,
+        Action onAsendiaHk,
+        Action onNldGls,
+        Action onMexRedpack,
+        Action onJetShip,
+        Action onDeDhlExpress,
+        Action onNinjavanThai,
+        Action onRabenGroup,
+        Action onEspAsm,
+        Action onHrvHrvatska,
+        Action onGlobalEstes,
+        Action onLtuLietuvos,
+        Action onBelDhl,
+        Action onAuAuPost,
+        Action onSpeedexcourier,
+        Action onFrColis,
+        Action onAramex,
+        Action onDpex,
+        Action onMysAirpak,
+        Action onCuckooexpress,
+        Action onDpdPoland,
+        Action onNldPostnl,
+        Action onNimExpress,
+        Action onQuantium,
+        Action onSendle,
+        Action onEspRedur,
+        Action onMatkahuolto,
+        Action onCpacket,
+        Action onPosti,
+        Action onHunterExpress,
+        Action onChoirExp,
+        Action onLegionExpress,
+        Action onAustrianPostExpress,
+        Action onGrupo,
+        Action onPostaRo,
+        Action onInterparcelUk,
+        Action onGlobalAbf,
+        Action onPostenNorge,
+        Action onXpertDelivery,
+        Action onDhlRefr,
+        Action onDhlHk,
+        Action onSkynetUae,
+        Action onGojek,
+        Action onYodelIntnl,
+        Action onJanco,
+        Action onYto,
+        Action onWiseExpress,
+        Action onJtexpressVn,
+        Action onFedexIntlMlserv,
+        Action onVamox,
+        Action onAmsGrp,
+        Action onDhlJp,
+        Action onHrparcel,
+        Action onGeswl,
+        Action onBluestar,
+        Action onCdekTr,
+        Action onDescartes,
+        Action onDeltecUk,
+        Action onDtdcExpress,
+        Action onTourline,
+        Action onBhWorldwide,
+        Action onOcs,
+        Action onYingnuoLogistics,
+        Action onUps,
+        Action onToll,
+        Action onPrtSeur,
+        Action onDtdcAu,
+        Action onThaDynamicLogistics,
+        Action onUbiLogistics,
+        Action onFedexCrossborder,
+        Action onA1Post,
+        Action onTazmanianFreight,
+        Action onCjIntMy,
+        Action onSaiaFreight,
+        Action onSgQxpress,
+        Action onNhansSolutions,
+        Action onDpdFr,
+        Action onCoordinadora,
+        Action onAndreani,
+        Action onDoora,
+        Action onInterparcelNz,
+        Action onPhlJamexpress,
+        Action onBelBelgiumPost,
+        Action onUsApc,
+        Action onIdnPos,
+        Action onFrMondial,
+        Action onDeDhl,
+        Action onHkRpx,
+        Action onDhlPieceid,
+        Action onVnpostEms,
+        Action onRrdonnelley,
+        Action onDpdDe,
+        Action onDelcartIn,
+        Action onImexglobalsolutions,
+        Action onAcommerce,
+        Action onEurodis,
+        Action onCanpar,
+        Action onGls,
+        Action onIndEcom,
+        Action onEspEnvialia,
+        Action onDhlUk,
+        Action onSmsaExpress,
+        Action onTntFr,
+        Action onDexI,
+        Action onBudbeeWebhook,
+        Action onCopaCourier,
+        Action onVnmVietnamPost,
+        Action onDpdHk,
+        Action onTollNz,
+        Action onEcho,
+        Action onFedexFr,
+        Action onBorderexpress,
+        Action onMailplusJpn,
+        Action onTntUkRefr,
+        Action onKec,
+        Action onDpdRo,
+        Action onTntJp,
+        Action onThCj,
+        Action onEcCn,
+        Action onFastwayUk,
+        Action onFastwayUs,
+        Action onGlsDe,
+        Action onGlsEs,
+        Action onGlsFr,
+        Action onMondialBe,
+        Action onSgtIt,
+        Action onTntCn,
+        Action onTntDe,
+        Action onTntEs,
+        Action onTntPl,
+        Action onParcelforce,
+        Action onSwissPost,
+        Action onTollIpec,
+        Action onAir21,
+        Action onAirspeed,
+        Action onBert,
+        Action onBluedart,
+        Action onCollectplus,
+        Action onCourierplus,
+        Action onCourierPost,
+        Action onDhlGlobalMail,
+        Action onDpdUk,
+        Action onDeltecDe,
+        Action onDeutscheDe,
+        Action onDotzot,
+        Action onEltaGr,
+        Action onEmsCn,
+        Action onEcargo,
+        Action onEnsenda,
+        Action onFercamIt,
+        Action onFastwayZa,
+        Action onFastwayAu,
+        Action onFirstLogisitcs,
+        Action onGeodis,
+        Action onGlobegistics,
+        Action onGreyhound,
+        Action onJetshipMy,
+        Action onLionParcel,
+        Action onAeroflash,
+        Action onOntrac,
+        Action onSagawa,
+        Action onSiodemka,
+        Action onStartrack,
+        Action onTntAu,
+        Action onTntIt,
+        Action onTransmission,
+        Action onYamato,
+        Action onDhlIt,
+        Action onDhlAt,
+        Action onLogisticsworldwideKr,
+        Action onGlsSpain,
+        Action onAmazonUkApi,
+        Action onDpdFrReference,
+        Action onDhlparcelUk,
+        Action onMegasave,
+        Action onQualitypost,
+        Action onIdsLogistics,
+        Action onJoyingbox,
+        Action onPantherOrderNumber,
+        Action onWatkinsShepard,
+        Action onFasttrack,
+        Action onUpExpress,
+        Action onElogistica,
+        Action onEcourier,
+        Action onCjPhilippines,
+        Action onSpeedex,
+        Action onOrangeconnex,
+        Action onTecor,
+        Action onSaee,
+        Action onGlsItalyFtp,
+        Action onDelivere,
+        Action onYycom,
+        Action onAdicionalPt,
+        Action onDksh,
+        Action onNipponExpressFtp,
+        Action onGols,
+        Action onFujexp,
+        Action onQtrack,
+        Action onOmlogisticsApi,
+        Action onGdpharm,
+        Action onMisumiCn,
+        Action onAirCanada,
+        Action onCity56Webhook,
+        Action onSagawaApi,
+        Action onKedaex,
+        Action onPgeonApi,
+        Action onWeworldexpress,
+        Action onJtLogistics,
+        Action onTrusk,
+        Action onViaxpress,
+        Action onDhlSupplychainId,
+        Action onZuelligpharmaSftp,
+        Action onMeest,
+        Action onTollPriority,
+        Action onMothershipApi,
+        Action onCapital,
+        Action onEuropaketApi,
+        Action onHfd,
+        Action onTourlineReference,
+        Action onGioEcourier,
+        Action onCnLogistics,
+        Action onPandion,
+        Action onBpostApi,
+        Action onPassportshipping,
+        Action onPakajo,
+        Action onDachser,
+        Action onYusenSftp,
+        Action onShyplite,
+        Action onXyy,
+        Action onMwd,
+        Action onFaxecargo,
+        Action onMazet,
+        Action onFirstLogisticsApi,
+        Action onSprintPack,
+        Action onHermesDeFtp,
+        Action onConcise,
+        Action onKerryExpressTwApi,
+        Action onEwe,
+        Action onFastdespatch,
+        Action onAbcustomSftp,
+        Action onChazki,
+        Action onShippie,
+        Action onGeodisApi,
+        Action onNaqelExpress,
+        Action onPapaWebhook,
+        Action onForwardair,
+        Action onDialogoLogisticaApi,
+        Action onLalamoveApi,
+        Action onTomydoor,
+        Action onKronosWebhook,
+        Action onJtcargo,
+        Action onTCat,
+        Action onConciseWebhook,
+        Action onTeleportWebhook,
+        Action onCustomcoApi,
+        Action onSpxTh,
+        Action onBolloreLogistics,
+        Action onClicklinkSftp,
+        Action onM3Logistics,
+        Action onVnpostApi,
+        Action onAxlehireFtp,
+        Action onShadowfax,
+        Action onMyhermesUkApi,
+        Action onDaiichi,
+        Action onMensajerosurbanosApi,
+        Action onPolarspeed,
+        Action onIdexpressId,
+        Action onPayo,
+        Action onWhistlSftp,
+        Action onIntexDe,
+        Action onTrans2U,
+        Action onProductcaregroupSftp,
+        Action onBigsmart,
+        Action onExpeditorsApiRef,
+        Action onAitworldwideApi,
+        Action onWorldcourier,
+        Action onQuiqup,
+        Action onAgedissSftp,
+        Action onAndreaniApi,
+        Action onCrlexpress,
+        Action onSmartcat,
+        Action onCrossflight,
+        Action onProcarrier,
+        Action onDhlReferenceApi,
+        Action onSeinoApi,
+        Action onWspexpress,
+        Action onKronos,
+        Action onTotalExpressApi,
+        Action onParcll,
+        Action onXpedigo,
+        Action onStarTrackWebhook,
+        Action onGpost,
+        Action onUcs,
+        Action onDmfgroup,
+        Action onCoordinadoraApi,
+        Action onMarken,
+        Action onNtl,
+        Action onRedjepakketje,
+        Action onAlliedExpressFtp,
+        Action onMondialrelayEs,
+        Action onNaekoFtp,
+        Action onMhi,
+        Action onShippify,
+        Action onMalcaAmitApi,
+        Action onJtexpressSgApi,
+        Action onDachserWeb,
+        Action onFlightlg,
+        Action onCago,
+        Action onCom1Express,
+        Action onTonamiFtp,
+        Action onPackfleet,
+        Action onPurolatorInternational,
+        Action onWineshippingWebhook,
+        Action onDhlEsSftp,
+        Action onPchomeApi,
+        Action onCeskapostaApi,
+        Action onGorush,
+        Action onHomerunner,
+        Action onAmazonOrder,
+        Action onEfwnowApi,
+        Action onCblLogisticaApi,
+        Action onNimbuspost,
+        Action onLogwinLogistics,
+        Action onNowlogApi,
+        Action onDpdNl,
+        Action onGodependable,
+        Action onEsdex,
+        Action onLogisystemsSftp,
+        Action onExpeditors,
+        Action onSntglobalApi,
+        Action onShipx,
+        Action onQintlApi,
+        Action onPacks,
+        Action onPostnlInternational,
+        Action onAmazonEmailPush,
+        Action onDhlApi,
+        Action onSpx,
+        Action onAxlehire,
+        Action onIcscourier,
+        Action onDialogoLogistica,
+        Action onShunbangExpress,
+        Action onTcsApi,
+        Action onSfExpressCn,
+        Action onPacketa,
+        Action onSicTeliway,
+        Action onMondialrelayFr,
+        Action onIntimeFtp,
+        Action onJdExpress,
+        Action onFastbox,
+        Action onPatheon,
+        Action onIndiaPost,
+        Action onTipsaRef,
+        Action onEcofreight,
+        Action onVox,
+        Action onDirectfreightAuRef,
+        Action onBesttransportSftp,
+        Action onAustraliaPostApi,
+        Action onFragilepakSftp,
+        Action onFlipxp,
+        Action onValueWebhook,
+        Action onDaeshin,
+        Action onSherpa,
+        Action onMwdApi,
+        Action onSmartkargo,
+        Action onDnjExpress,
+        Action onGopeople,
+        Action onMysendleApi,
+        Action onAramexApi,
+        Action onPidge,
+        Action onThaiparcels,
+        Action onPantherReferenceApi,
+        Action onPostaplus,
+        Action onBuffalo,
+        Action onUEnvios,
+        Action onEliteCo,
+        Action onRocheInternalSftp,
+        Action onDbschenkerIceland,
+        Action onTntFrReference,
+        Action onNewgisticsapi,
+        Action onGlovo,
+        Action onGwlogisApi,
+        Action onSpreetailApi,
+        Action onMoova,
+        Action onPlycongroup,
+        Action onUspsWebhook,
+        Action onReimaginedelivery,
+        Action onEdfFtp,
+        Action onDao365,
+        Action onBiocairFtp,
+        Action onRansaWebhook,
+        Action onShipxpres,
+        Action onCourantPlusApi,
+        Action onShipa,
+        Action onHomelogistics,
+        Action onDx,
+        Action onPosteItalianePaccocelere,
+        Action onTollWebhook,
+        Action onLctbrApi,
+        Action onDxFreight,
+        Action onDhlSftp,
+        Action onShiprocket,
+        Action onUberWebhook,
+        Action onStatovernight,
+        Action onBurd,
+        Action onFastship,
+        Action onIbventureWebhook,
+        Action onGatiKweApi,
+        Action onCryopdpFtp,
+        Action onHubbed,
+        Action onTipsaApi,
+        Action onAraskargo,
+        Action onThijsNl,
+        Action onAtshealthcareReference,
+        Action on_99Minutos,
+        Action onHellenicPost,
+        Action onHsmGlobal,
+        Action onMnx,
+        Action onNmtransfer,
+        Action onLogysto,
+        Action onIndiaPostInt,
+        Action onAmazonFbaSwishipIn,
+        Action onSrtTransport,
+        Action onBomi,
+        Action onDeliverrSftp,
+        Action onHsdexpress,
+        Action onSimpletireWebhook,
+        Action onHunterExpressSftp,
+        Action onUpsApi,
+        Action onWooyoungLogisticsSftp,
+        Action onPhseApi,
+        Action onWishEmailPush,
+        Action onNorthline,
+        Action onMedafrica,
+        Action onDpdAtSftp,
+        Action onAnteraja,
+        Action onDhlGlobalForwardingApi,
+        Action onLbcexpressApi,
+        Action onSimsglobal,
+        Action onCdldelivers,
+        Action onTyp,
+        Action onTestingCourierWebhook,
+        Action onPandagoApi,
+        Action onRoyalMailFtp,
+        Action onThunderexpress,
+        Action onSecretlabWebhook,
+        Action onSetel,
+        Action onJdWorldwide,
+        Action onDpdRuApi,
+        Action onArgentsWebhook,
+        Action onPostone,
+        Action onTusklogistics,
+        Action onRhenusUkApi,
+        Action onTaqbinSgApi,
+        Action onInntralogSftp,
+        Action onDayross,
+        Action onCorreosexpressApi,
+        Action onInternationalSeurApi,
+        Action onYodelApi,
+        Action onHeroexpress,
+        Action onDhlSupplychainIn,
+        Action onUrgentCargus,
+        Action onFrontdoorcorp,
+        Action onJtexpressPh,
+        Action onParcelstarsWebhook,
+        Action onDpdSkSftp,
+        Action onMovianto,
+        Action onOzepartsShipping,
+        Action onKargomkolay,
+        Action onTrunkrs,
+        Action onOmnirpsWebhook,
+        Action onChilexpress,
+        Action onTestingCourier,
+        Action onJneApi,
+        Action onBjshomedeliveryFtp,
+        Action onDexpressWebhook,
+        Action onUspsApi,
+        Action onTransvirtual,
+        Action onSolisticaApi,
+        Action onChienventureWebhook,
+        Action onDpdUkSftp,
+        Action onInpostUk,
+        Action onJavit,
+        Action onZtoDomestic,
+        Action onDhlGtApi,
+        Action onCevaTracking,
+        Action onKomonExpress,
+        Action onEastwestcourierFtp,
+        Action onDanniao,
+        Action onSpectran,
+        Action onDeliverIt,
+        Action onRelaiscolis,
+        Action onGlsSpainApi,
+        Action onPostplus,
+        Action onAirterra,
+        Action onGioEcourierApi,
+        Action onDpdChSftp,
+        Action onFedexApi,
+        Action onIntersmarttrans,
+        Action onHermesUkSftp,
+        Action onExelotFtp,
+        Action onDhlPaApi,
+        Action onVirtransportSftp,
+        Action onWorldnet,
+        Action onInstaboxWebhook,
+        Action onKng,
+        Action onFlashexpressWebhook,
+        Action onMagyarPostaApi,
+        Action onWeshipApi,
+        Action onOhiWebhook,
+        Action onMudita,
+        Action onBluedartApi,
+        Action onTCatApi,
+        Action onAds,
+        Action onHermesIt,
+        Action onFitzmarkApi,
+        Action onPostiApi,
+        Action onSmsaExpressWebhook,
+        Action onTamergroupWebhook,
+        Action onLivrapide,
+        Action onNipponExpress,
+        Action onBettertrucks,
+        Action onFan,
+        Action onPbUspsflatsFtp,
+        Action onParcelright,
+        Action onIthinklogistics,
+        Action onKerryExpressThWebhook,
+        Action onEcoutier,
+        Action onShowl,
+        Action onBrtItApi,
+        Action onRixonhkApi,
+        Action onDbschenkerApi,
+        Action onIlyanglogis,
+        Action onMailBoxEtc,
+        Action onWeship,
+        Action onDhlGlobalMailApi,
+        Action onActivos24Api,
+        Action onAtshealthcare,
+        Action onLuwjistik,
+        Action onGwWorld,
+        Action onFairsendenApi,
+        Action onServipWebhook,
+        Action onSwiship,
+        Action onTanet,
+        Action onHotsinCargo,
+        Action onDirex,
+        Action onHuantong,
+        Action onImileApi,
+        Action onAuexpress,
+        Action onNytlogistics,
+        Action onDsvReference,
+        Action onNovofarmaWebhook,
+        Action onAitworldwideSftp,
+        Action onShopolive,
+        Action onFnfZa,
+        Action onDhlEcommerceGc,
+        Action onFetchr,
+        Action onStarlinksApi,
+        Action onYyexpress,
+        Action onServientrega,
+        Action onHanjin,
+        Action onSpanishSeurFtp,
+        Action onDxB2BConnum,
+        Action onHelthjemApi,
+        Action onInexpost,
+        Action onA2BBa,
+        Action onRhenusGroup,
+        Action onSberlogisticsRu,
+        Action onMalcaAmit,
+        Action onPpl,
+        Action onOsmWorldwideSftp,
+        Action onAcilogistix,
+        Action onOptimacourier,
+        Action onNovaPoshtaApi,
+        Action onLoggi,
+        Action onYifan,
+        Action onMydynalogic,
+        Action onMorninglobal,
+        Action onConciseApi,
+        Action onFxtran,
+        Action onDeliveryourparcelZa,
+        Action onUparcel,
+        Action onMobiBr,
+        Action onLoginextWebhook,
+        Action onEms,
+        Action onSpeedy,
+        Action onZoomRed,
+        Action onNavlungo,
+        Action onCastleparcels,
+        Action onWeee,
+        Action onPackaly,
+        Action onYunhuipost,
+        Action onYouparcel,
+        Action onLeman,
+        Action onMoovin,
+        Action onUrbIt,
+        Action onMultientregapanama,
+        Action onJusdasr,
+        Action onDiscountpost,
+        Action onRhenusUk,
+        Action onSwishipJp,
+        Action onGlsUs,
+        Action onSmtl,
+        Action onEmega,
+        Action onExpressoneSv,
+        Action onHepsijet,
+        Action onWelivery,
+        Action onBringer,
+        Action onEasyroutes,
+        Action onMrw,
+        Action onRpm,
+        Action onDpdPrt,
+        Action onGlsRomania,
+        Action onLmparcel,
+        Action onGtagsm,
+        Action onDomino,
+        Action onEshipper,
+        Action onTranspak,
+        Action onXindus,
+        Action onAoyue,
+        Action onEasyparcel,
+        Action onExpressone,
+        Action onSendeoKargo,
+        Action onSpeedaf,
+        Action onEtower,
+        Action onGcx,
+        Action onNinjavanVn,
+        Action onAllegro,
+        Action onJumppoint,
+        Action onShipglobalUs,
+        Action onKinisi,
+        Action onOakh,
+        Action onAwest,
+        Action onBarsan,
+        Action onEnergologistic,
+        Action onMadrooex,
+        Action onGobolt,
+        Action onSwissUniversalExpress,
+        Action onIordirect,
+        Action onXmszm,
+        Action onGlsHun,
+        Action onSendy,
+        Action onBraunsexpress,
+        Action onGrandslamexpress,
+        Action onXgs,
+        Action onOtschile,
+        Action onPackUp,
+        Action onParcelstars,
+        Action onTeamexpressllc,
+        Action onAsyadexpress,
+        Action onTdn,
+        Action onEarlybird,
+        Action onCacesa,
+        Action onParceljet,
+        Action onMngKargo,
+        Action onSuperpackline,
+        Action onSpeedx,
+        Action onVesyl,
+        Action onSkyking,
+        Action onDirmensajeria,
+        Action onNetlogixgroup,
+        Action onZyou,
+        Action onJawar,
+        Action onAgsystems,
+        Action onGps,
+        Action onPttKargo,
+        Action onMaergo,
+        Action onArihantcourier,
+        Action onVtfe,
+        Action onYunant,
+        Action onUrbify,
+        Action onPackMan,
+        Action onLiefergrun,
+        Action onObibox,
+        Action onPaikeda,
+        Action onScotty,
+        Action onIntelcomCa,
+        Action onSwe,
+        Action onAsendia,
+        Action onDpdAt,
+        Action onRelay,
+        Action onAta,
+        Action onSkyexpressInternational,
+        Action onSuratKargo,
+        Action onSglink,
+        Action onFleetopticsinc,
+        Action onShopline,
+        Action onPiggyship,
+        Action onLogoix,
+        Action onKolayGelsin,
+        Action onAssociatedCouriers,
+        Action onUpsChecker,
+        Action onWineshipping,
+        Action onSpedisci,
+        Action onFourkites,
+        Action onEtonas,
+        Action onFinmile,
+        Action onUniuni,
+        Action onRodonaves,
+        Action onInpostIt,
+        Action onTforceFreight,
+        Action onRichmom,
+        Action onFranco,
+        Action onEcparcel,
+        Action onFedexChina,
+        Action onGofoExpress,
+        Action onShipbob,
+        Action onJerseypostAtlas,
+        Action onCoretrails,
+        Action onRhenusItaly,
+        Action onJadlog,
+        Action onJitsu,
+        Action onYanwenExpress,
+        Action onDashlink,
+        Action onSeinoSuperExpress,
+        Action onFloship,
+        Action onMetroscg,
+        Action onSendparcel,
+        Action onP2P,
+        Action onCnExpress,
+        Action onCirrotrack,
+        Action onLandLogistics,
+        Action onVeho,
+        Action onMedline,
+        Action onVdtrack,
+        Action onSinoScm,
+        Action on_3PeExpress,
+        Action onSwiftx,
+        Action onSfydexpress,
+        Action onToptrans,
+        Action<string> otherwise)
+    {
+        if (this == DpdRu) onDpdRu();
+        else if (this == BgBulgarianPost) onBgBulgarianPost();
+        else if (this == KrKoreaPost) onKrKoreaPost();
+        else if (this == ZaCourierit) onZaCourierit();
+        else if (this == FrExapaq) onFrExapaq();
+        else if (this == AreEmiratesPost) onAreEmiratesPost();
+        else if (this == Gac) onGac();
+        else if (this == Geis) onGeis();
+        else if (this == SfEx) onSfEx();
+        else if (this == Pago) onPago();
+        else if (this == Myhermes) onMyhermes();
+        else if (this == DiamondEurogistics) onDiamondEurogistics();
+        else if (this == CorporatecouriersWebhook) onCorporatecouriersWebhook();
+        else if (this == Bond) onBond();
+        else if (this == Omniparcel) onOmniparcel();
+        else if (this == SkPosta) onSkPosta();
+        else if (this == Purolator) onPurolator();
+        else if (this == FetchrWebhook) onFetchrWebhook();
+        else if (this == Thedeliverygroup) onThedeliverygroup();
+        else if (this == CelloSquare) onCelloSquare();
+        else if (this == Tarrive) onTarrive();
+        else if (this == Collivery) onCollivery();
+        else if (this == Mainfreight) onMainfreight();
+        else if (this == IndFirstflight) onIndFirstflight();
+        else if (this == Acsworldwide) onAcsworldwide();
+        else if (this == Amstan) onAmstan();
+        else if (this == Okayparcel) onOkayparcel();
+        else if (this == EnvialiaReference) onEnvialiaReference();
+        else if (this == SeurEs) onSeurEs();
+        else if (this == Continental) onContinental();
+        else if (this == Fdsexpress) onFdsexpress();
+        else if (this == AmazonFbaSwiship) onAmazonFbaSwiship();
+        else if (this == Wyngs) onWyngs();
+        else if (this == DhlActiveTracing) onDhlActiveTracing();
+        else if (this == Zyllem) onZyllem();
+        else if (this == Ruston) onRuston();
+        else if (this == Xpost) onXpost();
+        else if (this == CorreosEs) onCorreosEs();
+        else if (this == DhlFr) onDhlFr();
+        else if (this == PanAsia) onPanAsia();
+        else if (this == BrtIt) onBrtIt();
+        else if (this == SreKorea) onSreKorea();
+        else if (this == Speedee) onSpeedee();
+        else if (this == TntUk) onTntUk();
+        else if (this == Venipak) onVenipak();
+        else if (this == Shreenandancourier) onShreenandancourier();
+        else if (this == Croshot) onCroshot();
+        else if (this == NipostNg) onNipostNg();
+        else if (this == EpstGlbl) onEpstGlbl();
+        else if (this == Newgistics) onNewgistics();
+        else if (this == PostSlovenia) onPostSlovenia();
+        else if (this == JerseyPost) onJerseyPost();
+        else if (this == Bombinoexp) onBombinoexp();
+        else if (this == Wmg) onWmg();
+        else if (this == XqExpress) onXqExpress();
+        else if (this == Furdeco) onFurdeco();
+        else if (this == LhtExpress) onLhtExpress();
+        else if (this == SouthAfricanPostOffice) onSouthAfricanPostOffice();
+        else if (this == Spoton) onSpoton();
+        else if (this == Dimerco) onDimerco();
+        else if (this == CyprusPostCyp) onCyprusPostCyp();
+        else if (this == Abcustom) onAbcustom();
+        else if (this == IndDelivree) onIndDelivree();
+        else if (this == CnBestexpress) onCnBestexpress();
+        else if (this == DxSftp) onDxSftp();
+        else if (this == PickuppMys) onPickuppMys();
+        else if (this == Fmx) onFmx();
+        else if (this == Hellmann) onHellmann();
+        else if (this == ShipItAsia) onShipItAsia();
+        else if (this == KerryEcommerce) onKerryEcommerce();
+        else if (this == Freterapido) onFreterapido();
+        else if (this == PitneyBowes) onPitneyBowes();
+        else if (this == XpressenDk) onXpressenDk();
+        else if (this == SeurSpApi) onSeurSpApi();
+        else if (this == Deliveryontime) onDeliveryontime();
+        else if (this == Jinsung) onJinsung();
+        else if (this == TransKargo) onTransKargo();
+        else if (this == SwishipDe) onSwishipDe();
+        else if (this == IvoyWebhook) onIvoyWebhook();
+        else if (this == AirmeeWebhook) onAirmeeWebhook();
+        else if (this == DhlBenelux) onDhlBenelux();
+        else if (this == Firstmile) onFirstmile();
+        else if (this == FastwayIr) onFastwayIr();
+        else if (this == HhExp) onHhExp();
+        else if (this == MysMypostOnline) onMysMypostOnline();
+        else if (this == TntNl) onTntNl();
+        else if (this == Tipsa) onTipsa();
+        else if (this == TaqbinMy) onTaqbinMy();
+        else if (this == Kgmhub) onKgmhub();
+        else if (this == Intexpress) onIntexpress();
+        else if (this == OverseExp) onOverseExp();
+        else if (this == Oneclick) onOneclick();
+        else if (this == RoadrunnerFreight) onRoadrunnerFreight();
+        else if (this == GlsCrotia) onGlsCrotia();
+        else if (this == MrwFtp) onMrwFtp();
+        else if (this == Bluex) onBluex();
+        else if (this == Dylt) onDylt();
+        else if (this == DpdIr) onDpdIr();
+        else if (this == SinGlbl) onSinGlbl();
+        else if (this == TuffnellsReference) onTuffnellsReference();
+        else if (this == Cjpacket) onCjpacket();
+        else if (this == Milkman) onMilkman();
+        else if (this == Asigna) onAsigna();
+        else if (this == Oneworldexpress) onOneworldexpress();
+        else if (this == RoyalMail) onRoyalMail();
+        else if (this == ViaExpress) onViaExpress();
+        else if (this == Tigfreight) onTigfreight();
+        else if (this == ZtoExpress) onZtoExpress();
+        else if (this == TwoGo) onTwoGo();
+        else if (this == Iml) onIml();
+        else if (this == IntelValley) onIntelValley();
+        else if (this == Efs) onEfs();
+        else if (this == UkUkMail) onUkUkMail();
+        else if (this == Ram) onRam();
+        else if (this == Alliedexpress) onAlliedexpress();
+        else if (this == ApcOvernight) onApcOvernight();
+        else if (this == Shippit) onShippit();
+        else if (this == Tfm) onTfm();
+        else if (this == MXpress) onMXpress();
+        else if (this == HdbBox) onHdbBox();
+        else if (this == ClevyLinks) onClevyLinks();
+        else if (this == Ibeone) onIbeone();
+        else if (this == FiegeNl) onFiegeNl();
+        else if (this == KweGlobal) onKweGlobal();
+        else if (this == CtcExpress) onCtcExpress();
+        else if (this == Amazon) onAmazon();
+        else if (this == MoreLink) onMoreLink();
+        else if (this == Jx) onJx();
+        else if (this == EasyMail) onEasyMail();
+        else if (this == Aduiepyle) onAduiepyle();
+        else if (this == GbPanther) onGbPanther();
+        else if (this == Expresssale) onExpresssale();
+        else if (this == SgDetrack) onSgDetrack();
+        else if (this == TrunkrsWebhook) onTrunkrsWebhook();
+        else if (this == Matdespatch) onMatdespatch();
+        else if (this == Dicom) onDicom();
+        else if (this == Mbw) onMbw();
+        else if (this == KhmCambodiaPost) onKhmCambodiaPost();
+        else if (this == Sinotrans) onSinotrans();
+        else if (this == BrtItParcelid) onBrtItParcelid();
+        else if (this == DhlSupplyChain) onDhlSupplyChain();
+        else if (this == DhlPl) onDhlPl();
+        else if (this == Topyou) onTopyou();
+        else if (this == Palexpress) onPalexpress();
+        else if (this == DhlSg) onDhlSg();
+        else if (this == CnWedo) onCnWedo();
+        else if (this == Fulfillme) onFulfillme();
+        else if (this == DpdDelistrack) onDpdDelistrack();
+        else if (this == UpsReference) onUpsReference();
+        else if (this == Caribou) onCaribou();
+        else if (this == LocusWebhook) onLocusWebhook();
+        else if (this == Dsv) onDsv();
+        else if (this == P2PTrc) onP2PTrc();
+        else if (this == Directparcels) onDirectparcels();
+        else if (this == NovaPoshtaInt) onNovaPoshtaInt();
+        else if (this == FedexPoland) onFedexPoland();
+        else if (this == CnJcex) onCnJcex();
+        else if (this == FarInternational) onFarInternational();
+        else if (this == Idexpress) onIdexpress();
+        else if (this == Gangbao) onGangbao();
+        else if (this == Neway) onNeway();
+        else if (this == PostnlInt3S) onPostnlInt3S();
+        else if (this == RpxId) onRpxId();
+        else if (this == DesignertransportWebhook) onDesignertransportWebhook();
+        else if (this == GlsSloven) onGlsSloven();
+        else if (this == ParcelledIn) onParcelledIn();
+        else if (this == GsiExpress) onGsiExpress();
+        else if (this == ConWay) onConWay();
+        else if (this == BrouwerTransport) onBrouwerTransport();
+        else if (this == Cpex) onCpex();
+        else if (this == IsraelPost) onIsraelPost();
+        else if (this == DtdcIn) onDtdcIn();
+        else if (this == PttPost) onPttPost();
+        else if (this == XdeWebhook) onXdeWebhook();
+        else if (this == Tolos) onTolos();
+        else if (this == GiaoHang) onGiaoHang();
+        else if (this == GeodisEspace) onGeodisEspace();
+        else if (this == MagyarHu) onMagyarHu();
+        else if (this == DoordashWebhook) onDoordashWebhook();
+        else if (this == TikiId) onTikiId();
+        else if (this == CjHkInternational) onCjHkInternational();
+        else if (this == StarTrackExpress) onStarTrackExpress();
+        else if (this == Helthjem) onHelthjem();
+        else if (this == Sfb2C) onSfb2C();
+        else if (this == Freightquote) onFreightquote();
+        else if (this == LandmarkGlobalReference) onLandmarkGlobalReference();
+        else if (this == Parcel2Go) onParcel2Go();
+        else if (this == Delnext) onDelnext();
+        else if (this == Rcl) onRcl();
+        else if (this == CgsExpress) onCgsExpress();
+        else if (this == HkPost) onHkPost();
+        else if (this == SapExpress) onSapExpress();
+        else if (this == ParcelpostSg) onParcelpostSg();
+        else if (this == Hermes) onHermes();
+        else if (this == IndSafeexpress) onIndSafeexpress();
+        else if (this == Tophatterexpress) onTophatterexpress();
+        else if (this == Mglobal) onMglobal();
+        else if (this == Averitt) onAveritt();
+        else if (this == Leader) onLeader();
+        else if (this == _2Ebox) on_2Ebox();
+        else if (this == SgSpeedpost) onSgSpeedpost();
+        else if (this == DbschenkerSe) onDbschenkerSe();
+        else if (this == IsrPostDomestic) onIsrPostDomestic();
+        else if (this == Bestwayparcel) onBestwayparcel();
+        else if (this == AsendiaDe) onAsendiaDe();
+        else if (this == NightlineUk) onNightlineUk();
+        else if (this == TaqbinSg) onTaqbinSg();
+        else if (this == TckExpress) onTckExpress();
+        else if (this == EndeavourDelivery) onEndeavourDelivery();
+        else if (this == Nanjingwoyuan) onNanjingwoyuan();
+        else if (this == HeppnerFr) onHeppnerFr();
+        else if (this == EmpsCn) onEmpsCn();
+        else if (this == Fonsen) onFonsen();
+        else if (this == Pickrr) onPickrr();
+        else if (this == ApcOvernightConnum) onApcOvernightConnum();
+        else if (this == StarTrackNextFlight) onStarTrackNextFlight();
+        else if (this == Dajin) onDajin();
+        else if (this == UpsFreight) onUpsFreight();
+        else if (this == PostaPlus) onPostaPlus();
+        else if (this == Ceva) onCeva();
+        else if (this == Anserx) onAnserx();
+        else if (this == JsExpress) onJsExpress();
+        else if (this == Padtf) onPadtf();
+        else if (this == UpsMailInnovations) onUpsMailInnovations();
+        else if (this == Sypost) onSypost();
+        else if (this == AmazonShipMcf) onAmazonShipMcf();
+        else if (this == Yusen) onYusen();
+        else if (this == Bring) onBring();
+        else if (this == SdaIt) onSdaIt();
+        else if (this == Gba) onGba();
+        else if (this == Neweggexpress) onNeweggexpress();
+        else if (this == SpeedcouriersGr) onSpeedcouriersGr();
+        else if (this == Forrun) onForrun();
+        else if (this == Pickup) onPickup();
+        else if (this == Ecms) onEcms();
+        else if (this == Intelipost) onIntelipost();
+        else if (this == Flashexpress) onFlashexpress();
+        else if (this == CnSto) onCnSto();
+        else if (this == SekoSftp) onSekoSftp();
+        else if (this == HomeDeliverySolutions) onHomeDeliverySolutions();
+        else if (this == DpdHgry) onDpdHgry();
+        else if (this == KerryttcVn) onKerryttcVn();
+        else if (this == JoyingBox) onJoyingBox();
+        else if (this == TotalExpress) onTotalExpress();
+        else if (this == ZjsExpress) onZjsExpress();
+        else if (this == Starken) onStarken();
+        else if (this == Demandship) onDemandship();
+        else if (this == CnDpex) onCnDpex();
+        else if (this == AupostCn) onAupostCn();
+        else if (this == Logisters) onLogisters();
+        else if (this == Goglobalpost) onGoglobalpost();
+        else if (this == GlsCz) onGlsCz();
+        else if (this == PaackWebhook) onPaackWebhook();
+        else if (this == GrabWebhook) onGrabWebhook();
+        else if (this == Parcelpoint) onParcelpoint();
+        else if (this == Icumulus) onIcumulus();
+        else if (this == Daiglobaltrack) onDaiglobaltrack();
+        else if (this == GlobalIparcel) onGlobalIparcel();
+        else if (this == YurticiKargo) onYurticiKargo();
+        else if (this == CnPaypalPackage) onCnPaypalPackage();
+        else if (this == Parcel2Post) onParcel2Post();
+        else if (this == GlsIt) onGlsIt();
+        else if (this == PilLogistics) onPilLogistics();
+        else if (this == Heppner) onHeppner();
+        else if (this == GeneralOvernight) onGeneralOvernight();
+        else if (this == Happy2Point) onHappy2Point();
+        else if (this == Chitchats) onChitchats();
+        else if (this == Smooth) onSmooth();
+        else if (this == CleLogistics) onCleLogistics();
+        else if (this == Fiege) onFiege();
+        else if (this == MxCargo) onMxCargo();
+        else if (this == Ziingfinalmile) onZiingfinalmile();
+        else if (this == DaytonFreight) onDaytonFreight();
+        else if (this == Tcs) onTcs();
+        else if (this == Aex) onAex();
+        else if (this == HermesDe) onHermesDe();
+        else if (this == RoutificWebhook) onRoutificWebhook();
+        else if (this == Globavend) onGlobavend();
+        else if (this == CjLogistics) onCjLogistics();
+        else if (this == PalletNetwork) onPalletNetwork();
+        else if (this == RafPh) onRafPh();
+        else if (this == UkXdp) onUkXdp();
+        else if (this == PaperExpress) onPaperExpress();
+        else if (this == LaPosteSuivi) onLaPosteSuivi();
+        else if (this == Paquetexpress) onPaquetexpress();
+        else if (this == Liefery) onLiefery();
+        else if (this == StreckTransport) onStreckTransport();
+        else if (this == PonyExpress) onPonyExpress();
+        else if (this == AlwaysExpress) onAlwaysExpress();
+        else if (this == GbsBroker) onGbsBroker();
+        else if (this == CitylinkMy) onCitylinkMy();
+        else if (this == Alljoy) onAlljoy();
+        else if (this == Yodel) onYodel();
+        else if (this == YodelDir) onYodelDir();
+        else if (this == Stone3Pl) onStone3Pl();
+        else if (this == ParcelpalWebhook) onParcelpalWebhook();
+        else if (this == DhlEcomerceAsa) onDhlEcomerceAsa();
+        else if (this == Simplypost) onSimplypost();
+        else if (this == KyExpress) onKyExpress();
+        else if (this == Shenzhen) onShenzhen();
+        else if (this == UsLasership) onUsLasership();
+        else if (this == UcExpre) onUcExpre();
+        else if (this == Didadi) onDidadi();
+        else if (this == CjKr) onCjKr();
+        else if (this == DbschenkerB2B) onDbschenkerB2B();
+        else if (this == Mxe) onMxe();
+        else if (this == CaeDelivers) onCaeDelivers();
+        else if (this == Pfcexpress) onPfcexpress();
+        else if (this == Whistl) onWhistl();
+        else if (this == Wepost) onWepost();
+        else if (this == DhlParcelEs) onDhlParcelEs();
+        else if (this == Ddexpress) onDdexpress();
+        else if (this == AramexAu) onAramexAu();
+        else if (this == Bneed) onBneed();
+        else if (this == HkTgx) onHkTgx();
+        else if (this == LatvijasPasts) onLatvijasPasts();
+        else if (this == Viaeurope) onViaeurope();
+        else if (this == CorreoUy) onCorreoUy();
+        else if (this == ChronopostFr) onChronopostFr();
+        else if (this == JNet) onJNet();
+        else if (this == _6Ls) on_6Ls();
+        else if (this == BlrBelpost) onBlrBelpost();
+        else if (this == Birdsystem) onBirdsystem();
+        else if (this == Dobropost) onDobropost();
+        else if (this == WahanaId) onWahanaId();
+        else if (this == Weaship) onWeaship();
+        else if (this == Sonictl) onSonictl();
+        else if (this == Kwt) onKwt();
+        else if (this == AfllogFtp) onAfllogFtp();
+        else if (this == SkynetWorldwide) onSkynetWorldwide();
+        else if (this == NovaPoshta) onNovaPoshta();
+        else if (this == Seino) onSeino();
+        else if (this == Szendex) onSzendex();
+        else if (this == BpostInt) onBpostInt();
+        else if (this == DbschenkerSv) onDbschenkerSv();
+        else if (this == AoDeutschland) onAoDeutschland();
+        else if (this == EuFleetSolutions) onEuFleetSolutions();
+        else if (this == Pcfcorp) onPcfcorp();
+        else if (this == Linkbridge) onLinkbridge();
+        else if (this == Primamulticipta) onPrimamulticipta();
+        else if (this == Courex) onCourex();
+        else if (this == ZajilExpress) onZajilExpress();
+        else if (this == Collectco) onCollectco();
+        else if (this == Jtexpress) onJtexpress();
+        else if (this == FedexUk) onFedexUk();
+        else if (this == Uship) onUship();
+        else if (this == Pixsell) onPixsell();
+        else if (this == Shiptor) onShiptor();
+        else if (this == Cdek) onCdek();
+        else if (this == VnmViettelpost) onVnmViettelpost();
+        else if (this == CjCentury) onCjCentury();
+        else if (this == Gso) onGso();
+        else if (this == Viwo) onViwo();
+        else if (this == Skybox) onSkybox();
+        else if (this == Kerrytj) onKerrytj();
+        else if (this == NtlogisticsVn) onNtlogisticsVn();
+        else if (this == SdhScm) onSdhScm();
+        else if (this == Zinc) onZinc();
+        else if (this == DpeSouthAfrc) onDpeSouthAfrc();
+        else if (this == CeskaCz) onCeskaCz();
+        else if (this == AcsGr) onAcsGr();
+        else if (this == Dealersend) onDealersend();
+        else if (this == Jocom) onJocom();
+        else if (this == Cse) onCse();
+        else if (this == TforceFinalmile) onTforceFinalmile();
+        else if (this == ShipGate) onShipGate();
+        else if (this == Shipter) onShipter();
+        else if (this == NationalSameday) onNationalSameday();
+        else if (this == Yunexpress) onYunexpress();
+        else if (this == Cainiao) onCainiao();
+        else if (this == DmsMatrix) onDmsMatrix();
+        else if (this == Directlog) onDirectlog();
+        else if (this == AsendiaUs) onAsendiaUs();
+        else if (this == _3Jmslogistics) on_3Jmslogistics();
+        else if (this == LiccardiExpress) onLiccardiExpress();
+        else if (this == SkyPostal) onSkyPostal();
+        else if (this == Cnwangtong) onCnwangtong();
+        else if (this == PostnordLogisticsDk) onPostnordLogisticsDk();
+        else if (this == Logistika) onLogistika();
+        else if (this == Celeritas) onCeleritas();
+        else if (this == Pressiode) onPressiode();
+        else if (this == ShreeMaruti) onShreeMaruti();
+        else if (this == LogisticsworldwideHk) onLogisticsworldwideHk();
+        else if (this == Efex) onEfex();
+        else if (this == Lotte) onLotte();
+        else if (this == Lonestar) onLonestar();
+        else if (this == Aprisaexpress) onAprisaexpress();
+        else if (this == BelRs) onBelRs();
+        else if (this == OsmWorldwide) onOsmWorldwide();
+        else if (this == WestgateGl) onWestgateGl();
+        else if (this == Fastrack) onFastrack();
+        else if (this == DtdExpr) onDtdExpr();
+        else if (this == Alfatrex) onAlfatrex();
+        else if (this == Promeddelivery) onPromeddelivery();
+        else if (this == ThabitLogistics) onThabitLogistics();
+        else if (this == HctLogistics) onHctLogistics();
+        else if (this == CarryFlap) onCarryFlap();
+        else if (this == UsOldDominion) onUsOldDominion();
+        else if (this == AnicamBox) onAnicamBox();
+        else if (this == Wanbexpress) onWanbexpress();
+        else if (this == AnPost) onAnPost();
+        else if (this == DpdLocal) onDpdLocal();
+        else if (this == Stallionexpress) onStallionexpress();
+        else if (this == Raiderex) onRaiderex();
+        else if (this == Shopfans) onShopfans();
+        else if (this == KyungdongParcel) onKyungdongParcel();
+        else if (this == ChampionLogistics) onChampionLogistics();
+        else if (this == PickuppSgp) onPickuppSgp();
+        else if (this == MorningExpress) onMorningExpress();
+        else if (this == Nacex) onNacex();
+        else if (this == ThenileWebhook) onThenileWebhook();
+        else if (this == Holisol) onHolisol();
+        else if (this == LbcexpressFtp) onLbcexpressFtp();
+        else if (this == Kurasi) onKurasi();
+        else if (this == UsfReddaway) onUsfReddaway();
+        else if (this == Apg) onApg();
+        else if (this == CnBoxc) onCnBoxc();
+        else if (this == Ecoscooting) onEcoscooting();
+        else if (this == Mainway) onMainway();
+        else if (this == Paperfly) onPaperfly();
+        else if (this == Houndexpress) onHoundexpress();
+        else if (this == BoxBerry) onBoxBerry();
+        else if (this == EpBox) onEpBox();
+        else if (this == PlusLogUk) onPlusLogUk();
+        else if (this == Fulfilla) onFulfilla();
+        else if (this == Ase) onAse();
+        else if (this == MailPlus) onMailPlus();
+        else if (this == XpoLogistics) onXpoLogistics();
+        else if (this == Wndirect) onWndirect();
+        else if (this == CloudwishAsia) onCloudwishAsia();
+        else if (this == Zeleris) onZeleris();
+        else if (this == GioExpress) onGioExpress();
+        else if (this == OcsWorldwide) onOcsWorldwide();
+        else if (this == ArkLogistics) onArkLogistics();
+        else if (this == Aquiline) onAquiline();
+        else if (this == PilotFreight) onPilotFreight();
+        else if (this == Qwintry) onQwintry();
+        else if (this == DanskeFragt) onDanskeFragt();
+        else if (this == Carriers) onCarriers();
+        else if (this == AirCanadaGlobal) onAirCanadaGlobal();
+        else if (this == PresidentTrans) onPresidentTrans();
+        else if (this == Stepforwardfs) onStepforwardfs();
+        else if (this == SkynetUk) onSkynetUk();
+        else if (this == Pittohio) onPittohio();
+        else if (this == CorreosExpress) onCorreosExpress();
+        else if (this == RlUs) onRlUs();
+        else if (this == Destiny) onDestiny();
+        else if (this == UkYodel) onUkYodel();
+        else if (this == CometTech) onCometTech();
+        else if (this == DhlParcelRu) onDhlParcelRu();
+        else if (this == TntRefr) onTntRefr();
+        else if (this == ShreeAnjaniCourier) onShreeAnjaniCourier();
+        else if (this == MikropakketBe) onMikropakketBe();
+        else if (this == EtsExpress) onEtsExpress();
+        else if (this == ColisPrive) onColisPrive();
+        else if (this == CnYunda) onCnYunda();
+        else if (this == AaaCooper) onAaaCooper();
+        else if (this == RocketParcel) onRocketParcel();
+        else if (this == _360Lion) on_360Lion();
+        else if (this == Pandu) onPandu();
+        else if (this == ProfessionalCouriers) onProfessionalCouriers();
+        else if (this == Flytexpress) onFlytexpress();
+        else if (this == LogisticsworldwideMy) onLogisticsworldwideMy();
+        else if (this == CorreosDeEspana) onCorreosDeEspana();
+        else if (this == Imx) onImx();
+        else if (this == FourPxExpress) onFourPxExpress();
+        else if (this == Xpressbees) onXpressbees();
+        else if (this == PickuppVnm) onPickuppVnm();
+        else if (this == StartrackExpress) onStartrackExpress();
+        else if (this == FrColissimo) onFrColissimo();
+        else if (this == NacexSpainReference) onNacexSpainReference();
+        else if (this == DhlSupplyChainAu) onDhlSupplyChainAu();
+        else if (this == Eshipping) onEshipping();
+        else if (this == Shreetirupati) onShreetirupati();
+        else if (this == HxExpress) onHxExpress();
+        else if (this == Indopaket) onIndopaket();
+        else if (this == Cn17Post) onCn17Post();
+        else if (this == K1Express) onK1Express();
+        else if (this == CjGls) onCjGls();
+        else if (this == MysGdex) onMysGdex();
+        else if (this == Nationex) onNationex();
+        else if (this == Anjun) onAnjun();
+        else if (this == Fargood) onFargood();
+        else if (this == SmgExpress) onSmgExpress();
+        else if (this == Rzyexpress) onRzyexpress();
+        else if (this == Sefl) onSefl();
+        else if (this == TntClickIt) onTntClickIt();
+        else if (this == Hdb) onHdb();
+        else if (this == Hipshipper) onHipshipper();
+        else if (this == Rpxlogistics) onRpxlogistics();
+        else if (this == Kuehne) onKuehne();
+        else if (this == ItNexive) onItNexive();
+        else if (this == Pts) onPts();
+        else if (this == SwissPostFtp) onSwissPostFtp();
+        else if (this == FastrkServ) onFastrkServ();
+        else if (this == _472) on_472();
+        else if (this == UsYrc) onUsYrc();
+        else if (this == PostnlIntl3S) onPostnlIntl3S();
+        else if (this == ElianPost) onElianPost();
+        else if (this == Cubyn) onCubyn();
+        else if (this == SauSaudiPost) onSauSaudiPost();
+        else if (this == AbxexpressMy) onAbxexpressMy();
+        else if (this == HuahanExpress) onHuahanExpress();
+        else if (this == ZesExpress) onZesExpress();
+        else if (this == ZeptoExpress) onZeptoExpress();
+        else if (this == SkynetZa) onSkynetZa();
+        else if (this == Zeek2Door) onZeek2Door();
+        else if (this == Blinklastmile) onBlinklastmile();
+        else if (this == PostaUkr) onPostaUkr();
+        else if (this == Chrobinson) onChrobinson();
+        else if (this == CnPost56) onCnPost56();
+        else if (this == CourantPlus) onCourantPlus();
+        else if (this == ScudexExpress) onScudexExpress();
+        else if (this == Shipentegra) onShipentegra();
+        else if (this == BTwoCEurope) onBTwoCEurope();
+        else if (this == Cope) onCope();
+        else if (this == IndGati) onIndGati();
+        else if (this == CnWishpost) onCnWishpost();
+        else if (this == NacexEs) onNacexEs();
+        else if (this == TaqbinHk) onTaqbinHk();
+        else if (this == Globaltranz) onGlobaltranz();
+        else if (this == Hkd) onHkd();
+        else if (this == Bjshomedelivery) onBjshomedelivery();
+        else if (this == Omniva) onOmniva();
+        else if (this == Sutton) onSutton();
+        else if (this == PantherReference) onPantherReference();
+        else if (this == Sfcservice) onSfcservice();
+        else if (this == Ltl) onLtl();
+        else if (this == Parknparcel) onParknparcel();
+        else if (this == SpringGds) onSpringGds();
+        else if (this == Ecexpress) onEcexpress();
+        else if (this == InterparcelAu) onInterparcelAu();
+        else if (this == Agility) onAgility();
+        else if (this == XlExpress) onXlExpress();
+        else if (this == Aderonline) onAderonline();
+        else if (this == Directcouriers) onDirectcouriers();
+        else if (this == Planzer) onPlanzer();
+        else if (this == Sending) onSending();
+        else if (this == NinjavanWb) onNinjavanWb();
+        else if (this == NationwideMy) onNationwideMy();
+        else if (this == Sendit) onSendit();
+        else if (this == GbArrow) onGbArrow();
+        else if (this == IndGojavas) onIndGojavas();
+        else if (this == Kpost) onKpost();
+        else if (this == DhlFreight) onDhlFreight();
+        else if (this == Bluecare) onBluecare();
+        else if (this == Jindouyun) onJindouyun();
+        else if (this == Trackon) onTrackon();
+        else if (this == GbTuffnells) onGbTuffnells();
+        else if (this == Trumpcard) onTrumpcard();
+        else if (this == Etotal) onEtotal();
+        else if (this == SfplusWebhook) onSfplusWebhook();
+        else if (this == Sekologistics) onSekologistics();
+        else if (this == Hermes2MannHandling) onHermes2MannHandling();
+        else if (this == DpdLocalRef) onDpdLocalRef();
+        else if (this == Uds) onUds();
+        else if (this == ZaSpecialisedFreight) onZaSpecialisedFreight();
+        else if (this == ThaKerry) onThaKerry();
+        else if (this == PrtIntSeur) onPrtIntSeur();
+        else if (this == BraCorreios) onBraCorreios();
+        else if (this == NzNzPost) onNzNzPost();
+        else if (this == CnEquick) onCnEquick();
+        else if (this == MysEms) onMysEms();
+        else if (this == GbNorsk) onGbNorsk();
+        else if (this == EspMrw) onEspMrw();
+        else if (this == EspPacklink) onEspPacklink();
+        else if (this == KangarooMy) onKangarooMy();
+        else if (this == Rpx) onRpx();
+        else if (this == XdpUkReference) onXdpUkReference();
+        else if (this == NinjavanMy) onNinjavanMy();
+        else if (this == Adicional) onAdicional();
+        else if (this == Roadbull) onRoadbull();
+        else if (this == Yakit) onYakit();
+        else if (this == Mailamericas) onMailamericas();
+        else if (this == Mikropakket) onMikropakket();
+        else if (this == Dynalogic) onDynalogic();
+        else if (this == DhlEs) onDhlEs();
+        else if (this == DhlParcelNl) onDhlParcelNl();
+        else if (this == DhlGlobalMailAsia) onDhlGlobalMailAsia();
+        else if (this == DawnWing) onDawnWing();
+        else if (this == GenikiGr) onGenikiGr();
+        else if (this == HermesworldUk) onHermesworldUk();
+        else if (this == Alphafast) onAlphafast();
+        else if (this == Buylogic) onBuylogic();
+        else if (this == Ekart) onEkart();
+        else if (this == MexSenda) onMexSenda();
+        else if (this == SfcLogistics) onSfcLogistics();
+        else if (this == PostSerbia) onPostSerbia();
+        else if (this == IndDelhivery) onIndDelhivery();
+        else if (this == DeDpdDelistrack) onDeDpdDelistrack();
+        else if (this == Rpd2Man) onRpd2Man();
+        else if (this == CnSfExpress) onCnSfExpress();
+        else if (this == Yanwen) onYanwen();
+        else if (this == MysSkynet) onMysSkynet();
+        else if (this == CorreosDeMexico) onCorreosDeMexico();
+        else if (this == CblLogistica) onCblLogistica();
+        else if (this == MexEstafeta) onMexEstafeta();
+        else if (this == AuAustrianPost) onAuAustrianPost();
+        else if (this == Rincos) onRincos();
+        else if (this == NldDhl) onNldDhl();
+        else if (this == RussianPost) onRussianPost();
+        else if (this == CouriersPlease) onCouriersPlease();
+        else if (this == PostnordLogistics) onPostnordLogistics();
+        else if (this == Fedex) onFedex();
+        else if (this == DpeExpress) onDpeExpress();
+        else if (this == Dpd) onDpd();
+        else if (this == Adsone) onAdsone();
+        else if (this == IdnJne) onIdnJne();
+        else if (this == Thecourierguy) onThecourierguy();
+        else if (this == Cnexps) onCnexps();
+        else if (this == PrtChronopost) onPrtChronopost();
+        else if (this == LandmarkGlobal) onLandmarkGlobal();
+        else if (this == ItDhlEcommerce) onItDhlEcommerce();
+        else if (this == EspNacex) onEspNacex();
+        else if (this == PrtCtt) onPrtCtt();
+        else if (this == BeKiala) onBeKiala();
+        else if (this == AsendiaUk) onAsendiaUk();
+        else if (this == GlobalTnt) onGlobalTnt();
+        else if (this == PosturIs) onPosturIs();
+        else if (this == EparcelKr) onEparcelKr();
+        else if (this == InpostPaczkomaty) onInpostPaczkomaty();
+        else if (this == ItPosteItalia) onItPosteItalia();
+        else if (this == BeBpost) onBeBpost();
+        else if (this == PlPocztaPolska) onPlPocztaPolska();
+        else if (this == MysMysPost) onMysMysPost();
+        else if (this == SgSgPost) onSgSgPost();
+        else if (this == ThaThailandPost) onThaThailandPost();
+        else if (this == Lexship) onLexship();
+        else if (this == FastwayNz) onFastwayNz();
+        else if (this == DhlAu) onDhlAu();
+        else if (this == Costmeticsnow) onCostmeticsnow();
+        else if (this == Pflogistics) onPflogistics();
+        else if (this == LoomisExpress) onLoomisExpress();
+        else if (this == GlsItaly) onGlsItaly();
+        else if (this == Line) onLine();
+        else if (this == GelExpress) onGelExpress();
+        else if (this == Huodull) onHuodull();
+        else if (this == NinjavanSg) onNinjavanSg();
+        else if (this == Janio) onJanio();
+        else if (this == AoCourier) onAoCourier();
+        else if (this == BrtItSenderRef) onBrtItSenderRef();
+        else if (this == Sailpost) onSailpost();
+        else if (this == Lalamove) onLalamove();
+        else if (this == NewzealandCouriers) onNewzealandCouriers();
+        else if (this == Etomars) onEtomars();
+        else if (this == Virtransport) onVirtransport();
+        else if (this == Wizmo) onWizmo();
+        else if (this == Palletways) onPalletways();
+        else if (this == IDika) onIDika();
+        else if (this == CflLogistics) onCflLogistics();
+        else if (this == Gemworldwide) onGemworldwide();
+        else if (this == GlobalExpress) onGlobalExpress();
+        else if (this == LogistyxTransgroup) onLogistyxTransgroup();
+        else if (this == WestbankCourier) onWestbankCourier();
+        else if (this == ArcoSpedizioni) onArcoSpedizioni();
+        else if (this == YdhExpress) onYdhExpress();
+        else if (this == Parcelinklogistics) onParcelinklogistics();
+        else if (this == Cndexpress) onCndexpress();
+        else if (this == NoxNightTimeExpress) onNoxNightTimeExpress();
+        else if (this == Aeronet) onAeronet();
+        else if (this == Ltianexp) onLtianexp();
+        else if (this == Integra2Ftp) onIntegra2Ftp();
+        else if (this == Parcelone) onParcelone();
+        else if (this == NoxNachtexpress) onNoxNachtexpress();
+        else if (this == CnChinaPostEms) onCnChinaPostEms();
+        else if (this == Chukou1) onChukou1();
+        else if (this == GlsSlov) onGlsSlov();
+        else if (this == OrangeDs) onOrangeDs();
+        else if (this == JoomLogis) onJoomLogis();
+        else if (this == AusStartrack) onAusStartrack();
+        else if (this == Dhl) onDhl();
+        else if (this == GbApc) onGbApc();
+        else if (this == Bondscouriers) onBondscouriers();
+        else if (this == JpnJapanPost) onJpnJapanPost();
+        else if (this == Usps) onUsps();
+        else if (this == Winit) onWinit();
+        else if (this == ArgOca) onArgOca();
+        else if (this == TwTaiwanPost) onTwTaiwanPost();
+        else if (this == DmmNetwork) onDmmNetwork();
+        else if (this == Tnt) onTnt();
+        else if (this == BhPosta) onBhPosta();
+        else if (this == SwePostnord) onSwePostnord();
+        else if (this == CaCanadaPost) onCaCanadaPost();
+        else if (this == Wiseloads) onWiseloads();
+        else if (this == AsendiaHk) onAsendiaHk();
+        else if (this == NldGls) onNldGls();
+        else if (this == MexRedpack) onMexRedpack();
+        else if (this == JetShip) onJetShip();
+        else if (this == DeDhlExpress) onDeDhlExpress();
+        else if (this == NinjavanThai) onNinjavanThai();
+        else if (this == RabenGroup) onRabenGroup();
+        else if (this == EspAsm) onEspAsm();
+        else if (this == HrvHrvatska) onHrvHrvatska();
+        else if (this == GlobalEstes) onGlobalEstes();
+        else if (this == LtuLietuvos) onLtuLietuvos();
+        else if (this == BelDhl) onBelDhl();
+        else if (this == AuAuPost) onAuAuPost();
+        else if (this == Speedexcourier) onSpeedexcourier();
+        else if (this == FrColis) onFrColis();
+        else if (this == Aramex) onAramex();
+        else if (this == Dpex) onDpex();
+        else if (this == MysAirpak) onMysAirpak();
+        else if (this == Cuckooexpress) onCuckooexpress();
+        else if (this == DpdPoland) onDpdPoland();
+        else if (this == NldPostnl) onNldPostnl();
+        else if (this == NimExpress) onNimExpress();
+        else if (this == Quantium) onQuantium();
+        else if (this == Sendle) onSendle();
+        else if (this == EspRedur) onEspRedur();
+        else if (this == Matkahuolto) onMatkahuolto();
+        else if (this == Cpacket) onCpacket();
+        else if (this == Posti) onPosti();
+        else if (this == HunterExpress) onHunterExpress();
+        else if (this == ChoirExp) onChoirExp();
+        else if (this == LegionExpress) onLegionExpress();
+        else if (this == AustrianPostExpress) onAustrianPostExpress();
+        else if (this == Grupo) onGrupo();
+        else if (this == PostaRo) onPostaRo();
+        else if (this == InterparcelUk) onInterparcelUk();
+        else if (this == GlobalAbf) onGlobalAbf();
+        else if (this == PostenNorge) onPostenNorge();
+        else if (this == XpertDelivery) onXpertDelivery();
+        else if (this == DhlRefr) onDhlRefr();
+        else if (this == DhlHk) onDhlHk();
+        else if (this == SkynetUae) onSkynetUae();
+        else if (this == Gojek) onGojek();
+        else if (this == YodelIntnl) onYodelIntnl();
+        else if (this == Janco) onJanco();
+        else if (this == Yto) onYto();
+        else if (this == WiseExpress) onWiseExpress();
+        else if (this == JtexpressVn) onJtexpressVn();
+        else if (this == FedexIntlMlserv) onFedexIntlMlserv();
+        else if (this == Vamox) onVamox();
+        else if (this == AmsGrp) onAmsGrp();
+        else if (this == DhlJp) onDhlJp();
+        else if (this == Hrparcel) onHrparcel();
+        else if (this == Geswl) onGeswl();
+        else if (this == Bluestar) onBluestar();
+        else if (this == CdekTr) onCdekTr();
+        else if (this == Descartes) onDescartes();
+        else if (this == DeltecUk) onDeltecUk();
+        else if (this == DtdcExpress) onDtdcExpress();
+        else if (this == Tourline) onTourline();
+        else if (this == BhWorldwide) onBhWorldwide();
+        else if (this == Ocs) onOcs();
+        else if (this == YingnuoLogistics) onYingnuoLogistics();
+        else if (this == Ups) onUps();
+        else if (this == Toll) onToll();
+        else if (this == PrtSeur) onPrtSeur();
+        else if (this == DtdcAu) onDtdcAu();
+        else if (this == ThaDynamicLogistics) onThaDynamicLogistics();
+        else if (this == UbiLogistics) onUbiLogistics();
+        else if (this == FedexCrossborder) onFedexCrossborder();
+        else if (this == A1Post) onA1Post();
+        else if (this == TazmanianFreight) onTazmanianFreight();
+        else if (this == CjIntMy) onCjIntMy();
+        else if (this == SaiaFreight) onSaiaFreight();
+        else if (this == SgQxpress) onSgQxpress();
+        else if (this == NhansSolutions) onNhansSolutions();
+        else if (this == DpdFr) onDpdFr();
+        else if (this == Coordinadora) onCoordinadora();
+        else if (this == Andreani) onAndreani();
+        else if (this == Doora) onDoora();
+        else if (this == InterparcelNz) onInterparcelNz();
+        else if (this == PhlJamexpress) onPhlJamexpress();
+        else if (this == BelBelgiumPost) onBelBelgiumPost();
+        else if (this == UsApc) onUsApc();
+        else if (this == IdnPos) onIdnPos();
+        else if (this == FrMondial) onFrMondial();
+        else if (this == DeDhl) onDeDhl();
+        else if (this == HkRpx) onHkRpx();
+        else if (this == DhlPieceid) onDhlPieceid();
+        else if (this == VnpostEms) onVnpostEms();
+        else if (this == Rrdonnelley) onRrdonnelley();
+        else if (this == DpdDe) onDpdDe();
+        else if (this == DelcartIn) onDelcartIn();
+        else if (this == Imexglobalsolutions) onImexglobalsolutions();
+        else if (this == Acommerce) onAcommerce();
+        else if (this == Eurodis) onEurodis();
+        else if (this == Canpar) onCanpar();
+        else if (this == Gls) onGls();
+        else if (this == IndEcom) onIndEcom();
+        else if (this == EspEnvialia) onEspEnvialia();
+        else if (this == DhlUk) onDhlUk();
+        else if (this == SmsaExpress) onSmsaExpress();
+        else if (this == TntFr) onTntFr();
+        else if (this == DexI) onDexI();
+        else if (this == BudbeeWebhook) onBudbeeWebhook();
+        else if (this == CopaCourier) onCopaCourier();
+        else if (this == VnmVietnamPost) onVnmVietnamPost();
+        else if (this == DpdHk) onDpdHk();
+        else if (this == TollNz) onTollNz();
+        else if (this == Echo) onEcho();
+        else if (this == FedexFr) onFedexFr();
+        else if (this == Borderexpress) onBorderexpress();
+        else if (this == MailplusJpn) onMailplusJpn();
+        else if (this == TntUkRefr) onTntUkRefr();
+        else if (this == Kec) onKec();
+        else if (this == DpdRo) onDpdRo();
+        else if (this == TntJp) onTntJp();
+        else if (this == ThCj) onThCj();
+        else if (this == EcCn) onEcCn();
+        else if (this == FastwayUk) onFastwayUk();
+        else if (this == FastwayUs) onFastwayUs();
+        else if (this == GlsDe) onGlsDe();
+        else if (this == GlsEs) onGlsEs();
+        else if (this == GlsFr) onGlsFr();
+        else if (this == MondialBe) onMondialBe();
+        else if (this == SgtIt) onSgtIt();
+        else if (this == TntCn) onTntCn();
+        else if (this == TntDe) onTntDe();
+        else if (this == TntEs) onTntEs();
+        else if (this == TntPl) onTntPl();
+        else if (this == Parcelforce) onParcelforce();
+        else if (this == SwissPost) onSwissPost();
+        else if (this == TollIpec) onTollIpec();
+        else if (this == Air21) onAir21();
+        else if (this == Airspeed) onAirspeed();
+        else if (this == Bert) onBert();
+        else if (this == Bluedart) onBluedart();
+        else if (this == Collectplus) onCollectplus();
+        else if (this == Courierplus) onCourierplus();
+        else if (this == CourierPost) onCourierPost();
+        else if (this == DhlGlobalMail) onDhlGlobalMail();
+        else if (this == DpdUk) onDpdUk();
+        else if (this == DeltecDe) onDeltecDe();
+        else if (this == DeutscheDe) onDeutscheDe();
+        else if (this == Dotzot) onDotzot();
+        else if (this == EltaGr) onEltaGr();
+        else if (this == EmsCn) onEmsCn();
+        else if (this == Ecargo) onEcargo();
+        else if (this == Ensenda) onEnsenda();
+        else if (this == FercamIt) onFercamIt();
+        else if (this == FastwayZa) onFastwayZa();
+        else if (this == FastwayAu) onFastwayAu();
+        else if (this == FirstLogisitcs) onFirstLogisitcs();
+        else if (this == Geodis) onGeodis();
+        else if (this == Globegistics) onGlobegistics();
+        else if (this == Greyhound) onGreyhound();
+        else if (this == JetshipMy) onJetshipMy();
+        else if (this == LionParcel) onLionParcel();
+        else if (this == Aeroflash) onAeroflash();
+        else if (this == Ontrac) onOntrac();
+        else if (this == Sagawa) onSagawa();
+        else if (this == Siodemka) onSiodemka();
+        else if (this == Startrack) onStartrack();
+        else if (this == TntAu) onTntAu();
+        else if (this == TntIt) onTntIt();
+        else if (this == Transmission) onTransmission();
+        else if (this == Yamato) onYamato();
+        else if (this == DhlIt) onDhlIt();
+        else if (this == DhlAt) onDhlAt();
+        else if (this == LogisticsworldwideKr) onLogisticsworldwideKr();
+        else if (this == GlsSpain) onGlsSpain();
+        else if (this == AmazonUkApi) onAmazonUkApi();
+        else if (this == DpdFrReference) onDpdFrReference();
+        else if (this == DhlparcelUk) onDhlparcelUk();
+        else if (this == Megasave) onMegasave();
+        else if (this == Qualitypost) onQualitypost();
+        else if (this == IdsLogistics) onIdsLogistics();
+        else if (this == Joyingbox) onJoyingbox();
+        else if (this == PantherOrderNumber) onPantherOrderNumber();
+        else if (this == WatkinsShepard) onWatkinsShepard();
+        else if (this == Fasttrack) onFasttrack();
+        else if (this == UpExpress) onUpExpress();
+        else if (this == Elogistica) onElogistica();
+        else if (this == Ecourier) onEcourier();
+        else if (this == CjPhilippines) onCjPhilippines();
+        else if (this == Speedex) onSpeedex();
+        else if (this == Orangeconnex) onOrangeconnex();
+        else if (this == Tecor) onTecor();
+        else if (this == Saee) onSaee();
+        else if (this == GlsItalyFtp) onGlsItalyFtp();
+        else if (this == Delivere) onDelivere();
+        else if (this == Yycom) onYycom();
+        else if (this == AdicionalPt) onAdicionalPt();
+        else if (this == Dksh) onDksh();
+        else if (this == NipponExpressFtp) onNipponExpressFtp();
+        else if (this == Gols) onGols();
+        else if (this == Fujexp) onFujexp();
+        else if (this == Qtrack) onQtrack();
+        else if (this == OmlogisticsApi) onOmlogisticsApi();
+        else if (this == Gdpharm) onGdpharm();
+        else if (this == MisumiCn) onMisumiCn();
+        else if (this == AirCanada) onAirCanada();
+        else if (this == City56Webhook) onCity56Webhook();
+        else if (this == SagawaApi) onSagawaApi();
+        else if (this == Kedaex) onKedaex();
+        else if (this == PgeonApi) onPgeonApi();
+        else if (this == Weworldexpress) onWeworldexpress();
+        else if (this == JtLogistics) onJtLogistics();
+        else if (this == Trusk) onTrusk();
+        else if (this == Viaxpress) onViaxpress();
+        else if (this == DhlSupplychainId) onDhlSupplychainId();
+        else if (this == ZuelligpharmaSftp) onZuelligpharmaSftp();
+        else if (this == Meest) onMeest();
+        else if (this == TollPriority) onTollPriority();
+        else if (this == MothershipApi) onMothershipApi();
+        else if (this == Capital) onCapital();
+        else if (this == EuropaketApi) onEuropaketApi();
+        else if (this == Hfd) onHfd();
+        else if (this == TourlineReference) onTourlineReference();
+        else if (this == GioEcourier) onGioEcourier();
+        else if (this == CnLogistics) onCnLogistics();
+        else if (this == Pandion) onPandion();
+        else if (this == BpostApi) onBpostApi();
+        else if (this == Passportshipping) onPassportshipping();
+        else if (this == Pakajo) onPakajo();
+        else if (this == Dachser) onDachser();
+        else if (this == YusenSftp) onYusenSftp();
+        else if (this == Shyplite) onShyplite();
+        else if (this == Xyy) onXyy();
+        else if (this == Mwd) onMwd();
+        else if (this == Faxecargo) onFaxecargo();
+        else if (this == Mazet) onMazet();
+        else if (this == FirstLogisticsApi) onFirstLogisticsApi();
+        else if (this == SprintPack) onSprintPack();
+        else if (this == HermesDeFtp) onHermesDeFtp();
+        else if (this == Concise) onConcise();
+        else if (this == KerryExpressTwApi) onKerryExpressTwApi();
+        else if (this == Ewe) onEwe();
+        else if (this == Fastdespatch) onFastdespatch();
+        else if (this == AbcustomSftp) onAbcustomSftp();
+        else if (this == Chazki) onChazki();
+        else if (this == Shippie) onShippie();
+        else if (this == GeodisApi) onGeodisApi();
+        else if (this == NaqelExpress) onNaqelExpress();
+        else if (this == PapaWebhook) onPapaWebhook();
+        else if (this == Forwardair) onForwardair();
+        else if (this == DialogoLogisticaApi) onDialogoLogisticaApi();
+        else if (this == LalamoveApi) onLalamoveApi();
+        else if (this == Tomydoor) onTomydoor();
+        else if (this == KronosWebhook) onKronosWebhook();
+        else if (this == Jtcargo) onJtcargo();
+        else if (this == TCat) onTCat();
+        else if (this == ConciseWebhook) onConciseWebhook();
+        else if (this == TeleportWebhook) onTeleportWebhook();
+        else if (this == CustomcoApi) onCustomcoApi();
+        else if (this == SpxTh) onSpxTh();
+        else if (this == BolloreLogistics) onBolloreLogistics();
+        else if (this == ClicklinkSftp) onClicklinkSftp();
+        else if (this == M3Logistics) onM3Logistics();
+        else if (this == VnpostApi) onVnpostApi();
+        else if (this == AxlehireFtp) onAxlehireFtp();
+        else if (this == Shadowfax) onShadowfax();
+        else if (this == MyhermesUkApi) onMyhermesUkApi();
+        else if (this == Daiichi) onDaiichi();
+        else if (this == MensajerosurbanosApi) onMensajerosurbanosApi();
+        else if (this == Polarspeed) onPolarspeed();
+        else if (this == IdexpressId) onIdexpressId();
+        else if (this == Payo) onPayo();
+        else if (this == WhistlSftp) onWhistlSftp();
+        else if (this == IntexDe) onIntexDe();
+        else if (this == Trans2U) onTrans2U();
+        else if (this == ProductcaregroupSftp) onProductcaregroupSftp();
+        else if (this == Bigsmart) onBigsmart();
+        else if (this == ExpeditorsApiRef) onExpeditorsApiRef();
+        else if (this == AitworldwideApi) onAitworldwideApi();
+        else if (this == Worldcourier) onWorldcourier();
+        else if (this == Quiqup) onQuiqup();
+        else if (this == AgedissSftp) onAgedissSftp();
+        else if (this == AndreaniApi) onAndreaniApi();
+        else if (this == Crlexpress) onCrlexpress();
+        else if (this == Smartcat) onSmartcat();
+        else if (this == Crossflight) onCrossflight();
+        else if (this == Procarrier) onProcarrier();
+        else if (this == DhlReferenceApi) onDhlReferenceApi();
+        else if (this == SeinoApi) onSeinoApi();
+        else if (this == Wspexpress) onWspexpress();
+        else if (this == Kronos) onKronos();
+        else if (this == TotalExpressApi) onTotalExpressApi();
+        else if (this == Parcll) onParcll();
+        else if (this == Xpedigo) onXpedigo();
+        else if (this == StarTrackWebhook) onStarTrackWebhook();
+        else if (this == Gpost) onGpost();
+        else if (this == Ucs) onUcs();
+        else if (this == Dmfgroup) onDmfgroup();
+        else if (this == CoordinadoraApi) onCoordinadoraApi();
+        else if (this == Marken) onMarken();
+        else if (this == Ntl) onNtl();
+        else if (this == Redjepakketje) onRedjepakketje();
+        else if (this == AlliedExpressFtp) onAlliedExpressFtp();
+        else if (this == MondialrelayEs) onMondialrelayEs();
+        else if (this == NaekoFtp) onNaekoFtp();
+        else if (this == Mhi) onMhi();
+        else if (this == Shippify) onShippify();
+        else if (this == MalcaAmitApi) onMalcaAmitApi();
+        else if (this == JtexpressSgApi) onJtexpressSgApi();
+        else if (this == DachserWeb) onDachserWeb();
+        else if (this == Flightlg) onFlightlg();
+        else if (this == Cago) onCago();
+        else if (this == Com1Express) onCom1Express();
+        else if (this == TonamiFtp) onTonamiFtp();
+        else if (this == Packfleet) onPackfleet();
+        else if (this == PurolatorInternational) onPurolatorInternational();
+        else if (this == WineshippingWebhook) onWineshippingWebhook();
+        else if (this == DhlEsSftp) onDhlEsSftp();
+        else if (this == PchomeApi) onPchomeApi();
+        else if (this == CeskapostaApi) onCeskapostaApi();
+        else if (this == Gorush) onGorush();
+        else if (this == Homerunner) onHomerunner();
+        else if (this == AmazonOrder) onAmazonOrder();
+        else if (this == EfwnowApi) onEfwnowApi();
+        else if (this == CblLogisticaApi) onCblLogisticaApi();
+        else if (this == Nimbuspost) onNimbuspost();
+        else if (this == LogwinLogistics) onLogwinLogistics();
+        else if (this == NowlogApi) onNowlogApi();
+        else if (this == DpdNl) onDpdNl();
+        else if (this == Godependable) onGodependable();
+        else if (this == Esdex) onEsdex();
+        else if (this == LogisystemsSftp) onLogisystemsSftp();
+        else if (this == Expeditors) onExpeditors();
+        else if (this == SntglobalApi) onSntglobalApi();
+        else if (this == Shipx) onShipx();
+        else if (this == QintlApi) onQintlApi();
+        else if (this == Packs) onPacks();
+        else if (this == PostnlInternational) onPostnlInternational();
+        else if (this == AmazonEmailPush) onAmazonEmailPush();
+        else if (this == DhlApi) onDhlApi();
+        else if (this == Spx) onSpx();
+        else if (this == Axlehire) onAxlehire();
+        else if (this == Icscourier) onIcscourier();
+        else if (this == DialogoLogistica) onDialogoLogistica();
+        else if (this == ShunbangExpress) onShunbangExpress();
+        else if (this == TcsApi) onTcsApi();
+        else if (this == SfExpressCn) onSfExpressCn();
+        else if (this == Packeta) onPacketa();
+        else if (this == SicTeliway) onSicTeliway();
+        else if (this == MondialrelayFr) onMondialrelayFr();
+        else if (this == IntimeFtp) onIntimeFtp();
+        else if (this == JdExpress) onJdExpress();
+        else if (this == Fastbox) onFastbox();
+        else if (this == Patheon) onPatheon();
+        else if (this == IndiaPost) onIndiaPost();
+        else if (this == TipsaRef) onTipsaRef();
+        else if (this == Ecofreight) onEcofreight();
+        else if (this == Vox) onVox();
+        else if (this == DirectfreightAuRef) onDirectfreightAuRef();
+        else if (this == BesttransportSftp) onBesttransportSftp();
+        else if (this == AustraliaPostApi) onAustraliaPostApi();
+        else if (this == FragilepakSftp) onFragilepakSftp();
+        else if (this == Flipxp) onFlipxp();
+        else if (this == ValueWebhook) onValueWebhook();
+        else if (this == Daeshin) onDaeshin();
+        else if (this == Sherpa) onSherpa();
+        else if (this == MwdApi) onMwdApi();
+        else if (this == Smartkargo) onSmartkargo();
+        else if (this == DnjExpress) onDnjExpress();
+        else if (this == Gopeople) onGopeople();
+        else if (this == MysendleApi) onMysendleApi();
+        else if (this == AramexApi) onAramexApi();
+        else if (this == Pidge) onPidge();
+        else if (this == Thaiparcels) onThaiparcels();
+        else if (this == PantherReferenceApi) onPantherReferenceApi();
+        else if (this == Postaplus) onPostaplus();
+        else if (this == Buffalo) onBuffalo();
+        else if (this == UEnvios) onUEnvios();
+        else if (this == EliteCo) onEliteCo();
+        else if (this == RocheInternalSftp) onRocheInternalSftp();
+        else if (this == DbschenkerIceland) onDbschenkerIceland();
+        else if (this == TntFrReference) onTntFrReference();
+        else if (this == Newgisticsapi) onNewgisticsapi();
+        else if (this == Glovo) onGlovo();
+        else if (this == GwlogisApi) onGwlogisApi();
+        else if (this == SpreetailApi) onSpreetailApi();
+        else if (this == Moova) onMoova();
+        else if (this == Plycongroup) onPlycongroup();
+        else if (this == UspsWebhook) onUspsWebhook();
+        else if (this == Reimaginedelivery) onReimaginedelivery();
+        else if (this == EdfFtp) onEdfFtp();
+        else if (this == Dao365) onDao365();
+        else if (this == BiocairFtp) onBiocairFtp();
+        else if (this == RansaWebhook) onRansaWebhook();
+        else if (this == Shipxpres) onShipxpres();
+        else if (this == CourantPlusApi) onCourantPlusApi();
+        else if (this == Shipa) onShipa();
+        else if (this == Homelogistics) onHomelogistics();
+        else if (this == Dx) onDx();
+        else if (this == PosteItalianePaccocelere) onPosteItalianePaccocelere();
+        else if (this == TollWebhook) onTollWebhook();
+        else if (this == LctbrApi) onLctbrApi();
+        else if (this == DxFreight) onDxFreight();
+        else if (this == DhlSftp) onDhlSftp();
+        else if (this == Shiprocket) onShiprocket();
+        else if (this == UberWebhook) onUberWebhook();
+        else if (this == Statovernight) onStatovernight();
+        else if (this == Burd) onBurd();
+        else if (this == Fastship) onFastship();
+        else if (this == IbventureWebhook) onIbventureWebhook();
+        else if (this == GatiKweApi) onGatiKweApi();
+        else if (this == CryopdpFtp) onCryopdpFtp();
+        else if (this == Hubbed) onHubbed();
+        else if (this == TipsaApi) onTipsaApi();
+        else if (this == Araskargo) onAraskargo();
+        else if (this == ThijsNl) onThijsNl();
+        else if (this == AtshealthcareReference) onAtshealthcareReference();
+        else if (this == _99Minutos) on_99Minutos();
+        else if (this == HellenicPost) onHellenicPost();
+        else if (this == HsmGlobal) onHsmGlobal();
+        else if (this == Mnx) onMnx();
+        else if (this == Nmtransfer) onNmtransfer();
+        else if (this == Logysto) onLogysto();
+        else if (this == IndiaPostInt) onIndiaPostInt();
+        else if (this == AmazonFbaSwishipIn) onAmazonFbaSwishipIn();
+        else if (this == SrtTransport) onSrtTransport();
+        else if (this == Bomi) onBomi();
+        else if (this == DeliverrSftp) onDeliverrSftp();
+        else if (this == Hsdexpress) onHsdexpress();
+        else if (this == SimpletireWebhook) onSimpletireWebhook();
+        else if (this == HunterExpressSftp) onHunterExpressSftp();
+        else if (this == UpsApi) onUpsApi();
+        else if (this == WooyoungLogisticsSftp) onWooyoungLogisticsSftp();
+        else if (this == PhseApi) onPhseApi();
+        else if (this == WishEmailPush) onWishEmailPush();
+        else if (this == Northline) onNorthline();
+        else if (this == Medafrica) onMedafrica();
+        else if (this == DpdAtSftp) onDpdAtSftp();
+        else if (this == Anteraja) onAnteraja();
+        else if (this == DhlGlobalForwardingApi) onDhlGlobalForwardingApi();
+        else if (this == LbcexpressApi) onLbcexpressApi();
+        else if (this == Simsglobal) onSimsglobal();
+        else if (this == Cdldelivers) onCdldelivers();
+        else if (this == Typ) onTyp();
+        else if (this == TestingCourierWebhook) onTestingCourierWebhook();
+        else if (this == PandagoApi) onPandagoApi();
+        else if (this == RoyalMailFtp) onRoyalMailFtp();
+        else if (this == Thunderexpress) onThunderexpress();
+        else if (this == SecretlabWebhook) onSecretlabWebhook();
+        else if (this == Setel) onSetel();
+        else if (this == JdWorldwide) onJdWorldwide();
+        else if (this == DpdRuApi) onDpdRuApi();
+        else if (this == ArgentsWebhook) onArgentsWebhook();
+        else if (this == Postone) onPostone();
+        else if (this == Tusklogistics) onTusklogistics();
+        else if (this == RhenusUkApi) onRhenusUkApi();
+        else if (this == TaqbinSgApi) onTaqbinSgApi();
+        else if (this == InntralogSftp) onInntralogSftp();
+        else if (this == Dayross) onDayross();
+        else if (this == CorreosexpressApi) onCorreosexpressApi();
+        else if (this == InternationalSeurApi) onInternationalSeurApi();
+        else if (this == YodelApi) onYodelApi();
+        else if (this == Heroexpress) onHeroexpress();
+        else if (this == DhlSupplychainIn) onDhlSupplychainIn();
+        else if (this == UrgentCargus) onUrgentCargus();
+        else if (this == Frontdoorcorp) onFrontdoorcorp();
+        else if (this == JtexpressPh) onJtexpressPh();
+        else if (this == ParcelstarsWebhook) onParcelstarsWebhook();
+        else if (this == DpdSkSftp) onDpdSkSftp();
+        else if (this == Movianto) onMovianto();
+        else if (this == OzepartsShipping) onOzepartsShipping();
+        else if (this == Kargomkolay) onKargomkolay();
+        else if (this == Trunkrs) onTrunkrs();
+        else if (this == OmnirpsWebhook) onOmnirpsWebhook();
+        else if (this == Chilexpress) onChilexpress();
+        else if (this == TestingCourier) onTestingCourier();
+        else if (this == JneApi) onJneApi();
+        else if (this == BjshomedeliveryFtp) onBjshomedeliveryFtp();
+        else if (this == DexpressWebhook) onDexpressWebhook();
+        else if (this == UspsApi) onUspsApi();
+        else if (this == Transvirtual) onTransvirtual();
+        else if (this == SolisticaApi) onSolisticaApi();
+        else if (this == ChienventureWebhook) onChienventureWebhook();
+        else if (this == DpdUkSftp) onDpdUkSftp();
+        else if (this == InpostUk) onInpostUk();
+        else if (this == Javit) onJavit();
+        else if (this == ZtoDomestic) onZtoDomestic();
+        else if (this == DhlGtApi) onDhlGtApi();
+        else if (this == CevaTracking) onCevaTracking();
+        else if (this == KomonExpress) onKomonExpress();
+        else if (this == EastwestcourierFtp) onEastwestcourierFtp();
+        else if (this == Danniao) onDanniao();
+        else if (this == Spectran) onSpectran();
+        else if (this == DeliverIt) onDeliverIt();
+        else if (this == Relaiscolis) onRelaiscolis();
+        else if (this == GlsSpainApi) onGlsSpainApi();
+        else if (this == Postplus) onPostplus();
+        else if (this == Airterra) onAirterra();
+        else if (this == GioEcourierApi) onGioEcourierApi();
+        else if (this == DpdChSftp) onDpdChSftp();
+        else if (this == FedexApi) onFedexApi();
+        else if (this == Intersmarttrans) onIntersmarttrans();
+        else if (this == HermesUkSftp) onHermesUkSftp();
+        else if (this == ExelotFtp) onExelotFtp();
+        else if (this == DhlPaApi) onDhlPaApi();
+        else if (this == VirtransportSftp) onVirtransportSftp();
+        else if (this == Worldnet) onWorldnet();
+        else if (this == InstaboxWebhook) onInstaboxWebhook();
+        else if (this == Kng) onKng();
+        else if (this == FlashexpressWebhook) onFlashexpressWebhook();
+        else if (this == MagyarPostaApi) onMagyarPostaApi();
+        else if (this == WeshipApi) onWeshipApi();
+        else if (this == OhiWebhook) onOhiWebhook();
+        else if (this == Mudita) onMudita();
+        else if (this == BluedartApi) onBluedartApi();
+        else if (this == TCatApi) onTCatApi();
+        else if (this == Ads) onAds();
+        else if (this == HermesIt) onHermesIt();
+        else if (this == FitzmarkApi) onFitzmarkApi();
+        else if (this == PostiApi) onPostiApi();
+        else if (this == SmsaExpressWebhook) onSmsaExpressWebhook();
+        else if (this == TamergroupWebhook) onTamergroupWebhook();
+        else if (this == Livrapide) onLivrapide();
+        else if (this == NipponExpress) onNipponExpress();
+        else if (this == Bettertrucks) onBettertrucks();
+        else if (this == Fan) onFan();
+        else if (this == PbUspsflatsFtp) onPbUspsflatsFtp();
+        else if (this == Parcelright) onParcelright();
+        else if (this == Ithinklogistics) onIthinklogistics();
+        else if (this == KerryExpressThWebhook) onKerryExpressThWebhook();
+        else if (this == Ecoutier) onEcoutier();
+        else if (this == Showl) onShowl();
+        else if (this == BrtItApi) onBrtItApi();
+        else if (this == RixonhkApi) onRixonhkApi();
+        else if (this == DbschenkerApi) onDbschenkerApi();
+        else if (this == Ilyanglogis) onIlyanglogis();
+        else if (this == MailBoxEtc) onMailBoxEtc();
+        else if (this == Weship) onWeship();
+        else if (this == DhlGlobalMailApi) onDhlGlobalMailApi();
+        else if (this == Activos24Api) onActivos24Api();
+        else if (this == Atshealthcare) onAtshealthcare();
+        else if (this == Luwjistik) onLuwjistik();
+        else if (this == GwWorld) onGwWorld();
+        else if (this == FairsendenApi) onFairsendenApi();
+        else if (this == ServipWebhook) onServipWebhook();
+        else if (this == Swiship) onSwiship();
+        else if (this == Tanet) onTanet();
+        else if (this == HotsinCargo) onHotsinCargo();
+        else if (this == Direx) onDirex();
+        else if (this == Huantong) onHuantong();
+        else if (this == ImileApi) onImileApi();
+        else if (this == Auexpress) onAuexpress();
+        else if (this == Nytlogistics) onNytlogistics();
+        else if (this == DsvReference) onDsvReference();
+        else if (this == NovofarmaWebhook) onNovofarmaWebhook();
+        else if (this == AitworldwideSftp) onAitworldwideSftp();
+        else if (this == Shopolive) onShopolive();
+        else if (this == FnfZa) onFnfZa();
+        else if (this == DhlEcommerceGc) onDhlEcommerceGc();
+        else if (this == Fetchr) onFetchr();
+        else if (this == StarlinksApi) onStarlinksApi();
+        else if (this == Yyexpress) onYyexpress();
+        else if (this == Servientrega) onServientrega();
+        else if (this == Hanjin) onHanjin();
+        else if (this == SpanishSeurFtp) onSpanishSeurFtp();
+        else if (this == DxB2BConnum) onDxB2BConnum();
+        else if (this == HelthjemApi) onHelthjemApi();
+        else if (this == Inexpost) onInexpost();
+        else if (this == A2BBa) onA2BBa();
+        else if (this == RhenusGroup) onRhenusGroup();
+        else if (this == SberlogisticsRu) onSberlogisticsRu();
+        else if (this == MalcaAmit) onMalcaAmit();
+        else if (this == Ppl) onPpl();
+        else if (this == OsmWorldwideSftp) onOsmWorldwideSftp();
+        else if (this == Acilogistix) onAcilogistix();
+        else if (this == Optimacourier) onOptimacourier();
+        else if (this == NovaPoshtaApi) onNovaPoshtaApi();
+        else if (this == Loggi) onLoggi();
+        else if (this == Yifan) onYifan();
+        else if (this == Mydynalogic) onMydynalogic();
+        else if (this == Morninglobal) onMorninglobal();
+        else if (this == ConciseApi) onConciseApi();
+        else if (this == Fxtran) onFxtran();
+        else if (this == DeliveryourparcelZa) onDeliveryourparcelZa();
+        else if (this == Uparcel) onUparcel();
+        else if (this == MobiBr) onMobiBr();
+        else if (this == LoginextWebhook) onLoginextWebhook();
+        else if (this == Ems) onEms();
+        else if (this == Speedy) onSpeedy();
+        else if (this == ZoomRed) onZoomRed();
+        else if (this == Navlungo) onNavlungo();
+        else if (this == Castleparcels) onCastleparcels();
+        else if (this == Weee) onWeee();
+        else if (this == Packaly) onPackaly();
+        else if (this == Yunhuipost) onYunhuipost();
+        else if (this == Youparcel) onYouparcel();
+        else if (this == Leman) onLeman();
+        else if (this == Moovin) onMoovin();
+        else if (this == UrbIt) onUrbIt();
+        else if (this == Multientregapanama) onMultientregapanama();
+        else if (this == Jusdasr) onJusdasr();
+        else if (this == Discountpost) onDiscountpost();
+        else if (this == RhenusUk) onRhenusUk();
+        else if (this == SwishipJp) onSwishipJp();
+        else if (this == GlsUs) onGlsUs();
+        else if (this == Smtl) onSmtl();
+        else if (this == Emega) onEmega();
+        else if (this == ExpressoneSv) onExpressoneSv();
+        else if (this == Hepsijet) onHepsijet();
+        else if (this == Welivery) onWelivery();
+        else if (this == Bringer) onBringer();
+        else if (this == Easyroutes) onEasyroutes();
+        else if (this == Mrw) onMrw();
+        else if (this == Rpm) onRpm();
+        else if (this == DpdPrt) onDpdPrt();
+        else if (this == GlsRomania) onGlsRomania();
+        else if (this == Lmparcel) onLmparcel();
+        else if (this == Gtagsm) onGtagsm();
+        else if (this == Domino) onDomino();
+        else if (this == Eshipper) onEshipper();
+        else if (this == Transpak) onTranspak();
+        else if (this == Xindus) onXindus();
+        else if (this == Aoyue) onAoyue();
+        else if (this == Easyparcel) onEasyparcel();
+        else if (this == Expressone) onExpressone();
+        else if (this == SendeoKargo) onSendeoKargo();
+        else if (this == Speedaf) onSpeedaf();
+        else if (this == Etower) onEtower();
+        else if (this == Gcx) onGcx();
+        else if (this == NinjavanVn) onNinjavanVn();
+        else if (this == Allegro) onAllegro();
+        else if (this == Jumppoint) onJumppoint();
+        else if (this == ShipglobalUs) onShipglobalUs();
+        else if (this == Kinisi) onKinisi();
+        else if (this == Oakh) onOakh();
+        else if (this == Awest) onAwest();
+        else if (this == Barsan) onBarsan();
+        else if (this == Energologistic) onEnergologistic();
+        else if (this == Madrooex) onMadrooex();
+        else if (this == Gobolt) onGobolt();
+        else if (this == SwissUniversalExpress) onSwissUniversalExpress();
+        else if (this == Iordirect) onIordirect();
+        else if (this == Xmszm) onXmszm();
+        else if (this == GlsHun) onGlsHun();
+        else if (this == Sendy) onSendy();
+        else if (this == Braunsexpress) onBraunsexpress();
+        else if (this == Grandslamexpress) onGrandslamexpress();
+        else if (this == Xgs) onXgs();
+        else if (this == Otschile) onOtschile();
+        else if (this == PackUp) onPackUp();
+        else if (this == Parcelstars) onParcelstars();
+        else if (this == Teamexpressllc) onTeamexpressllc();
+        else if (this == Asyadexpress) onAsyadexpress();
+        else if (this == Tdn) onTdn();
+        else if (this == Earlybird) onEarlybird();
+        else if (this == Cacesa) onCacesa();
+        else if (this == Parceljet) onParceljet();
+        else if (this == MngKargo) onMngKargo();
+        else if (this == Superpackline) onSuperpackline();
+        else if (this == Speedx) onSpeedx();
+        else if (this == Vesyl) onVesyl();
+        else if (this == Skyking) onSkyking();
+        else if (this == Dirmensajeria) onDirmensajeria();
+        else if (this == Netlogixgroup) onNetlogixgroup();
+        else if (this == Zyou) onZyou();
+        else if (this == Jawar) onJawar();
+        else if (this == Agsystems) onAgsystems();
+        else if (this == Gps) onGps();
+        else if (this == PttKargo) onPttKargo();
+        else if (this == Maergo) onMaergo();
+        else if (this == Arihantcourier) onArihantcourier();
+        else if (this == Vtfe) onVtfe();
+        else if (this == Yunant) onYunant();
+        else if (this == Urbify) onUrbify();
+        else if (this == PackMan) onPackMan();
+        else if (this == Liefergrun) onLiefergrun();
+        else if (this == Obibox) onObibox();
+        else if (this == Paikeda) onPaikeda();
+        else if (this == Scotty) onScotty();
+        else if (this == IntelcomCa) onIntelcomCa();
+        else if (this == Swe) onSwe();
+        else if (this == Asendia) onAsendia();
+        else if (this == DpdAt) onDpdAt();
+        else if (this == Relay) onRelay();
+        else if (this == Ata) onAta();
+        else if (this == SkyexpressInternational) onSkyexpressInternational();
+        else if (this == SuratKargo) onSuratKargo();
+        else if (this == Sglink) onSglink();
+        else if (this == Fleetopticsinc) onFleetopticsinc();
+        else if (this == Shopline) onShopline();
+        else if (this == Piggyship) onPiggyship();
+        else if (this == Logoix) onLogoix();
+        else if (this == KolayGelsin) onKolayGelsin();
+        else if (this == AssociatedCouriers) onAssociatedCouriers();
+        else if (this == UpsChecker) onUpsChecker();
+        else if (this == Wineshipping) onWineshipping();
+        else if (this == Spedisci) onSpedisci();
+        else if (this == Fourkites) onFourkites();
+        else if (this == Etonas) onEtonas();
+        else if (this == Finmile) onFinmile();
+        else if (this == Uniuni) onUniuni();
+        else if (this == Rodonaves) onRodonaves();
+        else if (this == InpostIt) onInpostIt();
+        else if (this == TforceFreight) onTforceFreight();
+        else if (this == Richmom) onRichmom();
+        else if (this == Franco) onFranco();
+        else if (this == Ecparcel) onEcparcel();
+        else if (this == FedexChina) onFedexChina();
+        else if (this == GofoExpress) onGofoExpress();
+        else if (this == Shipbob) onShipbob();
+        else if (this == JerseypostAtlas) onJerseypostAtlas();
+        else if (this == Coretrails) onCoretrails();
+        else if (this == RhenusItaly) onRhenusItaly();
+        else if (this == Jadlog) onJadlog();
+        else if (this == Jitsu) onJitsu();
+        else if (this == YanwenExpress) onYanwenExpress();
+        else if (this == Dashlink) onDashlink();
+        else if (this == SeinoSuperExpress) onSeinoSuperExpress();
+        else if (this == Floship) onFloship();
+        else if (this == Metroscg) onMetroscg();
+        else if (this == Sendparcel) onSendparcel();
+        else if (this == P2P) onP2P();
+        else if (this == CnExpress) onCnExpress();
+        else if (this == Cirrotrack) onCirrotrack();
+        else if (this == LandLogistics) onLandLogistics();
+        else if (this == Veho) onVeho();
+        else if (this == Medline) onMedline();
+        else if (this == Vdtrack) onVdtrack();
+        else if (this == SinoScm) onSinoScm();
+        else if (this == _3PeExpress) on_3PeExpress();
+        else if (this == Swiftx) onSwiftx();
+        else if (this == Sfydexpress) onSfydexpress();
+        else if (this == Toptrans) onToptrans();
+        else otherwise(Value);
+    }
 }

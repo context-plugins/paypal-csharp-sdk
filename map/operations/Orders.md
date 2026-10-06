@@ -9,15 +9,15 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 ### AuthorizeOrder
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `AuthorizeOrder(string id, string? payPalMockResponse, string? payPalRequestId, string? payPalClientMetadataId, string? payPalAuthAssertion, OrderAuthorizeRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 5 params (`payPalMockResponse` … `body`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `AuthorizeOrder(AuthorizeOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `OrderAuthorizeResponse`
-- **Error**: `SdkException<AuthorizeOrderError>` — **Case A (typed)**
+- **Error**: `ApiException<AuthorizeOrderError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `AuthorizeOrderRequest` | `Requests/Orders/AuthorizeOrderRequest.cs` |
 | `OrderAuthorizeRequest` | `Models/OrderAuthorizeRequest.cs` |
 | `OrderAuthorizeResponse` | `Models/OrderAuthorizeResponse.cs` |
 | `AuthorizeOrderError` | `Errors/AuthorizeOrderError.cs` |
@@ -26,15 +26,15 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 ### CaptureOrder
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CaptureOrder(string id, string? payPalMockResponse, string? payPalRequestId, string? payPalClientMetadataId, string? payPalAuthAssertion, OrderCaptureRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 5 params (`payPalMockResponse` … `body`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `CaptureOrder(CaptureOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `Order`
-- **Error**: `SdkException<CaptureOrderError>` — **Case A (typed)**
+- **Error**: `ApiException<CaptureOrderError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CaptureOrderRequest` | `Requests/Orders/CaptureOrderRequest.cs` |
 | `OrderCaptureRequest` | `Models/OrderCaptureRequest.cs` |
 | `Order` | `Models/Order.cs` |
 | `CaptureOrderError` | `Errors/CaptureOrderError.cs` |
@@ -43,17 +43,15 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 ### ConfirmOrder
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `ConfirmOrder(string id, string? payPalClientMetadataId, string? payPalAuthAssertion, ConfirmOrderRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalClientMetadataId` — nullable, no default → **must pass explicitly**
-  - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
-  - `body` — nullable, no default → **must pass explicitly**
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `ConfirmOrder(ConfirmOrderOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `Order`
-- **Error**: `SdkException<ConfirmOrderError>` — **Case A (typed)**
+- **Error**: `ApiException<ConfirmOrderError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 403, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `ConfirmOrderOperationRequest` | `Requests/Orders/ConfirmOrderOperationRequest.cs` |
 | `ConfirmOrderRequest` | `Models/ConfirmOrderRequest.cs` |
 | `Order` | `Models/Order.cs` |
 | `ConfirmOrderError` | `Errors/ConfirmOrderError.cs` |
@@ -62,15 +60,15 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 ### CreateOrder
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CreateOrder(string? payPalMockResponse, string? payPalRequestId, string? payPalPartnerAttributionId, string? payPalClientMetadataId, string? payPalAuthAssertion, OrderRequest body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 5 params (`payPalMockResponse` … `payPalAuthAssertion`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `CreateOrder(CreateOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Body`
 - **Returns**: `Order`
-- **Error**: `SdkException<CreateOrderError>` — **Case A (typed)**
+- **Error**: `ApiException<CreateOrderError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 401, 422] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CreateOrderRequest` | `Requests/Orders/CreateOrderRequest.cs` |
 | `OrderRequest` | `Models/OrderRequest.cs` |
 | `Order` | `Models/Order.cs` |
 | `CreateOrderError` | `Errors/CreateOrderError.cs` |
@@ -79,14 +77,15 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 ### CreateOrderTracking
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CreateOrderTracking(string id, string? payPalAuthAssertion, OrderTrackerRequest body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
+- **Signature**: `CreateOrderTracking(CreateOrderTrackingRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`, `Body`
 - **Returns**: `Order`
-- **Error**: `SdkException<CreateOrderTrackingError>` — **Case A (typed)**
+- **Error**: `ApiException<CreateOrderTrackingError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CreateOrderTrackingRequest` | `Requests/Orders/CreateOrderTrackingRequest.cs` |
 | `OrderTrackerRequest` | `Models/OrderTrackerRequest.cs` |
 | `Order` | `Models/Order.cs` |
 | `CreateOrderTrackingError` | `Errors/CreateOrderTrackingError.cs` |
@@ -95,17 +94,16 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 ### GetOrder
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `GetOrder(string id, string? fields, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `fields` — nullable, no default → **must pass explicitly**
-  - `payPalMockResponse` — nullable, no default → **must pass explicitly**
-  - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `fields` ← `fields`
+- **Signature**: `GetOrder(GetOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
+- **Query params (wire ← C#)**: `fields` ← `Fields`
 - **Returns**: `Order`
-- **Error**: `SdkException<GetOrderError>` — **Case A (typed)**
+- **Error**: `ApiException<GetOrderError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [401, 404] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `GetOrderRequest` | `Requests/Orders/GetOrderRequest.cs` |
 | `Order` | `Models/Order.cs` |
 | `GetOrderError` | `Errors/GetOrderError.cs` |
 | `Error` | `Models/Error.cs` |
@@ -113,16 +111,15 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 ### PatchOrder
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `PatchOrder(string id, string? payPalMockResponse, string? payPalAuthAssertion, IReadOnlyList<Patch>? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalMockResponse` — nullable, no default → **must pass explicitly**
-  - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `PatchOrder(PatchOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<PatchOrderError>` — **Case A (typed)**
+- **Error**: `ApiException<PatchOrderError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 401, 404, 422] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `PatchOrderRequest` | `Requests/Orders/PatchOrderRequest.cs` |
 | `Patch` | `Models/Patch.cs` |
 | `PatchOrderError` | `Errors/PatchOrderError.cs` |
 | `Error` | `Models/Error.cs` |
@@ -130,15 +127,15 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 ### UpdateOrderTracking
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `UpdateOrderTracking(string id, string trackerId, string? payPalAuthAssertion, IReadOnlyList<Patch>? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `UpdateOrderTracking(UpdateOrderTrackingRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`, `TrackerId`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<UpdateOrderTrackingError>` — **Case A (typed)**
+- **Error**: `ApiException<UpdateOrderTrackingError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `UpdateOrderTrackingRequest` | `Requests/Orders/UpdateOrderTrackingRequest.cs` |
 | `Patch` | `Models/Patch.cs` |
 | `UpdateOrderTrackingError` | `Errors/UpdateOrderTrackingError.cs` |
 | `Error` | `Models/Error.cs` |

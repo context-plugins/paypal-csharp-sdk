@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Validation.Attributes;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Core.Validation.Attributes;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The billing cycle details.
@@ -40,6 +40,7 @@ public record SubscriptionBillingCycle
     /// <summary>
     /// The number of times this billing cycle gets executed. Trial billing cycles can only be executed a finite number of times (value between 1 and 999 for total_cycles). Regular billing cycles can be executed infinite times (value of 0 for total_cycles) or a finite number of times (value between 1 and 999 for total_cycles).
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("total_cycles")]
     [Minimum(0)]
     [Maximum(999)]

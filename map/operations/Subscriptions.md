@@ -9,27 +9,30 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### ActivateBillingPlan
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `ActivateBillingPlan(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `ActivateBillingPlan(ActivateBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<ActivateBillingPlanError>` — **Case A (typed)**
+- **Error**: `ApiException<ActivateBillingPlanError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `ActivateBillingPlanRequest` | `Requests/Subscriptions/ActivateBillingPlanRequest.cs` |
 | `ActivateBillingPlanError` | `Errors/ActivateBillingPlanError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
 
 ### ActivateSubscription
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `ActivateSubscription(string id, ActivateSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `ActivateSubscription(ActivateSubscriptionOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<ActivateSubscriptionError>` — **Case A (typed)**
+- **Error**: `ApiException<ActivateSubscriptionError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `ActivateSubscriptionOperationRequest` | `Requests/Subscriptions/ActivateSubscriptionOperationRequest.cs` |
 | `ActivateSubscriptionRequest` | `Models/ActivateSubscriptionRequest.cs` |
 | `ActivateSubscriptionError` | `Errors/ActivateSubscriptionError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -37,14 +40,15 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### CancelSubscription
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CancelSubscription(string id, CancelSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `CancelSubscription(CancelSubscriptionOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<CancelSubscriptionError>` — **Case A (typed)**
+- **Error**: `ApiException<CancelSubscriptionError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CancelSubscriptionOperationRequest` | `Requests/Subscriptions/CancelSubscriptionOperationRequest.cs` |
 | `CancelSubscriptionRequest` | `Models/CancelSubscriptionRequest.cs` |
 | `CancelSubscriptionError` | `Errors/CancelSubscriptionError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -52,15 +56,15 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### CaptureSubscription
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CaptureSubscription(string id, string? payPalRequestId, CaptureSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalRequestId` — nullable, no default → **must pass explicitly**
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `CaptureSubscription(CaptureSubscriptionOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `SubscriptionTransactionDetails`
-- **Error**: `SdkException<CaptureSubscriptionError>` — **Case A (typed)**
+- **Error**: `ApiException<CaptureSubscriptionError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CaptureSubscriptionOperationRequest` | `Requests/Subscriptions/CaptureSubscriptionOperationRequest.cs` |
 | `CaptureSubscriptionRequest` | `Models/CaptureSubscriptionRequest.cs` |
 | `SubscriptionTransactionDetails` | `Models/SubscriptionTransactionDetails.cs` |
 | `CaptureSubscriptionError` | `Errors/CaptureSubscriptionError.cs` |
@@ -69,16 +73,14 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### CreateBillingPlan
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CreateBillingPlan(string? payPalRequestId, PlanRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalRequestId` — nullable, no default → **must pass explicitly**
-  - `body` — nullable, no default → **must pass explicitly**
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `CreateBillingPlan(CreateBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
 - **Returns**: `BillingPlan`
-- **Error**: `SdkException<CreateBillingPlanError>` — **Case A (typed)**
+- **Error**: `ApiException<CreateBillingPlanError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CreateBillingPlanRequest` | `Requests/Subscriptions/CreateBillingPlanRequest.cs` |
 | `PlanRequest` | `Models/PlanRequest.cs` |
 | `BillingPlan` | `Models/BillingPlan.cs` |
 | `CreateBillingPlanError` | `Errors/CreateBillingPlanError.cs` |
@@ -87,17 +89,14 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### CreateSubscription
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CreateSubscription(string? payPalRequestId, string? payPalClientMetadataId, CreateSubscriptionRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalRequestId` — nullable, no default → **must pass explicitly**
-  - `payPalClientMetadataId` — nullable, no default → **must pass explicitly**
-  - `body` — nullable, no default → **must pass explicitly**
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `CreateSubscription(CreateSubscriptionOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
 - **Returns**: `Subscription`
-- **Error**: `SdkException<CreateSubscriptionError>` — **Case A (typed)**
+- **Error**: `ApiException<CreateSubscriptionError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CreateSubscriptionOperationRequest` | `Requests/Subscriptions/CreateSubscriptionOperationRequest.cs` |
 | `CreateSubscriptionRequest` | `Models/CreateSubscriptionRequest.cs` |
 | `Subscription` | `Models/Subscription.cs` |
 | `CreateSubscriptionError` | `Errors/CreateSubscriptionError.cs` |
@@ -106,26 +105,30 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### DeactivateBillingPlan
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `DeactivateBillingPlan(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `DeactivateBillingPlan(DeactivateBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<DeactivateBillingPlanError>` — **Case A (typed)**
+- **Error**: `ApiException<DeactivateBillingPlanError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `DeactivateBillingPlanRequest` | `Requests/Subscriptions/DeactivateBillingPlanRequest.cs` |
 | `DeactivateBillingPlanError` | `Errors/DeactivateBillingPlanError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
 
 ### GetBillingPlan
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `GetBillingPlan(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `GetBillingPlan(GetBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `BillingPlan`
-- **Error**: `SdkException<GetBillingPlanError>` — **Case A (typed)**
+- **Error**: `ApiException<GetBillingPlanError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [401, 403, 404, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `GetBillingPlanRequest` | `Requests/Subscriptions/GetBillingPlanRequest.cs` |
 | `BillingPlan` | `Models/BillingPlan.cs` |
 | `GetBillingPlanError` | `Errors/GetBillingPlanError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -133,15 +136,16 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### GetSubscription
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `GetSubscription(string id, string? fields, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `fields` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `fields` ← `fields`
+- **Signature**: `GetSubscription(GetSubscriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
+- **Query params (wire ← C#)**: `fields` ← `Fields`
 - **Returns**: `Subscription`
-- **Error**: `SdkException<GetSubscriptionError>` — **Case A (typed)**
+- **Error**: `ApiException<GetSubscriptionError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [401, 403, 404, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `GetSubscriptionRequest` | `Requests/Subscriptions/GetSubscriptionRequest.cs` |
 | `Subscription` | `Models/Subscription.cs` |
 | `GetSubscriptionError` | `Errors/GetSubscriptionError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -149,16 +153,15 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### ListBillingPlans
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `ListBillingPlans(string? productId, int? pageSize = 10, int? page = 1, bool? totalRequired = false, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `productId` — nullable, no default → **must pass explicitly**
-  - defaults: `pageSize` = `10`, `page` = `1`, `totalRequired` = `false`, `prefer` = `"return=minimal"`
-- **Query params (wire ← C#)**: `product_id` ← `productId`, `page_size` ← `pageSize`, `page` ← `page`, `total_required` ← `totalRequired`
+- **Signature**: `ListBillingPlans(ListBillingPlansRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+- **Query params (wire ← C#)**: `product_id` ← `ProductId`, `page_size` ← `PageSize`, `page` ← `Page`, `total_required` ← `TotalRequired`
 - **Returns**: `PlanCollection`
-- **Error**: `SdkException<ListBillingPlansError>` — **Case A (typed)**
+- **Error**: `ApiException<ListBillingPlansError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `ListBillingPlansRequest` | `Requests/Subscriptions/ListBillingPlansRequest.cs` |
 | `PlanCollection` | `Models/PlanCollection.cs` |
 | `ListBillingPlansError` | `Errors/ListBillingPlansError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -166,14 +169,16 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### ListSubscriptionTransactions
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `ListSubscriptionTransactions(string id, string startTime, string endTime, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `start_time` ← `startTime`, `end_time` ← `endTime`
+- **Signature**: `ListSubscriptionTransactions(ListSubscriptionTransactionsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`, `StartTime`, `EndTime`
+- **Query params (wire ← C#)**: `start_time` ← `StartTime`, `end_time` ← `EndTime`
 - **Returns**: `TransactionsList`
-- **Error**: `SdkException<ListSubscriptionTransactionsError>` — **Case A (typed)**
+- **Error**: `ApiException<ListSubscriptionTransactionsError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `ListSubscriptionTransactionsRequest` | `Requests/Subscriptions/ListSubscriptionTransactionsRequest.cs` |
 | `TransactionsList` | `Models/TransactionsList.cs` |
 | `ListSubscriptionTransactionsError` | `Errors/ListSubscriptionTransactionsError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -181,16 +186,15 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### ListSubscriptions
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `ListSubscriptions(string? planIds, string? statuses, string? createdAfter, string? createdBefore, string? statusUpdatedBefore, string? statusUpdatedAfter, string? filter, IReadOnlyList<string>? customerIds, int? pageSize = 10, int? page = 1, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 8 params (`planIds` … `customerIds`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-  - defaults: `pageSize` = `10`, `page` = `1`
-- **Query params (wire ← C#)**: `plan_ids` ← `planIds`, `statuses` ← `statuses`, `created_after` ← `createdAfter`, `created_before` ← `createdBefore`, `status_updated_before` ← `statusUpdatedBefore`, `status_updated_after` ← `statusUpdatedAfter`, `filter` ← `filter`, `page_size` ← `pageSize`, `page` ← `page`, `customer_ids` ← `customerIds`
+- **Signature**: `ListSubscriptions(ListSubscriptionsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+- **Query params (wire ← C#)**: `plan_ids` ← `PlanIds`, `statuses` ← `Statuses`, `created_after` ← `CreatedAfter`, `created_before` ← `CreatedBefore`, `status_updated_before` ← `StatusUpdatedBefore`, `status_updated_after` ← `StatusUpdatedAfter`, `filter` ← `Filter`, `page_size` ← `PageSize`, `page` ← `Page`, `customer_ids` ← `CustomerIds`
 - **Returns**: `SubscriptionCollection`
-- **Error**: `SdkException<ListSubscriptionsError>` — **Case A (typed)**
+- **Error**: `ApiException<ListSubscriptionsError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `ListSubscriptionsRequest` | `Requests/Subscriptions/ListSubscriptionsRequest.cs` |
 | `SubscriptionCollection` | `Models/SubscriptionCollection.cs` |
 | `ListSubscriptionsError` | `Errors/ListSubscriptionsError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -198,14 +202,15 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### PatchBillingPlan
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `PatchBillingPlan(string id, IReadOnlyList<Patch>? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `PatchBillingPlan(PatchBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<PatchBillingPlanError>` — **Case A (typed)**
+- **Error**: `ApiException<PatchBillingPlanError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `PatchBillingPlanRequest` | `Requests/Subscriptions/PatchBillingPlanRequest.cs` |
 | `Patch` | `Models/Patch.cs` |
 | `PatchBillingPlanError` | `Errors/PatchBillingPlanError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -213,14 +218,15 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### PatchSubscription
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `PatchSubscription(string id, IReadOnlyList<Patch>? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `PatchSubscription(PatchSubscriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<PatchSubscriptionError>` — **Case A (typed)**
+- **Error**: `ApiException<PatchSubscriptionError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `PatchSubscriptionRequest` | `Requests/Subscriptions/PatchSubscriptionRequest.cs` |
 | `Patch` | `Models/Patch.cs` |
 | `PatchSubscriptionError` | `Errors/PatchSubscriptionError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -228,14 +234,15 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### ReviseSubscription
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `ReviseSubscription(string id, ModifySubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `ReviseSubscription(ReviseSubscriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `ModifySubscriptionResponse`
-- **Error**: `SdkException<ReviseSubscriptionError>` — **Case A (typed)**
+- **Error**: `ApiException<ReviseSubscriptionError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `ReviseSubscriptionRequest` | `Requests/Subscriptions/ReviseSubscriptionRequest.cs` |
 | `ModifySubscriptionRequest` | `Models/ModifySubscriptionRequest.cs` |
 | `ModifySubscriptionResponse` | `Models/ModifySubscriptionResponse.cs` |
 | `ReviseSubscriptionError` | `Errors/ReviseSubscriptionError.cs` |
@@ -244,14 +251,15 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### SuspendSubscription
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `SuspendSubscription(string id, SuspendSubscription? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `SuspendSubscription(SuspendSubscriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<SuspendSubscriptionError>` — **Case A (typed)**
+- **Error**: `ApiException<SuspendSubscriptionError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `SuspendSubscriptionRequest` | `Requests/Subscriptions/SuspendSubscriptionRequest.cs` |
 | `SuspendSubscription` | `Models/SuspendSubscription.cs` |
 | `SuspendSubscriptionError` | `Errors/SuspendSubscriptionError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |
@@ -259,14 +267,15 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 ### UpdateBillingPlanPricingSchemes
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `UpdateBillingPlanPricingSchemes(string id, UpdatePricingSchemesRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `body` — nullable, no default → **must pass explicitly**
+- **Signature**: `UpdateBillingPlanPricingSchemes(UpdateBillingPlanPricingSchemesRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<UpdateBillingPlanPricingSchemesError>` — **Case A (typed)**
+- **Error**: `ApiException<UpdateBillingPlanPricingSchemesError>` — **Case A (typed)**
 - **Error accessors**: `TryGetSubscriptionError(out SubscriptionError)` [400, 401, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `UpdateBillingPlanPricingSchemesRequest` | `Requests/Subscriptions/UpdateBillingPlanPricingSchemesRequest.cs` |
 | `UpdatePricingSchemesRequest` | `Models/UpdatePricingSchemesRequest.cs` |
 | `UpdateBillingPlanPricingSchemesError` | `Errors/UpdateBillingPlanPricingSchemesError.cs` |
 | `SubscriptionError` | `Models/SubscriptionError.cs` |

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// A Resource representing a request to vault a Bank used for ACH Debit.

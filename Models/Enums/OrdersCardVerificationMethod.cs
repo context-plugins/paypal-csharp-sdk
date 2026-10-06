@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The method used for card verification.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<OrdersCardVerificationMethod>))]
-public sealed record OrdersCardVerificationMethod : StringEnum<OrdersCardVerificationMethod>
+public sealed record OrdersCardVerificationMethod : OpenStringEnum<OrdersCardVerificationMethod>
 {
     private OrdersCardVerificationMethod(string value) : base(value)
     {
@@ -33,5 +34,30 @@ public sealed record OrdersCardVerificationMethod : StringEnum<OrdersCardVerific
     /// </summary>
     public static readonly OrdersCardVerificationMethod AvsCvv = new("AVS_CVV");
 
-    public static OrdersCardVerificationMethod FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onScaAlways,
+        Func<TResult> onScaWhenRequired,
+        Func<TResult> on_3DSecure,
+        Func<TResult> onAvsCvv,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == ScaAlways => onScaAlways(),
+            _ when this == ScaWhenRequired => onScaWhenRequired(),
+            _ when this == _3DSecure => on_3DSecure(),
+            _ when this == AvsCvv => onAvsCvv(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onScaAlways,
+        Action onScaWhenRequired,
+        Action on_3DSecure,
+        Action onAvsCvv,
+        Action<string> otherwise)
+    {
+        if (this == ScaAlways) onScaAlways();
+        else if (this == ScaWhenRequired) onScaWhenRequired();
+        else if (this == _3DSecure) on_3DSecure();
+        else if (this == AvsCvv) onAvsCvv();
+        else otherwise(Value);
+    }
 }

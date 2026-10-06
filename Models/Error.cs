@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The error details.
@@ -35,7 +35,7 @@ public record Error
     public IReadOnlyList<ErrorDetails>? Details { get; init; }
 
     /// <summary>
-    /// An array of request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS links</see>.
+    /// An array of request-related <see href="/api/rest/responses/#hateoas-links">HATEOAS links</see>.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("links")]

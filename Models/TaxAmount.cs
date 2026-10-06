@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The tax levied by a government on the purchase of goods or services.

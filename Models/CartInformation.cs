@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The cart information.
@@ -22,6 +22,7 @@ public record CartInformation
     /// <summary>
     /// Indicates whether the item amount or the shipping amount already includes tax.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("tax_inclusive")]
     public bool? TaxInclusive { get; init; } = false;
 

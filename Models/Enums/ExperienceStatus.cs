@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// This field indicates the status of PayPal's Checkout experience throughout the order lifecycle. The values reflect the current stage of the checkout process.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<ExperienceStatus>))]
-public sealed record ExperienceStatus : StringEnum<ExperienceStatus>
+public sealed record ExperienceStatus : OpenStringEnum<ExperienceStatus>
 {
     private ExperienceStatus(string value) : base(value)
     {
@@ -33,5 +34,30 @@ public sealed record ExperienceStatus : StringEnum<ExperienceStatus>
     /// </summary>
     public static readonly ExperienceStatus Approved = new("APPROVED");
 
-    public static ExperienceStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onNotStarted,
+        Func<TResult> onInProgress,
+        Func<TResult> onCanceled,
+        Func<TResult> onApproved,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == NotStarted => onNotStarted(),
+            _ when this == InProgress => onInProgress(),
+            _ when this == Canceled => onCanceled(),
+            _ when this == Approved => onApproved(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onNotStarted,
+        Action onInProgress,
+        Action onCanceled,
+        Action onApproved,
+        Action<string> otherwise)
+    {
+        if (this == NotStarted) onNotStarted();
+        else if (this == InProgress) onInProgress();
+        else if (this == Canceled) onCanceled();
+        else if (this == Approved) onApproved();
+        else otherwise(Value);
+    }
 }

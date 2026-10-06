@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 
-namespace PayPalServerSdk.Core.Validation;
+namespace Paypal.Core.Validation;
 
 internal static class SchemaConstraintExtensions
 {

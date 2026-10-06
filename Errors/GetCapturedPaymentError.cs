@@ -1,11 +1,9 @@
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Models;
 
-namespace PayPalServerSdk.Errors;
+namespace Paypal.Errors;
 
 public sealed class GetCapturedPaymentError : ApiError
 {
@@ -21,8 +19,7 @@ public sealed class GetCapturedPaymentError : ApiError
         _noContentValue = noContentValue;
     }
 
-    private static GetCapturedPaymentError AsError(Error value) =>
-        new(Optional<Error>.Some(value), default, default);
+    private static GetCapturedPaymentError AsError(Error value) => new(Optional<Error>.Some(value), default, default);
 
     private static GetCapturedPaymentError AsNoContent(RawError value) =>
         new(default, Optional<RawError>.Some(value), default);
@@ -34,23 +31,13 @@ public sealed class GetCapturedPaymentError : ApiError
 
     public bool TryGetNoContent(out RawError value) => _noContentValue.TryGetValue(out value);
 
-    internal static Task<GetCapturedPaymentError> Create(HttpResponseMessage response, CancellationToken ct) =>
-        (int)response.StatusCode switch
+    private static Task<GetCapturedPaymentError> Create(FailedResponse response) =>
+        response.StatusCode switch
         {
-            401 or 403 or 404 => FromJson<Error>(response, ct).As(AsError),
-            500 => FromRawBody(response, ct).As(AsNoContent),
-            _ => FromRawBody(response, ct).As(AsFallback)
+            401 or 403 or 404 => response.Json<Error>().As(AsError),
+            500 => response.RawBody().As(AsNoContent),
+            _ => response.RawBody().As(AsFallback)
         };
-}
 
-internal sealed class GetCapturedPaymentErrorResponse : IErrorResponse<GetCapturedPaymentError>
-{
-    public static GetCapturedPaymentErrorResponse Instance { get; } = new();
-
-    private GetCapturedPaymentErrorResponse()
-    {
-    }
-
-    public Task<GetCapturedPaymentError> Map(HttpResponseMessage response, CancellationToken ct) =>
-        GetCapturedPaymentError.Create(response, ct);
+    internal static ApiErrorResponse<GetCapturedPaymentError> Response { get; } = new(Create);
 }

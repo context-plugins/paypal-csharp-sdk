@@ -1,11 +1,9 @@
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Models;
 
-namespace PayPalServerSdk.Errors;
+namespace Paypal.Errors;
 
 public sealed class RefundCapturedPaymentError : ApiError
 {
@@ -34,23 +32,13 @@ public sealed class RefundCapturedPaymentError : ApiError
 
     public bool TryGetNoContent(out RawError value) => _noContentValue.TryGetValue(out value);
 
-    internal static Task<RefundCapturedPaymentError> Create(HttpResponseMessage response, CancellationToken ct) =>
-        (int)response.StatusCode switch
+    private static Task<RefundCapturedPaymentError> Create(FailedResponse response) =>
+        response.StatusCode switch
         {
-            400 or 401 or 403 or 404 or 409 or 422 => FromJson<Error>(response, ct).As(AsError),
-            500 => FromRawBody(response, ct).As(AsNoContent),
-            _ => FromRawBody(response, ct).As(AsFallback)
+            400 or 401 or 403 or 404 or 409 or 422 => response.Json<Error>().As(AsError),
+            500 => response.RawBody().As(AsNoContent),
+            _ => response.RawBody().As(AsFallback)
         };
-}
 
-internal sealed class RefundCapturedPaymentErrorResponse : IErrorResponse<RefundCapturedPaymentError>
-{
-    public static RefundCapturedPaymentErrorResponse Instance { get; } = new();
-
-    private RefundCapturedPaymentErrorResponse()
-    {
-    }
-
-    public Task<RefundCapturedPaymentError> Map(HttpResponseMessage response, CancellationToken ct) =>
-        RefundCapturedPaymentError.Create(response, ct);
+    internal static ApiErrorResponse<RefundCapturedPaymentError> Response { get; } = new(Create);
 }

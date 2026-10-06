@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The reason code for the payment failure.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<ReasonCode>))]
-public sealed record ReasonCode : StringEnum<ReasonCode>
+public sealed record ReasonCode : OpenStringEnum<ReasonCode>
 {
     private ReasonCode(string value) : base(value)
     {
@@ -53,5 +54,46 @@ public sealed record ReasonCode : StringEnum<ReasonCode>
     /// </summary>
     public static readonly ReasonCode CurrencyMismatch = new("CURRENCY_MISMATCH");
 
-    public static ReasonCode FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onPaymentDenied,
+        Func<TResult> onInternalServerError,
+        Func<TResult> onPayeeAccountRestricted,
+        Func<TResult> onPayerAccountRestricted,
+        Func<TResult> onPayerCannotPay,
+        Func<TResult> onSendingLimitExceeded,
+        Func<TResult> onTransactionReceivingLimitExceeded,
+        Func<TResult> onCurrencyMismatch,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == PaymentDenied => onPaymentDenied(),
+            _ when this == InternalServerError => onInternalServerError(),
+            _ when this == PayeeAccountRestricted => onPayeeAccountRestricted(),
+            _ when this == PayerAccountRestricted => onPayerAccountRestricted(),
+            _ when this == PayerCannotPay => onPayerCannotPay(),
+            _ when this == SendingLimitExceeded => onSendingLimitExceeded(),
+            _ when this == TransactionReceivingLimitExceeded => onTransactionReceivingLimitExceeded(),
+            _ when this == CurrencyMismatch => onCurrencyMismatch(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onPaymentDenied,
+        Action onInternalServerError,
+        Action onPayeeAccountRestricted,
+        Action onPayerAccountRestricted,
+        Action onPayerCannotPay,
+        Action onSendingLimitExceeded,
+        Action onTransactionReceivingLimitExceeded,
+        Action onCurrencyMismatch,
+        Action<string> otherwise)
+    {
+        if (this == PaymentDenied) onPaymentDenied();
+        else if (this == InternalServerError) onInternalServerError();
+        else if (this == PayeeAccountRestricted) onPayeeAccountRestricted();
+        else if (this == PayerAccountRestricted) onPayerAccountRestricted();
+        else if (this == PayerCannotPay) onPayerCannotPay();
+        else if (this == SendingLimitExceeded) onSendingLimitExceeded();
+        else if (this == TransactionReceivingLimitExceeded) onTransactionReceivingLimitExceeded();
+        else if (this == CurrencyMismatch) onCurrencyMismatch();
+        else otherwise(Value);
+    }
 }

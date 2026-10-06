@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The customer type associated with the Venmo payment token. This is to indicate whether the customer acting on the merchant / platform is either a business or a consumer.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VenmoPaymentTokenCustomerType>))]
-public sealed record VenmoPaymentTokenCustomerType : StringEnum<VenmoPaymentTokenCustomerType>
+public sealed record VenmoPaymentTokenCustomerType : OpenStringEnum<VenmoPaymentTokenCustomerType>
 {
     private VenmoPaymentTokenCustomerType(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record VenmoPaymentTokenCustomerType : StringEnum<VenmoPaymentToke
     /// </summary>
     public static readonly VenmoPaymentTokenCustomerType Business = new("BUSINESS");
 
-    public static VenmoPaymentTokenCustomerType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onConsumer,
+        Func<TResult> onBusiness,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Consumer => onConsumer(),
+            _ when this == Business => onBusiness(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onConsumer, Action onBusiness, Action<string> otherwise)
+    {
+        if (this == Consumer) onConsumer();
+        else if (this == Business) onBusiness();
+        else otherwise(Value);
+    }
 }

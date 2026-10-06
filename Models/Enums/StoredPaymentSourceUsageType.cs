@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Indicates if this is a <c>first</c> or <c>subsequent</c> payment using a stored payment source (also referred to as stored credential or card on file).
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<StoredPaymentSourceUsageType>))]
-public sealed record StoredPaymentSourceUsageType : StringEnum<StoredPaymentSourceUsageType>
+public sealed record StoredPaymentSourceUsageType : OpenStringEnum<StoredPaymentSourceUsageType>
 {
     private StoredPaymentSourceUsageType(string value) : base(value)
     {
@@ -28,5 +29,23 @@ public sealed record StoredPaymentSourceUsageType : StringEnum<StoredPaymentSour
     /// </summary>
     public static readonly StoredPaymentSourceUsageType Derived = new("DERIVED");
 
-    public static StoredPaymentSourceUsageType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onFirst,
+        Func<TResult> onSubsequent,
+        Func<TResult> onDerived,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == First => onFirst(),
+            _ when this == Subsequent => onSubsequent(),
+            _ when this == Derived => onDerived(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onFirst, Action onSubsequent, Action onDerived, Action<string> otherwise)
+    {
+        if (this == First) onFirst();
+        else if (this == Subsequent) onSubsequent();
+        else if (this == Derived) onDerived();
+        else otherwise(Value);
+    }
 }

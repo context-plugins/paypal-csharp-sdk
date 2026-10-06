@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The reason why the refund has the <c>PENDING</c> or <c>FAILED</c> status.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<RefundIncompleteReason>))]
-public sealed record RefundIncompleteReason : StringEnum<RefundIncompleteReason>
+public sealed record RefundIncompleteReason : OpenStringEnum<RefundIncompleteReason>
 {
     private RefundIncompleteReason(string value) : base(value)
     {
@@ -18,5 +19,16 @@ public sealed record RefundIncompleteReason : StringEnum<RefundIncompleteReason>
     /// </summary>
     public static readonly RefundIncompleteReason Echeck = new("ECHECK");
 
-    public static RefundIncompleteReason FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onEcheck, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Echeck => onEcheck(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onEcheck, Action<string> otherwise)
+    {
+        if (this == Echeck) onEcheck();
+        else otherwise(Value);
+    }
 }

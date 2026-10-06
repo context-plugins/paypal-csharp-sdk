@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The tokenization method that generated the ID.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VaultTokenRequestType>))]
-public sealed record VaultTokenRequestType : StringEnum<VaultTokenRequestType>
+public sealed record VaultTokenRequestType : OpenStringEnum<VaultTokenRequestType>
 {
     private VaultTokenRequestType(string value) : base(value)
     {
@@ -18,5 +19,16 @@ public sealed record VaultTokenRequestType : StringEnum<VaultTokenRequestType>
     /// </summary>
     public static readonly VaultTokenRequestType SetupToken = new("SETUP_TOKEN");
 
-    public static VaultTokenRequestType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onSetupToken, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == SetupToken => onSetupToken(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onSetupToken, Action<string> otherwise)
+    {
+        if (this == SetupToken) onSetupToken();
+        else otherwise(Value);
+    }
 }

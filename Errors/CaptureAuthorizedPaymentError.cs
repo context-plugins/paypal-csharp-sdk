@@ -1,11 +1,9 @@
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Models;
 
-namespace PayPalServerSdk.Errors;
+namespace Paypal.Errors;
 
 public sealed class CaptureAuthorizedPaymentError : ApiError
 {
@@ -34,23 +32,13 @@ public sealed class CaptureAuthorizedPaymentError : ApiError
 
     public bool TryGetNoContent(out RawError value) => _noContentValue.TryGetValue(out value);
 
-    internal static Task<CaptureAuthorizedPaymentError> Create(HttpResponseMessage response, CancellationToken ct) =>
-        (int)response.StatusCode switch
+    private static Task<CaptureAuthorizedPaymentError> Create(FailedResponse response) =>
+        response.StatusCode switch
         {
-            400 or 401 or 403 or 404 or 409 or 422 => FromJson<Error>(response, ct).As(AsError),
-            500 => FromRawBody(response, ct).As(AsNoContent),
-            _ => FromRawBody(response, ct).As(AsFallback)
+            400 or 401 or 403 or 404 or 409 or 422 => response.Json<Error>().As(AsError),
+            500 => response.RawBody().As(AsNoContent),
+            _ => response.RawBody().As(AsFallback)
         };
-}
 
-internal sealed class CaptureAuthorizedPaymentErrorResponse : IErrorResponse<CaptureAuthorizedPaymentError>
-{
-    public static CaptureAuthorizedPaymentErrorResponse Instance { get; } = new();
-
-    private CaptureAuthorizedPaymentErrorResponse()
-    {
-    }
-
-    public Task<CaptureAuthorizedPaymentError> Map(HttpResponseMessage response, CancellationToken ct) =>
-        CaptureAuthorizedPaymentError.Create(response, ct);
+    internal static ApiErrorResponse<CaptureAuthorizedPaymentError> Response { get; } = new(Create);
 }

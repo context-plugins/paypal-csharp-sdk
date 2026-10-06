@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The action to take on the subscription if the initial payment for the setup fails.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<SetupFeeFailureAction>))]
-public sealed record SetupFeeFailureAction : StringEnum<SetupFeeFailureAction>
+public sealed record SetupFeeFailureAction : OpenStringEnum<SetupFeeFailureAction>
 {
     private SetupFeeFailureAction(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record SetupFeeFailureAction : StringEnum<SetupFeeFailureAction>
     /// </summary>
     public static readonly SetupFeeFailureAction Cancel = new("CANCEL");
 
-    public static SetupFeeFailureAction FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onContinue, Func<TResult> onCancel, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Continue => onContinue(),
+            _ when this == Cancel => onCancel(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onContinue, Action onCancel, Action<string> otherwise)
+    {
+        if (this == Continue) onContinue();
+        else if (this == Cancel) onCancel();
+        else otherwise(Value);
+    }
 }

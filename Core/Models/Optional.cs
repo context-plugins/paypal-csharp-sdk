@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace PayPalServerSdk.Core.Models;
+namespace Paypal.Core.Models;
 
 [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 internal readonly record struct Optional<TValue>

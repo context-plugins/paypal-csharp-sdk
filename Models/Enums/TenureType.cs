@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The tenure type of the billing cycle identifies if the billing cycle is a trial(free or discounted) or regular billing cycle., The tenure type of the billing cycle. In case of a plan having trial cycle, only 2 trial cycles are allowed per plan., The type of the billing cycle.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<TenureType>))]
-public sealed record TenureType : StringEnum<TenureType>
+public sealed record TenureType : OpenStringEnum<TenureType>
 {
     private TenureType(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record TenureType : StringEnum<TenureType>
     /// </summary>
     public static readonly TenureType Trial = new("TRIAL");
 
-    public static TenureType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onRegular, Func<TResult> onTrial, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Regular => onRegular(),
+            _ when this == Trial => onTrial(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onRegular, Action onTrial, Action<string> otherwise)
+    {
+        if (this == Regular) onRegular();
+        else if (this == Trial) onTrial();
+        else otherwise(Value);
+    }
 }

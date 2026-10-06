@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// A resource representing an experience context of vault a venmo account.
@@ -22,6 +22,7 @@ public record VenmoExperienceContext
     /// <summary>
     /// The shipping preference. This only applies to PayPal payment source.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("shipping_preference")]
     public ExperienceContextShippingPreference? ShippingPreference { get; init; } = ExperienceContextShippingPreference.GetFromFile;
 
@@ -35,6 +36,7 @@ public record VenmoExperienceContext
     /// <summary>
     /// User Action on action to be performed after a successful payer approval.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("user_action")]
     public VaultUserAction? UserAction { get; init; } = VaultUserAction.Continue;
 

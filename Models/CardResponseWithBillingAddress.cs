@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The payment card used to fund the payment. Card can be a credit or debit card.
@@ -34,7 +34,7 @@ public record CardResponseWithBillingAddress
     public string? Expiry { get; init; }
 
     /// <summary>
-    /// The <see href="https://developer.paypal.com/api/rest/reference/currency-codes/">three-character ISO-4217 currency code</see> that identifies the currency.
+    /// The <see href="/api/rest/reference/currency-codes/">three-character ISO-4217 currency code</see> that identifies the currency.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("currency_code")]

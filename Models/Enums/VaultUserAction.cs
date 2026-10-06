@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// User Action on action to be performed after a successful payer approval.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VaultUserAction>))]
-public sealed record VaultUserAction : StringEnum<VaultUserAction>
+public sealed record VaultUserAction : OpenStringEnum<VaultUserAction>
 {
     private VaultUserAction(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record VaultUserAction : StringEnum<VaultUserAction>
     /// </summary>
     public static readonly VaultUserAction Continue = new("CONTINUE");
 
-    public static VaultUserAction FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onSetupNow,
+        Func<TResult> onContinue,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == SetupNow => onSetupNow(),
+            _ when this == Continue => onContinue(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onSetupNow, Action onContinue, Action<string> otherwise)
+    {
+        if (this == SetupNow) onSetupNow();
+        else if (this == Continue) onContinue();
+        else otherwise(Value);
+    }
 }

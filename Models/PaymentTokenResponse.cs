@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// Full representation of a saved payment token.
@@ -34,7 +34,7 @@ public record PaymentTokenResponse
     public PaymentTokenResponsePaymentSource? PaymentSource { get; init; }
 
     /// <summary>
-    /// An array of related <see href="https://developer.paypal.com/api/rest/responses/#hateoas">HATEOAS links</see>.
+    /// An array of related <see href="/api/rest/responses/#hateoas">HATEOAS links</see>.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("links")]

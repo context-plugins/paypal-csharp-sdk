@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// Customizes the buyer experience during the approval process for payment with Venmo. Note: Partners and Marketplaces might configure shipping_preference during partner account setup, which overrides the request values.
@@ -22,6 +22,7 @@ public record VenmoWalletExperienceContext
     /// <summary>
     /// The location from which the shipping address is derived.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("shipping_preference")]
     public VenmoWalletExperienceContextShippingPreference? ShippingPreference { get; init; } = VenmoWalletExperienceContextShippingPreference.GetFromFile;
 
@@ -35,6 +36,7 @@ public record VenmoWalletExperienceContext
     /// <summary>
     /// Configures a Continue or Pay Now checkout flow.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("user_action")]
     public VenmoWalletExperienceContextUserAction? UserAction { get; init; } = VenmoWalletExperienceContextUserAction.Continue;
 

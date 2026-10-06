@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Authentication Method which is used for the card transaction.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<GooglePayAuthenticationMethod>))]
-public sealed record GooglePayAuthenticationMethod : StringEnum<GooglePayAuthenticationMethod>
+public sealed record GooglePayAuthenticationMethod : OpenStringEnum<GooglePayAuthenticationMethod>
 {
     private GooglePayAuthenticationMethod(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record GooglePayAuthenticationMethod : StringEnum<GooglePayAuthent
     /// </summary>
     public static readonly GooglePayAuthenticationMethod Cryptogram3Ds = new("CRYPTOGRAM_3DS");
 
-    public static GooglePayAuthenticationMethod FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onPanOnly,
+        Func<TResult> onCryptogram3Ds,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == PanOnly => onPanOnly(),
+            _ when this == Cryptogram3Ds => onCryptogram3Ds(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onPanOnly, Action onCryptogram3Ds, Action<string> otherwise)
+    {
+        if (this == PanOnly) onPanOnly();
+        else if (this == Cryptogram3Ds) onCryptogram3Ds();
+        else otherwise(Value);
+    }
 }

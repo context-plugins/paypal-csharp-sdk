@@ -4,12 +4,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Request;
-using PayPalServerSdk.Core.Response;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Core.Request;
+using Paypal.Core.Response;
 
-namespace PayPalServerSdk.Core.Authentication.OAuth2.ClientCredentials;
+namespace Paypal.Core.Authentication.OAuth2.ClientCredentials;
 
 internal sealed class OAuth2ClientCredentialsStrategy : IOAuth2TokenStrategy<OAuth2ClientCredentials>
 {

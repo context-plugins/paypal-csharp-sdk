@@ -1,10 +1,10 @@
 using System.Net.Http;
-using PayPalServerSdk.Api;
-using PayPalServerSdk.Core;
-using PayPalServerSdk.Core.Logging;
-using PayPalServerSdk.Core.Models;
+using Paypal.Api;
+using Paypal.Core;
+using Paypal.Core.Logging;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk;
+namespace Paypal;
 
 /// <summary>
 /// ### Important Notes
@@ -18,36 +18,40 @@ namespace PayPalServerSdk;
 ///  - Transaction Search Controller: <see href="https://developer.paypal.com/docs/api/transaction-search/v1/">Transaction Search API v1</see>
 ///  - Subscriptions Controller: <see href="https://developer.paypal.com/docs/api/subscriptions/v1/">Subscriptions API v1</see>
 /// </summary>
-public sealed class PayPalServerSdkClient
+public sealed class PaypalClient
 {
     private readonly RawClient _rawClient;
     private readonly Server _server;
     private readonly AuthSchemes _auth;
 
-    public PayPalServerSdkClient(HttpClient httpClient, PayPalServerSdkClientOptions options)
+    public PaypalClient(HttpClient httpClient, PaypalClientOptions options)
     {
         _server = new Server(options.Environment, options.Server);
         var queryParameterFactory = new QueryParameterFactory([]);
         var templateParamsFactory = new TemplateParamsFactory([]);
         var urlFactory = new UriFactory(queryParameterFactory, templateParamsFactory);
         var httpStatusPolicy = new HttpStatusPolicy([]);
-        var headersFactory =
-            new HeadersFactory([new HeaderParam("User-Agent", "PayPalServerSdkClient/2.29 CSharp"),
-                    new HeaderParam("X-APIMatic-Lang", "CSharp"),
-                    new HeaderParam("X-APIMatic-Package-Version", "2.29"),
-                    new HeaderParam("X-APIMatic-Gen-Version", "4.0.0"),
-                    new HeaderParam("X-APIMatic-OS", RuntimeEnvironment.Os),
-                    new HeaderParam("X-APIMatic-Runtime", RuntimeEnvironment.Runtime)]);
-        var resiliencePipelineFactory = new ResiliencePipelineFactory(options.Retry);
-        var httpLogger = new HttpLogger(options.Logging, "PayPalServerSdkClient");
+        var headersFactory = new HeadersFactory([
+            new HeaderParam("User-Agent", "PaypalClient/2.29 CSharp"),
+            new HeaderParam("X-APIMatic-Lang", "CSharp"),
+            new HeaderParam("X-APIMatic-Package-Version", "2.29"),
+            new HeaderParam("X-APIMatic-Gen-Version", "4.0.0"),
+            new HeaderParam("X-APIMatic-OS", RuntimeEnvironment.Os),
+            new HeaderParam("X-APIMatic-Runtime", RuntimeEnvironment.Runtime),
+        ]);
+        var resiliencePipelineFactory = new ResiliencePipelineFactory(options.Retry, options.TimeProvider);
+        var httpLogger = new HttpLogger(options.Logging, "PaypalClient", options.TimeProvider);
+        var responseContexts = new ResponseContextFactory(options.TimeProvider, options.StreamReadTimeout);
         _rawClient =
-            new RawClient(httpClient,
+            new RawClient(
+                httpClient,
                 urlFactory,
                 httpStatusPolicy,
                 headersFactory,
                 resiliencePipelineFactory,
                 httpLogger,
-                options.Hooks);
+                options.Hooks,
+                responseContexts);
         _auth = new AuthSchemes(options, _server, _rawClient);
     }
 

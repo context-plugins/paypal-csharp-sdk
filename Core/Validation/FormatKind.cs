@@ -1,4 +1,4 @@
-namespace PayPalServerSdk.Core.Validation;
+namespace Paypal.Core.Validation;
 
 public enum FormatKind
 {

@@ -1,29 +1,27 @@
 using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Servers;
+namespace Paypal.Servers;
 
 [JsonConverter(typeof(StringEnumConverter<ServerEnvironment>))]
-public record ServerEnvironment : StringEnum<ServerEnvironment>
+public sealed record ServerEnvironment : ClosedStringEnum<ServerEnvironment>
 {
+    private ServerEnvironment(string value) : base(value)
+    {
+    }
+
     /// <summary>
     /// PayPal Sandbox Environment
     /// </summary>
     public static readonly ServerEnvironment Sandbox = new("Sandbox");
 
-    private ServerEnvironment(string value) : base(value)
-    {
-    }
+    public static ServerEnvironment Default() => Sandbox;
 
-    internal T Match<T>(Func<T> onSandbox) =>
+    internal TResult Match<TResult>(Func<TResult> onSandbox) =>
         this switch
         {
             _ when this == Sandbox => onSandbox(),
-            _ => throw new ArgumentOutOfRangeException(nameof(ServerEnvironment),
-                this,
-                $"Unknown {nameof(ServerEnvironment)} value.")
+            _ => throw new InvalidOperationException($"{nameof(ServerEnvironment)} holds no known value.")
         };
-
-    public static ServerEnvironment Default() => Sandbox;
 }

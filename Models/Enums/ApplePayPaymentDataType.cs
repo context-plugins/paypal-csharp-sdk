@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Indicates the type of payment data passed, in case of Non China the payment data is 3DSECURE and for China it is EMV.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<ApplePayPaymentDataType>))]
-public sealed record ApplePayPaymentDataType : StringEnum<ApplePayPaymentDataType>
+public sealed record ApplePayPaymentDataType : OpenStringEnum<ApplePayPaymentDataType>
 {
     private ApplePayPaymentDataType(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record ApplePayPaymentDataType : StringEnum<ApplePayPaymentDataTyp
     /// </summary>
     public static readonly ApplePayPaymentDataType Emv = new("EMV");
 
-    public static ApplePayPaymentDataType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> on_3Dsecure, Func<TResult> onEmv, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == _3Dsecure => on_3Dsecure(),
+            _ when this == Emv => onEmv(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action on_3Dsecure, Action onEmv, Action<string> otherwise)
+    {
+        if (this == _3Dsecure) on_3Dsecure();
+        else if (this == Emv) onEmv();
+        else otherwise(Value);
+    }
 }

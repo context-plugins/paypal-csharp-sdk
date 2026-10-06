@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The verification method of the card.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VaultCardVerificationMethod>))]
-public sealed record VaultCardVerificationMethod : StringEnum<VaultCardVerificationMethod>
+public sealed record VaultCardVerificationMethod : OpenStringEnum<VaultCardVerificationMethod>
 {
     private VaultCardVerificationMethod(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record VaultCardVerificationMethod : StringEnum<VaultCardVerificat
     /// </summary>
     public static readonly VaultCardVerificationMethod ScaAlways = new("SCA_ALWAYS");
 
-    public static VaultCardVerificationMethod FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onScaWhenRequired,
+        Func<TResult> onScaAlways,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == ScaWhenRequired => onScaWhenRequired(),
+            _ when this == ScaAlways => onScaAlways(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onScaWhenRequired, Action onScaAlways, Action<string> otherwise)
+    {
+        if (this == ScaWhenRequired) onScaWhenRequired();
+        else if (this == ScaAlways) onScaAlways();
+        else otherwise(Value);
+    }
 }

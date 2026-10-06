@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The merchant-preferred payment methods.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PayeePaymentMethodPreference>))]
-public sealed record PayeePaymentMethodPreference : StringEnum<PayeePaymentMethodPreference>
+public sealed record PayeePaymentMethodPreference : OpenStringEnum<PayeePaymentMethodPreference>
 {
     private PayeePaymentMethodPreference(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record PayeePaymentMethodPreference : StringEnum<PayeePaymentMetho
     /// </summary>
     public static readonly PayeePaymentMethodPreference ImmediatePaymentRequired = new("IMMEDIATE_PAYMENT_REQUIRED");
 
-    public static PayeePaymentMethodPreference FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onUnrestricted,
+        Func<TResult> onImmediatePaymentRequired,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Unrestricted => onUnrestricted(),
+            _ when this == ImmediatePaymentRequired => onImmediatePaymentRequired(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onUnrestricted, Action onImmediatePaymentRequired, Action<string> otherwise)
+    {
+        if (this == Unrestricted) onUnrestricted();
+        else if (this == ImmediatePaymentRequired) onImmediatePaymentRequired();
+        else otherwise(Value);
+    }
 }

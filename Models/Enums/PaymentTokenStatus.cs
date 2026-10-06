@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The status of the payment token.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PaymentTokenStatus>))]
-public sealed record PaymentTokenStatus : StringEnum<PaymentTokenStatus>
+public sealed record PaymentTokenStatus : OpenStringEnum<PaymentTokenStatus>
 {
     private PaymentTokenStatus(string value) : base(value)
     {
@@ -38,5 +39,34 @@ public sealed record PaymentTokenStatus : StringEnum<PaymentTokenStatus>
     /// </summary>
     public static readonly PaymentTokenStatus Tokenized = new("TOKENIZED");
 
-    public static PaymentTokenStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCreated,
+        Func<TResult> onPayerActionRequired,
+        Func<TResult> onApproved,
+        Func<TResult> onVaulted,
+        Func<TResult> onTokenized,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Created => onCreated(),
+            _ when this == PayerActionRequired => onPayerActionRequired(),
+            _ when this == Approved => onApproved(),
+            _ when this == Vaulted => onVaulted(),
+            _ when this == Tokenized => onTokenized(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCreated,
+        Action onPayerActionRequired,
+        Action onApproved,
+        Action onVaulted,
+        Action onTokenized,
+        Action<string> otherwise)
+    {
+        if (this == Created) onCreated();
+        else if (this == PayerActionRequired) onPayerActionRequired();
+        else if (this == Approved) onApproved();
+        else if (this == Vaulted) onVaulted();
+        else if (this == Tokenized) onTokenized();
+        else otherwise(Value);
+    }
 }

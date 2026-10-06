@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// Buyer's mobile web browser context to app switch to the PayPal consumer app.
@@ -13,6 +13,7 @@ public record MobileWebContext
     /// <summary>
     /// Merchant preference on how the buyer can navigate back to merchant website post approving the transaction on the PayPal App.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("return_flow")]
     public MobileReturnFlow? ReturnFlow { get; init; } = MobileReturnFlow.Auto;
 

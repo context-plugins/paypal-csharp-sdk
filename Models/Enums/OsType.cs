@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Operating System type of the device that the buyer is using.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<OsType>))]
-public sealed record OsType : StringEnum<OsType>
+public sealed record OsType : OpenStringEnum<OsType>
 {
     private OsType(string value) : base(value)
     {
@@ -28,5 +29,23 @@ public sealed record OsType : StringEnum<OsType>
     /// </summary>
     public static readonly OsType Other = new("OTHER");
 
-    public static OsType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onAndroid,
+        Func<TResult> onIos,
+        Func<TResult> onOther,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Android => onAndroid(),
+            _ when this == Ios => onIos(),
+            _ when this == Other => onOther(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onAndroid, Action onIos, Action onOther, Action<string> otherwise)
+    {
+        if (this == Android) onAndroid();
+        else if (this == Ios) onIos();
+        else if (this == Other) onOther();
+        else otherwise(Value);
+    }
 }

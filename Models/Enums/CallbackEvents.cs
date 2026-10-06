@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// CallBack event.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<CallbackEvents>))]
-public sealed record CallbackEvents : StringEnum<CallbackEvents>
+public sealed record CallbackEvents : OpenStringEnum<CallbackEvents>
 {
     private CallbackEvents(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record CallbackEvents : StringEnum<CallbackEvents>
     /// </summary>
     public static readonly CallbackEvents ShippingOptions = new("SHIPPING_OPTIONS");
 
-    public static CallbackEvents FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onShippingAddress,
+        Func<TResult> onShippingOptions,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == ShippingAddress => onShippingAddress(),
+            _ when this == ShippingOptions => onShippingOptions(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onShippingAddress, Action onShippingOptions, Action<string> otherwise)
+    {
+        if (this == ShippingAddress) onShippingAddress();
+        else if (this == ShippingOptions) onShippingOptions();
+        else otherwise(Value);
+    }
 }

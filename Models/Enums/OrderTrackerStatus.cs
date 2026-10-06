@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The status of the item shipment.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<OrderTrackerStatus>))]
-public sealed record OrderTrackerStatus : StringEnum<OrderTrackerStatus>
+public sealed record OrderTrackerStatus : OpenStringEnum<OrderTrackerStatus>
 {
     private OrderTrackerStatus(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record OrderTrackerStatus : StringEnum<OrderTrackerStatus>
     /// </summary>
     public static readonly OrderTrackerStatus Shipped = new("SHIPPED");
 
-    public static OrderTrackerStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCancelled,
+        Func<TResult> onShipped,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Cancelled => onCancelled(),
+            _ when this == Shipped => onShipped(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCancelled, Action onShipped, Action<string> otherwise)
+    {
+        if (this == Cancelled) onCancelled();
+        else if (this == Shipped) onShipped();
+        else otherwise(Value);
+    }
 }

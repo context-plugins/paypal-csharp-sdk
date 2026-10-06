@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// Information about cardholder possession validation and cardholder identification and verifications (ID&amp;V).
@@ -11,12 +11,14 @@ public record AssuranceDetails
     /// <summary>
     /// If true, indicates that Cardholder possession validation has been performed on returned payment credential.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("account_verified")]
     public bool? AccountVerified { get; init; } = false;
 
     /// <summary>
     /// If true, indicates that identification and verifications (ID&amp;V) was performed on the returned payment credential.If false, the same risk-based authentication can be performed as you would for card transactions. This risk-based authentication can include, but not limited to, step-up with 3D Secure protocol if applicable.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("card_holder_authenticated")]
     public bool? CardHolderAuthenticated { get; init; } = false;
 

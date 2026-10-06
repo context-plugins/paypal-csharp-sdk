@@ -9,15 +9,15 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 ### CaptureAuthorizedPayment
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CaptureAuthorizedPayment(string authorizationId, string? payPalMockResponse, string? payPalRequestId, string? payPalAuthAssertion, CaptureRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`payPalMockResponse` … `body`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `CaptureAuthorizedPayment(CaptureAuthorizedPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `AuthorizationId`
 - **Returns**: `CapturedPayment`
-- **Error**: `SdkException<CaptureAuthorizedPaymentError>` — **Case A (typed)**
+- **Error**: `ApiException<CaptureAuthorizedPaymentError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 401, 403, 404, 409, 422] · `TryGetNoContent(out RawError)` [500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CaptureAuthorizedPaymentRequest` | `Requests/Payments/CaptureAuthorizedPaymentRequest.cs` |
 | `CaptureRequest` | `Models/CaptureRequest.cs` |
 | `CapturedPayment` | `Models/CapturedPayment.cs` |
 | `CaptureAuthorizedPaymentError` | `Errors/CaptureAuthorizedPaymentError.cs` |
@@ -26,15 +26,15 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 ### GetAuthorizedPayment
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `GetAuthorizedPayment(string authorizationId, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalMockResponse` — nullable, no default → **must pass explicitly**
-  - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
+- **Signature**: `GetAuthorizedPayment(GetAuthorizedPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `AuthorizationId`
 - **Returns**: `PaymentAuthorization`
-- **Error**: `SdkException<GetAuthorizedPaymentError>` — **Case A (typed)**
+- **Error**: `ApiException<GetAuthorizedPaymentError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [401, 403, 404] · `TryGetNoContent(out RawError)` [500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `GetAuthorizedPaymentRequest` | `Requests/Payments/GetAuthorizedPaymentRequest.cs` |
 | `PaymentAuthorization` | `Models/PaymentAuthorization.cs` |
 | `GetAuthorizedPaymentError` | `Errors/GetAuthorizedPaymentError.cs` |
 | `Error` | `Models/Error.cs` |
@@ -42,14 +42,15 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 ### GetCapturedPayment
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `GetCapturedPayment(string captureId, string? payPalMockResponse, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalMockResponse` — nullable, no default → **must pass explicitly**
+- **Signature**: `GetCapturedPayment(GetCapturedPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `CaptureId`
 - **Returns**: `CapturedPayment`
-- **Error**: `SdkException<GetCapturedPaymentError>` — **Case A (typed)**
+- **Error**: `ApiException<GetCapturedPaymentError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [401, 403, 404] · `TryGetNoContent(out RawError)` [500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `GetCapturedPaymentRequest` | `Requests/Payments/GetCapturedPaymentRequest.cs` |
 | `CapturedPayment` | `Models/CapturedPayment.cs` |
 | `GetCapturedPaymentError` | `Errors/GetCapturedPaymentError.cs` |
 | `Error` | `Models/Error.cs` |
@@ -57,15 +58,15 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 ### GetRefund
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `GetRefund(string refundId, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalMockResponse` — nullable, no default → **must pass explicitly**
-  - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
+- **Signature**: `GetRefund(GetRefundRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `RefundId`
 - **Returns**: `Refund`
-- **Error**: `SdkException<GetRefundError>` — **Case A (typed)**
+- **Error**: `ApiException<GetRefundError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [401, 403, 404] · `TryGetNoContent(out RawError)` [500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `GetRefundRequest` | `Requests/Payments/GetRefundRequest.cs` |
 | `Refund` | `Models/Refund.cs` |
 | `GetRefundError` | `Errors/GetRefundError.cs` |
 | `Error` | `Models/Error.cs` |
@@ -73,17 +74,15 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 ### ReauthorizePayment
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `ReauthorizePayment(string authorizationId, string? payPalRequestId, string? payPalAuthAssertion, ReauthorizeRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalRequestId` — nullable, no default → **must pass explicitly**
-  - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
-  - `body` — nullable, no default → **must pass explicitly**
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `ReauthorizePayment(ReauthorizePaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `AuthorizationId`
 - **Returns**: `PaymentAuthorization`
-- **Error**: `SdkException<ReauthorizePaymentError>` — **Case A (typed)**
+- **Error**: `ApiException<ReauthorizePaymentError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 401, 403, 404, 422] · `TryGetNoContent(out RawError)` [500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `ReauthorizePaymentRequest` | `Requests/Payments/ReauthorizePaymentRequest.cs` |
 | `ReauthorizeRequest` | `Models/ReauthorizeRequest.cs` |
 | `PaymentAuthorization` | `Models/PaymentAuthorization.cs` |
 | `ReauthorizePaymentError` | `Errors/ReauthorizePaymentError.cs` |
@@ -92,15 +91,15 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 ### RefundCapturedPayment
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `RefundCapturedPayment(string captureId, string? payPalMockResponse, string? payPalRequestId, string? payPalAuthAssertion, RefundRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`payPalMockResponse` … `body`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `RefundCapturedPayment(RefundCapturedPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `CaptureId`
 - **Returns**: `Refund`
-- **Error**: `SdkException<RefundCapturedPaymentError>` — **Case A (typed)**
+- **Error**: `ApiException<RefundCapturedPaymentError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 401, 403, 404, 409, 422] · `TryGetNoContent(out RawError)` [500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `RefundCapturedPaymentRequest` | `Requests/Payments/RefundCapturedPaymentRequest.cs` |
 | `RefundRequest` | `Models/RefundRequest.cs` |
 | `Refund` | `Models/Refund.cs` |
 | `RefundCapturedPaymentError` | `Errors/RefundCapturedPaymentError.cs` |
@@ -109,17 +108,15 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 ### VoidPayment
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `VoidPayment(string authorizationId, string? payPalMockResponse, string? payPalAuthAssertion, string? payPalRequestId, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalMockResponse` — nullable, no default → **must pass explicitly**
-  - `payPalAuthAssertion` — nullable, no default → **must pass explicitly**
-  - `payPalRequestId` — nullable, no default → **must pass explicitly**
-  - defaults: `prefer` = `"return=minimal"`
+- **Signature**: `VoidPayment(VoidPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `AuthorizationId`
 - **Returns**: `PaymentAuthorization`
-- **Error**: `SdkException<VoidPaymentError>` — **Case A (typed)**
+- **Error**: `ApiException<VoidPaymentError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [401, 403, 404, 409, 422] · `TryGetNoContent(out RawError)` [500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `VoidPaymentRequest` | `Requests/Payments/VoidPaymentRequest.cs` |
 | `PaymentAuthorization` | `Models/PaymentAuthorization.cs` |
 | `VoidPaymentError` | `Errors/VoidPaymentError.cs` |
 | `Error` | `Models/Error.cs` |

@@ -1,13 +1,15 @@
 # Reference
 
-> Source: [PayPalServerSdkClient](PayPalServerSdkClient.cs)
+Every operation below is shown in its throwing form. On an error status it throws `ApiException<TError>` — the status code, headers, content type and the operation's error type, `RawError` (the raw body) when the spec declares none — and where an operation offers an `…AsResult` sibling, that sibling returns `ApiResult<TResponse, TError>` instead. A request that produces no usable response surfaces as `SdkConnectionException` or `SdkTimeoutException`, a body that does not match the documented response type as `ResponseDeserializationException`, and a credential that cannot be applied as `AuthSchemeException`; all of them derive from `SdkException` and name the failed call. See [README → Error Handling](README.md#error-handling).
+
+> Source: [PaypalClient](PaypalClient.cs)
 
 ## Orders
 
 > Source: [Orders](Api/Orders.cs)
 
 <details>
-<summary><code>Task&lt;OrderAuthorizeResponse&gt; AuthorizeOrder(string id, string? payPalMockResponse, string? payPalRequestId, string? payPalClientMetadataId, string? payPalAuthAssertion, OrderAuthorizeRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;OrderAuthorizeResponse&gt; AuthorizeOrder(AuthorizeOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -30,15 +32,10 @@ Authorizes payment for an order. To successfully authorize payment for an order,
 ```csharp
 try
 {
-    var response = await client.Orders.AuthorizeOrder(id,
-        payPalMockResponse,
-        payPalRequestId,
-        payPalClientMetadataId,
-        payPalAuthAssertion,
-        body);
+    var response = await client.Orders.AuthorizeOrder(new AuthorizeOrderRequest { Id = "some example string" });
     // TODO: Handle 'response' of type OrderAuthorizeResponse
 }
-catch (SdkException<AuthorizeOrderError> ex)
+catch (ApiException<AuthorizeOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -50,20 +47,12 @@ catch (SdkException<AuthorizeOrderError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the order for which to authorize. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager. It is mandatory for all single-step create order calls (E.g. Create Order Request with payment source information like Card, PayPal.vault_id, PayPal.billing_agreement_id, etc). |
-| <code>payPalClientMetadataId</code> | <code>string?</code> | - |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see PayPal-Auth-Assertion. |
-| <code>body</code> | <code>[OrderAuthorizeRequest?](Models/OrderAuthorizeRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[AuthorizeOrderRequest](Requests/Orders/AuthorizeOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -75,7 +64,7 @@ catch (SdkException<AuthorizeOrderError> ex)
 
 **OnSuccess**: <code>[OrderAuthorizeResponse](Models/OrderAuthorizeResponse.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[AuthorizeOrderError](Errors/AuthorizeOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[AuthorizeOrderError](Errors/AuthorizeOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -86,7 +75,7 @@ catch (SdkException<AuthorizeOrderError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Order&gt; CaptureOrder(string id, string? payPalMockResponse, string? payPalRequestId, string? payPalClientMetadataId, string? payPalAuthAssertion, OrderCaptureRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Order&gt; CaptureOrder(CaptureOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -109,15 +98,10 @@ Captures payment for an order. To successfully capture payment for an order, the
 ```csharp
 try
 {
-    var response = await client.Orders.CaptureOrder(id,
-        payPalMockResponse,
-        payPalRequestId,
-        payPalClientMetadataId,
-        payPalAuthAssertion,
-        body);
+    var response = await client.Orders.CaptureOrder(new CaptureOrderRequest { Id = "some example string" });
     // TODO: Handle 'response' of type Order
 }
-catch (SdkException<CaptureOrderError> ex)
+catch (ApiException<CaptureOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -129,20 +113,12 @@ catch (SdkException<CaptureOrderError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the order for which to capture a payment. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager. It is mandatory for all single-step create order calls (E.g. Create Order Request with payment source information like Card, PayPal.vault_id, PayPal.billing_agreement_id, etc). |
-| <code>payPalClientMetadataId</code> | <code>string?</code> | - |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see PayPal-Auth-Assertion. |
-| <code>body</code> | <code>[OrderCaptureRequest?](Models/OrderCaptureRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[CaptureOrderRequest](Requests/Orders/CaptureOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -154,7 +130,7 @@ catch (SdkException<CaptureOrderError> ex)
 
 **OnSuccess**: <code>[Order](Models/Order.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CaptureOrderError](Errors/CaptureOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CaptureOrderError](Errors/CaptureOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -165,7 +141,7 @@ catch (SdkException<CaptureOrderError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Order&gt; ConfirmOrder(string id, string? payPalClientMetadataId, string? payPalAuthAssertion, ConfirmOrderRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Order&gt; ConfirmOrder(ConfirmOrderOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -188,10 +164,10 @@ Payer confirms their intent to pay for the the Order with the given payment sour
 ```csharp
 try
 {
-    var response = await client.Orders.ConfirmOrder(id, payPalClientMetadataId, payPalAuthAssertion, body);
+    var response = await client.Orders.ConfirmOrder(new ConfirmOrderOperationRequest { Id = "some example string" });
     // TODO: Handle 'response' of type Order
 }
-catch (SdkException<ConfirmOrderError> ex)
+catch (ApiException<ConfirmOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -203,18 +179,12 @@ catch (SdkException<ConfirmOrderError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the order for which the payer confirms their intent to pay. |
-| <code>payPalClientMetadataId</code> | <code>string?</code> | - |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see PayPal-Auth-Assertion. |
-| <code>body</code> | <code>[ConfirmOrderRequest?](Models/ConfirmOrderRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[ConfirmOrderOperationRequest](Requests/Orders/ConfirmOrderOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -226,7 +196,7 @@ catch (SdkException<ConfirmOrderError> ex)
 
 **OnSuccess**: <code>[Order](Models/Order.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[ConfirmOrderError](Errors/ConfirmOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ConfirmOrderError](Errors/ConfirmOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -237,7 +207,7 @@ catch (SdkException<ConfirmOrderError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Order&gt; CreateOrder(string? payPalMockResponse, string? payPalRequestId, string? payPalPartnerAttributionId, string? payPalClientMetadataId, string? payPalAuthAssertion, OrderRequest body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Order&gt; CreateOrder(CreateOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -260,15 +230,26 @@ Creates an order. Merchants and partners can add Level 2 and 3 data to payments 
 ```csharp
 try
 {
-    var response = await client.Orders.CreateOrder(payPalMockResponse,
-        payPalRequestId,
-        payPalPartnerAttributionId,
-        payPalClientMetadataId,
-        payPalAuthAssertion,
-        body);
+    var response = await client.Orders.CreateOrder(new CreateOrderRequest
+    {
+        Body = new OrderRequest
+        {
+            Intent = CheckoutPaymentIntent.Capture,
+            PurchaseUnits = [
+                new PurchaseUnitRequest
+                {
+                    Amount = new AmountWithBreakdown
+                    {
+                        CurrencyCode = "some example string",
+                        Value = "some example string",
+                    },
+                },
+            ],
+        },
+    });
     // TODO: Handle 'response' of type Order
 }
-catch (SdkException<CreateOrderError> ex)
+catch (ApiException<CreateOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -280,20 +261,12 @@ catch (SdkException<CreateOrderError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager. It is mandatory for all single-step create order calls (E.g. Create Order Request with payment source information like Card, PayPal.vault_id, PayPal.billing_agreement_id, etc). |
-| <code>payPalPartnerAttributionId</code> | <code>string?</code> | - |
-| <code>payPalClientMetadataId</code> | <code>string?</code> | - |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see PayPal-Auth-Assertion. |
-| <code>body</code> | <code>[OrderRequest](Models/OrderRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[CreateOrderRequest](Requests/Orders/CreateOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -305,7 +278,7 @@ catch (SdkException<CreateOrderError> ex)
 
 **OnSuccess**: <code>[Order](Models/Order.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CreateOrderError](Errors/CreateOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateOrderError](Errors/CreateOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -316,7 +289,7 @@ catch (SdkException<CreateOrderError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Order&gt; CreateOrderTracking(string id, string? payPalAuthAssertion, OrderTrackerRequest body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Order&gt; CreateOrderTracking(CreateOrderTrackingRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -339,10 +312,14 @@ Adds tracking information for an Order.
 ```csharp
 try
 {
-    var response = await client.Orders.CreateOrderTracking(id, payPalAuthAssertion, body);
+    var response = await client.Orders.CreateOrderTracking(new CreateOrderTrackingRequest
+    {
+        Id = "some example string",
+        Body = new OrderTrackerRequest { CaptureId = "some example string" },
+    });
     // TODO: Handle 'response' of type Order
 }
-catch (SdkException<CreateOrderTrackingError> ex)
+catch (ApiException<CreateOrderTrackingError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -354,16 +331,12 @@ catch (SdkException<CreateOrderTrackingError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the order that the tracking information is associated with. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see PayPal-Auth-Assertion. |
-| <code>body</code> | <code>[OrderTrackerRequest](Models/OrderTrackerRequest.cs)</code> | - |
+<code>[CreateOrderTrackingRequest](Requests/Orders/CreateOrderTrackingRequest.cs)</code>
 
 </dd>
 </dl>
@@ -375,7 +348,7 @@ catch (SdkException<CreateOrderTrackingError> ex)
 
 **OnSuccess**: <code>[Order](Models/Order.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CreateOrderTrackingError](Errors/CreateOrderTrackingError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateOrderTrackingError](Errors/CreateOrderTrackingError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -386,7 +359,7 @@ catch (SdkException<CreateOrderTrackingError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Order&gt; GetOrder(string id, string? fields, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Order&gt; GetOrder(GetOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -409,10 +382,10 @@ Shows details for an order, by ID. Note: For error handling and troubleshooting,
 ```csharp
 try
 {
-    var response = await client.Orders.GetOrder(id, fields, payPalMockResponse, payPalAuthAssertion);
+    var response = await client.Orders.GetOrder(new GetOrderRequest { Id = "some example string" });
     // TODO: Handle 'response' of type Order
 }
-catch (SdkException<GetOrderError> ex)
+catch (ApiException<GetOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -424,17 +397,12 @@ catch (SdkException<GetOrderError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the order for which to show details. |
-| <code>fields</code> | <code>string?</code> | A comma-separated list of fields that should be returned for the order. Valid filter field is `payment_source`. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see PayPal-Auth-Assertion. |
+<code>[GetOrderRequest](Requests/Orders/GetOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -446,7 +414,7 @@ catch (SdkException<GetOrderError> ex)
 
 **OnSuccess**: <code>[Order](Models/Order.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetOrderError](Errors/GetOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetOrderError](Errors/GetOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -457,7 +425,7 @@ catch (SdkException<GetOrderError> ex)
 </details>
 
 <details>
-<summary><code>Task PatchOrder(string id, string? payPalMockResponse, string? payPalAuthAssertion, IReadOnlyList&lt;Patch&gt;? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task PatchOrder(PatchOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -480,9 +448,9 @@ Updates an order with a `CREATED` or `APPROVED` status. You cannot update an ord
 ```csharp
 try
 {
-    await client.Orders.PatchOrder(id, payPalMockResponse, payPalAuthAssertion, body);
+    await client.Orders.PatchOrder(new PatchOrderRequest { Id = "some example string" });
 }
-catch (SdkException<PatchOrderError> ex)
+catch (ApiException<PatchOrderError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -494,17 +462,12 @@ catch (SdkException<PatchOrderError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the order to update. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see PayPal-Auth-Assertion. |
-| <code>body</code> | <code>IReadOnlyList&lt;[Patch](Models/Patch.cs)&gt;?</code> | - |
+<code>[PatchOrderRequest](Requests/Orders/PatchOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -516,7 +479,7 @@ catch (SdkException<PatchOrderError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[PatchOrderError](Errors/PatchOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[PatchOrderError](Errors/PatchOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -527,7 +490,7 @@ catch (SdkException<PatchOrderError> ex)
 </details>
 
 <details>
-<summary><code>Task UpdateOrderTracking(string id, string trackerId, string? payPalAuthAssertion, IReadOnlyList&lt;Patch&gt;? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task UpdateOrderTracking(UpdateOrderTrackingRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -550,9 +513,13 @@ Updates or cancels the tracking information for a PayPal order, by ID. Updatable
 ```csharp
 try
 {
-    await client.Orders.UpdateOrderTracking(id, trackerId, payPalAuthAssertion, body);
+    await client.Orders.UpdateOrderTracking(new UpdateOrderTrackingRequest
+    {
+        Id = "some example string",
+        TrackerId = "some example string",
+    });
 }
-catch (SdkException<UpdateOrderTrackingError> ex)
+catch (ApiException<UpdateOrderTrackingError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -564,17 +531,12 @@ catch (SdkException<UpdateOrderTrackingError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the order that the tracking information is associated with. |
-| <code>trackerId</code> | <code>string</code> | The order tracking ID. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see PayPal-Auth-Assertion. |
-| <code>body</code> | <code>IReadOnlyList&lt;[Patch](Models/Patch.cs)&gt;?</code> | - |
+<code>[UpdateOrderTrackingRequest](Requests/Orders/UpdateOrderTrackingRequest.cs)</code>
 
 </dd>
 </dl>
@@ -586,7 +548,7 @@ catch (SdkException<UpdateOrderTrackingError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[UpdateOrderTrackingError](Errors/UpdateOrderTrackingError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[UpdateOrderTrackingError](Errors/UpdateOrderTrackingError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -601,7 +563,7 @@ catch (SdkException<UpdateOrderTrackingError> ex)
 > Source: [Payments](Api/Payments.cs)
 
 <details>
-<summary><code>Task&lt;CapturedPayment&gt; CaptureAuthorizedPayment(string authorizationId, string? payPalMockResponse, string? payPalRequestId, string? payPalAuthAssertion, CaptureRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;CapturedPayment&gt; CaptureAuthorizedPayment(CaptureAuthorizedPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -624,14 +586,13 @@ Captures an authorized payment, by ID.
 ```csharp
 try
 {
-    var response = await client.Payments.CaptureAuthorizedPayment(authorizationId,
-        payPalMockResponse,
-        payPalRequestId,
-        payPalAuthAssertion,
-        body);
+    var response = await client.Payments.CaptureAuthorizedPayment(new CaptureAuthorizedPaymentRequest
+    {
+        AuthorizationId = "some example string",
+    });
     // TODO: Handle 'response' of type CapturedPayment
 }
-catch (SdkException<CaptureAuthorizedPaymentError> ex)
+catch (ApiException<CaptureAuthorizedPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -643,19 +604,12 @@ catch (SdkException<CaptureAuthorizedPaymentError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>authorizationId</code> | <code>string</code> | The PayPal-generated ID for the authorized payment to capture. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 45 days. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion). Note:For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject. |
-| <code>body</code> | <code>[CaptureRequest?](Models/CaptureRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[CaptureAuthorizedPaymentRequest](Requests/Payments/CaptureAuthorizedPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -667,7 +621,7 @@ catch (SdkException<CaptureAuthorizedPaymentError> ex)
 
 **OnSuccess**: <code>[CapturedPayment](Models/CapturedPayment.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CaptureAuthorizedPaymentError](Errors/CaptureAuthorizedPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CaptureAuthorizedPaymentError](Errors/CaptureAuthorizedPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -678,7 +632,7 @@ catch (SdkException<CaptureAuthorizedPaymentError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;PaymentAuthorization&gt; GetAuthorizedPayment(string authorizationId, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;PaymentAuthorization&gt; GetAuthorizedPayment(GetAuthorizedPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -701,10 +655,13 @@ Shows details for an authorized payment, by ID.
 ```csharp
 try
 {
-    var response = await client.Payments.GetAuthorizedPayment(authorizationId, payPalMockResponse, payPalAuthAssertion);
+    var response = await client.Payments.GetAuthorizedPayment(new GetAuthorizedPaymentRequest
+    {
+        AuthorizationId = "some example string",
+    });
     // TODO: Handle 'response' of type PaymentAuthorization
 }
-catch (SdkException<GetAuthorizedPaymentError> ex)
+catch (ApiException<GetAuthorizedPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -716,16 +673,12 @@ catch (SdkException<GetAuthorizedPaymentError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>authorizationId</code> | <code>string</code> | The ID of the authorized payment for which to show details. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion). Note:For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject. |
+<code>[GetAuthorizedPaymentRequest](Requests/Payments/GetAuthorizedPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -737,7 +690,7 @@ catch (SdkException<GetAuthorizedPaymentError> ex)
 
 **OnSuccess**: <code>[PaymentAuthorization](Models/PaymentAuthorization.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetAuthorizedPaymentError](Errors/GetAuthorizedPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetAuthorizedPaymentError](Errors/GetAuthorizedPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -748,7 +701,7 @@ catch (SdkException<GetAuthorizedPaymentError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;CapturedPayment&gt; GetCapturedPayment(string captureId, string? payPalMockResponse, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;CapturedPayment&gt; GetCapturedPayment(GetCapturedPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -771,10 +724,13 @@ Shows details for a captured payment, by ID.
 ```csharp
 try
 {
-    var response = await client.Payments.GetCapturedPayment(captureId, payPalMockResponse);
+    var response = await client.Payments.GetCapturedPayment(new GetCapturedPaymentRequest
+    {
+        CaptureId = "some example string",
+    });
     // TODO: Handle 'response' of type CapturedPayment
 }
-catch (SdkException<GetCapturedPaymentError> ex)
+catch (ApiException<GetCapturedPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -786,15 +742,12 @@ catch (SdkException<GetCapturedPaymentError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>captureId</code> | <code>string</code> | The PayPal-generated ID for the captured payment for which to show details. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
+<code>[GetCapturedPaymentRequest](Requests/Payments/GetCapturedPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -806,7 +759,7 @@ catch (SdkException<GetCapturedPaymentError> ex)
 
 **OnSuccess**: <code>[CapturedPayment](Models/CapturedPayment.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetCapturedPaymentError](Errors/GetCapturedPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetCapturedPaymentError](Errors/GetCapturedPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -817,7 +770,7 @@ catch (SdkException<GetCapturedPaymentError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Refund&gt; GetRefund(string refundId, string? payPalMockResponse, string? payPalAuthAssertion, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Refund&gt; GetRefund(GetRefundRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -840,10 +793,10 @@ Shows details for a refund, by ID.
 ```csharp
 try
 {
-    var response = await client.Payments.GetRefund(refundId, payPalMockResponse, payPalAuthAssertion);
+    var response = await client.Payments.GetRefund(new GetRefundRequest { RefundId = "some example string" });
     // TODO: Handle 'response' of type Refund
 }
-catch (SdkException<GetRefundError> ex)
+catch (ApiException<GetRefundError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -855,16 +808,12 @@ catch (SdkException<GetRefundError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>refundId</code> | <code>string</code> | The PayPal-generated ID for the refund for which to show details. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion). Note:For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject. |
+<code>[GetRefundRequest](Requests/Payments/GetRefundRequest.cs)</code>
 
 </dd>
 </dl>
@@ -876,7 +825,7 @@ catch (SdkException<GetRefundError> ex)
 
 **OnSuccess**: <code>[Refund](Models/Refund.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetRefundError](Errors/GetRefundError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetRefundError](Errors/GetRefundError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -887,7 +836,7 @@ catch (SdkException<GetRefundError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;PaymentAuthorization&gt; ReauthorizePayment(string authorizationId, string? payPalRequestId, string? payPalAuthAssertion, ReauthorizeRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;PaymentAuthorization&gt; ReauthorizePayment(ReauthorizePaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -910,13 +859,13 @@ Reauthorizes an authorized PayPal account payment, by ID. To ensure that funds a
 ```csharp
 try
 {
-    var response = await client.Payments.ReauthorizePayment(authorizationId,
-        payPalRequestId,
-        payPalAuthAssertion,
-        body);
+    var response = await client.Payments.ReauthorizePayment(new ReauthorizePaymentRequest
+    {
+        AuthorizationId = "some example string",
+    });
     // TODO: Handle 'response' of type PaymentAuthorization
 }
-catch (SdkException<ReauthorizePaymentError> ex)
+catch (ApiException<ReauthorizePaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -928,18 +877,12 @@ catch (SdkException<ReauthorizePaymentError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>authorizationId</code> | <code>string</code> | The PayPal-generated ID for the authorized payment to reauthorize. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 45 days. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion). Note:For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject. |
-| <code>body</code> | <code>[ReauthorizeRequest?](Models/ReauthorizeRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[ReauthorizePaymentRequest](Requests/Payments/ReauthorizePaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -951,7 +894,7 @@ catch (SdkException<ReauthorizePaymentError> ex)
 
 **OnSuccess**: <code>[PaymentAuthorization](Models/PaymentAuthorization.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[ReauthorizePaymentError](Errors/ReauthorizePaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ReauthorizePaymentError](Errors/ReauthorizePaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -962,7 +905,7 @@ catch (SdkException<ReauthorizePaymentError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Refund&gt; RefundCapturedPayment(string captureId, string? payPalMockResponse, string? payPalRequestId, string? payPalAuthAssertion, RefundRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Refund&gt; RefundCapturedPayment(RefundCapturedPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -985,14 +928,13 @@ Refunds a captured payment, by ID. For a full refund, include an empty payload i
 ```csharp
 try
 {
-    var response = await client.Payments.RefundCapturedPayment(captureId,
-        payPalMockResponse,
-        payPalRequestId,
-        payPalAuthAssertion,
-        body);
+    var response = await client.Payments.RefundCapturedPayment(new RefundCapturedPaymentRequest
+    {
+        CaptureId = "some example string",
+    });
     // TODO: Handle 'response' of type Refund
 }
-catch (SdkException<RefundCapturedPaymentError> ex)
+catch (ApiException<RefundCapturedPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -1004,19 +946,12 @@ catch (SdkException<RefundCapturedPaymentError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>captureId</code> | <code>string</code> | The PayPal-generated ID for the captured payment to refund. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 45 days. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion). Note:For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject. |
-| <code>body</code> | <code>[RefundRequest?](Models/RefundRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[RefundCapturedPaymentRequest](Requests/Payments/RefundCapturedPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1028,7 +963,7 @@ catch (SdkException<RefundCapturedPaymentError> ex)
 
 **OnSuccess**: <code>[Refund](Models/Refund.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RefundCapturedPaymentError](Errors/RefundCapturedPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[RefundCapturedPaymentError](Errors/RefundCapturedPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1039,7 +974,7 @@ catch (SdkException<RefundCapturedPaymentError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;PaymentAuthorization&gt; VoidPayment(string authorizationId, string? payPalMockResponse, string? payPalAuthAssertion, string? payPalRequestId, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;PaymentAuthorization&gt; VoidPayment(VoidPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1062,13 +997,13 @@ Voids, or cancels, an authorized payment, by ID. You cannot void an authorized p
 ```csharp
 try
 {
-    var response = await client.Payments.VoidPayment(authorizationId,
-        payPalMockResponse,
-        payPalAuthAssertion,
-        payPalRequestId);
+    var response = await client.Payments.VoidPayment(new VoidPaymentRequest
+    {
+        AuthorizationId = "some example string",
+    });
     // TODO: Handle 'response' of type PaymentAuthorization
 }
-catch (SdkException<VoidPaymentError> ex)
+catch (ApiException<VoidPaymentError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -1080,18 +1015,12 @@ catch (SdkException<VoidPaymentError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>authorizationId</code> | <code>string</code> | The PayPal-generated ID for the authorized payment to void. |
-| <code>payPalMockResponse</code> | <code>string?</code> | PayPal's REST API uses a request header to invoke negative testing in the sandbox. This header configures the sandbox into a negative testing state for transactions that include the merchant. |
-| <code>payPalAuthAssertion</code> | <code>string?</code> | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion). Note:For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 45 days. |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[VoidPaymentRequest](Requests/Payments/VoidPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1103,7 +1032,7 @@ catch (SdkException<VoidPaymentError> ex)
 
 **OnSuccess**: <code>[PaymentAuthorization](Models/PaymentAuthorization.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[VoidPaymentError](Errors/VoidPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[VoidPaymentError](Errors/VoidPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1118,7 +1047,7 @@ catch (SdkException<VoidPaymentError> ex)
 > Source: [Subscriptions](Api/Subscriptions.cs)
 
 <details>
-<summary><code>Task ActivateBillingPlan(string id, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task ActivateBillingPlan(ActivateBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1141,9 +1070,9 @@ Activates a plan, by ID.
 ```csharp
 try
 {
-    await client.Subscriptions.ActivateBillingPlan(id);
+    await client.Subscriptions.ActivateBillingPlan(new ActivateBillingPlanRequest { Id = "some example string" });
 }
-catch (SdkException<ActivateBillingPlanError> ex)
+catch (ApiException<ActivateBillingPlanError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1155,14 +1084,12 @@ catch (SdkException<ActivateBillingPlanError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the plan. |
+<code>[ActivateBillingPlanRequest](Requests/Subscriptions/ActivateBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1174,7 +1101,7 @@ catch (SdkException<ActivateBillingPlanError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[ActivateBillingPlanError](Errors/ActivateBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ActivateBillingPlanError](Errors/ActivateBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1185,7 +1112,7 @@ catch (SdkException<ActivateBillingPlanError> ex)
 </details>
 
 <details>
-<summary><code>Task ActivateSubscription(string id, ActivateSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task ActivateSubscription(ActivateSubscriptionOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1208,9 +1135,12 @@ Activates the subscription.
 ```csharp
 try
 {
-    await client.Subscriptions.ActivateSubscription(id, body);
+    await client.Subscriptions.ActivateSubscription(new ActivateSubscriptionOperationRequest
+    {
+        Id = "some example string",
+    });
 }
-catch (SdkException<ActivateSubscriptionError> ex)
+catch (ApiException<ActivateSubscriptionError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1222,15 +1152,12 @@ catch (SdkException<ActivateSubscriptionError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the subscription. |
-| <code>body</code> | <code>[ActivateSubscriptionRequest?](Models/ActivateSubscriptionRequest.cs)</code> | - |
+<code>[ActivateSubscriptionOperationRequest](Requests/Subscriptions/ActivateSubscriptionOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1242,7 +1169,7 @@ catch (SdkException<ActivateSubscriptionError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[ActivateSubscriptionError](Errors/ActivateSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ActivateSubscriptionError](Errors/ActivateSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1253,7 +1180,7 @@ catch (SdkException<ActivateSubscriptionError> ex)
 </details>
 
 <details>
-<summary><code>Task CancelSubscription(string id, CancelSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task CancelSubscription(CancelSubscriptionOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1276,9 +1203,12 @@ Cancels the subscription.
 ```csharp
 try
 {
-    await client.Subscriptions.CancelSubscription(id, body);
+    await client.Subscriptions.CancelSubscription(new CancelSubscriptionOperationRequest
+    {
+        Id = "some example string",
+    });
 }
-catch (SdkException<CancelSubscriptionError> ex)
+catch (ApiException<CancelSubscriptionError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1290,15 +1220,12 @@ catch (SdkException<CancelSubscriptionError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the subscription. |
-| <code>body</code> | <code>[CancelSubscriptionRequest?](Models/CancelSubscriptionRequest.cs)</code> | - |
+<code>[CancelSubscriptionOperationRequest](Requests/Subscriptions/CancelSubscriptionOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1310,7 +1237,7 @@ catch (SdkException<CancelSubscriptionError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CancelSubscriptionError](Errors/CancelSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CancelSubscriptionError](Errors/CancelSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1321,7 +1248,7 @@ catch (SdkException<CancelSubscriptionError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;SubscriptionTransactionDetails&gt; CaptureSubscription(string id, string? payPalRequestId, CaptureSubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;SubscriptionTransactionDetails&gt; CaptureSubscription(CaptureSubscriptionOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1344,10 +1271,13 @@ Captures an authorized payment from the subscriber on the subscription.
 ```csharp
 try
 {
-    var response = await client.Subscriptions.CaptureSubscription(id, payPalRequestId, body);
+    var response = await client.Subscriptions.CaptureSubscription(new CaptureSubscriptionOperationRequest
+    {
+        Id = "some example string",
+    });
     // TODO: Handle 'response' of type SubscriptionTransactionDetails
 }
-catch (SdkException<CaptureSubscriptionError> ex)
+catch (ApiException<CaptureSubscriptionError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1359,16 +1289,12 @@ catch (SdkException<CaptureSubscriptionError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the subscription. |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 72 hours. |
-| <code>body</code> | <code>[CaptureSubscriptionRequest?](Models/CaptureSubscriptionRequest.cs)</code> | - |
+<code>[CaptureSubscriptionOperationRequest](Requests/Subscriptions/CaptureSubscriptionOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1380,7 +1306,7 @@ catch (SdkException<CaptureSubscriptionError> ex)
 
 **OnSuccess**: <code>[SubscriptionTransactionDetails](Models/SubscriptionTransactionDetails.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CaptureSubscriptionError](Errors/CaptureSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CaptureSubscriptionError](Errors/CaptureSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1391,7 +1317,7 @@ catch (SdkException<CaptureSubscriptionError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;BillingPlan&gt; CreateBillingPlan(string? payPalRequestId, PlanRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;BillingPlan&gt; CreateBillingPlan(CreateBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1414,10 +1340,10 @@ Creates a plan that defines pricing and billing cycle details for subscriptions.
 ```csharp
 try
 {
-    var response = await client.Subscriptions.CreateBillingPlan(payPalRequestId, body);
+    var response = await client.Subscriptions.CreateBillingPlan(new CreateBillingPlanRequest());
     // TODO: Handle 'response' of type BillingPlan
 }
-catch (SdkException<CreateBillingPlanError> ex)
+catch (ApiException<CreateBillingPlanError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1429,16 +1355,12 @@ catch (SdkException<CreateBillingPlanError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 72 hours. |
-| <code>body</code> | <code>[PlanRequest?](Models/PlanRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[CreateBillingPlanRequest](Requests/Subscriptions/CreateBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1450,7 +1372,7 @@ catch (SdkException<CreateBillingPlanError> ex)
 
 **OnSuccess**: <code>[BillingPlan](Models/BillingPlan.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CreateBillingPlanError](Errors/CreateBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateBillingPlanError](Errors/CreateBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1461,7 +1383,7 @@ catch (SdkException<CreateBillingPlanError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Subscription&gt; CreateSubscription(string? payPalRequestId, string? payPalClientMetadataId, CreateSubscriptionRequest? body, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Subscription&gt; CreateSubscription(CreateSubscriptionOperationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1484,10 +1406,10 @@ Creates a subscription.
 ```csharp
 try
 {
-    var response = await client.Subscriptions.CreateSubscription(payPalRequestId, payPalClientMetadataId, body);
+    var response = await client.Subscriptions.CreateSubscription(new CreateSubscriptionOperationRequest());
     // TODO: Handle 'response' of type Subscription
 }
-catch (SdkException<CreateSubscriptionError> ex)
+catch (ApiException<CreateSubscriptionError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1499,17 +1421,12 @@ catch (SdkException<CreateSubscriptionError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 72 hours. |
-| <code>payPalClientMetadataId</code> | <code>string?</code> | The PayPal Client Metadata Id(CMID) is used to provide device-specific information to PayPal's risk engine. This is crucial for transactions that require device-specific risk assessments. Merchants typically use the Paypal SDK that automatically submits the CMID or they use tools like Fraudnet JS for web or Magnes JS for mobile to generate the CMID on the frontend and then pass it to the API as part of the request headers. |
-| <code>body</code> | <code>[CreateSubscriptionRequest?](Models/CreateSubscriptionRequest.cs)</code> | - |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[CreateSubscriptionOperationRequest](Requests/Subscriptions/CreateSubscriptionOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1521,7 +1438,7 @@ catch (SdkException<CreateSubscriptionError> ex)
 
 **OnSuccess**: <code>[Subscription](Models/Subscription.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CreateSubscriptionError](Errors/CreateSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateSubscriptionError](Errors/CreateSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1532,7 +1449,7 @@ catch (SdkException<CreateSubscriptionError> ex)
 </details>
 
 <details>
-<summary><code>Task DeactivateBillingPlan(string id, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task DeactivateBillingPlan(DeactivateBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1555,9 +1472,9 @@ Deactivates a plan, by ID.
 ```csharp
 try
 {
-    await client.Subscriptions.DeactivateBillingPlan(id);
+    await client.Subscriptions.DeactivateBillingPlan(new DeactivateBillingPlanRequest { Id = "some example string" });
 }
-catch (SdkException<DeactivateBillingPlanError> ex)
+catch (ApiException<DeactivateBillingPlanError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1569,14 +1486,12 @@ catch (SdkException<DeactivateBillingPlanError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the plan. |
+<code>[DeactivateBillingPlanRequest](Requests/Subscriptions/DeactivateBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1588,7 +1503,7 @@ catch (SdkException<DeactivateBillingPlanError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[DeactivateBillingPlanError](Errors/DeactivateBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[DeactivateBillingPlanError](Errors/DeactivateBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1599,7 +1514,7 @@ catch (SdkException<DeactivateBillingPlanError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;BillingPlan&gt; GetBillingPlan(string id, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;BillingPlan&gt; GetBillingPlan(GetBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1622,10 +1537,10 @@ Shows details for a plan, by ID.
 ```csharp
 try
 {
-    var response = await client.Subscriptions.GetBillingPlan(id);
+    var response = await client.Subscriptions.GetBillingPlan(new GetBillingPlanRequest { Id = "some example string" });
     // TODO: Handle 'response' of type BillingPlan
 }
-catch (SdkException<GetBillingPlanError> ex)
+catch (ApiException<GetBillingPlanError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1637,14 +1552,12 @@ catch (SdkException<GetBillingPlanError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the plan. |
+<code>[GetBillingPlanRequest](Requests/Subscriptions/GetBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1656,7 +1569,7 @@ catch (SdkException<GetBillingPlanError> ex)
 
 **OnSuccess**: <code>[BillingPlan](Models/BillingPlan.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetBillingPlanError](Errors/GetBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetBillingPlanError](Errors/GetBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1667,7 +1580,7 @@ catch (SdkException<GetBillingPlanError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Subscription&gt; GetSubscription(string id, string? fields, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Subscription&gt; GetSubscription(GetSubscriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1690,10 +1603,13 @@ Shows details for a subscription, by ID.
 ```csharp
 try
 {
-    var response = await client.Subscriptions.GetSubscription(id, fields);
+    var response = await client.Subscriptions.GetSubscription(new GetSubscriptionRequest
+    {
+        Id = "some example string",
+    });
     // TODO: Handle 'response' of type Subscription
 }
-catch (SdkException<GetSubscriptionError> ex)
+catch (ApiException<GetSubscriptionError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1705,15 +1621,12 @@ catch (SdkException<GetSubscriptionError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the subscription. |
-| <code>fields</code> | <code>string?</code> | List of fields that are to be returned in the response. Possible value for fields are last_failed_payment and plan. |
+<code>[GetSubscriptionRequest](Requests/Subscriptions/GetSubscriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1725,7 +1638,7 @@ catch (SdkException<GetSubscriptionError> ex)
 
 **OnSuccess**: <code>[Subscription](Models/Subscription.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetSubscriptionError](Errors/GetSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetSubscriptionError](Errors/GetSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1736,7 +1649,7 @@ catch (SdkException<GetSubscriptionError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;PlanCollection&gt; ListBillingPlans(string? productId, int? pageSize = 10, int? page = 1, bool? totalRequired = false, string? prefer = "return=minimal", RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;PlanCollection&gt; ListBillingPlans(ListBillingPlansRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1759,10 +1672,10 @@ Lists billing plans.
 ```csharp
 try
 {
-    var response = await client.Subscriptions.ListBillingPlans(productId);
+    var response = await client.Subscriptions.ListBillingPlans(new ListBillingPlansRequest());
     // TODO: Handle 'response' of type PlanCollection
 }
-catch (SdkException<ListBillingPlansError> ex)
+catch (ApiException<ListBillingPlansError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1774,18 +1687,12 @@ catch (SdkException<ListBillingPlansError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>productId</code> | <code>string?</code> | Filters the response by a Product ID. |
-| <code>pageSize</code> | <code>int?</code> | The number of items to return in the response.<br>**Default**: 10 |
-| <code>page</code> | <code>int?</code> | A non-zero integer which is the start index of the entire list of items to return in the response. The combination of `page=1` and `page_size=20` returns the first 20 items. The combination of `page=2` and `page_size=20` returns the next 20 items.<br>**Default**: 1 |
-| <code>totalRequired</code> | <code>bool?</code> | Indicates whether to show the total count in the response.<br>**Default**: false |
-| <code>prefer</code> | <code>string?</code> | The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, name, description and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.<br>**Default**: "return=minimal" |
+<code>[ListBillingPlansRequest](Requests/Subscriptions/ListBillingPlansRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1797,7 +1704,7 @@ catch (SdkException<ListBillingPlansError> ex)
 
 **OnSuccess**: <code>[PlanCollection](Models/PlanCollection.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[ListBillingPlansError](Errors/ListBillingPlansError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ListBillingPlansError](Errors/ListBillingPlansError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1808,7 +1715,7 @@ catch (SdkException<ListBillingPlansError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;TransactionsList&gt; ListSubscriptionTransactions(string id, string startTime, string endTime, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;TransactionsList&gt; ListSubscriptionTransactions(ListSubscriptionTransactionsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1831,10 +1738,15 @@ Lists transactions for a subscription.
 ```csharp
 try
 {
-    var response = await client.Subscriptions.ListSubscriptionTransactions(id, startTime, endTime);
+    var response = await client.Subscriptions.ListSubscriptionTransactions(new ListSubscriptionTransactionsRequest
+    {
+        Id = "some example string",
+        StartTime = "some example string",
+        EndTime = "some example string",
+    });
     // TODO: Handle 'response' of type TransactionsList
 }
-catch (SdkException<ListSubscriptionTransactionsError> ex)
+catch (ApiException<ListSubscriptionTransactionsError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1846,16 +1758,12 @@ catch (SdkException<ListSubscriptionTransactionsError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the subscription. |
-| <code>startTime</code> | <code>string</code> | The start time of the range of transactions to list. |
-| <code>endTime</code> | <code>string</code> | The end time of the range of transactions to list. |
+<code>[ListSubscriptionTransactionsRequest](Requests/Subscriptions/ListSubscriptionTransactionsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1867,7 +1775,7 @@ catch (SdkException<ListSubscriptionTransactionsError> ex)
 
 **OnSuccess**: <code>[TransactionsList](Models/TransactionsList.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[ListSubscriptionTransactionsError](Errors/ListSubscriptionTransactionsError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ListSubscriptionTransactionsError](Errors/ListSubscriptionTransactionsError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1878,7 +1786,7 @@ catch (SdkException<ListSubscriptionTransactionsError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;SubscriptionCollection&gt; ListSubscriptions(string? planIds, string? statuses, string? createdAfter, string? createdBefore, string? statusUpdatedBefore, string? statusUpdatedAfter, string? filter, IReadOnlyList&lt;string&gt;? customerIds, int? pageSize = 10, int? page = 1, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;SubscriptionCollection&gt; ListSubscriptions(ListSubscriptionsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1901,17 +1809,10 @@ List all subscriptions for merchant account.
 ```csharp
 try
 {
-    var response = await client.Subscriptions.ListSubscriptions(planIds,
-        statuses,
-        createdAfter,
-        createdBefore,
-        statusUpdatedBefore,
-        statusUpdatedAfter,
-        filter,
-        customerIds);
+    var response = await client.Subscriptions.ListSubscriptions(new ListSubscriptionsRequest());
     // TODO: Handle 'response' of type SubscriptionCollection
 }
-catch (SdkException<ListSubscriptionsError> ex)
+catch (ApiException<ListSubscriptionsError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1923,23 +1824,12 @@ catch (SdkException<ListSubscriptionsError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>planIds</code> | <code>string?</code> | Filters the response by list of plan IDs. Filter supports upto 70 plan IDs. URLs should not exceed a length of 2000 characters. |
-| <code>statuses</code> | <code>string?</code> | Filters the response by list of subscription statuses. |
-| <code>createdAfter</code> | <code>string?</code> | Filters the response by subscription creation start time for a range of subscriptions. |
-| <code>createdBefore</code> | <code>string?</code> | Filters the response by subscription creation end time for a range of subscriptions. |
-| <code>statusUpdatedBefore</code> | <code>string?</code> | Filters the response by status update start time for a range of subscriptions. |
-| <code>statusUpdatedAfter</code> | <code>string?</code> | Filters the response by status update end time for a range of subscriptions. |
-| <code>filter</code> | <code>string?</code> | Filter the response using complex expressions that could use comparison operators like ge, gt, le, lt and logical operators such as 'and' and 'or'. |
-| <code>customerIds</code> | <code>IReadOnlyList&lt;string&gt;?</code> | Filters the response by comma separated vault customer IDs (FSS subscriptions only). |
-| <code>pageSize</code> | <code>int?</code> | The number of items to return in the response.<br>**Default**: 10 |
-| <code>page</code> | <code>int?</code> | A non-zero integer which is the start index of the entire list of items to return in the response. The combination of `page=1` and `page_size=20` returns the first 20 items. The combination of `page=2` and `page_size=20` returns the next 20 items.<br>**Default**: 1 |
+<code>[ListSubscriptionsRequest](Requests/Subscriptions/ListSubscriptionsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1951,7 +1841,7 @@ catch (SdkException<ListSubscriptionsError> ex)
 
 **OnSuccess**: <code>[SubscriptionCollection](Models/SubscriptionCollection.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[ListSubscriptionsError](Errors/ListSubscriptionsError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ListSubscriptionsError](Errors/ListSubscriptionsError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1962,7 +1852,7 @@ catch (SdkException<ListSubscriptionsError> ex)
 </details>
 
 <details>
-<summary><code>Task PatchBillingPlan(string id, IReadOnlyList&lt;Patch&gt;? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task PatchBillingPlan(PatchBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1985,9 +1875,9 @@ Updates a plan with the `CREATED` or `ACTIVE` status. For an `INACTIVE` plan, yo
 ```csharp
 try
 {
-    await client.Subscriptions.PatchBillingPlan(id, body);
+    await client.Subscriptions.PatchBillingPlan(new PatchBillingPlanRequest { Id = "some example string" });
 }
-catch (SdkException<PatchBillingPlanError> ex)
+catch (ApiException<PatchBillingPlanError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -1999,15 +1889,12 @@ catch (SdkException<PatchBillingPlanError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the plan. |
-| <code>body</code> | <code>IReadOnlyList&lt;[Patch](Models/Patch.cs)&gt;?</code> | - |
+<code>[PatchBillingPlanRequest](Requests/Subscriptions/PatchBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2019,7 +1906,7 @@ catch (SdkException<PatchBillingPlanError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[PatchBillingPlanError](Errors/PatchBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[PatchBillingPlanError](Errors/PatchBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2030,7 +1917,7 @@ catch (SdkException<PatchBillingPlanError> ex)
 </details>
 
 <details>
-<summary><code>Task PatchSubscription(string id, IReadOnlyList&lt;Patch&gt;? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task PatchSubscription(PatchSubscriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2053,9 +1940,9 @@ Updates a subscription which could be in ACTIVE or SUSPENDED status. You can ove
 ```csharp
 try
 {
-    await client.Subscriptions.PatchSubscription(id, body);
+    await client.Subscriptions.PatchSubscription(new PatchSubscriptionRequest { Id = "some example string" });
 }
-catch (SdkException<PatchSubscriptionError> ex)
+catch (ApiException<PatchSubscriptionError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -2067,15 +1954,12 @@ catch (SdkException<PatchSubscriptionError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID for the subscription. |
-| <code>body</code> | <code>IReadOnlyList&lt;[Patch](Models/Patch.cs)&gt;?</code> | - |
+<code>[PatchSubscriptionRequest](Requests/Subscriptions/PatchSubscriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2087,7 +1971,7 @@ catch (SdkException<PatchSubscriptionError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[PatchSubscriptionError](Errors/PatchSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[PatchSubscriptionError](Errors/PatchSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2098,7 +1982,7 @@ catch (SdkException<PatchSubscriptionError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ModifySubscriptionResponse&gt; ReviseSubscription(string id, ModifySubscriptionRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ModifySubscriptionResponse&gt; ReviseSubscription(ReviseSubscriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2121,10 +2005,13 @@ Updates the quantity of the product or service in a subscription. You can also u
 ```csharp
 try
 {
-    var response = await client.Subscriptions.ReviseSubscription(id, body);
+    var response = await client.Subscriptions.ReviseSubscription(new ReviseSubscriptionRequest
+    {
+        Id = "some example string",
+    });
     // TODO: Handle 'response' of type ModifySubscriptionResponse
 }
-catch (SdkException<ReviseSubscriptionError> ex)
+catch (ApiException<ReviseSubscriptionError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -2136,15 +2023,12 @@ catch (SdkException<ReviseSubscriptionError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the subscription. |
-| <code>body</code> | <code>[ModifySubscriptionRequest?](Models/ModifySubscriptionRequest.cs)</code> | - |
+<code>[ReviseSubscriptionRequest](Requests/Subscriptions/ReviseSubscriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2156,7 +2040,7 @@ catch (SdkException<ReviseSubscriptionError> ex)
 
 **OnSuccess**: <code>[ModifySubscriptionResponse](Models/ModifySubscriptionResponse.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[ReviseSubscriptionError](Errors/ReviseSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ReviseSubscriptionError](Errors/ReviseSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2167,7 +2051,7 @@ catch (SdkException<ReviseSubscriptionError> ex)
 </details>
 
 <details>
-<summary><code>Task SuspendSubscription(string id, SuspendSubscription? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task SuspendSubscription(SuspendSubscriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2190,9 +2074,9 @@ Suspends the subscription.
 ```csharp
 try
 {
-    await client.Subscriptions.SuspendSubscription(id, body);
+    await client.Subscriptions.SuspendSubscription(new SuspendSubscriptionRequest { Id = "some example string" });
 }
-catch (SdkException<SuspendSubscriptionError> ex)
+catch (ApiException<SuspendSubscriptionError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -2204,15 +2088,12 @@ catch (SdkException<SuspendSubscriptionError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID of the subscription. |
-| <code>body</code> | <code>[SuspendSubscription?](Models/SuspendSubscription.cs)</code> | - |
+<code>[SuspendSubscriptionRequest](Requests/Subscriptions/SuspendSubscriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2224,7 +2105,7 @@ catch (SdkException<SuspendSubscriptionError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[SuspendSubscriptionError](Errors/SuspendSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[SuspendSubscriptionError](Errors/SuspendSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2235,7 +2116,7 @@ catch (SdkException<SuspendSubscriptionError> ex)
 </details>
 
 <details>
-<summary><code>Task UpdateBillingPlanPricingSchemes(string id, UpdatePricingSchemesRequest? body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task UpdateBillingPlanPricingSchemes(UpdateBillingPlanPricingSchemesRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2258,9 +2139,12 @@ Updates pricing for a plan. For example, you can update a regular billing cycle 
 ```csharp
 try
 {
-    await client.Subscriptions.UpdateBillingPlanPricingSchemes(id, body);
+    await client.Subscriptions.UpdateBillingPlanPricingSchemes(new UpdateBillingPlanPricingSchemesRequest
+    {
+        Id = "some example string",
+    });
 }
-catch (SdkException<UpdateBillingPlanPricingSchemesError> ex)
+catch (ApiException<UpdateBillingPlanPricingSchemesError> ex)
 {
     if (ex.Error.TryGetSubscriptionError(out var error))
     {
@@ -2272,15 +2156,12 @@ catch (SdkException<UpdateBillingPlanPricingSchemesError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | The ID for the plan. |
-| <code>body</code> | <code>[UpdatePricingSchemesRequest?](Models/UpdatePricingSchemesRequest.cs)</code> | - |
+<code>[UpdateBillingPlanPricingSchemesRequest](Requests/Subscriptions/UpdateBillingPlanPricingSchemesRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2292,7 +2173,7 @@ catch (SdkException<UpdateBillingPlanPricingSchemesError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[UpdateBillingPlanPricingSchemesError](Errors/UpdateBillingPlanPricingSchemesError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[UpdateBillingPlanPricingSchemesError](Errors/UpdateBillingPlanPricingSchemesError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2307,7 +2188,7 @@ catch (SdkException<UpdateBillingPlanPricingSchemesError> ex)
 > Source: [TransactionSearch](Api/TransactionSearch.cs)
 
 <details>
-<summary><code>Task&lt;BalancesResponse&gt; SearchBalances(string? asOfTime, string? currencyCode, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;BalancesResponse&gt; SearchBalances(SearchBalancesRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2330,10 +2211,10 @@ List all balances. Specify date time to list balances for that time that appear 
 ```csharp
 try
 {
-    var response = await client.TransactionSearch.SearchBalances(asOfTime, currencyCode);
+    var response = await client.TransactionSearch.SearchBalances(new SearchBalancesRequest());
     // TODO: Handle 'response' of type BalancesResponse
 }
-catch (SdkException<SearchBalancesError> ex)
+catch (ApiException<SearchBalancesError> ex)
 {
     if (ex.Error.TryGetDefaultError(out var error))
     {
@@ -2345,15 +2226,12 @@ catch (SdkException<SearchBalancesError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>asOfTime</code> | <code>string?</code> | List balances in the response at the date time provided, will return the last refreshed balance in the system when not provided. |
-| <code>currencyCode</code> | <code>string?</code> | Filters the transactions in the response by a [three-character ISO-4217 currency code](https://developer.paypal.com/api/rest/reference/currency-codes/) for the PayPal transaction currency. |
+<code>[SearchBalancesRequest](Requests/TransactionSearch/SearchBalancesRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2365,7 +2243,7 @@ catch (SdkException<SearchBalancesError> ex)
 
 **OnSuccess**: <code>[BalancesResponse](Models/BalancesResponse.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[SearchBalancesError](Errors/SearchBalancesError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[SearchBalancesError](Errors/SearchBalancesError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2376,7 +2254,7 @@ catch (SdkException<SearchBalancesError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;SearchResponse&gt; SearchTransactions(string startDate, string endDate, string? transactionId, string? transactionType, string? transactionStatus, string? transactionAmount, string? transactionCurrency, string? paymentInstrumentType, string? storeId, string? terminalId, string? fields = "transaction_info", string? balanceAffectingRecordsOnly = "Y", int? pageSize = 100, int? page = 1, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;SearchResponse&gt; SearchTransactions(SearchTransactionsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2399,19 +2277,14 @@ Lists transactions. Specify one or more query parameters to filter the transacti
 ```csharp
 try
 {
-    var response = await client.TransactionSearch.SearchTransactions(startDate,
-        endDate,
-        transactionId,
-        transactionType,
-        transactionStatus,
-        transactionAmount,
-        transactionCurrency,
-        paymentInstrumentType,
-        storeId,
-        terminalId);
+    var response = await client.TransactionSearch.SearchTransactions(new SearchTransactionsRequest
+    {
+        StartDate = "some example string",
+        EndDate = "some example string",
+    });
     // TODO: Handle 'response' of type SearchResponse
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2420,27 +2293,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>startDate</code> | <code>string</code> | Filters the transactions in the response by a start date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required. Fractional seconds are optional. |
-| <code>endDate</code> | <code>string</code> | Filters the transactions in the response by an end date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required. Fractional seconds are optional. The maximum supported range is 31 days. |
-| <code>transactionId</code> | <code>string?</code> | Filters the transactions in the response by a PayPal transaction ID. A valid transaction ID is 17 characters long, except for an order ID, which is 19 characters long. Note: A transaction ID is not unique in the reporting system. The response can list two transactions with the same ID. One transaction can be balance affecting while the other is non-balance affecting. |
-| <code>transactionType</code> | <code>string?</code> | Filters the transactions in the response by a PayPal transaction event code. See [Transaction event codes](/docs/integration/direct/transaction-search/transaction-event-codes/). |
-| <code>transactionStatus</code> | <code>string?</code> | Filters the transactions in the response by a PayPal transaction status code. Value is: Status code Description D PayPal or merchant rules denied the transaction. P The transaction is pending. The transaction was created but waits for another payment process to complete, such as an ACH transaction, before the status changes to S. S The transaction successfully completed without a denial and after any pending statuses. V A successful transaction was reversed and funds were refunded to the original sender. |
-| <code>transactionAmount</code> | <code>string?</code> | Filters the transactions in the response by a gross transaction amount range. Specify the range as ` TO `, where ` ` is the lower limit of the gross PayPal transaction amount and ` ` is the upper limit of the gross transaction amount. Specify the amounts in lower denominations. For example, to search for transactions from $5.00 to $10.05, specify `[500 TO 1005]`. Note:The values must be URL encoded. |
-| <code>transactionCurrency</code> | <code>string?</code> | Filters the transactions in the response by a [three-character ISO-4217 currency code](https://developer.paypal.com/api/rest/reference/currency-codes/) for the PayPal transaction currency. |
-| <code>paymentInstrumentType</code> | <code>string?</code> | Filters the transactions in the response by a payment instrument type. Value is either: CREDITCARD. Returns a direct credit card transaction with a corresponding value. DEBITCARD. Returns a debit card transaction with a corresponding value. If you omit this parameter, the API does not apply this filter. |
-| <code>storeId</code> | <code>string?</code> | Filters the transactions in the response by a store ID. |
-| <code>terminalId</code> | <code>string?</code> | Filters the transactions in the response by a terminal ID. |
-| <code>fields</code> | <code>string?</code> | Indicates which fields appear in the response. Value is a single field or a comma-separated list of fields. The transaction_info value returns only the transaction details in the response. To include all fields in the response, specify fields=all. Valid fields are: transaction_info. The transaction information. Includes the ID of the PayPal account of the payee, the PayPal-generated transaction ID, the PayPal-generated base ID, the PayPal reference ID type, the transaction event code, the date and time when the transaction was initiated and was last updated, the transaction amounts including the PayPal fee, any discounts, insurance, the transaction status, and other information about the transaction. payer_info. The payer information. Includes the PayPal customer account ID and the payer's email address, primary phone number, name, country code, address, and whether the payer is verified or unverified. shipping_info. The shipping information. Includes the recipient's name, the shipping method for this order, the shipping address for this order, and the secondary address associated with this order. auction_info. The auction information. Includes the name of the auction site, the auction site URL, the ID of the customer who makes the purchase in the auction, and the date and time when the auction closes. cart_info. The cart information. Includes an array of item details, whether the item amount or the shipping amount already includes tax, and the ID of the invoice for PayPal-generated invoices. incentive_info. An array of incentive detail objects. Each object includes the incentive, such as a special offer or coupon, the incentive amount, and the incentive program code that identifies a merchant loyalty or incentive program. store_info. The store information. Includes the ID of the merchant store and the terminal ID for the checkout stand in the merchant store.<br>**Default**: "transaction_info" |
-| <code>balanceAffectingRecordsOnly</code> | <code>string?</code> | Indicates whether the response includes only balance-impacting transactions or all transactions. Value is either: Y. The default. The response includes only balance transactions. N. The response includes all transactions.<br>**Default**: "Y" |
-| <code>pageSize</code> | <code>int?</code> | The number of items to return in the response. So, the combination of `page=1` and `page_size=20` returns the first 20 items. The combination of `page=2` and `page_size=20` returns the next 20 items.<br>**Default**: 100 |
-| <code>page</code> | <code>int?</code> | The zero-relative start index of the entire list of items that are returned in the response. So, the combination of `page=1` and `page_size=20` returns the first 20 items.<br>**Default**: 1 |
+<code>[SearchTransactionsRequest](Requests/TransactionSearch/SearchTransactionsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2452,7 +2310,7 @@ catch (SdkException<RawError> ex)
 
 **OnSuccess**: <code>[SearchResponse](Models/SearchResponse.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2467,7 +2325,7 @@ catch (SdkException<RawError> ex)
 > Source: [Vault](Api/Vault.cs)
 
 <details>
-<summary><code>Task&lt;PaymentTokenResponse&gt; CreatePaymentToken(string? payPalRequestId, PaymentTokenRequest body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;PaymentTokenResponse&gt; CreatePaymentToken(CreatePaymentTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2490,10 +2348,13 @@ Creates a Payment Token from the given payment source and adds it to the Vault o
 ```csharp
 try
 {
-    var response = await client.Vault.CreatePaymentToken(payPalRequestId, body);
+    var response = await client.Vault.CreatePaymentToken(new CreatePaymentTokenRequest
+    {
+        Body = new PaymentTokenRequest { PaymentSource = new PaymentTokenRequestPaymentSource() },
+    });
     // TODO: Handle 'response' of type PaymentTokenResponse
 }
-catch (SdkException<CreatePaymentTokenError> ex)
+catch (ApiException<CreatePaymentTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -2505,15 +2366,12 @@ catch (SdkException<CreatePaymentTokenError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 3 hours. |
-| <code>body</code> | <code>[PaymentTokenRequest](Models/PaymentTokenRequest.cs)</code> | - |
+<code>[CreatePaymentTokenRequest](Requests/Vault/CreatePaymentTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2525,7 +2383,7 @@ catch (SdkException<CreatePaymentTokenError> ex)
 
 **OnSuccess**: <code>[PaymentTokenResponse](Models/PaymentTokenResponse.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CreatePaymentTokenError](Errors/CreatePaymentTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreatePaymentTokenError](Errors/CreatePaymentTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2536,7 +2394,7 @@ catch (SdkException<CreatePaymentTokenError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;SetupTokenResponse&gt; CreateSetupToken(string? payPalRequestId, SetupTokenRequest body, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;SetupTokenResponse&gt; CreateSetupToken(CreateSetupTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2559,10 +2417,13 @@ Creates a Setup Token from the given payment source and adds it to the Vault of 
 ```csharp
 try
 {
-    var response = await client.Vault.CreateSetupToken(payPalRequestId, body);
+    var response = await client.Vault.CreateSetupToken(new CreateSetupTokenRequest
+    {
+        Body = new SetupTokenRequest { PaymentSource = new SetupTokenRequestPaymentSource() },
+    });
     // TODO: Handle 'response' of type SetupTokenResponse
 }
-catch (SdkException<CreateSetupTokenError> ex)
+catch (ApiException<CreateSetupTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -2574,15 +2435,12 @@ catch (SdkException<CreateSetupTokenError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>payPalRequestId</code> | <code>string?</code> | The server stores keys for 3 hours. |
-| <code>body</code> | <code>[SetupTokenRequest](Models/SetupTokenRequest.cs)</code> | - |
+<code>[CreateSetupTokenRequest](Requests/Vault/CreateSetupTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2594,7 +2452,7 @@ catch (SdkException<CreateSetupTokenError> ex)
 
 **OnSuccess**: <code>[SetupTokenResponse](Models/SetupTokenResponse.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[CreateSetupTokenError](Errors/CreateSetupTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateSetupTokenError](Errors/CreateSetupTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2605,7 +2463,7 @@ catch (SdkException<CreateSetupTokenError> ex)
 </details>
 
 <details>
-<summary><code>Task DeletePaymentToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task DeletePaymentToken(DeletePaymentTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2628,9 +2486,9 @@ Delete the payment token associated with the payment token id.
 ```csharp
 try
 {
-    await client.Vault.DeletePaymentToken(id);
+    await client.Vault.DeletePaymentToken(new DeletePaymentTokenRequest { Id = "some example string" });
 }
-catch (SdkException<DeletePaymentTokenError> ex)
+catch (ApiException<DeletePaymentTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -2642,14 +2500,12 @@ catch (SdkException<DeletePaymentTokenError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | ID of the payment token. |
+<code>[DeletePaymentTokenRequest](Requests/Vault/DeletePaymentTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2661,7 +2517,7 @@ catch (SdkException<DeletePaymentTokenError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[DeletePaymentTokenError](Errors/DeletePaymentTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[DeletePaymentTokenError](Errors/DeletePaymentTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2672,7 +2528,7 @@ catch (SdkException<DeletePaymentTokenError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;PaymentTokenResponse&gt; GetPaymentToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;PaymentTokenResponse&gt; GetPaymentToken(GetPaymentTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2695,10 +2551,10 @@ Returns a readable representation of vaulted payment source associated with the 
 ```csharp
 try
 {
-    var response = await client.Vault.GetPaymentToken(id);
+    var response = await client.Vault.GetPaymentToken(new GetPaymentTokenRequest { Id = "some example string" });
     // TODO: Handle 'response' of type PaymentTokenResponse
 }
-catch (SdkException<GetPaymentTokenError> ex)
+catch (ApiException<GetPaymentTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -2710,14 +2566,12 @@ catch (SdkException<GetPaymentTokenError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | ID of the payment token. |
+<code>[GetPaymentTokenRequest](Requests/Vault/GetPaymentTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2729,7 +2583,7 @@ catch (SdkException<GetPaymentTokenError> ex)
 
 **OnSuccess**: <code>[PaymentTokenResponse](Models/PaymentTokenResponse.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetPaymentTokenError](Errors/GetPaymentTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetPaymentTokenError](Errors/GetPaymentTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2740,7 +2594,7 @@ catch (SdkException<GetPaymentTokenError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;SetupTokenResponse&gt; GetSetupToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;SetupTokenResponse&gt; GetSetupToken(GetSetupTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2763,10 +2617,10 @@ Returns a readable representation of temporarily vaulted payment source associat
 ```csharp
 try
 {
-    var response = await client.Vault.GetSetupToken(id);
+    var response = await client.Vault.GetSetupToken(new GetSetupTokenRequest { Id = "some example string" });
     // TODO: Handle 'response' of type SetupTokenResponse
 }
-catch (SdkException<GetSetupTokenError> ex)
+catch (ApiException<GetSetupTokenError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -2778,14 +2632,12 @@ catch (SdkException<GetSetupTokenError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | ID of the setup token. |
+<code>[GetSetupTokenRequest](Requests/Vault/GetSetupTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2797,7 +2649,7 @@ catch (SdkException<GetSetupTokenError> ex)
 
 **OnSuccess**: <code>[SetupTokenResponse](Models/SetupTokenResponse.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[GetSetupTokenError](Errors/GetSetupTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetSetupTokenError](Errors/GetSetupTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2808,7 +2660,7 @@ catch (SdkException<GetSetupTokenError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;CustomerVaultPaymentTokensResponse&gt; ListCustomerPaymentTokens(string customerId, int? pageSize = 5, int? page = 1, bool? totalRequired = false, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;CustomerVaultPaymentTokensResponse&gt; ListCustomerPaymentTokens(ListCustomerPaymentTokensRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2831,10 +2683,13 @@ Returns all payment tokens for a customer.
 ```csharp
 try
 {
-    var response = await client.Vault.ListCustomerPaymentTokens(customerId);
+    var response = await client.Vault.ListCustomerPaymentTokens(new ListCustomerPaymentTokensRequest
+    {
+        CustomerId = "some example string",
+    });
     // TODO: Handle 'response' of type CustomerVaultPaymentTokensResponse
 }
-catch (SdkException<ListCustomerPaymentTokensError> ex)
+catch (ApiException<ListCustomerPaymentTokensError> ex)
 {
     if (ex.Error.TryGetError(out var error))
     {
@@ -2846,17 +2701,12 @@ catch (SdkException<ListCustomerPaymentTokensError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>customerId</code> | <code>string</code> | A unique identifier representing a specific customer in merchant's/partner's system or records. |
-| <code>pageSize</code> | <code>int?</code> | A non-negative, non-zero integer indicating the maximum number of results to return at one time.<br>**Default**: 5 |
-| <code>page</code> | <code>int?</code> | A non-negative, non-zero integer representing the page of the results.<br>**Default**: 1 |
-| <code>totalRequired</code> | <code>bool?</code> | A boolean indicating total number of items (total_items) and pages (total_pages) are expected to be returned in the response.<br>**Default**: false |
+<code>[ListCustomerPaymentTokensRequest](Requests/Vault/ListCustomerPaymentTokensRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2868,7 +2718,7 @@ catch (SdkException<ListCustomerPaymentTokensError> ex)
 
 **OnSuccess**: <code>[CustomerVaultPaymentTokensResponse](Models/CustomerVaultPaymentTokensResponse.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[ListCustomerPaymentTokensError](Errors/ListCustomerPaymentTokensError.cs)&gt;</code>
+**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ListCustomerPaymentTokensError](Errors/ListCustomerPaymentTokensError.cs)&gt;</code>
 
 </dd>
 </dl>

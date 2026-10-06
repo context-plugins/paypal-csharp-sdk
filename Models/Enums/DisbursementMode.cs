@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The funds that are held on behalf of the merchant.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<DisbursementMode>))]
-public sealed record DisbursementMode : StringEnum<DisbursementMode>
+public sealed record DisbursementMode : OpenStringEnum<DisbursementMode>
 {
     private DisbursementMode(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record DisbursementMode : StringEnum<DisbursementMode>
     /// </summary>
     public static readonly DisbursementMode Delayed = new("DELAYED");
 
-    public static DisbursementMode FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onInstant, Func<TResult> onDelayed, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Instant => onInstant(),
+            _ when this == Delayed => onDelayed(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onInstant, Action onDelayed, Action<string> otherwise)
+    {
+        if (this == Instant) onInstant();
+        else if (this == Delayed) onDelayed();
+        else otherwise(Value);
+    }
 }

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The error details. Required for client-side <c>4XX</c> errors.
@@ -27,6 +27,7 @@ public record ErrorDetails
     /// <summary>
     /// The location of the field that caused the error. Value is <c>body</c>, <c>path</c>, or <c>query</c>.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("location")]
     public string? Location { get; init; } = "body";
 
@@ -37,7 +38,7 @@ public record ErrorDetails
     public required string Issue { get; init; }
 
     /// <summary>
-    /// An array of request-related <see href="https://developer.paypal.com/api/rest/responses/#hateoas-links">HATEOAS links</see> that are either relevant to the issue by providing additional information or offering potential resolutions.
+    /// An array of request-related <see href="/api/rest/responses/#hateoas-links">HATEOAS links</see> that are either relevant to the issue by providing additional information or offering potential resolutions.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("links")]

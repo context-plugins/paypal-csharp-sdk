@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
-using PayPalServerSdk.Core.Hooks;
+using Paypal.Core.Hooks;
 
-namespace PayPalServerSdk.Core;
+namespace Paypal.Core;
 
 public sealed record RequestOptions
 {

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The create plan request details.
@@ -30,6 +30,7 @@ public record PlanRequest
     /// <summary>
     /// The initial state of the plan. Allowed input values are CREATED and ACTIVE.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("status")]
     public PlanRequestStatus? Status { get; init; } = PlanRequestStatus.Active;
 
@@ -73,6 +74,7 @@ public record PlanRequest
     /// <summary>
     /// Indicates whether you can subscribe to this plan by providing a quantity for the goods or service.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("quantity_supported")]
     public bool? QuantitySupported { get; init; } = false;
 

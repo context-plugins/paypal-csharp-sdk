@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// Additional attributes associated with the use of this PayPal Wallet.
@@ -12,6 +12,9 @@ public record PayPalWalletAttributes
     [JsonPropertyName("customer")]
     public PayPalWalletCustomerRequest? Customer { get; init; }
 
+    /// <summary>
+    /// Resource consolidating common request and response attributes for vaulting PayPal Wallet.
+    /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("vault")]
     public PayPalWalletVaultInstruction? Vault { get; init; }

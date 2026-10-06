@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace PayPalServerSdk.Core.Extensions;
+namespace Paypal.Core.Extensions;
 
 internal static class JsonSerializerExtensions
 {

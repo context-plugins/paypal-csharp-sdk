@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The location from which the shipping address is derived., The shipping preference. This only applies to PayPal payment source., The shipping preference. This only applies to PayPal payment source., The location from which the shipping address is derived.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<ExperienceContextShippingPreference>))]
-public sealed record ExperienceContextShippingPreference : StringEnum<ExperienceContextShippingPreference>
+public sealed record ExperienceContextShippingPreference : OpenStringEnum<ExperienceContextShippingPreference>
 {
     private ExperienceContextShippingPreference(string value) : base(value)
     {
@@ -28,5 +29,23 @@ public sealed record ExperienceContextShippingPreference : StringEnum<Experience
     /// </summary>
     public static readonly ExperienceContextShippingPreference SetProvidedAddress = new("SET_PROVIDED_ADDRESS");
 
-    public static ExperienceContextShippingPreference FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onGetFromFile,
+        Func<TResult> onNoShipping,
+        Func<TResult> onSetProvidedAddress,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == GetFromFile => onGetFromFile(),
+            _ when this == NoShipping => onNoShipping(),
+            _ when this == SetProvidedAddress => onSetProvidedAddress(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onGetFromFile, Action onNoShipping, Action onSetProvidedAddress, Action<string> otherwise)
+    {
+        if (this == GetFromFile) onGetFromFile();
+        else if (this == NoShipping) onNoShipping();
+        else if (this == SetProvidedAddress) onSetProvidedAddress();
+        else otherwise(Value);
+    }
 }

@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Indicates the type of the stored payment_source payment.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<StoredPaymentSourcePaymentType>))]
-public sealed record StoredPaymentSourcePaymentType : StringEnum<StoredPaymentSourcePaymentType>
+public sealed record StoredPaymentSourcePaymentType : OpenStringEnum<StoredPaymentSourcePaymentType>
 {
     private StoredPaymentSourcePaymentType(string value) : base(value)
     {
@@ -28,5 +29,23 @@ public sealed record StoredPaymentSourcePaymentType : StringEnum<StoredPaymentSo
     /// </summary>
     public static readonly StoredPaymentSourcePaymentType Unscheduled = new("UNSCHEDULED");
 
-    public static StoredPaymentSourcePaymentType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onOneTime,
+        Func<TResult> onRecurring,
+        Func<TResult> onUnscheduled,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == OneTime => onOneTime(),
+            _ when this == Recurring => onRecurring(),
+            _ when this == Unscheduled => onUnscheduled(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onOneTime, Action onRecurring, Action onUnscheduled, Action<string> otherwise)
+    {
+        if (this == OneTime) onOneTime();
+        else if (this == Recurring) onRecurring();
+        else if (this == Unscheduled) onUnscheduled();
+        else otherwise(Value);
+    }
 }

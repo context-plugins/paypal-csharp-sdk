@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The status of the refund.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<RefundStatus>))]
-public sealed record RefundStatus : StringEnum<RefundStatus>
+public sealed record RefundStatus : OpenStringEnum<RefundStatus>
 {
     private RefundStatus(string value) : base(value)
     {
@@ -33,5 +34,30 @@ public sealed record RefundStatus : StringEnum<RefundStatus>
     /// </summary>
     public static readonly RefundStatus Completed = new("COMPLETED");
 
-    public static RefundStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCancelled,
+        Func<TResult> onFailed,
+        Func<TResult> onPending,
+        Func<TResult> onCompleted,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Cancelled => onCancelled(),
+            _ when this == Failed => onFailed(),
+            _ when this == Pending => onPending(),
+            _ when this == Completed => onCompleted(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCancelled,
+        Action onFailed,
+        Action onPending,
+        Action onCompleted,
+        Action<string> otherwise)
+    {
+        if (this == Cancelled) onCancelled();
+        else if (this == Failed) onFailed();
+        else if (this == Pending) onPending();
+        else if (this == Completed) onCompleted();
+        else otherwise(Value);
+    }
 }

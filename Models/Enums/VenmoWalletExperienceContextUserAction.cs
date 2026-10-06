@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Configures a Continue or Pay Now checkout flow.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VenmoWalletExperienceContextUserAction>))]
-public sealed record VenmoWalletExperienceContextUserAction : StringEnum<VenmoWalletExperienceContextUserAction>
+public sealed record VenmoWalletExperienceContextUserAction : OpenStringEnum<VenmoWalletExperienceContextUserAction>
 {
     private VenmoWalletExperienceContextUserAction(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record VenmoWalletExperienceContextUserAction : StringEnum<VenmoWa
     /// </summary>
     public static readonly VenmoWalletExperienceContextUserAction PayNow = new("PAY_NOW");
 
-    public static VenmoWalletExperienceContextUserAction FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onContinue, Func<TResult> onPayNow, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Continue => onContinue(),
+            _ when this == PayNow => onPayNow(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onContinue, Action onPayNow, Action<string> otherwise)
+    {
+        if (this == Continue) onContinue();
+        else if (this == PayNow) onPayNow();
+        else otherwise(Value);
+    }
 }

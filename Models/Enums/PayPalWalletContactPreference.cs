@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The preference to display the contact information (buyer’s shipping email &amp; phone number) on PayPal's checkout for easy merchant-buyer communication.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PayPalWalletContactPreference>))]
-public sealed record PayPalWalletContactPreference : StringEnum<PayPalWalletContactPreference>
+public sealed record PayPalWalletContactPreference : OpenStringEnum<PayPalWalletContactPreference>
 {
     private PayPalWalletContactPreference(string value) : base(value)
     {
@@ -28,5 +29,26 @@ public sealed record PayPalWalletContactPreference : StringEnum<PayPalWalletCont
     /// </summary>
     public static readonly PayPalWalletContactPreference RetainContactInfo = new("RETAIN_CONTACT_INFO");
 
-    public static PayPalWalletContactPreference FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onNoContactInfo,
+        Func<TResult> onUpdateContactInfo,
+        Func<TResult> onRetainContactInfo,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == NoContactInfo => onNoContactInfo(),
+            _ when this == UpdateContactInfo => onUpdateContactInfo(),
+            _ when this == RetainContactInfo => onRetainContactInfo(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onNoContactInfo,
+        Action onUpdateContactInfo,
+        Action onRetainContactInfo,
+        Action<string> otherwise)
+    {
+        if (this == NoContactInfo) onNoContactInfo();
+        else if (this == UpdateContactInfo) onUpdateContactInfo();
+        else if (this == RetainContactInfo) onRetainContactInfo();
+        else otherwise(Value);
+    }
 }

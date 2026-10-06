@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// A captured payment.
@@ -71,6 +71,7 @@ public record PaymentsCapture
     /// <summary>
     /// Indicates whether you can make additional captures against the authorized payment. Set to <c>true</c> if you do not intend to capture additional payments against the authorization. Set to <c>false</c> if you intend to capture additional payments against the authorization.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("final_capture")]
     public bool? FinalCapture { get; init; } = false;
 
@@ -84,6 +85,7 @@ public record PaymentsCapture
     /// <summary>
     /// The funds that are held on behalf of the merchant.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("disbursement_mode")]
     public DisbursementMode? DisbursementMode { get; init; } = DisbursementMode.Instant;
 

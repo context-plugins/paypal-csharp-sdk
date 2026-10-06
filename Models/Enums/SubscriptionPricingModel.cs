@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The pricing model for tiered plan. The <c>tiers</c> parameter is required.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<SubscriptionPricingModel>))]
-public sealed record SubscriptionPricingModel : StringEnum<SubscriptionPricingModel>
+public sealed record SubscriptionPricingModel : OpenStringEnum<SubscriptionPricingModel>
 {
     private SubscriptionPricingModel(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record SubscriptionPricingModel : StringEnum<SubscriptionPricingMo
     /// </summary>
     public static readonly SubscriptionPricingModel Tiered = new("TIERED");
 
-    public static SubscriptionPricingModel FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onVolume, Func<TResult> onTiered, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Volume => onVolume(),
+            _ when this == Tiered => onTiered(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onVolume, Action onTiered, Action<string> otherwise)
+    {
+        if (this == Volume) onVolume();
+        else if (this == Tiered) onTiered();
+        else otherwise(Value);
+    }
 }

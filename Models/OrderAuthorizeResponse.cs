@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The order authorize response.
@@ -49,13 +49,6 @@ public record OrderAuthorizeResponse
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("intent")]
     public CheckoutPaymentIntent? Intent { get; init; }
-
-    /// <summary>
-    /// The instruction to process an order.
-    /// </summary>
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    [JsonPropertyName("processing_instruction")]
-    public ProcessingInstruction? ProcessingInstruction { get; init; }
 
     /// <summary>
     /// The customer who approves and pays for the order. The customer is also known as the payer.

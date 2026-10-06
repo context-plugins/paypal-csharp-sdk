@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Json;
-using PayPalServerSdk.Core.Extensions;
+using Paypal.Core.Extensions;
 
-namespace PayPalServerSdk.Core.Models;
+namespace Paypal.Core.Models;
 
 public sealed class AdditionalProperties : IDictionary<string, JsonElement>, IEquatable<AdditionalProperties>
 {

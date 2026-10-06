@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The status for the authorized payment.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<AuthorizationStatus>))]
-public sealed record AuthorizationStatus : StringEnum<AuthorizationStatus>
+public sealed record AuthorizationStatus : OpenStringEnum<AuthorizationStatus>
 {
     private AuthorizationStatus(string value) : base(value)
     {
@@ -43,5 +44,38 @@ public sealed record AuthorizationStatus : StringEnum<AuthorizationStatus>
     /// </summary>
     public static readonly AuthorizationStatus Pending = new("PENDING");
 
-    public static AuthorizationStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCreated,
+        Func<TResult> onCaptured,
+        Func<TResult> onDenied,
+        Func<TResult> onPartiallyCaptured,
+        Func<TResult> onVoided,
+        Func<TResult> onPending,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Created => onCreated(),
+            _ when this == Captured => onCaptured(),
+            _ when this == Denied => onDenied(),
+            _ when this == PartiallyCaptured => onPartiallyCaptured(),
+            _ when this == Voided => onVoided(),
+            _ when this == Pending => onPending(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCreated,
+        Action onCaptured,
+        Action onDenied,
+        Action onPartiallyCaptured,
+        Action onVoided,
+        Action onPending,
+        Action<string> otherwise)
+    {
+        if (this == Created) onCreated();
+        else if (this == Captured) onCaptured();
+        else if (this == Denied) onDenied();
+        else if (this == PartiallyCaptured) onPartiallyCaptured();
+        else if (this == Voided) onVoided();
+        else if (this == Pending) onPending();
+        else otherwise(Value);
+    }
 }

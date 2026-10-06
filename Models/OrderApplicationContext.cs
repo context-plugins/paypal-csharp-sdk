@@ -1,11 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Validation;
-using PayPalServerSdk.Core.Validation.Attributes;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Core.Validation;
+using Paypal.Core.Validation.Attributes;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// Customizes the payer experience during the approval process for the payment with PayPal. Note: Partners and Marketplaces might configure brand_name and shipping_preference during partner account setup, which overrides the request values.
@@ -32,18 +32,21 @@ public record OrderApplicationContext
     /// <summary>
     /// DEPRECATED. DEPRECATED. The type of landing page to show on the PayPal site for customer checkout.  The fields in <c>application_context</c> are now available in the <c>experience_context</c> object under the <c>payment_source</c> which supports them (eg. <c>payment_source.paypal.experience_context.landing_page</c>). Please specify this field in the <c>experience_context</c> object instead of the <c>application_context</c> object.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("landing_page")]
     public OrderApplicationContextLandingPage? LandingPage { get; init; } = OrderApplicationContextLandingPage.NoPreference;
 
     /// <summary>
     /// DEPRECATED. DEPRECATED. The shipping preference: Displays the shipping address to the customer. Enables the customer to choose an address on the PayPal site. Restricts the customer from changing the address during the payment-approval process. .  The fields in <c>application_context</c> are now available in the <c>experience_context</c> object under the <c>payment_source</c> which supports them (eg. <c>payment_source.paypal.experience_context.shipping_preference</c>). Please specify this field in the <c>experience_context</c> object instead of the <c>application_context</c> object.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("shipping_preference")]
     public OrderApplicationContextShippingPreference? ShippingPreference { get; init; } = OrderApplicationContextShippingPreference.GetFromFile;
 
     /// <summary>
     /// DEPRECATED. Configures a Continue or Pay Now checkout flow.  The fields in <c>application_context</c> are now available in the <c>experience_context</c> object under the <c>payment_source</c> which supports them (eg. <c>payment_source.paypal.experience_context.user_action</c>). Please specify this field in the <c>experience_context</c> object instead of the <c>application_context</c> object.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("user_action")]
     public OrderApplicationContextUserAction? UserAction { get; init; } = OrderApplicationContextUserAction.Continue;
 

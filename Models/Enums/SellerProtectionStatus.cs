@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Indicates whether the transaction is eligible for seller protection. For information, see <see href="https://www.paypal.com/us/webapps/mpp/security/seller-protection">PayPal Seller Protection for Merchants</see>.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<SellerProtectionStatus>))]
-public sealed record SellerProtectionStatus : StringEnum<SellerProtectionStatus>
+public sealed record SellerProtectionStatus : OpenStringEnum<SellerProtectionStatus>
 {
     private SellerProtectionStatus(string value) : base(value)
     {
@@ -28,5 +29,23 @@ public sealed record SellerProtectionStatus : StringEnum<SellerProtectionStatus>
     /// </summary>
     public static readonly SellerProtectionStatus NotEligible = new("NOT_ELIGIBLE");
 
-    public static SellerProtectionStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onEligible,
+        Func<TResult> onPartiallyEligible,
+        Func<TResult> onNotEligible,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Eligible => onEligible(),
+            _ when this == PartiallyEligible => onPartiallyEligible(),
+            _ when this == NotEligible => onNotEligible(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onEligible, Action onPartiallyEligible, Action onNotEligible, Action<string> otherwise)
+    {
+        if (this == Eligible) onEligible();
+        else if (this == PartiallyEligible) onPartiallyEligible();
+        else if (this == NotEligible) onNotEligible();
+        else otherwise(Value);
+    }
 }

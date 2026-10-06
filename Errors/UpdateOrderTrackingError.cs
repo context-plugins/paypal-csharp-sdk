@@ -1,11 +1,9 @@
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Models;
 
-namespace PayPalServerSdk.Errors;
+namespace Paypal.Errors;
 
 public sealed class UpdateOrderTrackingError : ApiError
 {
@@ -16,30 +14,18 @@ public sealed class UpdateOrderTrackingError : ApiError
         _errorValue = errorValue;
     }
 
-    private static UpdateOrderTrackingError AsError(Error value) =>
-        new(Optional<Error>.Some(value), default);
+    private static UpdateOrderTrackingError AsError(Error value) => new(Optional<Error>.Some(value), default);
 
-    private static UpdateOrderTrackingError AsFallback(RawError value) =>
-        new(default, Optional<RawError>.Some(value));
+    private static UpdateOrderTrackingError AsFallback(RawError value) => new(default, Optional<RawError>.Some(value));
 
     public bool TryGetError(out Error value) => _errorValue.TryGetValue(out value);
 
-    internal static Task<UpdateOrderTrackingError> Create(HttpResponseMessage response, CancellationToken ct) =>
-        (int)response.StatusCode switch
+    private static Task<UpdateOrderTrackingError> Create(FailedResponse response) =>
+        response.StatusCode switch
         {
-            400 or 403 or 404 or 422 or 500 => FromJson<Error>(response, ct).As(AsError),
-            _ => FromRawBody(response, ct).As(AsFallback)
+            400 or 403 or 404 or 422 or 500 => response.Json<Error>().As(AsError),
+            _ => response.RawBody().As(AsFallback)
         };
-}
 
-internal sealed class UpdateOrderTrackingErrorResponse : IErrorResponse<UpdateOrderTrackingError>
-{
-    public static UpdateOrderTrackingErrorResponse Instance { get; } = new();
-
-    private UpdateOrderTrackingErrorResponse()
-    {
-    }
-
-    public Task<UpdateOrderTrackingError> Map(HttpResponseMessage response, CancellationToken ct) =>
-        UpdateOrderTrackingError.Create(response, ct);
+    internal static ApiErrorResponse<UpdateOrderTrackingError> Response { get; } = new(Create);
 }

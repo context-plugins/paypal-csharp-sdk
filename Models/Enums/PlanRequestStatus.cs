@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The initial state of the plan. Allowed input values are CREATED and ACTIVE.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PlanRequestStatus>))]
-public sealed record PlanRequestStatus : StringEnum<PlanRequestStatus>
+public sealed record PlanRequestStatus : OpenStringEnum<PlanRequestStatus>
 {
     private PlanRequestStatus(string value) : base(value)
     {
@@ -28,5 +29,23 @@ public sealed record PlanRequestStatus : StringEnum<PlanRequestStatus>
     /// </summary>
     public static readonly PlanRequestStatus Active = new("ACTIVE");
 
-    public static PlanRequestStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCreated,
+        Func<TResult> onInactive,
+        Func<TResult> onActive,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Created => onCreated(),
+            _ when this == Inactive => onInactive(),
+            _ when this == Active => onActive(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCreated, Action onInactive, Action onActive, Action<string> otherwise)
+    {
+        if (this == Created) onCreated();
+        else if (this == Inactive) onInactive();
+        else if (this == Active) onActive();
+        else otherwise(Value);
+    }
 }

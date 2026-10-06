@@ -1,11 +1,9 @@
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Models;
 
-namespace PayPalServerSdk.Errors;
+namespace Paypal.Errors;
 
 public sealed class CreateOrderError : ApiError
 {
@@ -18,27 +16,16 @@ public sealed class CreateOrderError : ApiError
 
     private static CreateOrderError AsError(Error value) => new(Optional<Error>.Some(value), default);
 
-    private static CreateOrderError AsFallback(RawError value) =>
-        new(default, Optional<RawError>.Some(value));
+    private static CreateOrderError AsFallback(RawError value) => new(default, Optional<RawError>.Some(value));
 
     public bool TryGetError(out Error value) => _errorValue.TryGetValue(out value);
 
-    internal static Task<CreateOrderError> Create(HttpResponseMessage response, CancellationToken ct) =>
-        (int)response.StatusCode switch
+    private static Task<CreateOrderError> Create(FailedResponse response) =>
+        response.StatusCode switch
         {
-            400 or 401 or 422 => FromJson<Error>(response, ct).As(AsError),
-            _ => FromRawBody(response, ct).As(AsFallback)
+            400 or 401 or 422 => response.Json<Error>().As(AsError),
+            _ => response.RawBody().As(AsFallback)
         };
-}
 
-internal sealed class CreateOrderErrorResponse : IErrorResponse<CreateOrderError>
-{
-    public static CreateOrderErrorResponse Instance { get; } = new();
-
-    private CreateOrderErrorResponse()
-    {
-    }
-
-    public Task<CreateOrderError> Map(HttpResponseMessage response, CancellationToken ct) =>
-        CreateOrderError.Create(response, ct);
+    internal static ApiErrorResponse<CreateOrderError> Response { get; } = new(Create);
 }

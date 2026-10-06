@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The tax details.
@@ -19,6 +19,7 @@ public record Taxes
     /// <summary>
     /// Indicates whether the tax was already included in the billing amount.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("inclusive")]
     public bool? Inclusive { get; init; } = true;
 

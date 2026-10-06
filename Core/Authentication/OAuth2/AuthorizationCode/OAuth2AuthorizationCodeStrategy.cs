@@ -5,12 +5,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Request;
-using PayPalServerSdk.Core.Response;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Core.Request;
+using Paypal.Core.Response;
 
-namespace PayPalServerSdk.Core.Authentication.OAuth2.AuthorizationCode;
+namespace Paypal.Core.Authentication.OAuth2.AuthorizationCode;
 
 internal sealed class OAuth2AuthorizationCodeStrategy
     : IOAuth2RefreshableTokenStrategy<OAuth2AuthorizationCodeCredentials>
@@ -142,9 +142,9 @@ internal sealed class OAuth2AuthorizationCodeStrategy
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(bytes);
         var verifier = Base64UrlEncode(bytes);
-        var challenge = method == PkceMethod.Plain
-            ? verifier
-            : Base64UrlEncode(Sha256Hash(Encoding.ASCII.GetBytes(verifier)));
+        var challenge = method.Match(
+            onS256: () => Base64UrlEncode(Sha256Hash(Encoding.ASCII.GetBytes(verifier))),
+            onPlain: () => verifier);
         return new PkceValues(verifier, challenge, method);
     }
 

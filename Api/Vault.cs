@@ -2,15 +2,16 @@ using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core;
-using PayPalServerSdk.Core.Exceptions;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Request;
-using PayPalServerSdk.Core.Response;
-using PayPalServerSdk.Errors;
-using PayPalServerSdk.Models;
+using Paypal.Core;
+using Paypal.Core.Exceptions;
+using Paypal.Core.Models;
+using Paypal.Core.Request;
+using Paypal.Core.Response;
+using Paypal.Errors;
+using Paypal.Models;
+using Paypal.Requests.Vault;
 
-namespace PayPalServerSdk.Api;
+namespace Paypal.Api;
 
 /// <summary>
 /// Use the <c>/vault</c> resource to create, retrieve, and delete payment and setup tokens.
@@ -31,169 +32,173 @@ public sealed class Vault
     /// <summary>
     /// Create payment token for a given payment source
     /// </summary>
-    /// <param name="payPalRequestId">The server stores keys for 3 hours.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="PaymentTokenResponse"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="CreatePaymentTokenError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="CreatePaymentTokenError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Creates a Payment Token from the given payment source and adds it to the Vault of the associated customer.
     /// </remarks>
-    public Task<PaymentTokenResponse> CreatePaymentToken(string? payPalRequestId,
-        PaymentTokenRequest body,
+    public Task<PaymentTokenResponse> CreatePaymentToken(CreatePaymentTokenRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v3/vault/payment-tokens"),
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v3/vault/payment-tokens"),
             [],
             [],
-            [new HeaderParam("PayPal-Request-Id", payPalRequestId),
-                new HeaderParam("Idempotency-Key", Guid.NewGuid())],
+            [
+                new HeaderParam("PayPal-Request-Id", request.PayPalRequestId),
+                new HeaderParam("Idempotency-Key", Guid.NewGuid()),
+            ],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             JsonResponse.Create<PaymentTokenResponse>(),
-            CreatePaymentTokenErrorResponse.Instance,
+            CreatePaymentTokenError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Create a setup token
     /// </summary>
-    /// <param name="payPalRequestId">The server stores keys for 3 hours.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="SetupTokenResponse"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="CreateSetupTokenError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="CreateSetupTokenError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Creates a Setup Token from the given payment source and adds it to the Vault of the associated customer.
     /// </remarks>
-    public Task<SetupTokenResponse> CreateSetupToken(string? payPalRequestId,
-        SetupTokenRequest body,
+    public Task<SetupTokenResponse> CreateSetupToken(CreateSetupTokenRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v3/vault/setup-tokens"),
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v3/vault/setup-tokens"),
             [],
             [],
-            [new HeaderParam("PayPal-Request-Id", payPalRequestId),
-                new HeaderParam("Idempotency-Key", Guid.NewGuid())],
+            [
+                new HeaderParam("PayPal-Request-Id", request.PayPalRequestId),
+                new HeaderParam("Idempotency-Key", Guid.NewGuid()),
+            ],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             JsonResponse.Create<SetupTokenResponse>(),
-            CreateSetupTokenErrorResponse.Instance,
+            CreateSetupTokenError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Delete payment token
     /// </summary>
-    /// <param name="id">ID of the payment token.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="DeletePaymentTokenError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="DeletePaymentTokenError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Delete the payment token associated with the payment token id.
     /// </remarks>
-    public Task DeletePaymentToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v3/vault/payment-tokens/{id}"),
-            [new TemplateParam("id", id)],
+    public Task DeletePaymentToken(DeletePaymentTokenRequest request,
+        RequestOptions? requestOptions = null,
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v3/vault/payment-tokens/{id}"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Delete,
             EmptyBody.Instance,
             VoidResponse.Instance,
-            DeletePaymentTokenErrorResponse.Instance,
+            DeletePaymentTokenError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Retrieve a payment token
     /// </summary>
-    /// <param name="id">ID of the payment token.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="PaymentTokenResponse"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="GetPaymentTokenError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="GetPaymentTokenError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Returns a readable representation of vaulted payment source associated with the payment token id.
     /// </remarks>
-    public Task<PaymentTokenResponse> GetPaymentToken(string id,
+    public Task<PaymentTokenResponse> GetPaymentToken(GetPaymentTokenRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v3/vault/payment-tokens/{id}"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v3/vault/payment-tokens/{id}"),
+            [new TemplateParam("id", request.Id)],
             [],
             [],
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<PaymentTokenResponse>(),
-            GetPaymentTokenErrorResponse.Instance,
+            GetPaymentTokenError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Retrieve a setup token
     /// </summary>
-    /// <param name="id">ID of the setup token.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="SetupTokenResponse"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="GetSetupTokenError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="GetSetupTokenError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Returns a readable representation of temporarily vaulted payment source associated with the setup token id.
     /// </remarks>
-    public Task<SetupTokenResponse> GetSetupToken(string id,
+    public Task<SetupTokenResponse> GetSetupToken(GetSetupTokenRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v3/vault/setup-tokens/{id}"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v3/vault/setup-tokens/{id}"),
+            [new TemplateParam("id", request.Id)],
             [],
             [],
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<SetupTokenResponse>(),
-            GetSetupTokenErrorResponse.Instance,
+            GetSetupTokenError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// List all payment tokens
     /// </summary>
-    /// <param name="customerId">A unique identifier representing a specific customer in merchant's/partner's system or records.</param>
-    /// <param name="pageSize">A non-negative, non-zero integer indicating the maximum number of results to return at one time.</param>
-    /// <param name="page">A non-negative, non-zero integer representing the page of the results.</param>
-    /// <param name="totalRequired">A boolean indicating total number of items (total_items) and pages (total_pages) are expected to be returned in the response.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="CustomerVaultPaymentTokensResponse"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="ListCustomerPaymentTokensError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="ListCustomerPaymentTokensError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Returns all payment tokens for a customer.
     /// </remarks>
-    public Task<CustomerVaultPaymentTokensResponse> ListCustomerPaymentTokens(string customerId,
-        int? pageSize = 5,
-        int? page = 1,
-        bool? totalRequired = false,
+    public Task<CustomerVaultPaymentTokensResponse> ListCustomerPaymentTokens(ListCustomerPaymentTokensRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v3/vault/payment-tokens"),
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v3/vault/payment-tokens"),
             [],
-            [new Param("customer_id", customerId),
-                new Param("page_size", pageSize),
-                new Param("page", page),
-                new Param("total_required", totalRequired)],
+            [
+                new Param("customer_id", request.CustomerId),
+                new Param("page_size", request.PageSize),
+                new Param("page", request.Page),
+                new Param("total_required", request.TotalRequired),
+            ],
             [],
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<CustomerVaultPaymentTokensResponse>(),
-            ListCustomerPaymentTokensErrorResponse.Instance,
+            ListCustomerPaymentTokensError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 }

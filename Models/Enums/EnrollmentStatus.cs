@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Status of Authentication eligibility.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<EnrollmentStatus>))]
-public sealed record EnrollmentStatus : StringEnum<EnrollmentStatus>
+public sealed record EnrollmentStatus : OpenStringEnum<EnrollmentStatus>
 {
     private EnrollmentStatus(string value) : base(value)
     {
@@ -33,5 +34,26 @@ public sealed record EnrollmentStatus : StringEnum<EnrollmentStatus>
     /// </summary>
     public static readonly EnrollmentStatus B = new("B");
 
-    public static EnrollmentStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onY,
+        Func<TResult> onN,
+        Func<TResult> onU,
+        Func<TResult> onB,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Y => onY(),
+            _ when this == N => onN(),
+            _ when this == U => onU(),
+            _ when this == B => onB(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onY, Action onN, Action onU, Action onB, Action<string> otherwise)
+    {
+        if (this == Y) onY();
+        else if (this == N) onN();
+        else if (this == U) onU();
+        else if (this == B) onB();
+        else otherwise(Value);
+    }
 }

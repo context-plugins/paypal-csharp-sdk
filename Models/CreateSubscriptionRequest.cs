@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The create subscription request details.
@@ -52,6 +52,7 @@ public record CreateSubscriptionRequest
     /// <summary>
     /// DEPRECATED. Indicates whether the subscription auto-renews after the billing cycles complete.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("auto_renewal")]
     public bool? AutoRenewal { get; init; } = false;
 

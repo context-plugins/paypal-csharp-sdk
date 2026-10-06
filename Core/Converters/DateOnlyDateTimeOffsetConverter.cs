@@ -1,9 +1,9 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Extensions;
+using Paypal.Core.Extensions;
 
-namespace PayPalServerSdk.Core.Converters;
+namespace Paypal.Core.Converters;
 
 internal sealed class DateOnlyDateTimeOffsetConverter : JsonConverter<DateTimeOffset>
 {

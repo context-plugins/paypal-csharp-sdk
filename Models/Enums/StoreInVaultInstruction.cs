@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Defines how and when the payment source gets vaulted.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<StoreInVaultInstruction>))]
-public sealed record StoreInVaultInstruction : StringEnum<StoreInVaultInstruction>
+public sealed record StoreInVaultInstruction : OpenStringEnum<StoreInVaultInstruction>
 {
     private StoreInVaultInstruction(string value) : base(value)
     {
@@ -18,5 +19,16 @@ public sealed record StoreInVaultInstruction : StringEnum<StoreInVaultInstructio
     /// </summary>
     public static readonly StoreInVaultInstruction OnSuccess = new("ON_SUCCESS");
 
-    public static StoreInVaultInstruction FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onOnSuccess, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == OnSuccess => onOnSuccess(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onOnSuccess, Action<string> otherwise)
+    {
+        if (this == OnSuccess) onOnSuccess();
+        else otherwise(Value);
+    }
 }

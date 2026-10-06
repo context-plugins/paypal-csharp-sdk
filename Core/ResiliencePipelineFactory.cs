@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Polly;
 using Polly.Retry;
 using Polly.Timeout;
-using PayPalServerSdk.Core.Configuration;
-using PayPalServerSdk.Core.Logging;
-using PayPalServerSdk.Core.Request;
+using Paypal.Core.Configuration;
+using Paypal.Core.Logging;
+using Paypal.Core.Request;
 
-namespace PayPalServerSdk.Core;
+namespace Paypal.Core;
 
 internal sealed class ResiliencePipelineFactory
 {
@@ -25,9 +25,8 @@ internal sealed class ResiliencePipelineFactory
     private readonly ResiliencePipeline<HttpResponseMessage> _pipeline;
     private readonly ResiliencePipeline<HttpResponseMessage> _timeoutOnly;
 
-    public ResiliencePipelineFactory(RetryOptions options, TimeProvider? clock = null)
+    public ResiliencePipelineFactory(RetryOptions options, TimeProvider clock)
     {
-        clock ??= TimeProvider.System;
         _pipeline = CreateResiliencePipeline(options, clock);
         _timeoutOnly = options.MaxRetries <= 0
             ? _pipeline

@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// DEPRECATED. DEPRECATED. The type of landing page to show on the PayPal site for customer checkout.  The fields in <c>application_context</c> are now available in the <c>experience_context</c> object under the <c>payment_source</c> which supports them (eg. <c>payment_source.paypal.experience_context.landing_page</c>). Please specify this field in the <c>experience_context</c> object instead of the <c>application_context</c> object.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<OrderApplicationContextLandingPage>))]
-public sealed record OrderApplicationContextLandingPage : StringEnum<OrderApplicationContextLandingPage>
+public sealed record OrderApplicationContextLandingPage : OpenStringEnum<OrderApplicationContextLandingPage>
 {
     private OrderApplicationContextLandingPage(string value) : base(value)
     {
@@ -28,5 +29,23 @@ public sealed record OrderApplicationContextLandingPage : StringEnum<OrderApplic
     /// </summary>
     public static readonly OrderApplicationContextLandingPage NoPreference = new("NO_PREFERENCE");
 
-    public static OrderApplicationContextLandingPage FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onLogin,
+        Func<TResult> onBilling,
+        Func<TResult> onNoPreference,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Login => onLogin(),
+            _ when this == Billing => onBilling(),
+            _ when this == NoPreference => onNoPreference(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onLogin, Action onBilling, Action onNoPreference, Action<string> otherwise)
+    {
+        if (this == Login) onLogin();
+        else if (this == Billing) onBilling();
+        else if (this == NoPreference) onNoPreference();
+        else otherwise(Value);
+    }
 }

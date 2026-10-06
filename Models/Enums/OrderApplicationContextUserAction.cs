@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// DEPRECATED. Configures a Continue or Pay Now checkout flow.  The fields in <c>application_context</c> are now available in the <c>experience_context</c> object under the <c>payment_source</c> which supports them (eg. <c>payment_source.paypal.experience_context.user_action</c>). Please specify this field in the <c>experience_context</c> object instead of the <c>application_context</c> object.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<OrderApplicationContextUserAction>))]
-public sealed record OrderApplicationContextUserAction : StringEnum<OrderApplicationContextUserAction>
+public sealed record OrderApplicationContextUserAction : OpenStringEnum<OrderApplicationContextUserAction>
 {
     private OrderApplicationContextUserAction(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record OrderApplicationContextUserAction : StringEnum<OrderApplica
     /// </summary>
     public static readonly OrderApplicationContextUserAction PayNow = new("PAY_NOW");
 
-    public static OrderApplicationContextUserAction FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onContinue, Func<TResult> onPayNow, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Continue => onContinue(),
+            _ when this == PayNow => onPayNow(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onContinue, Action onPayNow, Action<string> otherwise)
+    {
+        if (this == Continue) onContinue();
+        else if (this == PayNow) onPayNow();
+        else otherwise(Value);
+    }
 }

@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Merchant preference on how the buyer can navigate back to merchant website post approving the transaction on the Venmo App.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<ReturnFlow>))]
-public sealed record ReturnFlow : StringEnum<ReturnFlow>
+public sealed record ReturnFlow : OpenStringEnum<ReturnFlow>
 {
     private ReturnFlow(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record ReturnFlow : StringEnum<ReturnFlow>
     /// </summary>
     public static readonly ReturnFlow Manual = new("MANUAL");
 
-    public static ReturnFlow FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onAuto, Func<TResult> onManual, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Auto => onAuto(),
+            _ when this == Manual => onManual(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onAuto, Action onManual, Action<string> otherwise)
+    {
+        if (this == Auto) onAuto();
+        else if (this == Manual) onManual();
+        else otherwise(Value);
+    }
 }

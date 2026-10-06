@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The customer's tax ID type.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<TaxIdType>))]
-public sealed record TaxIdType : StringEnum<TaxIdType>
+public sealed record TaxIdType : OpenStringEnum<TaxIdType>
 {
     private TaxIdType(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record TaxIdType : StringEnum<TaxIdType>
     /// </summary>
     public static readonly TaxIdType BrCnpj = new("BR_CNPJ");
 
-    public static TaxIdType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onBrCpf, Func<TResult> onBrCnpj, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == BrCpf => onBrCpf(),
+            _ when this == BrCnpj => onBrCnpj(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onBrCpf, Action onBrCnpj, Action<string> otherwise)
+    {
+        if (this == BrCpf) onBrCpf();
+        else if (this == BrCnpj) onBrCnpj();
+        else otherwise(Value);
+    }
 }

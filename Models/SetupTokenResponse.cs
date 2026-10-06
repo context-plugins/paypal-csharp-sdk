@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// Minimal representation of a cached setup token.
@@ -30,6 +30,7 @@ public record SetupTokenResponse
     /// <summary>
     /// The status of the payment token.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("status")]
     public PaymentTokenStatus? Status { get; init; } = PaymentTokenStatus.Created;
 
@@ -41,7 +42,7 @@ public record SetupTokenResponse
     public SetupTokenResponsePaymentSource? PaymentSource { get; init; }
 
     /// <summary>
-    /// An array of related <see href="https://developer.paypal.com/api/rest/responses/#hateoas">HATEOAS links</see>.
+    /// An array of related <see href="/api/rest/responses/#hateoas">HATEOAS links</see>.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("links")]

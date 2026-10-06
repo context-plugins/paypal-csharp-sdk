@@ -4,9 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.Exceptions;
+using Paypal.Core.Exceptions;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Core.Authentication;
+namespace Paypal.Core.Authentication;
 
 /// <summary>
 /// Represents multiple alternative schemes (OR logic).
@@ -42,18 +43,21 @@ internal sealed class AuthSchemeAny : IRevocableAuthScheme
                 await scheme.Apply(request, cancellationToken).ConfigureAwait(false);
                 return;
             }
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not OperationCanceledException)
             {
                 failures.Add(ex);
             }
         }
 
         if (failures.Count > 0)
-            throw new AuthSchemeException("No authentication scheme succeeded.", failures);
+        {
+            var callContext = CallContext.For(request);
+            throw new AuthSchemeException($"{callContext} could not be authenticated: no configured scheme succeeded.", failures)
+            {
+                Method = callContext.Method,
+                RequestUri = callContext.RequestUri,
+            };
+        }
     }
 
     // We don't track which inner scheme won the last Apply, so on a 401 we invalidate every

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The error details. Required for client-side <c>4XX</c> errors.
@@ -25,6 +25,7 @@ public record TransactionSearchErrorDetails
     /// <summary>
     /// The location of the field that caused the error. Value is <c>body</c>, <c>path</c>, or <c>query</c>.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("location")]
     public string? Location { get; init; } = "body";
 

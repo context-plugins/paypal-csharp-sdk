@@ -1,11 +1,9 @@
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Models;
 
-namespace PayPalServerSdk.Errors;
+namespace Paypal.Errors;
 
 public sealed class ReauthorizePaymentError : ApiError
 {
@@ -21,8 +19,7 @@ public sealed class ReauthorizePaymentError : ApiError
         _noContentValue = noContentValue;
     }
 
-    private static ReauthorizePaymentError AsError(Error value) =>
-        new(Optional<Error>.Some(value), default, default);
+    private static ReauthorizePaymentError AsError(Error value) => new(Optional<Error>.Some(value), default, default);
 
     private static ReauthorizePaymentError AsNoContent(RawError value) =>
         new(default, Optional<RawError>.Some(value), default);
@@ -34,23 +31,13 @@ public sealed class ReauthorizePaymentError : ApiError
 
     public bool TryGetNoContent(out RawError value) => _noContentValue.TryGetValue(out value);
 
-    internal static Task<ReauthorizePaymentError> Create(HttpResponseMessage response, CancellationToken ct) =>
-        (int)response.StatusCode switch
+    private static Task<ReauthorizePaymentError> Create(FailedResponse response) =>
+        response.StatusCode switch
         {
-            400 or 401 or 403 or 404 or 422 => FromJson<Error>(response, ct).As(AsError),
-            500 => FromRawBody(response, ct).As(AsNoContent),
-            _ => FromRawBody(response, ct).As(AsFallback)
+            400 or 401 or 403 or 404 or 422 => response.Json<Error>().As(AsError),
+            500 => response.RawBody().As(AsNoContent),
+            _ => response.RawBody().As(AsFallback)
         };
-}
 
-internal sealed class ReauthorizePaymentErrorResponse : IErrorResponse<ReauthorizePaymentError>
-{
-    public static ReauthorizePaymentErrorResponse Instance { get; } = new();
-
-    private ReauthorizePaymentErrorResponse()
-    {
-    }
-
-    public Task<ReauthorizePaymentError> Map(HttpResponseMessage response, CancellationToken ct) =>
-        ReauthorizePaymentError.Create(response, ct);
+    internal static ApiErrorResponse<ReauthorizePaymentError> Response { get; } = new(Create);
 }

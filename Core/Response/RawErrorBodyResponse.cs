@@ -1,9 +1,9 @@
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Core.Response;
+namespace Paypal.Core.Response;
 
 internal sealed class RawErrorBodyResponse : IResponse<RawError>
 {
@@ -11,6 +11,6 @@ internal sealed class RawErrorBodyResponse : IResponse<RawError>
 
     private RawErrorBodyResponse() { }
 
-    public ValueTask<RawError> Map(HttpResponseMessage httpResponseMessage, CancellationToken cancellationToken) =>
-        new(RawError.Create(httpResponseMessage, cancellationToken));
+    public ValueTask<RawError> Map(ResponseContext context, CancellationToken cancellationToken) =>
+        new(RawError.Create(context.Response, cancellationToken));
 }

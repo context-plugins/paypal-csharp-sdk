@@ -9,14 +9,15 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 ### CreatePaymentToken
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CreatePaymentToken(string? payPalRequestId, PaymentTokenRequest body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalRequestId` — nullable, no default → **must pass explicitly**
+- **Signature**: `CreatePaymentToken(CreatePaymentTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Body`
 - **Returns**: `PaymentTokenResponse`
-- **Error**: `SdkException<CreatePaymentTokenError>` — **Case A (typed)**
+- **Error**: `ApiException<CreatePaymentTokenError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CreatePaymentTokenRequest` | `Requests/Vault/CreatePaymentTokenRequest.cs` |
 | `PaymentTokenRequest` | `Models/PaymentTokenRequest.cs` |
 | `PaymentTokenResponse` | `Models/PaymentTokenResponse.cs` |
 | `CreatePaymentTokenError` | `Errors/CreatePaymentTokenError.cs` |
@@ -25,14 +26,15 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 ### CreateSetupToken
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `CreateSetupToken(string? payPalRequestId, SetupTokenRequest body, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `payPalRequestId` — nullable, no default → **must pass explicitly**
+- **Signature**: `CreateSetupToken(CreateSetupTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Body`
 - **Returns**: `SetupTokenResponse`
-- **Error**: `SdkException<CreateSetupTokenError>` — **Case A (typed)**
+- **Error**: `ApiException<CreateSetupTokenError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 403, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `CreateSetupTokenRequest` | `Requests/Vault/CreateSetupTokenRequest.cs` |
 | `SetupTokenRequest` | `Models/SetupTokenRequest.cs` |
 | `SetupTokenResponse` | `Models/SetupTokenResponse.cs` |
 | `CreateSetupTokenError` | `Errors/CreateSetupTokenError.cs` |
@@ -41,26 +43,30 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 ### DeletePaymentToken
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `DeletePaymentToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `DeletePaymentToken(DeletePaymentTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `void` (Task)
-- **Error**: `SdkException<DeletePaymentTokenError>` — **Case A (typed)**
+- **Error**: `ApiException<DeletePaymentTokenError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 403, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `DeletePaymentTokenRequest` | `Requests/Vault/DeletePaymentTokenRequest.cs` |
 | `DeletePaymentTokenError` | `Errors/DeletePaymentTokenError.cs` |
 | `Error` | `Models/Error.cs` |
 
 ### GetPaymentToken
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `GetPaymentToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `GetPaymentToken(GetPaymentTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `PaymentTokenResponse`
-- **Error**: `SdkException<GetPaymentTokenError>` — **Case A (typed)**
+- **Error**: `ApiException<GetPaymentTokenError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `GetPaymentTokenRequest` | `Requests/Vault/GetPaymentTokenRequest.cs` |
 | `PaymentTokenResponse` | `Models/PaymentTokenResponse.cs` |
 | `GetPaymentTokenError` | `Errors/GetPaymentTokenError.cs` |
 | `Error` | `Models/Error.cs` |
@@ -68,13 +74,15 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 ### GetSetupToken
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `GetSetupToken(string id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `GetSetupToken(GetSetupTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`
 - **Returns**: `SetupTokenResponse`
-- **Error**: `SdkException<GetSetupTokenError>` — **Case A (typed)**
+- **Error**: `ApiException<GetSetupTokenError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [403, 404, 422, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `GetSetupTokenRequest` | `Requests/Vault/GetSetupTokenRequest.cs` |
 | `SetupTokenResponse` | `Models/SetupTokenResponse.cs` |
 | `GetSetupTokenError` | `Errors/GetSetupTokenError.cs` |
 | `Error` | `Models/Error.cs` |
@@ -82,15 +90,16 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 ### ListCustomerPaymentTokens
 
 - **Auth**: `options.Oauth2`
-- **Signature**: `ListCustomerPaymentTokens(string customerId, int? pageSize = 5, int? page = 1, bool? totalRequired = false, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - defaults: `pageSize` = `5`, `page` = `1`, `totalRequired` = `false`
-- **Query params (wire ← C#)**: `customer_id` ← `customerId`, `page_size` ← `pageSize`, `page` ← `page`, `total_required` ← `totalRequired`
+- **Signature**: `ListCustomerPaymentTokens(ListCustomerPaymentTokensRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `CustomerId`
+- **Query params (wire ← C#)**: `customer_id` ← `CustomerId`, `page_size` ← `PageSize`, `page` ← `Page`, `total_required` ← `TotalRequired`
 - **Returns**: `CustomerVaultPaymentTokensResponse`
-- **Error**: `SdkException<ListCustomerPaymentTokensError>` — **Case A (typed)**
+- **Error**: `ApiException<ListCustomerPaymentTokensError>` — **Case A (typed)**
 - **Error accessors**: `TryGetError(out Error)` [400, 403, 500] · `TryGetRawError(out RawError)` [fallback]
 
 | Type | Source |
 | --- | --- |
+| `ListCustomerPaymentTokensRequest` | `Requests/Vault/ListCustomerPaymentTokensRequest.cs` |
 | `CustomerVaultPaymentTokensResponse` | `Models/CustomerVaultPaymentTokensResponse.cs` |
 | `ListCustomerPaymentTokensError` | `Errors/ListCustomerPaymentTokensError.cs` |
 | `Error` | `Models/Error.cs` |

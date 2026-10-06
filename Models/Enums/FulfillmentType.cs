@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// A classification for the method of purchase fulfillment (e.g shipping, in-store pickup, etc). Either <c>type</c> or <c>options</c> may be present, but not both.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<FulfillmentType>))]
-public sealed record FulfillmentType : StringEnum<FulfillmentType>
+public sealed record FulfillmentType : OpenStringEnum<FulfillmentType>
 {
     private FulfillmentType(string value) : base(value)
     {
@@ -33,5 +34,30 @@ public sealed record FulfillmentType : StringEnum<FulfillmentType>
     /// </summary>
     public static readonly FulfillmentType PickupFromPerson = new("PICKUP_FROM_PERSON");
 
-    public static FulfillmentType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onShipping,
+        Func<TResult> onPickupInPerson,
+        Func<TResult> onPickupInStore,
+        Func<TResult> onPickupFromPerson,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Shipping => onShipping(),
+            _ when this == PickupInPerson => onPickupInPerson(),
+            _ when this == PickupInStore => onPickupInStore(),
+            _ when this == PickupFromPerson => onPickupFromPerson(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onShipping,
+        Action onPickupInPerson,
+        Action onPickupInStore,
+        Action onPickupFromPerson,
+        Action<string> otherwise)
+    {
+        if (this == Shipping) onShipping();
+        else if (this == PickupInPerson) onPickupInPerson();
+        else if (this == PickupInStore) onPickupInStore();
+        else if (this == PickupFromPerson) onPickupFromPerson();
+        else otherwise(Value);
+    }
 }

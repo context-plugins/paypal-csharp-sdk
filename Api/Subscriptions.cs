@@ -1,17 +1,17 @@
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core;
-using PayPalServerSdk.Core.Exceptions;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Request;
-using PayPalServerSdk.Core.Response;
-using PayPalServerSdk.Errors;
-using PayPalServerSdk.Models;
+using Paypal.Core;
+using Paypal.Core.Exceptions;
+using Paypal.Core.Models;
+using Paypal.Core.Request;
+using Paypal.Core.Response;
+using Paypal.Errors;
+using Paypal.Models;
+using Paypal.Requests.Subscriptions;
 
-namespace PayPalServerSdk.Api;
+namespace Paypal.Api;
 
 /// <summary>
 /// Use the <c>/subscriptions</c> resource to create, update, retrieve, and cancel subscriptions and their associated plans.
@@ -32,520 +32,487 @@ public sealed class Subscriptions
     /// <summary>
     /// Activate plan
     /// </summary>
-    /// <param name="id">The ID of the plan.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="ActivateBillingPlanError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="ActivateBillingPlanError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Activates a plan, by ID.
     /// </remarks>
-    public Task ActivateBillingPlan(string id,
+    public Task ActivateBillingPlan(ActivateBillingPlanRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/plans/{id}/activate"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/plans/{id}/activate"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
             EmptyBody.Instance,
             VoidResponse.Instance,
-            ActivateBillingPlanErrorResponse.Instance,
+            ActivateBillingPlanError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Activate subscription
     /// </summary>
-    /// <param name="id">The ID of the subscription.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="ActivateSubscriptionError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="ActivateSubscriptionError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Activates the subscription.
     /// </remarks>
-    public Task ActivateSubscription(string id,
-        ActivateSubscriptionRequest? body,
+    public Task ActivateSubscription(ActivateSubscriptionOperationRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}/activate"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions/{id}/activate"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             VoidResponse.Instance,
-            ActivateSubscriptionErrorResponse.Instance,
+            ActivateSubscriptionError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Cancel subscription
     /// </summary>
-    /// <param name="id">The ID of the subscription.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="CancelSubscriptionError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="CancelSubscriptionError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Cancels the subscription.
     /// </remarks>
-    public Task CancelSubscription(string id,
-        CancelSubscriptionRequest? body,
+    public Task CancelSubscription(CancelSubscriptionOperationRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}/cancel"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions/{id}/cancel"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             VoidResponse.Instance,
-            CancelSubscriptionErrorResponse.Instance,
+            CancelSubscriptionError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Capture authorized payment on subscription
     /// </summary>
-    /// <param name="id">The ID of the subscription.</param>
-    /// <param name="payPalRequestId">The server stores keys for 72 hours.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="SubscriptionTransactionDetails"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="CaptureSubscriptionError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="CaptureSubscriptionError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Captures an authorized payment from the subscriber on the subscription.
     /// </remarks>
-    public Task<SubscriptionTransactionDetails> CaptureSubscription(string id,
-        string? payPalRequestId,
-        CaptureSubscriptionRequest? body,
+    public Task<SubscriptionTransactionDetails> CaptureSubscription(CaptureSubscriptionOperationRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}/capture"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions/{id}/capture"),
+            [new TemplateParam("id", request.Id)],
             [],
-            [new HeaderParam("PayPal-Request-Id", payPalRequestId),
-                new HeaderParam("Idempotency-Key", Guid.NewGuid())],
+            [
+                new HeaderParam("PayPal-Request-Id", request.PayPalRequestId),
+                new HeaderParam("Idempotency-Key", Guid.NewGuid()),
+            ],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             JsonResponse.Create<SubscriptionTransactionDetails>(),
-            CaptureSubscriptionErrorResponse.Instance,
+            CaptureSubscriptionError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Create plan
     /// </summary>
-    /// <param name="payPalRequestId">The server stores keys for 72 hours.</param>
-    /// <param name="body"></param>
-    /// <param name="prefer">The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="BillingPlan"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="CreateBillingPlanError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="CreateBillingPlanError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Creates a plan that defines pricing and billing cycle details for subscriptions.
     /// </remarks>
-    public Task<BillingPlan> CreateBillingPlan(string? payPalRequestId,
-        PlanRequest? body,
-        string? prefer = "return=minimal",
+    public Task<BillingPlan> CreateBillingPlan(CreateBillingPlanRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/plans"),
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/plans"),
             [],
             [],
-            [new HeaderParam("Prefer", prefer),
-                new HeaderParam("PayPal-Request-Id", payPalRequestId),
-                new HeaderParam("Idempotency-Key", Guid.NewGuid())],
+            [
+                new HeaderParam("Prefer", request.Prefer),
+                new HeaderParam("PayPal-Request-Id", request.PayPalRequestId),
+                new HeaderParam("Idempotency-Key", Guid.NewGuid()),
+            ],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             JsonResponse.Create<BillingPlan>(),
-            CreateBillingPlanErrorResponse.Instance,
+            CreateBillingPlanError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Create subscription
     /// </summary>
-    /// <param name="payPalRequestId">The server stores keys for 72 hours.</param>
-    /// <param name="payPalClientMetadataId">The PayPal Client Metadata Id(CMID) is used to provide device-specific information to PayPal's risk engine. This is crucial for transactions that require device-specific risk assessments. Merchants typically use the Paypal SDK that automatically submits the CMID or they use tools like Fraudnet JS for web or Magnes JS for mobile to generate the CMID on the frontend and then pass it to the API as part of the request headers.</param>
-    /// <param name="body"></param>
-    /// <param name="prefer">The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="Subscription"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="CreateSubscriptionError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="CreateSubscriptionError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Creates a subscription.
     /// </remarks>
-    public Task<Subscription> CreateSubscription(string? payPalRequestId,
-        string? payPalClientMetadataId,
-        CreateSubscriptionRequest? body,
-        string? prefer = "return=minimal",
+    public Task<Subscription> CreateSubscription(CreateSubscriptionOperationRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions"),
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions"),
             [],
             [],
-            [new HeaderParam("Prefer", prefer),
-                new HeaderParam("PayPal-Request-Id", payPalRequestId),
-                new HeaderParam("PayPal-Client-Metadata-Id", payPalClientMetadataId),
-                new HeaderParam("Idempotency-Key", Guid.NewGuid())],
+            [
+                new HeaderParam("Prefer", request.Prefer),
+                new HeaderParam("PayPal-Request-Id", request.PayPalRequestId),
+                new HeaderParam("PayPal-Client-Metadata-Id", request.PayPalClientMetadataId),
+                new HeaderParam("Idempotency-Key", Guid.NewGuid()),
+            ],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             JsonResponse.Create<Subscription>(),
-            CreateSubscriptionErrorResponse.Instance,
+            CreateSubscriptionError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Deactivate plan
     /// </summary>
-    /// <param name="id">The ID of the plan.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="DeactivateBillingPlanError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="DeactivateBillingPlanError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Deactivates a plan, by ID.
     /// </remarks>
-    public Task DeactivateBillingPlan(string id,
+    public Task DeactivateBillingPlan(DeactivateBillingPlanRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/plans/{id}/deactivate"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/plans/{id}/deactivate"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
             EmptyBody.Instance,
             VoidResponse.Instance,
-            DeactivateBillingPlanErrorResponse.Instance,
+            DeactivateBillingPlanError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Show plan details
     /// </summary>
-    /// <param name="id">The ID of the plan.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="BillingPlan"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="GetBillingPlanError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="GetBillingPlanError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Shows details for a plan, by ID.
     /// </remarks>
-    public Task<BillingPlan> GetBillingPlan(string id,
+    public Task<BillingPlan> GetBillingPlan(GetBillingPlanRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/plans/{id}"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/plans/{id}"),
+            [new TemplateParam("id", request.Id)],
             [],
             [],
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<BillingPlan>(),
-            GetBillingPlanErrorResponse.Instance,
+            GetBillingPlanError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Show subscription details
     /// </summary>
-    /// <param name="id">The ID of the subscription.</param>
-    /// <param name="fields">List of fields that are to be returned in the response. Possible value for fields are last_failed_payment and plan.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="Subscription"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="GetSubscriptionError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="GetSubscriptionError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Shows details for a subscription, by ID.
     /// </remarks>
-    public Task<Subscription> GetSubscription(string id,
-        string? fields,
+    public Task<Subscription> GetSubscription(GetSubscriptionRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}"),
-            [new TemplateParam("id", id)],
-            [new Param("fields", fields)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions/{id}"),
+            [new TemplateParam("id", request.Id)],
+            [new Param("fields", request.Fields)],
             [],
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<Subscription>(),
-            GetSubscriptionErrorResponse.Instance,
+            GetSubscriptionError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// List plans
     /// </summary>
-    /// <param name="productId">Filters the response by a Product ID.</param>
-    /// <param name="pageSize">The number of items to return in the response.</param>
-    /// <param name="page">A non-zero integer which is the start index of the entire list of items to return in the response. The combination of <c>page=1</c> and <c>page_size=20</c> returns the first 20 items. The combination of <c>page=2</c> and <c>page_size=20</c> returns the next 20 items.</param>
-    /// <param name="totalRequired">Indicates whether to show the total count in the response.</param>
-    /// <param name="prefer">The preferred server response upon successful completion of the request. Value is: return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, name, description and HATEOAS links. return=representation. The server returns a complete resource representation, including the current state of the resource.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="PlanCollection"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="ListBillingPlansError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="ListBillingPlansError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Lists billing plans.
     /// </remarks>
-    public Task<PlanCollection> ListBillingPlans(string? productId,
-        int? pageSize = 10,
-        int? page = 1,
-        bool? totalRequired = false,
-        string? prefer = "return=minimal",
+    public Task<PlanCollection> ListBillingPlans(ListBillingPlansRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/plans"),
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/plans"),
             [],
-            [new Param("product_id", productId),
-                new Param("page_size", pageSize),
-                new Param("page", page),
-                new Param("total_required", totalRequired)],
-            [new HeaderParam("Prefer", prefer)],
+            [
+                new Param("product_id", request.ProductId),
+                new Param("page_size", request.PageSize),
+                new Param("page", request.Page),
+                new Param("total_required", request.TotalRequired),
+            ],
+            [new HeaderParam("Prefer", request.Prefer)],
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<PlanCollection>(),
-            ListBillingPlansErrorResponse.Instance,
+            ListBillingPlansError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// List transactions for subscription
     /// </summary>
-    /// <param name="id">The ID of the subscription.</param>
-    /// <param name="startTime">The start time of the range of transactions to list.</param>
-    /// <param name="endTime">The end time of the range of transactions to list.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="TransactionsList"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="ListSubscriptionTransactionsError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="ListSubscriptionTransactionsError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Lists transactions for a subscription.
     /// </remarks>
-    public Task<TransactionsList> ListSubscriptionTransactions(string id,
-        string startTime,
-        string endTime,
+    public Task<TransactionsList> ListSubscriptionTransactions(ListSubscriptionTransactionsRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}/transactions"),
-            [new TemplateParam("id", id)],
-            [new Param("start_time", startTime), new Param("end_time", endTime)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions/{id}/transactions"),
+            [new TemplateParam("id", request.Id)],
+            [new Param("start_time", request.StartTime), new Param("end_time", request.EndTime)],
             [],
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<TransactionsList>(),
-            ListSubscriptionTransactionsErrorResponse.Instance,
+            ListSubscriptionTransactionsError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// List subscriptions
     /// </summary>
-    /// <param name="planIds">Filters the response by list of plan IDs. Filter supports upto 70 plan IDs. URLs should not exceed a length of 2000 characters.</param>
-    /// <param name="statuses">Filters the response by list of subscription statuses.</param>
-    /// <param name="createdAfter">Filters the response by subscription creation start time for a range of subscriptions.</param>
-    /// <param name="createdBefore">Filters the response by subscription creation end time for a range of subscriptions.</param>
-    /// <param name="statusUpdatedBefore">Filters the response by status update start time for a range of subscriptions.</param>
-    /// <param name="statusUpdatedAfter">Filters the response by status update end time for a range of subscriptions.</param>
-    /// <param name="filter">Filter the response using complex expressions that could use comparison operators like ge, gt, le, lt and logical operators such as 'and' and 'or'.</param>
-    /// <param name="customerIds">Filters the response by comma separated vault customer IDs (FSS subscriptions only).</param>
-    /// <param name="pageSize">The number of items to return in the response.</param>
-    /// <param name="page">A non-zero integer which is the start index of the entire list of items to return in the response. The combination of <c>page=1</c> and <c>page_size=20</c> returns the first 20 items. The combination of <c>page=2</c> and <c>page_size=20</c> returns the next 20 items.</param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="SubscriptionCollection"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="ListSubscriptionsError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="ListSubscriptionsError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// List all subscriptions for merchant account.
     /// </remarks>
-    public Task<SubscriptionCollection> ListSubscriptions(string? planIds,
-        string? statuses,
-        string? createdAfter,
-        string? createdBefore,
-        string? statusUpdatedBefore,
-        string? statusUpdatedAfter,
-        string? filter,
-        IReadOnlyList<string>? customerIds,
-        int? pageSize = 10,
-        int? page = 1,
+    public Task<SubscriptionCollection> ListSubscriptions(ListSubscriptionsRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions"),
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions"),
             [],
-            [new Param("plan_ids", planIds),
-                new Param("statuses", statuses),
-                new Param("created_after", createdAfter),
-                new Param("created_before", createdBefore),
-                new Param("status_updated_before", statusUpdatedBefore),
-                new Param("status_updated_after", statusUpdatedAfter),
-                new Param("filter", filter),
-                new Param("page_size", pageSize),
-                new Param("page", page),
-                new Param("customer_ids", customerIds)],
+            [
+                new Param("plan_ids", request.PlanIds),
+                new Param("statuses", request.Statuses),
+                new Param("created_after", request.CreatedAfter),
+                new Param("created_before", request.CreatedBefore),
+                new Param("status_updated_before", request.StatusUpdatedBefore),
+                new Param("status_updated_after", request.StatusUpdatedAfter),
+                new Param("filter", request.Filter),
+                new Param("page_size", request.PageSize),
+                new Param("page", request.Page),
+                new Param("customer_ids", request.CustomerIds),
+            ],
             [],
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<SubscriptionCollection>(),
-            ListSubscriptionsErrorResponse.Instance,
+            ListSubscriptionsError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Update plan
     /// </summary>
-    /// <param name="id">The ID of the plan.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="PatchBillingPlanError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="PatchBillingPlanError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Updates a plan with the <c>CREATED</c> or <c>ACTIVE</c> status. For an <c>INACTIVE</c> plan, you can make only status updates. You can patch these attributes and objects: Attribute or object Operations description replace payment_preferences.auto_bill_outstanding replace taxes.percentage replace payment_preferences.payment_failure_threshold replace payment_preferences.setup_fee replace payment_preferences.setup_fee_failure_action replace name replace
     /// </remarks>
-    public Task PatchBillingPlan(string id,
-        IReadOnlyList<Patch>? body,
+    public Task PatchBillingPlan(PatchBillingPlanRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/plans/{id}"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/plans/{id}"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             new HttpMethod("PATCH"),
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             VoidResponse.Instance,
-            PatchBillingPlanErrorResponse.Instance,
+            PatchBillingPlanError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Update subscription
     /// </summary>
-    /// <param name="id">The ID for the subscription.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="PatchSubscriptionError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="PatchSubscriptionError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Updates a subscription which could be in ACTIVE or SUSPENDED status. You can override plan level default attributes by providing customised values for plan path in the patch request. You cannot update attributes that have already completed (Example - trial cycles can’t be updated if completed). Once overridden, changes to plan resource will not impact subscription. Any price update will not impact billing cycles within next 10 days (Applicable only for subscriptions funded by PayPal account). Following are the fields eligible for patch. Attribute or object Operations billing_info.outstanding_balance replace custom_id add,replace plan.billing_cycles[@sequence==n]. pricing_scheme.fixed_price add,replace plan.billing_cycles[@sequence==n]. pricing_scheme.tiers replace plan.billing_cycles[@sequence==n]. total_cycles replace plan.payment_preferences. auto_bill_outstanding replace plan.payment_preferences. payment_failure_threshold replace plan.taxes.inclusive add,replace plan.taxes.percentage add,replace shipping_amount add,replace start_time replace subscriber.shipping_address add,replace subscriber.payment_source (for subscriptions funded by card payments) replace
     /// </remarks>
-    public Task PatchSubscription(string id,
-        IReadOnlyList<Patch>? body,
+    public Task PatchSubscription(PatchSubscriptionRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions/{id}"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             new HttpMethod("PATCH"),
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             VoidResponse.Instance,
-            PatchSubscriptionErrorResponse.Instance,
+            PatchSubscriptionError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Revise plan or quantity of subscription
     /// </summary>
-    /// <param name="id">The ID of the subscription.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task{TResult}"/> of <see cref="ModifySubscriptionResponse"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="ReviseSubscriptionError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="ReviseSubscriptionError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Updates the quantity of the product or service in a subscription. You can also use this method to switch the plan and update the <c>shipping_amount</c>, <c>shipping_address</c> values for the subscription. This type of update requires the buyer's consent.
     /// </remarks>
-    public Task<ModifySubscriptionResponse> ReviseSubscription(string id,
-        ModifySubscriptionRequest? body,
+    public Task<ModifySubscriptionResponse> ReviseSubscription(ReviseSubscriptionRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}/revise"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions/{id}/revise"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             JsonResponse.Create<ModifySubscriptionResponse>(),
-            ReviseSubscriptionErrorResponse.Instance,
+            ReviseSubscriptionError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Suspend subscription
     /// </summary>
-    /// <param name="id">The ID of the subscription.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="SuspendSubscriptionError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="SuspendSubscriptionError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Suspends the subscription.
     /// </remarks>
-    public Task SuspendSubscription(string id,
-        SuspendSubscription? body,
+    public Task SuspendSubscription(SuspendSubscriptionRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/subscriptions/{id}/suspend"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/subscriptions/{id}/suspend"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             VoidResponse.Instance,
-            SuspendSubscriptionErrorResponse.Instance,
+            SuspendSubscriptionError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 
     /// <summary>
     /// Update pricing
     /// </summary>
-    /// <param name="id">The ID for the plan.</param>
-    /// <param name="body"></param>
+    /// <param name="request">The operation's inputs</param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="UpdateBillingPlanPricingSchemesError"/> when the server returns an error response.</exception>
+    /// <exception cref="ApiException{TError}"> of <see cref="UpdateBillingPlanPricingSchemesError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Updates pricing for a plan. For example, you can update a regular billing cycle from $5 per month to $7 per month.
     /// </remarks>
-    public Task UpdateBillingPlanPricingSchemes(string id,
-        UpdatePricingSchemesRequest? body,
+    public Task UpdateBillingPlanPricingSchemes(UpdateBillingPlanPricingSchemesRequest request,
         RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/v1/billing/plans/{id}/update-pricing-schemes"),
-            [new TemplateParam("id", id)],
+        CancellationToken cancellationToken = default) =>
+        _rawClient.Execute(
+            _server.Default("/v1/billing/plans/{id}/update-pricing-schemes"),
+            [new TemplateParam("id", request.Id)],
             [],
             [new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
-            JsonRequest.Create(body),
+            JsonRequest.Create(request.Body),
             VoidResponse.Instance,
-            UpdateBillingPlanPricingSchemesErrorResponse.Instance,
+            UpdateBillingPlanPricingSchemesError.Response,
             [_auth.Oauth2],
             requestOptions,
-            ct);
+            cancellationToken);
 }

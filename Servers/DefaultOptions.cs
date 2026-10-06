@@ -1,6 +1,6 @@
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Servers;
+namespace Paypal.Servers;
 
 public class DefaultOptions
 {

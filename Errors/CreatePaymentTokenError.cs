@@ -1,11 +1,9 @@
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Models;
 
-namespace PayPalServerSdk.Errors;
+namespace Paypal.Errors;
 
 public sealed class CreatePaymentTokenError : ApiError
 {
@@ -16,30 +14,18 @@ public sealed class CreatePaymentTokenError : ApiError
         _errorValue = errorValue;
     }
 
-    private static CreatePaymentTokenError AsError(Error value) =>
-        new(Optional<Error>.Some(value), default);
+    private static CreatePaymentTokenError AsError(Error value) => new(Optional<Error>.Some(value), default);
 
-    private static CreatePaymentTokenError AsFallback(RawError value) =>
-        new(default, Optional<RawError>.Some(value));
+    private static CreatePaymentTokenError AsFallback(RawError value) => new(default, Optional<RawError>.Some(value));
 
     public bool TryGetError(out Error value) => _errorValue.TryGetValue(out value);
 
-    internal static Task<CreatePaymentTokenError> Create(HttpResponseMessage response, CancellationToken ct) =>
-        (int)response.StatusCode switch
+    private static Task<CreatePaymentTokenError> Create(FailedResponse response) =>
+        response.StatusCode switch
         {
-            400 or 403 or 404 or 422 or 500 => FromJson<Error>(response, ct).As(AsError),
-            _ => FromRawBody(response, ct).As(AsFallback)
+            400 or 403 or 404 or 422 or 500 => response.Json<Error>().As(AsError),
+            _ => response.RawBody().As(AsFallback)
         };
-}
 
-internal sealed class CreatePaymentTokenErrorResponse : IErrorResponse<CreatePaymentTokenError>
-{
-    public static CreatePaymentTokenErrorResponse Instance { get; } = new();
-
-    private CreatePaymentTokenErrorResponse()
-    {
-    }
-
-    public Task<CreatePaymentTokenError> Map(HttpResponseMessage response, CancellationToken ct) =>
-        CreatePaymentTokenError.Create(response, ct);
+    internal static ApiErrorResponse<CreatePaymentTokenError> Response { get; } = new(Create);
 }

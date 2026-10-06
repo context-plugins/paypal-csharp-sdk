@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The reason why the captured payment status is <c>PENDING</c> or <c>DENIED</c>.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<CaptureIncompleteReason>))]
-public sealed record CaptureIncompleteReason : StringEnum<CaptureIncompleteReason>
+public sealed record CaptureIncompleteReason : OpenStringEnum<CaptureIncompleteReason>
 {
     private CaptureIncompleteReason(string value) : base(value)
     {
@@ -46,7 +47,8 @@ public sealed record CaptureIncompleteReason : StringEnum<CaptureIncompleteReaso
     /// <summary>
     /// The payee has not yet set up appropriate receiving preferences for their account. For more information about how to accept or deny this payment, visit your account online. This reason is typically offered in scenarios such as when the currency of the captured payment is different from the primary holding currency of the payee.
     /// </summary>
-    public static readonly CaptureIncompleteReason ReceivingPreferenceMandatesManualAction = new("RECEIVING_PREFERENCE_MANDATES_MANUAL_ACTION");
+    public static readonly CaptureIncompleteReason ReceivingPreferenceMandatesManualAction = new(
+        "RECEIVING_PREFERENCE_MANDATES_MANUAL_ACTION");
 
     /// <summary>
     /// The captured funds were refunded.
@@ -56,7 +58,8 @@ public sealed record CaptureIncompleteReason : StringEnum<CaptureIncompleteReaso
     /// <summary>
     /// The payer must send the funds for this captured payment. This code generally appears for manual EFTs.
     /// </summary>
-    public static readonly CaptureIncompleteReason TransactionApprovedAwaitingFunding = new("TRANSACTION_APPROVED_AWAITING_FUNDING");
+    public static readonly CaptureIncompleteReason TransactionApprovedAwaitingFunding = new(
+        "TRANSACTION_APPROVED_AWAITING_FUNDING");
 
     /// <summary>
     /// The payee does not have a PayPal account.
@@ -73,5 +76,62 @@ public sealed record CaptureIncompleteReason : StringEnum<CaptureIncompleteReaso
     /// </summary>
     public static readonly CaptureIncompleteReason DeclinedByRiskFraudFilters = new("DECLINED_BY_RISK_FRAUD_FILTERS");
 
-    public static CaptureIncompleteReason FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onBuyerComplaint,
+        Func<TResult> onChargeback,
+        Func<TResult> onEcheck,
+        Func<TResult> onInternationalWithdrawal,
+        Func<TResult> onOther,
+        Func<TResult> onPendingReview,
+        Func<TResult> onReceivingPreferenceMandatesManualAction,
+        Func<TResult> onRefunded,
+        Func<TResult> onTransactionApprovedAwaitingFunding,
+        Func<TResult> onUnilateral,
+        Func<TResult> onVerificationRequired,
+        Func<TResult> onDeclinedByRiskFraudFilters,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == BuyerComplaint => onBuyerComplaint(),
+            _ when this == Chargeback => onChargeback(),
+            _ when this == Echeck => onEcheck(),
+            _ when this == InternationalWithdrawal => onInternationalWithdrawal(),
+            _ when this == Other => onOther(),
+            _ when this == PendingReview => onPendingReview(),
+            _ when this == ReceivingPreferenceMandatesManualAction => onReceivingPreferenceMandatesManualAction(),
+            _ when this == Refunded => onRefunded(),
+            _ when this == TransactionApprovedAwaitingFunding => onTransactionApprovedAwaitingFunding(),
+            _ when this == Unilateral => onUnilateral(),
+            _ when this == VerificationRequired => onVerificationRequired(),
+            _ when this == DeclinedByRiskFraudFilters => onDeclinedByRiskFraudFilters(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onBuyerComplaint,
+        Action onChargeback,
+        Action onEcheck,
+        Action onInternationalWithdrawal,
+        Action onOther,
+        Action onPendingReview,
+        Action onReceivingPreferenceMandatesManualAction,
+        Action onRefunded,
+        Action onTransactionApprovedAwaitingFunding,
+        Action onUnilateral,
+        Action onVerificationRequired,
+        Action onDeclinedByRiskFraudFilters,
+        Action<string> otherwise)
+    {
+        if (this == BuyerComplaint) onBuyerComplaint();
+        else if (this == Chargeback) onChargeback();
+        else if (this == Echeck) onEcheck();
+        else if (this == InternationalWithdrawal) onInternationalWithdrawal();
+        else if (this == Other) onOther();
+        else if (this == PendingReview) onPendingReview();
+        else if (this == ReceivingPreferenceMandatesManualAction) onReceivingPreferenceMandatesManualAction();
+        else if (this == Refunded) onRefunded();
+        else if (this == TransactionApprovedAwaitingFunding) onTransactionApprovedAwaitingFunding();
+        else if (this == Unilateral) onUnilateral();
+        else if (this == VerificationRequired) onVerificationRequired();
+        else if (this == DeclinedByRiskFraudFilters) onDeclinedByRiskFraudFilters();
+        else otherwise(Value);
+    }
 }

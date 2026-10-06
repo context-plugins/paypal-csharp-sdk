@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The type of the payment credential. Currently, only CARD is supported.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<GooglePayPaymentMethod>))]
-public sealed record GooglePayPaymentMethod : StringEnum<GooglePayPaymentMethod>
+public sealed record GooglePayPaymentMethod : OpenStringEnum<GooglePayPaymentMethod>
 {
     private GooglePayPaymentMethod(string value) : base(value)
     {
@@ -18,5 +19,16 @@ public sealed record GooglePayPaymentMethod : StringEnum<GooglePayPaymentMethod>
     /// </summary>
     public static readonly GooglePayPaymentMethod Card = new("CARD");
 
-    public static GooglePayPaymentMethod FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCard, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Card => onCard(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCard, Action<string> otherwise)
+    {
+        if (this == Card) onCard();
+        else otherwise(Value);
+    }
 }

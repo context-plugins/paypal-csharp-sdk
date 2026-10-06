@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Vault Instruction on action to be performed after a successful payer approval.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VaultInstructionAction>))]
-public sealed record VaultInstructionAction : StringEnum<VaultInstructionAction>
+public sealed record VaultInstructionAction : OpenStringEnum<VaultInstructionAction>
 {
     private VaultInstructionAction(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record VaultInstructionAction : StringEnum<VaultInstructionAction>
     /// </summary>
     public static readonly VaultInstructionAction OnPayerApproval = new("ON_PAYER_APPROVAL");
 
-    public static VaultInstructionAction FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onOnCreatePaymentTokens,
+        Func<TResult> onOnPayerApproval,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == OnCreatePaymentTokens => onOnCreatePaymentTokens(),
+            _ when this == OnPayerApproval => onOnPayerApproval(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onOnCreatePaymentTokens, Action onOnPayerApproval, Action<string> otherwise)
+    {
+        if (this == OnCreatePaymentTokens) onOnCreatePaymentTokens();
+        else if (this == OnPayerApproval) onOnPayerApproval();
+        else otherwise(Value);
+    }
 }

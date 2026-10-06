@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The intent to either capture payment immediately or authorize a payment for an order after order creation.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<CheckoutPaymentIntent>))]
-public sealed record CheckoutPaymentIntent : StringEnum<CheckoutPaymentIntent>
+public sealed record CheckoutPaymentIntent : OpenStringEnum<CheckoutPaymentIntent>
 {
     private CheckoutPaymentIntent(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record CheckoutPaymentIntent : StringEnum<CheckoutPaymentIntent>
     /// </summary>
     public static readonly CheckoutPaymentIntent Authorize = new("AUTHORIZE");
 
-    public static CheckoutPaymentIntent FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCapture,
+        Func<TResult> onAuthorize,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Capture => onCapture(),
+            _ when this == Authorize => onAuthorize(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCapture, Action onAuthorize, Action<string> otherwise)
+    {
+        if (this == Capture) onCapture();
+        else if (this == Authorize) onAuthorize();
+        else otherwise(Value);
+    }
 }

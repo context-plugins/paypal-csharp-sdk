@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Expected business/pricing model for the billing agreement.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VenmoPaymentTokenUsagePattern>))]
-public sealed record VenmoPaymentTokenUsagePattern : StringEnum<VenmoPaymentTokenUsagePattern>
+public sealed record VenmoPaymentTokenUsagePattern : OpenStringEnum<VenmoPaymentTokenUsagePattern>
 {
     private VenmoPaymentTokenUsagePattern(string value) : base(value)
     {
@@ -43,5 +44,38 @@ public sealed record VenmoPaymentTokenUsagePattern : StringEnum<VenmoPaymentToke
     /// </summary>
     public static readonly VenmoPaymentTokenUsagePattern ThresholdPostpaid = new("THRESHOLD_POSTPAID");
 
-    public static VenmoPaymentTokenUsagePattern FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onImmediate,
+        Func<TResult> onDeferred,
+        Func<TResult> onRecurringPrepaid,
+        Func<TResult> onRecurringPostpaid,
+        Func<TResult> onThresholdPrepaid,
+        Func<TResult> onThresholdPostpaid,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Immediate => onImmediate(),
+            _ when this == Deferred => onDeferred(),
+            _ when this == RecurringPrepaid => onRecurringPrepaid(),
+            _ when this == RecurringPostpaid => onRecurringPostpaid(),
+            _ when this == ThresholdPrepaid => onThresholdPrepaid(),
+            _ when this == ThresholdPostpaid => onThresholdPostpaid(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onImmediate,
+        Action onDeferred,
+        Action onRecurringPrepaid,
+        Action onRecurringPostpaid,
+        Action onThresholdPrepaid,
+        Action onThresholdPostpaid,
+        Action<string> otherwise)
+    {
+        if (this == Immediate) onImmediate();
+        else if (this == Deferred) onDeferred();
+        else if (this == RecurringPrepaid) onRecurringPrepaid();
+        else if (this == RecurringPostpaid) onRecurringPostpaid();
+        else if (this == ThresholdPrepaid) onThresholdPrepaid();
+        else if (this == ThresholdPostpaid) onThresholdPostpaid();
+        else otherwise(Value);
+    }
 }

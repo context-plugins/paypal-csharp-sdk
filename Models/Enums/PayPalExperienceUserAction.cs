@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Configures a Continue or Pay Now checkout flow.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PayPalExperienceUserAction>))]
-public sealed record PayPalExperienceUserAction : StringEnum<PayPalExperienceUserAction>
+public sealed record PayPalExperienceUserAction : OpenStringEnum<PayPalExperienceUserAction>
 {
     private PayPalExperienceUserAction(string value) : base(value)
     {
@@ -23,5 +24,18 @@ public sealed record PayPalExperienceUserAction : StringEnum<PayPalExperienceUse
     /// </summary>
     public static readonly PayPalExperienceUserAction PayNow = new("PAY_NOW");
 
-    public static PayPalExperienceUserAction FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onContinue, Func<TResult> onPayNow, Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Continue => onContinue(),
+            _ when this == PayNow => onPayNow(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onContinue, Action onPayNow, Action<string> otherwise)
+    {
+        if (this == Continue) onContinue();
+        else if (this == PayNow) onPayNow();
+        else otherwise(Value);
+    }
 }

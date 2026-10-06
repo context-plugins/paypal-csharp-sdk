@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PayPalServerSdk.Core.Hooks;
+namespace Paypal.Core.Hooks;
 
 public abstract class SdkHook
 {

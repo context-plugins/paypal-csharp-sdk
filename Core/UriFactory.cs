@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Core;
+namespace Paypal.Core;
 
 internal sealed class UriFactory
 {
@@ -20,10 +20,10 @@ internal sealed class UriFactory
     {
         var hostPath = _templateParamsFactory.Create(urlTemplate, templateParams);
 
-        if (queryParameters.Count == 0)
-            return new Uri(hostPath);
-
         var queryString = _factory.Serialize(queryParameters);
-        return new Uri($"{hostPath}?{queryString}");
+
+        return queryString.Length == 0
+            ? new Uri(hostPath)
+            : new Uri($"{hostPath}?{queryString}");
     }
 }

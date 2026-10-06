@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The status of the captured payment.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<CaptureStatus>))]
-public sealed record CaptureStatus : StringEnum<CaptureStatus>
+public sealed record CaptureStatus : OpenStringEnum<CaptureStatus>
 {
     private CaptureStatus(string value) : base(value)
     {
@@ -43,5 +44,38 @@ public sealed record CaptureStatus : StringEnum<CaptureStatus>
     /// </summary>
     public static readonly CaptureStatus Failed = new("FAILED");
 
-    public static CaptureStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCompleted,
+        Func<TResult> onDeclined,
+        Func<TResult> onPartiallyRefunded,
+        Func<TResult> onPending,
+        Func<TResult> onRefunded,
+        Func<TResult> onFailed,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Completed => onCompleted(),
+            _ when this == Declined => onDeclined(),
+            _ when this == PartiallyRefunded => onPartiallyRefunded(),
+            _ when this == Pending => onPending(),
+            _ when this == Refunded => onRefunded(),
+            _ when this == Failed => onFailed(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCompleted,
+        Action onDeclined,
+        Action onPartiallyRefunded,
+        Action onPending,
+        Action onRefunded,
+        Action onFailed,
+        Action<string> otherwise)
+    {
+        if (this == Completed) onCompleted();
+        else if (this == Declined) onDeclined();
+        else if (this == PartiallyRefunded) onPartiallyRefunded();
+        else if (this == Pending) onPending();
+        else if (this == Refunded) onRefunded();
+        else if (this == Failed) onFailed();
+        else otherwise(Value);
+    }
 }

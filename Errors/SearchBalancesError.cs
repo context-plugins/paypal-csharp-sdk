@@ -1,11 +1,9 @@
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using PayPalServerSdk.Core.ErrorResponse;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models;
+using Paypal.Core.ErrorResponse;
+using Paypal.Core.Models;
+using Paypal.Models;
 
-namespace PayPalServerSdk.Errors;
+namespace Paypal.Errors;
 
 public sealed class SearchBalancesError : ApiError
 {
@@ -19,27 +17,16 @@ public sealed class SearchBalancesError : ApiError
     private static SearchBalancesError AsDefaultError(DefaultError value) =>
         new(Optional<DefaultError>.Some(value), default);
 
-    private static SearchBalancesError AsFallback(RawError value) =>
-        new(default, Optional<RawError>.Some(value));
+    private static SearchBalancesError AsFallback(RawError value) => new(default, Optional<RawError>.Some(value));
 
     public bool TryGetDefaultError(out DefaultError value) => _defaultErrorValue.TryGetValue(out value);
 
-    internal static Task<SearchBalancesError> Create(HttpResponseMessage response, CancellationToken ct) =>
-        (int)response.StatusCode switch
+    private static Task<SearchBalancesError> Create(FailedResponse response) =>
+        response.StatusCode switch
         {
-            400 or 403 or 500 => FromJson<DefaultError>(response, ct).As(AsDefaultError),
-            _ => FromRawBody(response, ct).As(AsFallback)
+            400 or 403 or 500 => response.Json<DefaultError>().As(AsDefaultError),
+            _ => response.RawBody().As(AsFallback)
         };
-}
 
-internal sealed class SearchBalancesErrorResponse : IErrorResponse<SearchBalancesError>
-{
-    public static SearchBalancesErrorResponse Instance { get; } = new();
-
-    private SearchBalancesErrorResponse()
-    {
-    }
-
-    public Task<SearchBalancesError> Map(HttpResponseMessage response, CancellationToken ct) =>
-        SearchBalancesError.Create(response, ct);
+    internal static ApiErrorResponse<SearchBalancesError> Response { get; } = new(Create);
 }

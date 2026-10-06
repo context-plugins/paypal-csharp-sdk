@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The type of landing page to show on the PayPal site for customer checkout.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PayPalExperienceLandingPage>))]
-public sealed record PayPalExperienceLandingPage : StringEnum<PayPalExperienceLandingPage>
+public sealed record PayPalExperienceLandingPage : OpenStringEnum<PayPalExperienceLandingPage>
 {
     private PayPalExperienceLandingPage(string value) : base(value)
     {
@@ -33,5 +34,30 @@ public sealed record PayPalExperienceLandingPage : StringEnum<PayPalExperienceLa
     /// </summary>
     public static readonly PayPalExperienceLandingPage Billing = new("BILLING");
 
-    public static PayPalExperienceLandingPage FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onLogin,
+        Func<TResult> onGuestCheckout,
+        Func<TResult> onNoPreference,
+        Func<TResult> onBilling,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Login => onLogin(),
+            _ when this == GuestCheckout => onGuestCheckout(),
+            _ when this == NoPreference => onNoPreference(),
+            _ when this == Billing => onBilling(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onLogin,
+        Action onGuestCheckout,
+        Action onNoPreference,
+        Action onBilling,
+        Action<string> otherwise)
+    {
+        if (this == Login) onLogin();
+        else if (this == GuestCheckout) onGuestCheckout();
+        else if (this == NoPreference) onNoPreference();
+        else if (this == Billing) onBilling();
+        else otherwise(Value);
+    }
 }

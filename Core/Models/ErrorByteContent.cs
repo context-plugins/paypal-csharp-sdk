@@ -1,7 +1,7 @@
 using System;
 using System.Net.Http.Headers;
 
-namespace PayPalServerSdk.Core.Models;
+namespace Paypal.Core.Models;
 
 public sealed class ErrorByteContent
 {

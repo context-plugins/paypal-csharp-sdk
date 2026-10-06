@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The interval at which the subscription is charged or billed.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<IntervalUnit>))]
-public sealed record IntervalUnit : StringEnum<IntervalUnit>
+public sealed record IntervalUnit : OpenStringEnum<IntervalUnit>
 {
     private IntervalUnit(string value) : base(value)
     {
@@ -33,5 +34,26 @@ public sealed record IntervalUnit : StringEnum<IntervalUnit>
     /// </summary>
     public static readonly IntervalUnit Year = new("YEAR");
 
-    public static IntervalUnit FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onDay,
+        Func<TResult> onWeek,
+        Func<TResult> onMonth,
+        Func<TResult> onYear,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Day => onDay(),
+            _ when this == Week => onWeek(),
+            _ when this == Month => onMonth(),
+            _ when this == Year => onYear(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onDay, Action onWeek, Action onMonth, Action onYear, Action<string> otherwise)
+    {
+        if (this == Day) onDay();
+        else if (this == Week) onWeek();
+        else if (this == Month) onMonth();
+        else if (this == Year) onYear();
+        else otherwise(Value);
+    }
 }

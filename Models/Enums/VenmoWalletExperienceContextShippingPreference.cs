@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The location from which the shipping address is derived.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VenmoWalletExperienceContextShippingPreference>))]
-public sealed record VenmoWalletExperienceContextShippingPreference : StringEnum<VenmoWalletExperienceContextShippingPreference>
+public sealed record VenmoWalletExperienceContextShippingPreference : OpenStringEnum<VenmoWalletExperienceContextShippingPreference>
 {
     private VenmoWalletExperienceContextShippingPreference(string value) : base(value)
     {
@@ -26,8 +27,26 @@ public sealed record VenmoWalletExperienceContextShippingPreference : StringEnum
     /// <summary>
     /// Get the merchant-provided address. The customer cannot change this address on the PayPal site. If merchant does not pass an address, customer can choose the address on PayPal pages.
     /// </summary>
-    public static readonly VenmoWalletExperienceContextShippingPreference SetProvidedAddress = new("SET_PROVIDED_ADDRESS");
+    public static readonly VenmoWalletExperienceContextShippingPreference SetProvidedAddress = new(
+        "SET_PROVIDED_ADDRESS");
 
-    public static VenmoWalletExperienceContextShippingPreference FromValue(string value) =>
-        FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onGetFromFile,
+        Func<TResult> onNoShipping,
+        Func<TResult> onSetProvidedAddress,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == GetFromFile => onGetFromFile(),
+            _ when this == NoShipping => onNoShipping(),
+            _ when this == SetProvidedAddress => onSetProvidedAddress(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onGetFromFile, Action onNoShipping, Action onSetProvidedAddress, Action<string> otherwise)
+    {
+        if (this == GetFromFile) onGetFromFile();
+        else if (this == NoShipping) onNoShipping();
+        else if (this == SetProvidedAddress) onSetProvidedAddress();
+        else otherwise(Value);
+    }
 }

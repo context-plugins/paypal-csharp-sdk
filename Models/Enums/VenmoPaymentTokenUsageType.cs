@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The usage type associated with the Venmo payment token.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VenmoPaymentTokenUsageType>))]
-public sealed record VenmoPaymentTokenUsageType : StringEnum<VenmoPaymentTokenUsageType>
+public sealed record VenmoPaymentTokenUsageType : OpenStringEnum<VenmoPaymentTokenUsageType>
 {
     private VenmoPaymentTokenUsageType(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record VenmoPaymentTokenUsageType : StringEnum<VenmoPaymentTokenUs
     /// </summary>
     public static readonly VenmoPaymentTokenUsageType Platform = new("PLATFORM");
 
-    public static VenmoPaymentTokenUsageType FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onMerchant,
+        Func<TResult> onPlatform,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Merchant => onMerchant(),
+            _ when this == Platform => onPlatform(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onMerchant, Action onPlatform, Action<string> otherwise)
+    {
+        if (this == Merchant) onMerchant();
+        else if (this == Platform) onPlatform();
+        else otherwise(Value);
+    }
 }

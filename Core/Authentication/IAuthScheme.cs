@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Paypal.Core.Exceptions;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Core.Authentication;
+namespace Paypal.Core.Authentication;
 
 public interface IAuthScheme
 {
@@ -24,7 +27,19 @@ internal static class AuthSchemeExtensions
         {
             foreach (var authScheme in authSchemes)
             {
-                await authScheme.Apply(httpRequest, cancellationToken).ConfigureAwait(false);
+                try
+                {
+                    await authScheme.Apply(httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception ex) when (ex is not (OperationCanceledException or AuthSchemeException))
+                {
+                    var callContext = CallContext.For(httpRequest);
+                    throw new AuthSchemeException($"{callContext} could not be authenticated: {ex.Message}", [ex])
+                    {
+                        Method = callContext.Method,
+                        RequestUri = callContext.RequestUri,
+                    };
+                }
             }
         }
 

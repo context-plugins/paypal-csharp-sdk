@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Configures the label name to <c>Continue</c> or <c>Subscribe Now</c> for subscription consent experience.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<ApplicationContextUserAction>))]
-public sealed record ApplicationContextUserAction : StringEnum<ApplicationContextUserAction>
+public sealed record ApplicationContextUserAction : OpenStringEnum<ApplicationContextUserAction>
 {
     private ApplicationContextUserAction(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record ApplicationContextUserAction : StringEnum<ApplicationContex
     /// </summary>
     public static readonly ApplicationContextUserAction SubscribeNow = new("SUBSCRIBE_NOW");
 
-    public static ApplicationContextUserAction FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onContinue,
+        Func<TResult> onSubscribeNow,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Continue => onContinue(),
+            _ when this == SubscribeNow => onSubscribeNow(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onContinue, Action onSubscribeNow, Action<string> otherwise)
+    {
+        if (this == Continue) onContinue();
+        else if (this == SubscribeNow) onSubscribeNow();
+        else otherwise(Value);
+    }
 }

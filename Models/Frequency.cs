@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Core.Validation.Attributes;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
+using Paypal.Core.Validation.Attributes;
+using Paypal.Models.Enums;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The frequency of the billing cycle.
@@ -19,6 +19,7 @@ public record Frequency
     /// <summary>
     /// The number of intervals after which a subscriber is billed. For example, if the <c>interval_unit</c> is <c>DAY</c> with an <c>interval_count</c> of  <c>2</c>, the subscription is billed once every two days. The following table lists the maximum allowed values for the <c>interval_count</c> for each <c>interval_unit</c>: Interval unit Maximum interval count DAY 365 WEEK 52 MONTH 12 YEAR 1
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("interval_count")]
     [Minimum(1)]
     [Maximum(365)]

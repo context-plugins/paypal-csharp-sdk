@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The person or party who initiated or triggered the payment.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PaymentInitiator>))]
-public sealed record PaymentInitiator : StringEnum<PaymentInitiator>
+public sealed record PaymentInitiator : OpenStringEnum<PaymentInitiator>
 {
     private PaymentInitiator(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record PaymentInitiator : StringEnum<PaymentInitiator>
     /// </summary>
     public static readonly PaymentInitiator Merchant = new("MERCHANT");
 
-    public static PaymentInitiator FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onCustomer,
+        Func<TResult> onMerchant,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Customer => onCustomer(),
+            _ when this == Merchant => onMerchant(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onCustomer, Action onMerchant, Action<string> otherwise)
+    {
+        if (this == Customer) onCustomer();
+        else if (this == Merchant) onMerchant();
+        else otherwise(Value);
+    }
 }

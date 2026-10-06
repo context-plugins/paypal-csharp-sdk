@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The vault status.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<VenmoVaultResponseStatus>))]
-public sealed record VenmoVaultResponseStatus : StringEnum<VenmoVaultResponseStatus>
+public sealed record VenmoVaultResponseStatus : OpenStringEnum<VenmoVaultResponseStatus>
 {
     private VenmoVaultResponseStatus(string value) : base(value)
     {
@@ -28,5 +29,23 @@ public sealed record VenmoVaultResponseStatus : StringEnum<VenmoVaultResponseSta
     /// </summary>
     public static readonly VenmoVaultResponseStatus Approved = new("APPROVED");
 
-    public static VenmoVaultResponseStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onVaulted,
+        Func<TResult> onCreated,
+        Func<TResult> onApproved,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Vaulted => onVaulted(),
+            _ when this == Created => onCreated(),
+            _ when this == Approved => onApproved(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onVaulted, Action onCreated, Action onApproved, Action<string> otherwise)
+    {
+        if (this == Vaulted) onVaulted();
+        else if (this == Created) onCreated();
+        else if (this == Approved) onApproved();
+        else otherwise(Value);
+    }
 }

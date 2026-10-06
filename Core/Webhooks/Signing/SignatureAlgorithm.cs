@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace PayPalServerSdk.Core.Webhooks.Signing;
+namespace Paypal.Core.Webhooks.Signing;
 
 internal abstract record SignatureAlgorithm
 {

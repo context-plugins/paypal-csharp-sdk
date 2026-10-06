@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The account status indicates whether the buyer has verified the financial details associated with their PayPal account.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PayPalWalletAccountVerificationStatus>))]
-public sealed record PayPalWalletAccountVerificationStatus : StringEnum<PayPalWalletAccountVerificationStatus>
+public sealed record PayPalWalletAccountVerificationStatus : OpenStringEnum<PayPalWalletAccountVerificationStatus>
 {
     private PayPalWalletAccountVerificationStatus(string value) : base(value)
     {
@@ -23,5 +24,20 @@ public sealed record PayPalWalletAccountVerificationStatus : StringEnum<PayPalWa
     /// </summary>
     public static readonly PayPalWalletAccountVerificationStatus Unverified = new("UNVERIFIED");
 
-    public static PayPalWalletAccountVerificationStatus FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onVerified,
+        Func<TResult> onUnverified,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Verified => onVerified(),
+            _ when this == Unverified => onUnverified(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onVerified, Action onUnverified, Action<string> otherwise)
+    {
+        if (this == Verified) onVerified();
+        else if (this == Unverified) onUnverified();
+        else otherwise(Value);
+    }
 }

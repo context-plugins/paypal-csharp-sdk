@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// Expected business/pricing model for the billing agreement., Expected business/charge model for the billing agreement.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<UsagePattern>))]
-public sealed record UsagePattern : StringEnum<UsagePattern>
+public sealed record UsagePattern : OpenStringEnum<UsagePattern>
 {
     private UsagePattern(string value) : base(value)
     {
@@ -73,5 +74,62 @@ public sealed record UsagePattern : StringEnum<UsagePattern>
     /// </summary>
     public static readonly UsagePattern InstallmentPostpaid = new("INSTALLMENT_POSTPAID");
 
-    public static UsagePattern FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onImmediate,
+        Func<TResult> onDeferred,
+        Func<TResult> onRecurringPrepaid,
+        Func<TResult> onRecurringPostpaid,
+        Func<TResult> onThresholdPrepaid,
+        Func<TResult> onThresholdPostpaid,
+        Func<TResult> onSubscriptionPrepaid,
+        Func<TResult> onSubscriptionPostpaid,
+        Func<TResult> onUnscheduledPrepaid,
+        Func<TResult> onUnscheduledPostpaid,
+        Func<TResult> onInstallmentPrepaid,
+        Func<TResult> onInstallmentPostpaid,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Immediate => onImmediate(),
+            _ when this == Deferred => onDeferred(),
+            _ when this == RecurringPrepaid => onRecurringPrepaid(),
+            _ when this == RecurringPostpaid => onRecurringPostpaid(),
+            _ when this == ThresholdPrepaid => onThresholdPrepaid(),
+            _ when this == ThresholdPostpaid => onThresholdPostpaid(),
+            _ when this == SubscriptionPrepaid => onSubscriptionPrepaid(),
+            _ when this == SubscriptionPostpaid => onSubscriptionPostpaid(),
+            _ when this == UnscheduledPrepaid => onUnscheduledPrepaid(),
+            _ when this == UnscheduledPostpaid => onUnscheduledPostpaid(),
+            _ when this == InstallmentPrepaid => onInstallmentPrepaid(),
+            _ when this == InstallmentPostpaid => onInstallmentPostpaid(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onImmediate,
+        Action onDeferred,
+        Action onRecurringPrepaid,
+        Action onRecurringPostpaid,
+        Action onThresholdPrepaid,
+        Action onThresholdPostpaid,
+        Action onSubscriptionPrepaid,
+        Action onSubscriptionPostpaid,
+        Action onUnscheduledPrepaid,
+        Action onUnscheduledPostpaid,
+        Action onInstallmentPrepaid,
+        Action onInstallmentPostpaid,
+        Action<string> otherwise)
+    {
+        if (this == Immediate) onImmediate();
+        else if (this == Deferred) onDeferred();
+        else if (this == RecurringPrepaid) onRecurringPrepaid();
+        else if (this == RecurringPostpaid) onRecurringPostpaid();
+        else if (this == ThresholdPrepaid) onThresholdPrepaid();
+        else if (this == ThresholdPostpaid) onThresholdPostpaid();
+        else if (this == SubscriptionPrepaid) onSubscriptionPrepaid();
+        else if (this == SubscriptionPostpaid) onSubscriptionPostpaid();
+        else if (this == UnscheduledPrepaid) onUnscheduledPrepaid();
+        else if (this == UnscheduledPostpaid) onUnscheduledPostpaid();
+        else if (this == InstallmentPrepaid) onInstallmentPrepaid();
+        else if (this == InstallmentPostpaid) onInstallmentPostpaid();
+        else otherwise(Value);
+    }
 }

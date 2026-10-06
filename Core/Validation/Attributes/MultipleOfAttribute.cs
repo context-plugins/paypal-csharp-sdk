@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PayPalServerSdk.Core.Validation.Attributes;
+namespace Paypal.Core.Validation.Attributes;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
 public sealed class MultipleOfAttribute : ValidationAttribute

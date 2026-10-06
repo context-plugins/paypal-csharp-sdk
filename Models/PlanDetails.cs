@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// The plan details.
@@ -70,6 +70,7 @@ public record PlanDetails
     /// <summary>
     /// Indicates whether you can subscribe to this plan by providing a quantity for the goods or service.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("quantity_supported")]
     public bool? QuantitySupported { get; init; } = false;
 

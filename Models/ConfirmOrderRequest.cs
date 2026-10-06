@@ -1,8 +1,7 @@
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Models;
-using PayPalServerSdk.Models.Enums;
+using Paypal.Core.Models;
 
-namespace PayPalServerSdk.Models;
+namespace Paypal.Models;
 
 /// <summary>
 /// Payer confirms the intent to pay for the Order using the provided payment source.
@@ -14,13 +13,6 @@ public record ConfirmOrderRequest
     /// </summary>
     [JsonPropertyName("payment_source")]
     public required PaymentSource PaymentSource { get; init; }
-
-    /// <summary>
-    /// The instruction to process an order.
-    /// </summary>
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    [JsonPropertyName("processing_instruction")]
-    public ProcessingInstruction? ProcessingInstruction { get; init; }
 
     /// <summary>
     /// Customizes the payer confirmation experience.

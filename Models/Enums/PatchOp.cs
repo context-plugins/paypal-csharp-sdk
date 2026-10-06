@@ -1,13 +1,14 @@
+using System;
 using System.Text.Json.Serialization;
-using PayPalServerSdk.Core.Enum;
+using Paypal.Core.Enum;
 
-namespace PayPalServerSdk.Models.Enums;
+namespace Paypal.Models.Enums;
 
 /// <summary>
 /// The operation.
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter<PatchOp>))]
-public sealed record PatchOp : StringEnum<PatchOp>
+public sealed record PatchOp : OpenStringEnum<PatchOp>
 {
     private PatchOp(string value) : base(value)
     {
@@ -43,5 +44,38 @@ public sealed record PatchOp : StringEnum<PatchOp>
     /// </summary>
     public static readonly PatchOp Test = new("test");
 
-    public static PatchOp FromValue(string value) => FromValueCore(value);
+    public TResult Match<TResult>(Func<TResult> onAdd,
+        Func<TResult> onRemove,
+        Func<TResult> onReplace,
+        Func<TResult> onMove,
+        Func<TResult> onCopy,
+        Func<TResult> onTest,
+        Func<string, TResult> otherwise) =>
+        this switch
+        {
+            _ when this == Add => onAdd(),
+            _ when this == Remove => onRemove(),
+            _ when this == Replace => onReplace(),
+            _ when this == Move => onMove(),
+            _ when this == Copy => onCopy(),
+            _ when this == Test => onTest(),
+            _ => otherwise(Value)
+        };
+
+    public void Match(Action onAdd,
+        Action onRemove,
+        Action onReplace,
+        Action onMove,
+        Action onCopy,
+        Action onTest,
+        Action<string> otherwise)
+    {
+        if (this == Add) onAdd();
+        else if (this == Remove) onRemove();
+        else if (this == Replace) onReplace();
+        else if (this == Move) onMove();
+        else if (this == Copy) onCopy();
+        else if (this == Test) onTest();
+        else otherwise(Value);
+    }
 }
