@@ -2,7 +2,7 @@
 
 # Subscriptions — operations
 
-Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operations
+Accessor: `client.Subscriptions` · Source: `src/Paypal/Api/Subscriptions.cs` · 17 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
@@ -17,9 +17,9 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `ActivateBillingPlanRequest` | `Requests/Subscriptions/ActivateBillingPlanRequest.cs` |
-| `ActivateBillingPlanError` | `Errors/ActivateBillingPlanError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `ActivateBillingPlanRequest` | `src/Paypal/Requests/Subscriptions/ActivateBillingPlanRequest.cs` |
+| `ActivateBillingPlanError` | `src/Paypal/Errors/ActivateBillingPlanError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### ActivateSubscription
 
@@ -32,10 +32,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `ActivateSubscriptionOperationRequest` | `Requests/Subscriptions/ActivateSubscriptionOperationRequest.cs` |
-| `ActivateSubscriptionRequest` | `Models/ActivateSubscriptionRequest.cs` |
-| `ActivateSubscriptionError` | `Errors/ActivateSubscriptionError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `ActivateSubscriptionOperationRequest` | `src/Paypal/Requests/Subscriptions/ActivateSubscriptionOperationRequest.cs` |
+| `ActivateSubscriptionRequest` | `src/Paypal/Models/ActivateSubscriptionRequest.cs` |
+| `ActivateSubscriptionError` | `src/Paypal/Errors/ActivateSubscriptionError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### CancelSubscription
 
@@ -48,10 +48,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `CancelSubscriptionOperationRequest` | `Requests/Subscriptions/CancelSubscriptionOperationRequest.cs` |
-| `CancelSubscriptionRequest` | `Models/CancelSubscriptionRequest.cs` |
-| `CancelSubscriptionError` | `Errors/CancelSubscriptionError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `CancelSubscriptionOperationRequest` | `src/Paypal/Requests/Subscriptions/CancelSubscriptionOperationRequest.cs` |
+| `CancelSubscriptionRequest` | `src/Paypal/Models/CancelSubscriptionRequest.cs` |
+| `CancelSubscriptionError` | `src/Paypal/Errors/CancelSubscriptionError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### CaptureSubscription
 
@@ -64,11 +64,11 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `CaptureSubscriptionOperationRequest` | `Requests/Subscriptions/CaptureSubscriptionOperationRequest.cs` |
-| `CaptureSubscriptionRequest` | `Models/CaptureSubscriptionRequest.cs` |
-| `SubscriptionTransactionDetails` | `Models/SubscriptionTransactionDetails.cs` |
-| `CaptureSubscriptionError` | `Errors/CaptureSubscriptionError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `CaptureSubscriptionOperationRequest` | `src/Paypal/Requests/Subscriptions/CaptureSubscriptionOperationRequest.cs` |
+| `CaptureSubscriptionRequest` | `src/Paypal/Models/CaptureSubscriptionRequest.cs` |
+| `SubscriptionTransactionDetails` | `src/Paypal/Models/SubscriptionTransactionDetails.cs` |
+| `CaptureSubscriptionError` | `src/Paypal/Errors/CaptureSubscriptionError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### CreateBillingPlan
 
@@ -80,11 +80,11 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `CreateBillingPlanRequest` | `Requests/Subscriptions/CreateBillingPlanRequest.cs` |
-| `PlanRequest` | `Models/PlanRequest.cs` |
-| `BillingPlan` | `Models/BillingPlan.cs` |
-| `CreateBillingPlanError` | `Errors/CreateBillingPlanError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `CreateBillingPlanRequest` | `src/Paypal/Requests/Subscriptions/CreateBillingPlanRequest.cs` |
+| `PlanRequest` | `src/Paypal/Models/PlanRequest.cs` |
+| `BillingPlan` | `src/Paypal/Models/BillingPlan.cs` |
+| `CreateBillingPlanError` | `src/Paypal/Errors/CreateBillingPlanError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### CreateSubscription
 
@@ -96,11 +96,11 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `CreateSubscriptionOperationRequest` | `Requests/Subscriptions/CreateSubscriptionOperationRequest.cs` |
-| `CreateSubscriptionRequest` | `Models/CreateSubscriptionRequest.cs` |
-| `Subscription` | `Models/Subscription.cs` |
-| `CreateSubscriptionError` | `Errors/CreateSubscriptionError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `CreateSubscriptionOperationRequest` | `src/Paypal/Requests/Subscriptions/CreateSubscriptionOperationRequest.cs` |
+| `CreateSubscriptionRequest` | `src/Paypal/Models/CreateSubscriptionRequest.cs` |
+| `Subscription` | `src/Paypal/Models/Subscription.cs` |
+| `CreateSubscriptionError` | `src/Paypal/Errors/CreateSubscriptionError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### DeactivateBillingPlan
 
@@ -113,9 +113,9 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `DeactivateBillingPlanRequest` | `Requests/Subscriptions/DeactivateBillingPlanRequest.cs` |
-| `DeactivateBillingPlanError` | `Errors/DeactivateBillingPlanError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `DeactivateBillingPlanRequest` | `src/Paypal/Requests/Subscriptions/DeactivateBillingPlanRequest.cs` |
+| `DeactivateBillingPlanError` | `src/Paypal/Errors/DeactivateBillingPlanError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### GetBillingPlan
 
@@ -128,10 +128,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `GetBillingPlanRequest` | `Requests/Subscriptions/GetBillingPlanRequest.cs` |
-| `BillingPlan` | `Models/BillingPlan.cs` |
-| `GetBillingPlanError` | `Errors/GetBillingPlanError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `GetBillingPlanRequest` | `src/Paypal/Requests/Subscriptions/GetBillingPlanRequest.cs` |
+| `BillingPlan` | `src/Paypal/Models/BillingPlan.cs` |
+| `GetBillingPlanError` | `src/Paypal/Errors/GetBillingPlanError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### GetSubscription
 
@@ -145,10 +145,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `GetSubscriptionRequest` | `Requests/Subscriptions/GetSubscriptionRequest.cs` |
-| `Subscription` | `Models/Subscription.cs` |
-| `GetSubscriptionError` | `Errors/GetSubscriptionError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `GetSubscriptionRequest` | `src/Paypal/Requests/Subscriptions/GetSubscriptionRequest.cs` |
+| `Subscription` | `src/Paypal/Models/Subscription.cs` |
+| `GetSubscriptionError` | `src/Paypal/Errors/GetSubscriptionError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### ListBillingPlans
 
@@ -161,10 +161,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `ListBillingPlansRequest` | `Requests/Subscriptions/ListBillingPlansRequest.cs` |
-| `PlanCollection` | `Models/PlanCollection.cs` |
-| `ListBillingPlansError` | `Errors/ListBillingPlansError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `ListBillingPlansRequest` | `src/Paypal/Requests/Subscriptions/ListBillingPlansRequest.cs` |
+| `PlanCollection` | `src/Paypal/Models/PlanCollection.cs` |
+| `ListBillingPlansError` | `src/Paypal/Errors/ListBillingPlansError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### ListSubscriptionTransactions
 
@@ -178,10 +178,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `ListSubscriptionTransactionsRequest` | `Requests/Subscriptions/ListSubscriptionTransactionsRequest.cs` |
-| `TransactionsList` | `Models/TransactionsList.cs` |
-| `ListSubscriptionTransactionsError` | `Errors/ListSubscriptionTransactionsError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `ListSubscriptionTransactionsRequest` | `src/Paypal/Requests/Subscriptions/ListSubscriptionTransactionsRequest.cs` |
+| `TransactionsList` | `src/Paypal/Models/TransactionsList.cs` |
+| `ListSubscriptionTransactionsError` | `src/Paypal/Errors/ListSubscriptionTransactionsError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### ListSubscriptions
 
@@ -194,10 +194,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `ListSubscriptionsRequest` | `Requests/Subscriptions/ListSubscriptionsRequest.cs` |
-| `SubscriptionCollection` | `Models/SubscriptionCollection.cs` |
-| `ListSubscriptionsError` | `Errors/ListSubscriptionsError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `ListSubscriptionsRequest` | `src/Paypal/Requests/Subscriptions/ListSubscriptionsRequest.cs` |
+| `SubscriptionCollection` | `src/Paypal/Models/SubscriptionCollection.cs` |
+| `ListSubscriptionsError` | `src/Paypal/Errors/ListSubscriptionsError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### PatchBillingPlan
 
@@ -210,10 +210,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `PatchBillingPlanRequest` | `Requests/Subscriptions/PatchBillingPlanRequest.cs` |
-| `Patch` | `Models/Patch.cs` |
-| `PatchBillingPlanError` | `Errors/PatchBillingPlanError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `PatchBillingPlanRequest` | `src/Paypal/Requests/Subscriptions/PatchBillingPlanRequest.cs` |
+| `Patch` | `src/Paypal/Models/Patch.cs` |
+| `PatchBillingPlanError` | `src/Paypal/Errors/PatchBillingPlanError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### PatchSubscription
 
@@ -226,10 +226,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `PatchSubscriptionRequest` | `Requests/Subscriptions/PatchSubscriptionRequest.cs` |
-| `Patch` | `Models/Patch.cs` |
-| `PatchSubscriptionError` | `Errors/PatchSubscriptionError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `PatchSubscriptionRequest` | `src/Paypal/Requests/Subscriptions/PatchSubscriptionRequest.cs` |
+| `Patch` | `src/Paypal/Models/Patch.cs` |
+| `PatchSubscriptionError` | `src/Paypal/Errors/PatchSubscriptionError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### ReviseSubscription
 
@@ -242,11 +242,11 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `ReviseSubscriptionRequest` | `Requests/Subscriptions/ReviseSubscriptionRequest.cs` |
-| `ModifySubscriptionRequest` | `Models/ModifySubscriptionRequest.cs` |
-| `ModifySubscriptionResponse` | `Models/ModifySubscriptionResponse.cs` |
-| `ReviseSubscriptionError` | `Errors/ReviseSubscriptionError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `ReviseSubscriptionRequest` | `src/Paypal/Requests/Subscriptions/ReviseSubscriptionRequest.cs` |
+| `ModifySubscriptionRequest` | `src/Paypal/Models/ModifySubscriptionRequest.cs` |
+| `ModifySubscriptionResponse` | `src/Paypal/Models/ModifySubscriptionResponse.cs` |
+| `ReviseSubscriptionError` | `src/Paypal/Errors/ReviseSubscriptionError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### SuspendSubscription
 
@@ -259,10 +259,10 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `SuspendSubscriptionRequest` | `Requests/Subscriptions/SuspendSubscriptionRequest.cs` |
-| `SuspendSubscription` | `Models/SuspendSubscription.cs` |
-| `SuspendSubscriptionError` | `Errors/SuspendSubscriptionError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `SuspendSubscriptionRequest` | `src/Paypal/Requests/Subscriptions/SuspendSubscriptionRequest.cs` |
+| `SuspendSubscription` | `src/Paypal/Models/SuspendSubscription.cs` |
+| `SuspendSubscriptionError` | `src/Paypal/Errors/SuspendSubscriptionError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 
 ### UpdateBillingPlanPricingSchemes
 
@@ -275,8 +275,8 @@ Accessor: `client.Subscriptions` · Source: `Api/Subscriptions.cs` · 17 operati
 
 | Type | Source |
 | --- | --- |
-| `UpdateBillingPlanPricingSchemesRequest` | `Requests/Subscriptions/UpdateBillingPlanPricingSchemesRequest.cs` |
-| `UpdatePricingSchemesRequest` | `Models/UpdatePricingSchemesRequest.cs` |
-| `UpdateBillingPlanPricingSchemesError` | `Errors/UpdateBillingPlanPricingSchemesError.cs` |
-| `SubscriptionError` | `Models/SubscriptionError.cs` |
+| `UpdateBillingPlanPricingSchemesRequest` | `src/Paypal/Requests/Subscriptions/UpdateBillingPlanPricingSchemesRequest.cs` |
+| `UpdatePricingSchemesRequest` | `src/Paypal/Models/UpdatePricingSchemesRequest.cs` |
+| `UpdateBillingPlanPricingSchemesError` | `src/Paypal/Errors/UpdateBillingPlanPricingSchemesError.cs` |
+| `SubscriptionError` | `src/Paypal/Models/SubscriptionError.cs` |
 

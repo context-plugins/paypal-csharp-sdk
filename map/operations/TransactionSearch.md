@@ -2,7 +2,7 @@
 
 # TransactionSearch — operations
 
-Accessor: `client.TransactionSearch` · Source: `Api/TransactionSearch.cs` · 2 operations
+Accessor: `client.TransactionSearch` · Source: `src/Paypal/Api/TransactionSearch.cs` · 2 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
@@ -17,10 +17,10 @@ Accessor: `client.TransactionSearch` · Source: `Api/TransactionSearch.cs` · 2 
 
 | Type | Source |
 | --- | --- |
-| `SearchBalancesRequest` | `Requests/TransactionSearch/SearchBalancesRequest.cs` |
-| `BalancesResponse` | `Models/BalancesResponse.cs` |
-| `SearchBalancesError` | `Errors/SearchBalancesError.cs` |
-| `DefaultError` | `Models/DefaultError.cs` |
+| `SearchBalancesRequest` | `src/Paypal/Requests/TransactionSearch/SearchBalancesRequest.cs` |
+| `BalancesResponse` | `src/Paypal/Models/BalancesResponse.cs` |
+| `SearchBalancesError` | `src/Paypal/Errors/SearchBalancesError.cs` |
+| `DefaultError` | `src/Paypal/Models/DefaultError.cs` |
 
 ### SearchTransactions
 
@@ -33,6 +33,6 @@ Accessor: `client.TransactionSearch` · Source: `Api/TransactionSearch.cs` · 2 
 
 | Type | Source |
 | --- | --- |
-| `SearchTransactionsRequest` | `Requests/TransactionSearch/SearchTransactionsRequest.cs` |
-| `SearchResponse` | `Models/SearchResponse.cs` |
+| `SearchTransactionsRequest` | `src/Paypal/Requests/TransactionSearch/SearchTransactionsRequest.cs` |
+| `SearchResponse` | `src/Paypal/Models/SearchResponse.cs` |
 

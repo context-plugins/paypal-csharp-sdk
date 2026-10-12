@@ -2,7 +2,7 @@
 
 # Payments — operations
 
-Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
+Accessor: `client.Payments` · Source: `src/Paypal/Api/Payments.cs` · 7 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
@@ -17,11 +17,11 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 | Type | Source |
 | --- | --- |
-| `CaptureAuthorizedPaymentRequest` | `Requests/Payments/CaptureAuthorizedPaymentRequest.cs` |
-| `CaptureRequest` | `Models/CaptureRequest.cs` |
-| `CapturedPayment` | `Models/CapturedPayment.cs` |
-| `CaptureAuthorizedPaymentError` | `Errors/CaptureAuthorizedPaymentError.cs` |
-| `Error` | `Models/Error.cs` |
+| `CaptureAuthorizedPaymentRequest` | `src/Paypal/Requests/Payments/CaptureAuthorizedPaymentRequest.cs` |
+| `CaptureRequest` | `src/Paypal/Models/CaptureRequest.cs` |
+| `CapturedPayment` | `src/Paypal/Models/CapturedPayment.cs` |
+| `CaptureAuthorizedPaymentError` | `src/Paypal/Errors/CaptureAuthorizedPaymentError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### GetAuthorizedPayment
 
@@ -34,10 +34,10 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 | Type | Source |
 | --- | --- |
-| `GetAuthorizedPaymentRequest` | `Requests/Payments/GetAuthorizedPaymentRequest.cs` |
-| `PaymentAuthorization` | `Models/PaymentAuthorization.cs` |
-| `GetAuthorizedPaymentError` | `Errors/GetAuthorizedPaymentError.cs` |
-| `Error` | `Models/Error.cs` |
+| `GetAuthorizedPaymentRequest` | `src/Paypal/Requests/Payments/GetAuthorizedPaymentRequest.cs` |
+| `PaymentAuthorization` | `src/Paypal/Models/PaymentAuthorization.cs` |
+| `GetAuthorizedPaymentError` | `src/Paypal/Errors/GetAuthorizedPaymentError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### GetCapturedPayment
 
@@ -50,10 +50,10 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 | Type | Source |
 | --- | --- |
-| `GetCapturedPaymentRequest` | `Requests/Payments/GetCapturedPaymentRequest.cs` |
-| `CapturedPayment` | `Models/CapturedPayment.cs` |
-| `GetCapturedPaymentError` | `Errors/GetCapturedPaymentError.cs` |
-| `Error` | `Models/Error.cs` |
+| `GetCapturedPaymentRequest` | `src/Paypal/Requests/Payments/GetCapturedPaymentRequest.cs` |
+| `CapturedPayment` | `src/Paypal/Models/CapturedPayment.cs` |
+| `GetCapturedPaymentError` | `src/Paypal/Errors/GetCapturedPaymentError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### GetRefund
 
@@ -66,10 +66,10 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 | Type | Source |
 | --- | --- |
-| `GetRefundRequest` | `Requests/Payments/GetRefundRequest.cs` |
-| `Refund` | `Models/Refund.cs` |
-| `GetRefundError` | `Errors/GetRefundError.cs` |
-| `Error` | `Models/Error.cs` |
+| `GetRefundRequest` | `src/Paypal/Requests/Payments/GetRefundRequest.cs` |
+| `Refund` | `src/Paypal/Models/Refund.cs` |
+| `GetRefundError` | `src/Paypal/Errors/GetRefundError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### ReauthorizePayment
 
@@ -82,11 +82,11 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 | Type | Source |
 | --- | --- |
-| `ReauthorizePaymentRequest` | `Requests/Payments/ReauthorizePaymentRequest.cs` |
-| `ReauthorizeRequest` | `Models/ReauthorizeRequest.cs` |
-| `PaymentAuthorization` | `Models/PaymentAuthorization.cs` |
-| `ReauthorizePaymentError` | `Errors/ReauthorizePaymentError.cs` |
-| `Error` | `Models/Error.cs` |
+| `ReauthorizePaymentRequest` | `src/Paypal/Requests/Payments/ReauthorizePaymentRequest.cs` |
+| `ReauthorizeRequest` | `src/Paypal/Models/ReauthorizeRequest.cs` |
+| `PaymentAuthorization` | `src/Paypal/Models/PaymentAuthorization.cs` |
+| `ReauthorizePaymentError` | `src/Paypal/Errors/ReauthorizePaymentError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### RefundCapturedPayment
 
@@ -99,11 +99,11 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 | Type | Source |
 | --- | --- |
-| `RefundCapturedPaymentRequest` | `Requests/Payments/RefundCapturedPaymentRequest.cs` |
-| `RefundRequest` | `Models/RefundRequest.cs` |
-| `Refund` | `Models/Refund.cs` |
-| `RefundCapturedPaymentError` | `Errors/RefundCapturedPaymentError.cs` |
-| `Error` | `Models/Error.cs` |
+| `RefundCapturedPaymentRequest` | `src/Paypal/Requests/Payments/RefundCapturedPaymentRequest.cs` |
+| `RefundRequest` | `src/Paypal/Models/RefundRequest.cs` |
+| `Refund` | `src/Paypal/Models/Refund.cs` |
+| `RefundCapturedPaymentError` | `src/Paypal/Errors/RefundCapturedPaymentError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### VoidPayment
 
@@ -116,8 +116,8 @@ Accessor: `client.Payments` · Source: `Api/Payments.cs` · 7 operations
 
 | Type | Source |
 | --- | --- |
-| `VoidPaymentRequest` | `Requests/Payments/VoidPaymentRequest.cs` |
-| `PaymentAuthorization` | `Models/PaymentAuthorization.cs` |
-| `VoidPaymentError` | `Errors/VoidPaymentError.cs` |
-| `Error` | `Models/Error.cs` |
+| `VoidPaymentRequest` | `src/Paypal/Requests/Payments/VoidPaymentRequest.cs` |
+| `PaymentAuthorization` | `src/Paypal/Models/PaymentAuthorization.cs` |
+| `VoidPaymentError` | `src/Paypal/Errors/VoidPaymentError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 

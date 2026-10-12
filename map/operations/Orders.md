@@ -2,7 +2,7 @@
 
 # Orders — operations
 
-Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
+Accessor: `client.Orders` · Source: `src/Paypal/Api/Orders.cs` · 8 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
@@ -17,11 +17,11 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 | Type | Source |
 | --- | --- |
-| `AuthorizeOrderRequest` | `Requests/Orders/AuthorizeOrderRequest.cs` |
-| `OrderAuthorizeRequest` | `Models/OrderAuthorizeRequest.cs` |
-| `OrderAuthorizeResponse` | `Models/OrderAuthorizeResponse.cs` |
-| `AuthorizeOrderError` | `Errors/AuthorizeOrderError.cs` |
-| `Error` | `Models/Error.cs` |
+| `AuthorizeOrderRequest` | `src/Paypal/Requests/Orders/AuthorizeOrderRequest.cs` |
+| `OrderAuthorizeRequest` | `src/Paypal/Models/OrderAuthorizeRequest.cs` |
+| `OrderAuthorizeResponse` | `src/Paypal/Models/OrderAuthorizeResponse.cs` |
+| `AuthorizeOrderError` | `src/Paypal/Errors/AuthorizeOrderError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### CaptureOrder
 
@@ -34,11 +34,11 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 | Type | Source |
 | --- | --- |
-| `CaptureOrderRequest` | `Requests/Orders/CaptureOrderRequest.cs` |
-| `OrderCaptureRequest` | `Models/OrderCaptureRequest.cs` |
-| `Order` | `Models/Order.cs` |
-| `CaptureOrderError` | `Errors/CaptureOrderError.cs` |
-| `Error` | `Models/Error.cs` |
+| `CaptureOrderRequest` | `src/Paypal/Requests/Orders/CaptureOrderRequest.cs` |
+| `OrderCaptureRequest` | `src/Paypal/Models/OrderCaptureRequest.cs` |
+| `Order` | `src/Paypal/Models/Order.cs` |
+| `CaptureOrderError` | `src/Paypal/Errors/CaptureOrderError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### ConfirmOrder
 
@@ -51,11 +51,11 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 | Type | Source |
 | --- | --- |
-| `ConfirmOrderOperationRequest` | `Requests/Orders/ConfirmOrderOperationRequest.cs` |
-| `ConfirmOrderRequest` | `Models/ConfirmOrderRequest.cs` |
-| `Order` | `Models/Order.cs` |
-| `ConfirmOrderError` | `Errors/ConfirmOrderError.cs` |
-| `Error` | `Models/Error.cs` |
+| `ConfirmOrderOperationRequest` | `src/Paypal/Requests/Orders/ConfirmOrderOperationRequest.cs` |
+| `ConfirmOrderRequest` | `src/Paypal/Models/ConfirmOrderRequest.cs` |
+| `Order` | `src/Paypal/Models/Order.cs` |
+| `ConfirmOrderError` | `src/Paypal/Errors/ConfirmOrderError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### CreateOrder
 
@@ -68,11 +68,11 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 | Type | Source |
 | --- | --- |
-| `CreateOrderRequest` | `Requests/Orders/CreateOrderRequest.cs` |
-| `OrderRequest` | `Models/OrderRequest.cs` |
-| `Order` | `Models/Order.cs` |
-| `CreateOrderError` | `Errors/CreateOrderError.cs` |
-| `Error` | `Models/Error.cs` |
+| `CreateOrderRequest` | `src/Paypal/Requests/Orders/CreateOrderRequest.cs` |
+| `OrderRequest` | `src/Paypal/Models/OrderRequest.cs` |
+| `Order` | `src/Paypal/Models/Order.cs` |
+| `CreateOrderError` | `src/Paypal/Errors/CreateOrderError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### CreateOrderTracking
 
@@ -85,11 +85,11 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 | Type | Source |
 | --- | --- |
-| `CreateOrderTrackingRequest` | `Requests/Orders/CreateOrderTrackingRequest.cs` |
-| `OrderTrackerRequest` | `Models/OrderTrackerRequest.cs` |
-| `Order` | `Models/Order.cs` |
-| `CreateOrderTrackingError` | `Errors/CreateOrderTrackingError.cs` |
-| `Error` | `Models/Error.cs` |
+| `CreateOrderTrackingRequest` | `src/Paypal/Requests/Orders/CreateOrderTrackingRequest.cs` |
+| `OrderTrackerRequest` | `src/Paypal/Models/OrderTrackerRequest.cs` |
+| `Order` | `src/Paypal/Models/Order.cs` |
+| `CreateOrderTrackingError` | `src/Paypal/Errors/CreateOrderTrackingError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### GetOrder
 
@@ -103,10 +103,10 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 | Type | Source |
 | --- | --- |
-| `GetOrderRequest` | `Requests/Orders/GetOrderRequest.cs` |
-| `Order` | `Models/Order.cs` |
-| `GetOrderError` | `Errors/GetOrderError.cs` |
-| `Error` | `Models/Error.cs` |
+| `GetOrderRequest` | `src/Paypal/Requests/Orders/GetOrderRequest.cs` |
+| `Order` | `src/Paypal/Models/Order.cs` |
+| `GetOrderError` | `src/Paypal/Errors/GetOrderError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### PatchOrder
 
@@ -119,10 +119,10 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 | Type | Source |
 | --- | --- |
-| `PatchOrderRequest` | `Requests/Orders/PatchOrderRequest.cs` |
-| `Patch` | `Models/Patch.cs` |
-| `PatchOrderError` | `Errors/PatchOrderError.cs` |
-| `Error` | `Models/Error.cs` |
+| `PatchOrderRequest` | `src/Paypal/Requests/Orders/PatchOrderRequest.cs` |
+| `Patch` | `src/Paypal/Models/Patch.cs` |
+| `PatchOrderError` | `src/Paypal/Errors/PatchOrderError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### UpdateOrderTracking
 
@@ -135,8 +135,8 @@ Accessor: `client.Orders` · Source: `Api/Orders.cs` · 8 operations
 
 | Type | Source |
 | --- | --- |
-| `UpdateOrderTrackingRequest` | `Requests/Orders/UpdateOrderTrackingRequest.cs` |
-| `Patch` | `Models/Patch.cs` |
-| `UpdateOrderTrackingError` | `Errors/UpdateOrderTrackingError.cs` |
-| `Error` | `Models/Error.cs` |
+| `UpdateOrderTrackingRequest` | `src/Paypal/Requests/Orders/UpdateOrderTrackingRequest.cs` |
+| `Patch` | `src/Paypal/Models/Patch.cs` |
+| `UpdateOrderTrackingError` | `src/Paypal/Errors/UpdateOrderTrackingError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 

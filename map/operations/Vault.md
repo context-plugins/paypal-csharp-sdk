@@ -2,7 +2,7 @@
 
 # Vault — operations
 
-Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
+Accessor: `client.Vault` · Source: `src/Paypal/Api/Vault.cs` · 6 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
@@ -17,11 +17,11 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 | Type | Source |
 | --- | --- |
-| `CreatePaymentTokenRequest` | `Requests/Vault/CreatePaymentTokenRequest.cs` |
-| `PaymentTokenRequest` | `Models/PaymentTokenRequest.cs` |
-| `PaymentTokenResponse` | `Models/PaymentTokenResponse.cs` |
-| `CreatePaymentTokenError` | `Errors/CreatePaymentTokenError.cs` |
-| `Error` | `Models/Error.cs` |
+| `CreatePaymentTokenRequest` | `src/Paypal/Requests/Vault/CreatePaymentTokenRequest.cs` |
+| `PaymentTokenRequest` | `src/Paypal/Models/PaymentTokenRequest.cs` |
+| `PaymentTokenResponse` | `src/Paypal/Models/PaymentTokenResponse.cs` |
+| `CreatePaymentTokenError` | `src/Paypal/Errors/CreatePaymentTokenError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### CreateSetupToken
 
@@ -34,11 +34,11 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 | Type | Source |
 | --- | --- |
-| `CreateSetupTokenRequest` | `Requests/Vault/CreateSetupTokenRequest.cs` |
-| `SetupTokenRequest` | `Models/SetupTokenRequest.cs` |
-| `SetupTokenResponse` | `Models/SetupTokenResponse.cs` |
-| `CreateSetupTokenError` | `Errors/CreateSetupTokenError.cs` |
-| `Error` | `Models/Error.cs` |
+| `CreateSetupTokenRequest` | `src/Paypal/Requests/Vault/CreateSetupTokenRequest.cs` |
+| `SetupTokenRequest` | `src/Paypal/Models/SetupTokenRequest.cs` |
+| `SetupTokenResponse` | `src/Paypal/Models/SetupTokenResponse.cs` |
+| `CreateSetupTokenError` | `src/Paypal/Errors/CreateSetupTokenError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### DeletePaymentToken
 
@@ -51,9 +51,9 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 | Type | Source |
 | --- | --- |
-| `DeletePaymentTokenRequest` | `Requests/Vault/DeletePaymentTokenRequest.cs` |
-| `DeletePaymentTokenError` | `Errors/DeletePaymentTokenError.cs` |
-| `Error` | `Models/Error.cs` |
+| `DeletePaymentTokenRequest` | `src/Paypal/Requests/Vault/DeletePaymentTokenRequest.cs` |
+| `DeletePaymentTokenError` | `src/Paypal/Errors/DeletePaymentTokenError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### GetPaymentToken
 
@@ -66,10 +66,10 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 | Type | Source |
 | --- | --- |
-| `GetPaymentTokenRequest` | `Requests/Vault/GetPaymentTokenRequest.cs` |
-| `PaymentTokenResponse` | `Models/PaymentTokenResponse.cs` |
-| `GetPaymentTokenError` | `Errors/GetPaymentTokenError.cs` |
-| `Error` | `Models/Error.cs` |
+| `GetPaymentTokenRequest` | `src/Paypal/Requests/Vault/GetPaymentTokenRequest.cs` |
+| `PaymentTokenResponse` | `src/Paypal/Models/PaymentTokenResponse.cs` |
+| `GetPaymentTokenError` | `src/Paypal/Errors/GetPaymentTokenError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### GetSetupToken
 
@@ -82,10 +82,10 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 | Type | Source |
 | --- | --- |
-| `GetSetupTokenRequest` | `Requests/Vault/GetSetupTokenRequest.cs` |
-| `SetupTokenResponse` | `Models/SetupTokenResponse.cs` |
-| `GetSetupTokenError` | `Errors/GetSetupTokenError.cs` |
-| `Error` | `Models/Error.cs` |
+| `GetSetupTokenRequest` | `src/Paypal/Requests/Vault/GetSetupTokenRequest.cs` |
+| `SetupTokenResponse` | `src/Paypal/Models/SetupTokenResponse.cs` |
+| `GetSetupTokenError` | `src/Paypal/Errors/GetSetupTokenError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 
 ### ListCustomerPaymentTokens
 
@@ -99,8 +99,8 @@ Accessor: `client.Vault` · Source: `Api/Vault.cs` · 6 operations
 
 | Type | Source |
 | --- | --- |
-| `ListCustomerPaymentTokensRequest` | `Requests/Vault/ListCustomerPaymentTokensRequest.cs` |
-| `CustomerVaultPaymentTokensResponse` | `Models/CustomerVaultPaymentTokensResponse.cs` |
-| `ListCustomerPaymentTokensError` | `Errors/ListCustomerPaymentTokensError.cs` |
-| `Error` | `Models/Error.cs` |
+| `ListCustomerPaymentTokensRequest` | `src/Paypal/Requests/Vault/ListCustomerPaymentTokensRequest.cs` |
+| `CustomerVaultPaymentTokensResponse` | `src/Paypal/Models/CustomerVaultPaymentTokensResponse.cs` |
+| `ListCustomerPaymentTokensError` | `src/Paypal/Errors/ListCustomerPaymentTokensError.cs` |
+| `Error` | `src/Paypal/Models/Error.cs` |
 

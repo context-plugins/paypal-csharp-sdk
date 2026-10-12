@@ -2,11 +2,11 @@
 
 Every operation below is shown in its throwing form. On an error status it throws `ApiException<TError>` — the status code, headers, content type and the operation's error type, `RawError` (the raw body) when the spec declares none — and where an operation offers an `…AsResult` sibling, that sibling returns `ApiResult<TResponse, TError>` instead. A request that produces no usable response surfaces as `SdkConnectionException` or `SdkTimeoutException`, a body that does not match the documented response type as `ResponseDeserializationException`, and a credential that cannot be applied as `AuthSchemeException`; all of them derive from `SdkException` and name the failed call. See [README → Error Handling](README.md#error-handling).
 
-> Source: [PaypalClient](PaypalClient.cs)
+> Source: [PaypalClient](src/Paypal/PaypalClient.cs)
 
 ## Orders
 
-> Source: [Orders](Api/Orders.cs)
+> Source: [Orders](src/Paypal/Api/Orders.cs)
 
 <details>
 <summary><code>Task&lt;OrderAuthorizeResponse&gt; AuthorizeOrder(AuthorizeOrderRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
@@ -52,7 +52,7 @@ catch (ApiException<AuthorizeOrderError> ex)
 <dl>
 <dd>
 
-<code>[AuthorizeOrderRequest](Requests/Orders/AuthorizeOrderRequest.cs)</code>
+<code>[AuthorizeOrderRequest](src/Paypal/Requests/Orders/AuthorizeOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -62,9 +62,9 @@ catch (ApiException<AuthorizeOrderError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[OrderAuthorizeResponse](Models/OrderAuthorizeResponse.cs)</code>
+**OnSuccess**: <code>[OrderAuthorizeResponse](src/Paypal/Models/OrderAuthorizeResponse.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[AuthorizeOrderError](Errors/AuthorizeOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[AuthorizeOrderError](src/Paypal/Errors/AuthorizeOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -118,7 +118,7 @@ catch (ApiException<CaptureOrderError> ex)
 <dl>
 <dd>
 
-<code>[CaptureOrderRequest](Requests/Orders/CaptureOrderRequest.cs)</code>
+<code>[CaptureOrderRequest](src/Paypal/Requests/Orders/CaptureOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -128,9 +128,9 @@ catch (ApiException<CaptureOrderError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Order](Models/Order.cs)</code>
+**OnSuccess**: <code>[Order](src/Paypal/Models/Order.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CaptureOrderError](Errors/CaptureOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CaptureOrderError](src/Paypal/Errors/CaptureOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -184,7 +184,7 @@ catch (ApiException<ConfirmOrderError> ex)
 <dl>
 <dd>
 
-<code>[ConfirmOrderOperationRequest](Requests/Orders/ConfirmOrderOperationRequest.cs)</code>
+<code>[ConfirmOrderOperationRequest](src/Paypal/Requests/Orders/ConfirmOrderOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -194,9 +194,9 @@ catch (ApiException<ConfirmOrderError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Order](Models/Order.cs)</code>
+**OnSuccess**: <code>[Order](src/Paypal/Models/Order.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ConfirmOrderError](Errors/ConfirmOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[ConfirmOrderError](src/Paypal/Errors/ConfirmOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -266,7 +266,7 @@ catch (ApiException<CreateOrderError> ex)
 <dl>
 <dd>
 
-<code>[CreateOrderRequest](Requests/Orders/CreateOrderRequest.cs)</code>
+<code>[CreateOrderRequest](src/Paypal/Requests/Orders/CreateOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -276,9 +276,9 @@ catch (ApiException<CreateOrderError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Order](Models/Order.cs)</code>
+**OnSuccess**: <code>[Order](src/Paypal/Models/Order.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateOrderError](Errors/CreateOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CreateOrderError](src/Paypal/Errors/CreateOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -336,7 +336,7 @@ catch (ApiException<CreateOrderTrackingError> ex)
 <dl>
 <dd>
 
-<code>[CreateOrderTrackingRequest](Requests/Orders/CreateOrderTrackingRequest.cs)</code>
+<code>[CreateOrderTrackingRequest](src/Paypal/Requests/Orders/CreateOrderTrackingRequest.cs)</code>
 
 </dd>
 </dl>
@@ -346,9 +346,9 @@ catch (ApiException<CreateOrderTrackingError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Order](Models/Order.cs)</code>
+**OnSuccess**: <code>[Order](src/Paypal/Models/Order.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateOrderTrackingError](Errors/CreateOrderTrackingError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CreateOrderTrackingError](src/Paypal/Errors/CreateOrderTrackingError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -402,7 +402,7 @@ catch (ApiException<GetOrderError> ex)
 <dl>
 <dd>
 
-<code>[GetOrderRequest](Requests/Orders/GetOrderRequest.cs)</code>
+<code>[GetOrderRequest](src/Paypal/Requests/Orders/GetOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -412,9 +412,9 @@ catch (ApiException<GetOrderError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Order](Models/Order.cs)</code>
+**OnSuccess**: <code>[Order](src/Paypal/Models/Order.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetOrderError](Errors/GetOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[GetOrderError](src/Paypal/Errors/GetOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -467,7 +467,7 @@ catch (ApiException<PatchOrderError> ex)
 <dl>
 <dd>
 
-<code>[PatchOrderRequest](Requests/Orders/PatchOrderRequest.cs)</code>
+<code>[PatchOrderRequest](src/Paypal/Requests/Orders/PatchOrderRequest.cs)</code>
 
 </dd>
 </dl>
@@ -479,7 +479,7 @@ catch (ApiException<PatchOrderError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[PatchOrderError](Errors/PatchOrderError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[PatchOrderError](src/Paypal/Errors/PatchOrderError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -536,7 +536,7 @@ catch (ApiException<UpdateOrderTrackingError> ex)
 <dl>
 <dd>
 
-<code>[UpdateOrderTrackingRequest](Requests/Orders/UpdateOrderTrackingRequest.cs)</code>
+<code>[UpdateOrderTrackingRequest](src/Paypal/Requests/Orders/UpdateOrderTrackingRequest.cs)</code>
 
 </dd>
 </dl>
@@ -548,7 +548,7 @@ catch (ApiException<UpdateOrderTrackingError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[UpdateOrderTrackingError](Errors/UpdateOrderTrackingError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[UpdateOrderTrackingError](src/Paypal/Errors/UpdateOrderTrackingError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -560,7 +560,7 @@ catch (ApiException<UpdateOrderTrackingError> ex)
 
 ## Payments
 
-> Source: [Payments](Api/Payments.cs)
+> Source: [Payments](src/Paypal/Api/Payments.cs)
 
 <details>
 <summary><code>Task&lt;CapturedPayment&gt; CaptureAuthorizedPayment(CaptureAuthorizedPaymentRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
@@ -609,7 +609,7 @@ catch (ApiException<CaptureAuthorizedPaymentError> ex)
 <dl>
 <dd>
 
-<code>[CaptureAuthorizedPaymentRequest](Requests/Payments/CaptureAuthorizedPaymentRequest.cs)</code>
+<code>[CaptureAuthorizedPaymentRequest](src/Paypal/Requests/Payments/CaptureAuthorizedPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -619,9 +619,9 @@ catch (ApiException<CaptureAuthorizedPaymentError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CapturedPayment](Models/CapturedPayment.cs)</code>
+**OnSuccess**: <code>[CapturedPayment](src/Paypal/Models/CapturedPayment.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CaptureAuthorizedPaymentError](Errors/CaptureAuthorizedPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CaptureAuthorizedPaymentError](src/Paypal/Errors/CaptureAuthorizedPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -678,7 +678,7 @@ catch (ApiException<GetAuthorizedPaymentError> ex)
 <dl>
 <dd>
 
-<code>[GetAuthorizedPaymentRequest](Requests/Payments/GetAuthorizedPaymentRequest.cs)</code>
+<code>[GetAuthorizedPaymentRequest](src/Paypal/Requests/Payments/GetAuthorizedPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -688,9 +688,9 @@ catch (ApiException<GetAuthorizedPaymentError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PaymentAuthorization](Models/PaymentAuthorization.cs)</code>
+**OnSuccess**: <code>[PaymentAuthorization](src/Paypal/Models/PaymentAuthorization.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetAuthorizedPaymentError](Errors/GetAuthorizedPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[GetAuthorizedPaymentError](src/Paypal/Errors/GetAuthorizedPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -747,7 +747,7 @@ catch (ApiException<GetCapturedPaymentError> ex)
 <dl>
 <dd>
 
-<code>[GetCapturedPaymentRequest](Requests/Payments/GetCapturedPaymentRequest.cs)</code>
+<code>[GetCapturedPaymentRequest](src/Paypal/Requests/Payments/GetCapturedPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -757,9 +757,9 @@ catch (ApiException<GetCapturedPaymentError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CapturedPayment](Models/CapturedPayment.cs)</code>
+**OnSuccess**: <code>[CapturedPayment](src/Paypal/Models/CapturedPayment.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetCapturedPaymentError](Errors/GetCapturedPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[GetCapturedPaymentError](src/Paypal/Errors/GetCapturedPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -813,7 +813,7 @@ catch (ApiException<GetRefundError> ex)
 <dl>
 <dd>
 
-<code>[GetRefundRequest](Requests/Payments/GetRefundRequest.cs)</code>
+<code>[GetRefundRequest](src/Paypal/Requests/Payments/GetRefundRequest.cs)</code>
 
 </dd>
 </dl>
@@ -823,9 +823,9 @@ catch (ApiException<GetRefundError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Refund](Models/Refund.cs)</code>
+**OnSuccess**: <code>[Refund](src/Paypal/Models/Refund.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetRefundError](Errors/GetRefundError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[GetRefundError](src/Paypal/Errors/GetRefundError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -882,7 +882,7 @@ catch (ApiException<ReauthorizePaymentError> ex)
 <dl>
 <dd>
 
-<code>[ReauthorizePaymentRequest](Requests/Payments/ReauthorizePaymentRequest.cs)</code>
+<code>[ReauthorizePaymentRequest](src/Paypal/Requests/Payments/ReauthorizePaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -892,9 +892,9 @@ catch (ApiException<ReauthorizePaymentError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PaymentAuthorization](Models/PaymentAuthorization.cs)</code>
+**OnSuccess**: <code>[PaymentAuthorization](src/Paypal/Models/PaymentAuthorization.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ReauthorizePaymentError](Errors/ReauthorizePaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[ReauthorizePaymentError](src/Paypal/Errors/ReauthorizePaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -951,7 +951,7 @@ catch (ApiException<RefundCapturedPaymentError> ex)
 <dl>
 <dd>
 
-<code>[RefundCapturedPaymentRequest](Requests/Payments/RefundCapturedPaymentRequest.cs)</code>
+<code>[RefundCapturedPaymentRequest](src/Paypal/Requests/Payments/RefundCapturedPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -961,9 +961,9 @@ catch (ApiException<RefundCapturedPaymentError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Refund](Models/Refund.cs)</code>
+**OnSuccess**: <code>[Refund](src/Paypal/Models/Refund.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[RefundCapturedPaymentError](Errors/RefundCapturedPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[RefundCapturedPaymentError](src/Paypal/Errors/RefundCapturedPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1020,7 +1020,7 @@ catch (ApiException<VoidPaymentError> ex)
 <dl>
 <dd>
 
-<code>[VoidPaymentRequest](Requests/Payments/VoidPaymentRequest.cs)</code>
+<code>[VoidPaymentRequest](src/Paypal/Requests/Payments/VoidPaymentRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1030,9 +1030,9 @@ catch (ApiException<VoidPaymentError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PaymentAuthorization](Models/PaymentAuthorization.cs)</code>
+**OnSuccess**: <code>[PaymentAuthorization](src/Paypal/Models/PaymentAuthorization.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[VoidPaymentError](Errors/VoidPaymentError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[VoidPaymentError](src/Paypal/Errors/VoidPaymentError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1044,7 +1044,7 @@ catch (ApiException<VoidPaymentError> ex)
 
 ## Subscriptions
 
-> Source: [Subscriptions](Api/Subscriptions.cs)
+> Source: [Subscriptions](src/Paypal/Api/Subscriptions.cs)
 
 <details>
 <summary><code>Task ActivateBillingPlan(ActivateBillingPlanRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
@@ -1089,7 +1089,7 @@ catch (ApiException<ActivateBillingPlanError> ex)
 <dl>
 <dd>
 
-<code>[ActivateBillingPlanRequest](Requests/Subscriptions/ActivateBillingPlanRequest.cs)</code>
+<code>[ActivateBillingPlanRequest](src/Paypal/Requests/Subscriptions/ActivateBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1101,7 +1101,7 @@ catch (ApiException<ActivateBillingPlanError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ActivateBillingPlanError](Errors/ActivateBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[ActivateBillingPlanError](src/Paypal/Errors/ActivateBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1157,7 +1157,7 @@ catch (ApiException<ActivateSubscriptionError> ex)
 <dl>
 <dd>
 
-<code>[ActivateSubscriptionOperationRequest](Requests/Subscriptions/ActivateSubscriptionOperationRequest.cs)</code>
+<code>[ActivateSubscriptionOperationRequest](src/Paypal/Requests/Subscriptions/ActivateSubscriptionOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1169,7 +1169,7 @@ catch (ApiException<ActivateSubscriptionError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ActivateSubscriptionError](Errors/ActivateSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[ActivateSubscriptionError](src/Paypal/Errors/ActivateSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1225,7 +1225,7 @@ catch (ApiException<CancelSubscriptionError> ex)
 <dl>
 <dd>
 
-<code>[CancelSubscriptionOperationRequest](Requests/Subscriptions/CancelSubscriptionOperationRequest.cs)</code>
+<code>[CancelSubscriptionOperationRequest](src/Paypal/Requests/Subscriptions/CancelSubscriptionOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1237,7 +1237,7 @@ catch (ApiException<CancelSubscriptionError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CancelSubscriptionError](Errors/CancelSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CancelSubscriptionError](src/Paypal/Errors/CancelSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1294,7 +1294,7 @@ catch (ApiException<CaptureSubscriptionError> ex)
 <dl>
 <dd>
 
-<code>[CaptureSubscriptionOperationRequest](Requests/Subscriptions/CaptureSubscriptionOperationRequest.cs)</code>
+<code>[CaptureSubscriptionOperationRequest](src/Paypal/Requests/Subscriptions/CaptureSubscriptionOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1304,9 +1304,9 @@ catch (ApiException<CaptureSubscriptionError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SubscriptionTransactionDetails](Models/SubscriptionTransactionDetails.cs)</code>
+**OnSuccess**: <code>[SubscriptionTransactionDetails](src/Paypal/Models/SubscriptionTransactionDetails.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CaptureSubscriptionError](Errors/CaptureSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CaptureSubscriptionError](src/Paypal/Errors/CaptureSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1360,7 +1360,7 @@ catch (ApiException<CreateBillingPlanError> ex)
 <dl>
 <dd>
 
-<code>[CreateBillingPlanRequest](Requests/Subscriptions/CreateBillingPlanRequest.cs)</code>
+<code>[CreateBillingPlanRequest](src/Paypal/Requests/Subscriptions/CreateBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1370,9 +1370,9 @@ catch (ApiException<CreateBillingPlanError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BillingPlan](Models/BillingPlan.cs)</code>
+**OnSuccess**: <code>[BillingPlan](src/Paypal/Models/BillingPlan.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateBillingPlanError](Errors/CreateBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CreateBillingPlanError](src/Paypal/Errors/CreateBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1426,7 +1426,7 @@ catch (ApiException<CreateSubscriptionError> ex)
 <dl>
 <dd>
 
-<code>[CreateSubscriptionOperationRequest](Requests/Subscriptions/CreateSubscriptionOperationRequest.cs)</code>
+<code>[CreateSubscriptionOperationRequest](src/Paypal/Requests/Subscriptions/CreateSubscriptionOperationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1436,9 +1436,9 @@ catch (ApiException<CreateSubscriptionError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Subscription](Models/Subscription.cs)</code>
+**OnSuccess**: <code>[Subscription](src/Paypal/Models/Subscription.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateSubscriptionError](Errors/CreateSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CreateSubscriptionError](src/Paypal/Errors/CreateSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1491,7 +1491,7 @@ catch (ApiException<DeactivateBillingPlanError> ex)
 <dl>
 <dd>
 
-<code>[DeactivateBillingPlanRequest](Requests/Subscriptions/DeactivateBillingPlanRequest.cs)</code>
+<code>[DeactivateBillingPlanRequest](src/Paypal/Requests/Subscriptions/DeactivateBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1503,7 +1503,7 @@ catch (ApiException<DeactivateBillingPlanError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[DeactivateBillingPlanError](Errors/DeactivateBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[DeactivateBillingPlanError](src/Paypal/Errors/DeactivateBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1557,7 +1557,7 @@ catch (ApiException<GetBillingPlanError> ex)
 <dl>
 <dd>
 
-<code>[GetBillingPlanRequest](Requests/Subscriptions/GetBillingPlanRequest.cs)</code>
+<code>[GetBillingPlanRequest](src/Paypal/Requests/Subscriptions/GetBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1567,9 +1567,9 @@ catch (ApiException<GetBillingPlanError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BillingPlan](Models/BillingPlan.cs)</code>
+**OnSuccess**: <code>[BillingPlan](src/Paypal/Models/BillingPlan.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetBillingPlanError](Errors/GetBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[GetBillingPlanError](src/Paypal/Errors/GetBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1626,7 +1626,7 @@ catch (ApiException<GetSubscriptionError> ex)
 <dl>
 <dd>
 
-<code>[GetSubscriptionRequest](Requests/Subscriptions/GetSubscriptionRequest.cs)</code>
+<code>[GetSubscriptionRequest](src/Paypal/Requests/Subscriptions/GetSubscriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1636,9 +1636,9 @@ catch (ApiException<GetSubscriptionError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Subscription](Models/Subscription.cs)</code>
+**OnSuccess**: <code>[Subscription](src/Paypal/Models/Subscription.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetSubscriptionError](Errors/GetSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[GetSubscriptionError](src/Paypal/Errors/GetSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1692,7 +1692,7 @@ catch (ApiException<ListBillingPlansError> ex)
 <dl>
 <dd>
 
-<code>[ListBillingPlansRequest](Requests/Subscriptions/ListBillingPlansRequest.cs)</code>
+<code>[ListBillingPlansRequest](src/Paypal/Requests/Subscriptions/ListBillingPlansRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1702,9 +1702,9 @@ catch (ApiException<ListBillingPlansError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PlanCollection](Models/PlanCollection.cs)</code>
+**OnSuccess**: <code>[PlanCollection](src/Paypal/Models/PlanCollection.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ListBillingPlansError](Errors/ListBillingPlansError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[ListBillingPlansError](src/Paypal/Errors/ListBillingPlansError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1763,7 +1763,7 @@ catch (ApiException<ListSubscriptionTransactionsError> ex)
 <dl>
 <dd>
 
-<code>[ListSubscriptionTransactionsRequest](Requests/Subscriptions/ListSubscriptionTransactionsRequest.cs)</code>
+<code>[ListSubscriptionTransactionsRequest](src/Paypal/Requests/Subscriptions/ListSubscriptionTransactionsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1773,9 +1773,9 @@ catch (ApiException<ListSubscriptionTransactionsError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[TransactionsList](Models/TransactionsList.cs)</code>
+**OnSuccess**: <code>[TransactionsList](src/Paypal/Models/TransactionsList.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ListSubscriptionTransactionsError](Errors/ListSubscriptionTransactionsError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[ListSubscriptionTransactionsError](src/Paypal/Errors/ListSubscriptionTransactionsError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1829,7 +1829,7 @@ catch (ApiException<ListSubscriptionsError> ex)
 <dl>
 <dd>
 
-<code>[ListSubscriptionsRequest](Requests/Subscriptions/ListSubscriptionsRequest.cs)</code>
+<code>[ListSubscriptionsRequest](src/Paypal/Requests/Subscriptions/ListSubscriptionsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1839,9 +1839,9 @@ catch (ApiException<ListSubscriptionsError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SubscriptionCollection](Models/SubscriptionCollection.cs)</code>
+**OnSuccess**: <code>[SubscriptionCollection](src/Paypal/Models/SubscriptionCollection.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ListSubscriptionsError](Errors/ListSubscriptionsError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[ListSubscriptionsError](src/Paypal/Errors/ListSubscriptionsError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1894,7 +1894,7 @@ catch (ApiException<PatchBillingPlanError> ex)
 <dl>
 <dd>
 
-<code>[PatchBillingPlanRequest](Requests/Subscriptions/PatchBillingPlanRequest.cs)</code>
+<code>[PatchBillingPlanRequest](src/Paypal/Requests/Subscriptions/PatchBillingPlanRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1906,7 +1906,7 @@ catch (ApiException<PatchBillingPlanError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[PatchBillingPlanError](Errors/PatchBillingPlanError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[PatchBillingPlanError](src/Paypal/Errors/PatchBillingPlanError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1959,7 +1959,7 @@ catch (ApiException<PatchSubscriptionError> ex)
 <dl>
 <dd>
 
-<code>[PatchSubscriptionRequest](Requests/Subscriptions/PatchSubscriptionRequest.cs)</code>
+<code>[PatchSubscriptionRequest](src/Paypal/Requests/Subscriptions/PatchSubscriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1971,7 +1971,7 @@ catch (ApiException<PatchSubscriptionError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[PatchSubscriptionError](Errors/PatchSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[PatchSubscriptionError](src/Paypal/Errors/PatchSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2028,7 +2028,7 @@ catch (ApiException<ReviseSubscriptionError> ex)
 <dl>
 <dd>
 
-<code>[ReviseSubscriptionRequest](Requests/Subscriptions/ReviseSubscriptionRequest.cs)</code>
+<code>[ReviseSubscriptionRequest](src/Paypal/Requests/Subscriptions/ReviseSubscriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2038,9 +2038,9 @@ catch (ApiException<ReviseSubscriptionError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ModifySubscriptionResponse](Models/ModifySubscriptionResponse.cs)</code>
+**OnSuccess**: <code>[ModifySubscriptionResponse](src/Paypal/Models/ModifySubscriptionResponse.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ReviseSubscriptionError](Errors/ReviseSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[ReviseSubscriptionError](src/Paypal/Errors/ReviseSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2093,7 +2093,7 @@ catch (ApiException<SuspendSubscriptionError> ex)
 <dl>
 <dd>
 
-<code>[SuspendSubscriptionRequest](Requests/Subscriptions/SuspendSubscriptionRequest.cs)</code>
+<code>[SuspendSubscriptionRequest](src/Paypal/Requests/Subscriptions/SuspendSubscriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2105,7 +2105,7 @@ catch (ApiException<SuspendSubscriptionError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[SuspendSubscriptionError](Errors/SuspendSubscriptionError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[SuspendSubscriptionError](src/Paypal/Errors/SuspendSubscriptionError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2161,7 +2161,7 @@ catch (ApiException<UpdateBillingPlanPricingSchemesError> ex)
 <dl>
 <dd>
 
-<code>[UpdateBillingPlanPricingSchemesRequest](Requests/Subscriptions/UpdateBillingPlanPricingSchemesRequest.cs)</code>
+<code>[UpdateBillingPlanPricingSchemesRequest](src/Paypal/Requests/Subscriptions/UpdateBillingPlanPricingSchemesRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2173,7 +2173,7 @@ catch (ApiException<UpdateBillingPlanPricingSchemesError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[UpdateBillingPlanPricingSchemesError](Errors/UpdateBillingPlanPricingSchemesError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[UpdateBillingPlanPricingSchemesError](src/Paypal/Errors/UpdateBillingPlanPricingSchemesError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2185,7 +2185,7 @@ catch (ApiException<UpdateBillingPlanPricingSchemesError> ex)
 
 ## TransactionSearch
 
-> Source: [TransactionSearch](Api/TransactionSearch.cs)
+> Source: [TransactionSearch](src/Paypal/Api/TransactionSearch.cs)
 
 <details>
 <summary><code>Task&lt;BalancesResponse&gt; SearchBalances(SearchBalancesRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
@@ -2231,7 +2231,7 @@ catch (ApiException<SearchBalancesError> ex)
 <dl>
 <dd>
 
-<code>[SearchBalancesRequest](Requests/TransactionSearch/SearchBalancesRequest.cs)</code>
+<code>[SearchBalancesRequest](src/Paypal/Requests/TransactionSearch/SearchBalancesRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2241,9 +2241,9 @@ catch (ApiException<SearchBalancesError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BalancesResponse](Models/BalancesResponse.cs)</code>
+**OnSuccess**: <code>[BalancesResponse](src/Paypal/Models/BalancesResponse.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[SearchBalancesError](Errors/SearchBalancesError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[SearchBalancesError](src/Paypal/Errors/SearchBalancesError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2298,7 +2298,7 @@ catch (ApiException<RawError> ex)
 <dl>
 <dd>
 
-<code>[SearchTransactionsRequest](Requests/TransactionSearch/SearchTransactionsRequest.cs)</code>
+<code>[SearchTransactionsRequest](src/Paypal/Requests/TransactionSearch/SearchTransactionsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2308,9 +2308,9 @@ catch (ApiException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SearchResponse](Models/SearchResponse.cs)</code>
+**OnSuccess**: <code>[SearchResponse](src/Paypal/Models/SearchResponse.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[RawError](src/Paypal/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2322,7 +2322,7 @@ catch (ApiException<RawError> ex)
 
 ## Vault
 
-> Source: [Vault](Api/Vault.cs)
+> Source: [Vault](src/Paypal/Api/Vault.cs)
 
 <details>
 <summary><code>Task&lt;PaymentTokenResponse&gt; CreatePaymentToken(CreatePaymentTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
@@ -2371,7 +2371,7 @@ catch (ApiException<CreatePaymentTokenError> ex)
 <dl>
 <dd>
 
-<code>[CreatePaymentTokenRequest](Requests/Vault/CreatePaymentTokenRequest.cs)</code>
+<code>[CreatePaymentTokenRequest](src/Paypal/Requests/Vault/CreatePaymentTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2381,9 +2381,9 @@ catch (ApiException<CreatePaymentTokenError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PaymentTokenResponse](Models/PaymentTokenResponse.cs)</code>
+**OnSuccess**: <code>[PaymentTokenResponse](src/Paypal/Models/PaymentTokenResponse.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreatePaymentTokenError](Errors/CreatePaymentTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CreatePaymentTokenError](src/Paypal/Errors/CreatePaymentTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2440,7 +2440,7 @@ catch (ApiException<CreateSetupTokenError> ex)
 <dl>
 <dd>
 
-<code>[CreateSetupTokenRequest](Requests/Vault/CreateSetupTokenRequest.cs)</code>
+<code>[CreateSetupTokenRequest](src/Paypal/Requests/Vault/CreateSetupTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2450,9 +2450,9 @@ catch (ApiException<CreateSetupTokenError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SetupTokenResponse](Models/SetupTokenResponse.cs)</code>
+**OnSuccess**: <code>[SetupTokenResponse](src/Paypal/Models/SetupTokenResponse.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[CreateSetupTokenError](Errors/CreateSetupTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[CreateSetupTokenError](src/Paypal/Errors/CreateSetupTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2505,7 +2505,7 @@ catch (ApiException<DeletePaymentTokenError> ex)
 <dl>
 <dd>
 
-<code>[DeletePaymentTokenRequest](Requests/Vault/DeletePaymentTokenRequest.cs)</code>
+<code>[DeletePaymentTokenRequest](src/Paypal/Requests/Vault/DeletePaymentTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2517,7 +2517,7 @@ catch (ApiException<DeletePaymentTokenError> ex)
 
 **OnSuccess**: No content
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[DeletePaymentTokenError](Errors/DeletePaymentTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[DeletePaymentTokenError](src/Paypal/Errors/DeletePaymentTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2571,7 +2571,7 @@ catch (ApiException<GetPaymentTokenError> ex)
 <dl>
 <dd>
 
-<code>[GetPaymentTokenRequest](Requests/Vault/GetPaymentTokenRequest.cs)</code>
+<code>[GetPaymentTokenRequest](src/Paypal/Requests/Vault/GetPaymentTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2581,9 +2581,9 @@ catch (ApiException<GetPaymentTokenError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PaymentTokenResponse](Models/PaymentTokenResponse.cs)</code>
+**OnSuccess**: <code>[PaymentTokenResponse](src/Paypal/Models/PaymentTokenResponse.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetPaymentTokenError](Errors/GetPaymentTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[GetPaymentTokenError](src/Paypal/Errors/GetPaymentTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2637,7 +2637,7 @@ catch (ApiException<GetSetupTokenError> ex)
 <dl>
 <dd>
 
-<code>[GetSetupTokenRequest](Requests/Vault/GetSetupTokenRequest.cs)</code>
+<code>[GetSetupTokenRequest](src/Paypal/Requests/Vault/GetSetupTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2647,9 +2647,9 @@ catch (ApiException<GetSetupTokenError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SetupTokenResponse](Models/SetupTokenResponse.cs)</code>
+**OnSuccess**: <code>[SetupTokenResponse](src/Paypal/Models/SetupTokenResponse.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[GetSetupTokenError](Errors/GetSetupTokenError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[GetSetupTokenError](src/Paypal/Errors/GetSetupTokenError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2706,7 +2706,7 @@ catch (ApiException<ListCustomerPaymentTokensError> ex)
 <dl>
 <dd>
 
-<code>[ListCustomerPaymentTokensRequest](Requests/Vault/ListCustomerPaymentTokensRequest.cs)</code>
+<code>[ListCustomerPaymentTokensRequest](src/Paypal/Requests/Vault/ListCustomerPaymentTokensRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2716,9 +2716,9 @@ catch (ApiException<ListCustomerPaymentTokensError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CustomerVaultPaymentTokensResponse](Models/CustomerVaultPaymentTokensResponse.cs)</code>
+**OnSuccess**: <code>[CustomerVaultPaymentTokensResponse](src/Paypal/Models/CustomerVaultPaymentTokensResponse.cs)</code>
 
-**OnError**: <code>[ApiException](Core/Exceptions/ApiException.cs)&lt;[ListCustomerPaymentTokensError](Errors/ListCustomerPaymentTokensError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/Paypal/Core/Exceptions/ApiException.cs)&lt;[ListCustomerPaymentTokensError](src/Paypal/Errors/ListCustomerPaymentTokensError.cs)&gt;</code>
 
 </dd>
 </dl>
